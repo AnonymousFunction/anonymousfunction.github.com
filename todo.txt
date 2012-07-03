@@ -3,12 +3,5 @@ Create theme, look and feel
 Add professional about us content
 Add info on products we have worked on (quote.auto-owners.com, detlor.com, personal sites, etc.)
 Add personal about us content
-<<<<<<< HEAD
+
 "lightweight design, solid functionality"
-
-
-Pages
------
-=======
-test
->>>>>>> 32c2ee064412f48e24b22659891934ade4d6768d
