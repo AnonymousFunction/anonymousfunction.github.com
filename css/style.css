@@ -212,6 +212,7 @@ td { vertical-align: top; }
 
 body {
     font-family: Monaco;
+    background-color: black;
 }
 
 header {
@@ -220,37 +221,52 @@ header {
     color: white;
 }
 header h1 {
-    margin: 0 10px;
+    margin: 0 10px 0 20px;
     font-size: 2.5em;
-}
-header h2 {
-    color: gray;
-    margin: 0 0 0 10px;
-    font-size: 1.2em;
 }
 
 #wrapper {
     margin: 0 auto;
-    width: 1200px;
+    max-width: 1300px;
+    width: 95%;
     border-left: 1px solid black;
     border-right: 1px solid black;
 }
 
+nav {
+    position: absolute;
+    background: white;
+    width: 250px;
+    height: 2000px;
+}
+nav.fixed {
+    position: fixed;
+    top: 0;
+}
 nav ul {
-    width: 95%;
     margin: 10px auto;
     list-style-type: none;
-    overflow: hidden;
 }
 nav li {
-    float: left;
-    width: 300px;
+    margin: 25px 0 25px 30px;
+    font-size: 1.3em;
+}
+nav li.active:before {
+    content: '\2192';
+    font-size: 1.5em;
+    padding: 0 5px 0 0;
 }
 
 #content {
+    border-left: 1px solid black;
     padding: 15px;
+    margin-left: 250px;
+    background: white;
 }
 
+a.active + h2 {
+    text-decoration: underline;
+}
 
 
 
