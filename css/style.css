@@ -211,11 +211,12 @@ td { vertical-align: top; }
 /***** Primary File ****/
 
 body {
-    font-family: Monaco;
+    font-family: Monaco, Verdana, Arial;
     background-color: black;
 }
 
 header {
+    font-family: 'Delius', Verdana, Arial;
     background-color: black;
     padding: 15px 0;
     color: white;
@@ -236,7 +237,7 @@ header h1 {
 nav {
     position: absolute;
     background: white;
-    width: 250px;
+    width: 200px;
     height: 2000px;
 }
 nav.fixed {
@@ -261,12 +262,17 @@ nav li.active:before {
 #content {
     border-left: 1px solid black;
     padding: 25px 35px;
-    margin-left: 250px;
+    margin-left: 200px;
     background: white;
 }
-
+#content h2 {
+    margin-top: 30px;
+    text-decoration: underline;
+    font-weight: 500;
+}
 #content > h2:first-child {
     margin-top: 0;
+    text-decoration: none;
 }
 
 a.active + h2 {
