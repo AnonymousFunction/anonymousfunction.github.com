@@ -252,6 +252,9 @@ nav li {
     margin: 25px 0 25px 30px;
     font-size: 1.3em;
 }
+nav li.active {
+    left: 5px;
+}
 nav li.active:before {
     content: '\2192';
     padding: 0 10px 0 0;
@@ -273,10 +276,6 @@ nav li.active:before {
 #content > h2:first-child {
     margin-top: 0;
     text-decoration: none;
-}
-
-a.active + h2 {
-    text-decoration: underline;
 }
 
 

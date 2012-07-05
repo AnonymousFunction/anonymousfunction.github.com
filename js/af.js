@@ -15,15 +15,19 @@ $(function() {
 
 	var markActiveNavElement = function() {
 		var sectionList = [];
-		$('a[name]').each(function(index, section) {
-			sectionList.push({
-				name: $(section).attr('name'),
-				nodeWrapper: $(section),
-				top: $(section).offset().top
+		var buildSectionList = function() {
+			$('a[name]').each(function(index, section) {
+				sectionList.push({
+					name: $(section).attr('name'),
+					nodeWrapper: $(section),
+					top: $(section).offset().top
+				});
 			});
-		});
-		
+		};
+
+		buildSectionList();
 		$window = $(window);
+		$window.on('resize', buildSectionList);
 		$window.on('scroll', function() {
 			$('.active').removeClass('active');
 			for (var i = sectionList.length - 1; i >= 0; i--) {
