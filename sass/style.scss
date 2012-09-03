@@ -1,0 +1,57 @@
+@import 'boilerplate';
+
+body {
+    background-color: black;
+}
+
+header {
+    background-color: black;
+    padding: 15px;
+    margin: 0;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+    position: fixed;
+    width: 95%;
+
+    h1 {
+        margin: 1em 0;
+        font-size: 2.5em;
+    }
+    nav {
+        width: 65%;
+        margin: 0 auto;
+        ul { overflow: hidden; }
+        li {
+            float: left;
+
+            a {
+                color: white;
+                &:visited { color: white; }
+            }
+        }
+    }
+}
+
+#wrapper {
+    margin: 0 auto;
+    max-width: 1300px;
+    width: 95%;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+#content {
+    border-left: 1px solid black;
+    padding: 150px 20px 20px 20px;
+    background: white;
+}
+#content h2 {
+    margin-top: 30px;
+    text-decoration: underline;
+    font-weight: 500;
+}
+#content > h2:first-child {
+    margin-top: 0;
+    text-decoration: none;
+}
