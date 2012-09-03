@@ -346,23 +346,29 @@ td {
 
   h2, h3 {
     page-break-after: avoid; } }
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
 body {
   background-color: black; }
 
 header {
   background-color: black;
   padding: 15px;
-  margin: 0;
+  margin: 0 auto;
+  width: 100%;
   color: white;
   text-align: center;
   overflow: hidden;
-  position: fixed;
-  width: 95%; }
+  position: fixed; }
   header h1 {
-    margin: 1em 0;
+    margin: 0.2em 0;
     font-size: 2.5em; }
   header nav {
-    width: 65%;
+    width: 100%;
+    padding: 0 20%;
     margin: 0 auto; }
     header nav ul {
       overflow: hidden; }
