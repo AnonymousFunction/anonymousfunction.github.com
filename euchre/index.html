@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="euchre.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+		<link rel="stylesheet" href="stylesheets/base.css">
+		<link rel="stylesheet" href="stylesheets/skeleton.css">
+		<link rel="stylesheet" href="stylesheets/layout.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="Euchre.js"></script>
+	</head>
+	<body>
+		<div id="game">
+			<div id="partner">
+				<span class="handLabel">Partner</span>
+				<div class="hiddenHand">
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+				</div>
+				<div class="hand hidden"></div>
+			</div>
+			<div id="opponentOne">
+				<span class="handLabel">Opponent</span>
+				<div class="hiddenHand">
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+				</div>
+				<div class="hand hidden"></div>
+			</div>
+			<div id="opponentTwo">
+				<span class="handLabel">Opponent</span>
+				<div class="hiddenHand">
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+				</div>
+				<div class="hand hidden"></div>
+			</div>
+			
+			<div id="board">
+				<div class="play" id="partnerPlay">K &clubs;</div>
+				<div class="play" id="opponentOnePlay">J &spades;</div>
+				<div class="play" id="opponentTwoPlay">Q &clubs;</div>
+				<div class="play" id="userPlay">J &clubs;</div>
+				<div id="info">
+					<span id="trump">Trump: <span id="trumpSuit">&clubs;</span></span> |
+					<span id="tricks">Tricks: <span id="userTricks">0</span> - <span id="opponentTricks">0</span></span> |
+					<span id="score">Score: <span id="userScore">0</span> - <span id="opponentScore">0</span></span>
+				</div>
+				
+			</div>
+			<div id="user">
+				<div class="hand"></div>
+			</div>
+		</div>
+	</body>
+</html>
