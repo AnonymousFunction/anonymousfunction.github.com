@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 	<head>
+		<title>Euchre by Anonymous Function</title>
 		<link rel="stylesheet" type="text/css" href="euchre.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -9,11 +10,14 @@
 		<link rel="stylesheet" href="stylesheets/base.css">
 		<link rel="stylesheet" href="stylesheets/skeleton.css">
 		<link rel="stylesheet" href="stylesheets/layout.css">
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 		<script src="Euchre.js"></script>
 	</head>
 	<body>
 		<div id="game">
+			<div id="help">?</div>
 			<div id="partner">
 				<span class="handLabel">Partner</span>
 				<div class="hiddenHand">
@@ -63,6 +67,9 @@
 			<div id="user">
 				<div class="hand"></div>
 			</div>
+		</div>
+		<div id="helpDialog" style="display: none;">
+			Euchre &copy; 2013 - built by Rich McLaughlin
 		</div>
 	</body>
 </html>

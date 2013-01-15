@@ -7,6 +7,15 @@ html body {
 .heart, .diamond {
 	color: red;
 }
+#help {
+	position: absolute;
+	color: white;
+	border: 2pt solid white;
+	border-radius: 13px 13px 13px 13px;
+	padding: 0 7px;
+	font-weight: bold;
+	margin: 3px 0 0 3px;
+}
 #game {
 	text-align: center;
 }

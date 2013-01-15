@@ -87,6 +87,16 @@ var Euchre = function(){
 		buildDeck();
 		shuffle();
 		deal();
+		
+		$("#help").on("click", function(){
+			$("#helpDialog").dialog({
+				autoOpen: true,
+				draggable: false,
+				resizable: false,
+				modal: true,
+				title: "Euchre Help"
+			})
+		});
 	};
 	
 	return {
