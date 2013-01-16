@@ -75,19 +75,23 @@ html body {
 }
 #opponentOnePlay.play {
 	float: left;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#kitty.play {
+	margin-top: 20px;	
+	margin-bottom: -63px;;
 }
 #opponentTwoPlay.play {
 	float: right;
-	margin-top: 10px;	
-	margin-bottom: 10px;
+	margin-top: 20px;	
+	margin-bottom: 20px;
 }
 #userPlay {
 	clear: both;
 }
 #info {
-	padding-top: 25px;
+	padding-top: 10px;
 	font-size: 1.2em;
 }
 #user {
