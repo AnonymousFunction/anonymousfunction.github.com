@@ -90,6 +90,18 @@ html body {
 #userPlay {
 	clear: both;
 }
+#pass {
+	float: left;
+	margin-top: -43px;
+	margin-left: 20px;
+	width: 70px;
+}
+#orderUp {
+	float: right;
+	margin-top: -43px;
+	margin-right: 20px;
+	width: 70px;
+}
 #info {
 	padding-top: 10px;
 	font-size: 1.2em;
