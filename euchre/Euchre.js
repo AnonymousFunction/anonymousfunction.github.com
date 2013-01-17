@@ -83,10 +83,49 @@ var Euchre = function(){
 		}
 	}
 	
+	var showKitty = function(){
+		$("#kitty").html(KITTY[0].value + " " + KITTY[0].suit).addClass(KITTY[0].cssClass);
+	};
+	
+	var userDecideKitty = function(orderedUp){
+		//TODO - go around for kitty
+		$("#pass, #orderUp").hide();
+		if (orderedUp) {
+			//TODO - discard
+			showMessageDialog({message: "You must discard", title: "Discard"});
+			$("#user .card").on("click", function(){
+				//Change the card they pick to the first of the kitty
+				$(this).html(KITTY[0].value + " " + KITTY[0].suit)
+					.removeClass("club spade heart diamond")
+					.addClass(KITTY[0].cssClass);
+					
+				//Hide the kitty, it's not needed for the hand
+				$("#kitty").hide();
+					
+				//Turn off the kitty replacing event handler
+				$("#user .card").off();
+			});
+		} else {
+			//TODO - pass to left
+		}
+	};
+	
+	var showMessageDialog = function(params) {
+		$("#messageDialog").text(params.message);
+		$("#messageDialog").dialog({
+			autoOpen: true,
+			draggable: false,
+			resizable: false,
+			modal: true,
+			title: params.title
+		});
+	};
+	
 	var initialize = function(){
 		buildDeck();
 		shuffle();
 		deal();
+		showKitty();
 		
 		$("#help").on("click", function(){
 			$("#helpDialog").dialog({
@@ -95,7 +134,15 @@ var Euchre = function(){
 				resizable: false,
 				modal: true,
 				title: "Euchre Help"
-			})
+			});
+		});
+		
+		$("#pass").on("click", function(){
+			userDecideKitty(false);
+		});
+		
+		$("#orderUp").on("click", function(){
+			userDecideKitty(true);
 		});
 	};
 	
