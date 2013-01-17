@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Euchre by Anonymous Function</title>
+		<link rel="stylesheet" type="text/css" href="euchre.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+		<link rel="stylesheet" href="stylesheets/base.css">
+		<link rel="stylesheet" href="stylesheets/skeleton.css">
+		<link rel="stylesheet" href="stylesheets/layout.css">
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+		<script src="Euchre.js"></script>
+	</head>
+	<body>
+		<div id="game">
+			<div id="help">?</div>
+			<div id="partner">
+				<span class="handLabel">Partner</span>
+				<div class="hiddenHand">
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+				</div>
+				<div class="hand hidden"></div>
+			</div>
+			<div id="opponentOne">
+				<span class="handLabel">Opponent</span>
+				<div class="hiddenHand">
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+				</div>
+				<div class="hand hidden"></div>
+			</div>
+			<div id="opponentTwo">
+				<span class="handLabel">Opponent</span>
+				<div class="hiddenHand">
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+					<span>?</span>
+				</div>
+				<div class="hand hidden"></div>
+			</div>
+			
+			<div id="board">
+				<div class="play" id="partnerPlay">&nbsp;</div>
+				<div class="play" id="opponentOnePlay">&nbsp;</div>
+				<div class="play" id="kitty">&nbsp;</div>
+				<div class="play" id="opponentTwoPlay">&nbsp;</div>
+				<div class="play" id="userPlay">&nbsp;</div>
+				<input type="button" id="pass" value="Pass"/>
+				<input type="button" id="orderUp" value="Order Up"/>
+				<div id="info">
+					<span id="trump">Trump: <span id="trumpSuit">&clubs;</span></span> |
+					<span id="tricks">Tricks: <span id="userTricks">0</span> - <span id="opponentTricks">0</span></span> |
+					<span id="score">Score: <span id="userScore">0</span> - <span id="opponentScore">0</span></span>
+				</div>
+				
+			</div>
+			<div id="user">
+				<div class="hand"></div>
+			</div>
+		</div>
+		<div id="helpDialog" style="display: none;">
+			Euchre &copy; 2013 <br/> built by Rich McLaughlin
+		</div>
+		<div id="messageDialog" style="display: none"></div>
+	</body>
+</html>

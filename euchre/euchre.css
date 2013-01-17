@@ -1,0 +1,121 @@
+html body {
+	background: url("images/felt3.png")
+}
+.club, .spade {
+	color: black;
+}
+.heart, .diamond {
+	color: red;
+}
+#help {
+	position: absolute;
+	color: white;
+	border: 2pt solid white;
+	border-radius: 13px 13px 13px 13px;
+	padding: 0 7px;
+	font-weight: bold;
+	margin: 3px 0 0 3px;
+}
+#game {
+	text-align: center;
+}
+.hiddenHand span {
+	background: white;
+	border: 1pt solid black;
+	padding: 0 5px;
+	text-align: center;
+}
+.card {
+	background: white;
+	border: 1pt solid black;
+	text-align: center;
+	padding: 10px;
+	margin: 0 5px;
+	font-size: 1.3em;
+	border-radius: 5px;
+}
+.hidden {
+	display: none;
+}
+.handLabel {
+	color: white;
+	margin-bottom: 10px;
+}
+
+#partner {
+	width: 100%;
+	margin: 0 auto;
+}
+
+#opponentOne {
+	width: 50%;
+	float: left;
+}
+
+#opponentTwo {
+	width: 50%;
+	float: right;
+}
+#board {
+	color: white;
+	clear: both;
+	border-top: 1pt solid white;
+	padding: 10px 5px;
+}
+#board .play {
+	background: white;
+	border: 1pt solid black;
+	text-align: center;
+	padding: 10px;
+	margin: 0 auto;
+	font-size: 1.3em;
+	border-radius: 5px;
+	width: 37px;
+}
+#opponentOnePlay.play {
+	float: left;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#kitty.play {
+	margin-top: 20px;	
+	margin-bottom: -63px;;
+}
+#opponentTwoPlay.play {
+	float: right;
+	margin-top: 20px;	
+	margin-bottom: 20px;
+}
+#userPlay {
+	clear: both;
+}
+#pass {
+	float: left;
+	margin-top: -43px;
+	margin-left: 20px;
+	width: 70px;
+}
+#orderUp {
+	float: right;
+	margin-top: -43px;
+	margin-right: 20px;
+	width: 70px;
+}
+#info {
+	padding-top: 10px;
+	font-size: 1.2em;
+}
+#user {
+	clear: both;
+	width: 100%;
+	bottom: 0;
+	position: absolute;
+	padding-bottom: 15px;
+	border-top: 1pt solid white;
+	padding-top: 20px;
+}
+
+#user .hand {
+	display: inline-block;
+	width: 100%;
+}
