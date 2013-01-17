@@ -18,6 +18,8 @@ var Euchre = function(){
 	
 	var KITTY = [];
 	
+	var TRUMP = "";
+	
 	var createCard = function(value, suit, cssClass){
 		return {
 			value: value,
@@ -101,6 +103,10 @@ var Euchre = function(){
 					
 				//Hide the kitty, it's not needed for the hand
 				$("#kitty").hide();
+				
+				//Set trump for the hand and on the screen
+				TRUMP = KITTY[0].suit;
+				$("#trumpSuit").html(TRUMP);
 					
 				//Turn off the kitty replacing event handler
 				$("#user .card").off();
