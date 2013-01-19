@@ -169,6 +169,9 @@ var Euchre = function(){
 			LED_SUIT = newSuit;
 			
 			HAS_TRICK = TEAM.USER;
+			
+			//Delete card from hand after user plays it
+			$(this).remove();
 		
 			//TODO - don't hardcode this
 			opponentOneTurn();
