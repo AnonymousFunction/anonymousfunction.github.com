@@ -7,6 +7,8 @@ var Euchre = function(){
 		DIAMONDS: "&diams;"
 	};
 	
+	var ALL_SUITS_CSS = "club spade heart diamond";
+	
 	var CARDS = [];
 	
 	var PLAYERS = {
@@ -19,6 +21,24 @@ var Euchre = function(){
 	var KITTY = [];
 	
 	var TRUMP = "";
+	
+	var TEAM = {
+		USER: "User",
+		OPPONENT: "Opponent"
+	};
+	
+	var PLAYER = {
+		USER: "USER",
+		OPPONENT_ONE: "OPPONENT_ONE",
+		PARTNER: "PARTNER",
+		OPPONENT_TWO: "OPPONENT_TWO"
+	}
+	
+	var LED_TRICK = "";
+	
+	var LED_SUIT = ""
+	
+	var HAS_TRICK = "";
 	
 	var createCard = function(value, suit, cssClass){
 		return {
@@ -98,7 +118,7 @@ var Euchre = function(){
 			$("#user .card").on("click", function(){
 				//Change the card they pick to the first of the kitty
 				$(this).html(KITTY[0].value + " " + KITTY[0].suit)
-					.removeClass("club spade heart diamond")
+					.removeClass(ALL_SUITS_CSS)
 					.addClass(KITTY[0].cssClass);
 					
 				//Hide the kitty, it's not needed for the hand
@@ -110,11 +130,132 @@ var Euchre = function(){
 					
 				//Turn off the kitty replacing event handler
 				$("#user .card").off();
+				
+				startTrick();
 			});
 		} else {
 			//TODO - pass to left
 		}
 	};
+	
+	var startTrick = function(){
+		//TODO - who's the dealer? start to the left of them, let's hardcode the user for now
+		userTurn()
+		
+	};
+	
+	var userTurn = function(){
+		$("#user .card").on("click", function(){
+			$("#userPlay").html($(this).html()).removeClass(ALL_SUITS_CSS);
+			var newSuit;
+			
+			//TODO - a better way to get the suit
+			if ($(this).hasClass("club")) {
+				newSuit = "club";
+			} else if ($(this).hasClass("spade")) {
+				newSuit = "spade";
+			} else if ($(this).hasClass("heart")) {
+				newSuit = "heart";
+			} else if ($(this).hasClass("diamond")) {
+				newSuit = "diamond";
+			}
+			$("#userPlay").addClass(newSuit);
+			
+			$("#user .card").off();
+
+			//TODO - Combine PLAYER and PLAYERS
+			LED_TRICK = PLAYER.USER;
+			
+			LED_SUIT = newSuit;
+			
+			HAS_TRICK = TEAM.USER;
+			
+			//Delete card from hand after user plays it
+			$(this).remove();
+		
+			//TODO - don't hardcode this whose turn it is
+			//TODO - Make the CPU look like it's thinking to give the user time to 
+			//follow the trick
+			$("#opponentOnePlay").addClass("thinking");
+			setTimeout(function(){opponentOneTurn();}, 2000);
+		});
+	};
+	
+	var opponentOneTurn = function(){
+		console.log("Who has the trick?", HAS_TRICK);
+		consoleLogHand("Opponent One", PLAYERS.OPPONENT_ONE);
+		
+		
+		var hand = PLAYERS.OPPONENT_ONE;
+		var cardToPlay;
+		
+		if (hasToFollowSuit(hand)) {
+			console.log("Must follow suit");
+			if (HAS_TRICK == TEAM.OPPONENT) {
+				//TODO - We have the trick, throw lowest value suit card
+				//Just play the first suited card for now
+				for (var card in hand){
+					if (hand[card].cssClass == LED_SUIT) {
+						cardToPlay = hand[card];
+						break;
+					}
+				}
+			} else {
+				//TODO - If I can take the trick, throw highest suit card
+				//TODO - Else throw lowest value suit card
+				
+				//Just play the first suited card for now
+				for (var card in hand){
+					if (hand[card].cssClass == LED_SUIT) {
+						cardToPlay = hand[card];
+						break;
+					}
+				}
+			}
+		} else {
+			console.log("Can't follow suit");
+			if (HAS_TRICK == TEAM.OPPONENT) {
+				//TODO - We have the suit, throw lowest off suit card, do NOT play trump
+				
+				//Just play the first card for now
+				cardToPlay = hand[0];
+			} else {
+				//TODO - If I have trump, throw the lowest value trump card
+				//TODO - Else throw lowest value off suit card
+				
+				//Just play the first card for now
+				cardToPlay = hand[0];
+			}
+		}
+
+		//Make the CPU look like it's done thinking before playing		
+		$("#opponentOnePlay").removeClass("thinking");
+		
+		//Play the card the the board and remove it from the hand
+		$("#opponentOnePlay").html(cardToPlay.value + " " + cardToPlay.suit)
+			.removeClass(ALL_SUITS_CSS).addClass(cardToPlay.cssClass);
+		$("#opponentOne .hiddenHand span:first").remove();
+	};
+	
+	var hasToFollowSuit = function(playerHand){
+		//TODO - Add "acts as" suit for trump
+		console.log("Led Trick", LED_TRICK);
+		//TODO - Who led the trick? What suit did they play?
+		console.log("User play", $("#userPlay").text());
+		console.log("Led Suit", LED_SUIT);
+		
+		var doesHaveToFollowSuit = false;
+		
+		for (var card in playerHand){
+			if (playerHand[card].cssClass == LED_SUIT) {
+				doesHaveToFollowSuit = true;
+				break;
+			}
+		}
+		
+		return doesHaveToFollowSuit;
+		
+	}
 	
 	var showMessageDialog = function(params) {
 		$("#messageDialog").text(params.message);
@@ -126,6 +267,13 @@ var Euchre = function(){
 			title: params.title
 		});
 	};
+	
+	var consoleLogHand = function(label, playerHand) {
+		console.log(label + "'s hand");
+		for (var card in playerHand){
+			console.log(playerHand[card]);
+		}
+	}
 	
 	var initialize = function(){
 		buildDeck();

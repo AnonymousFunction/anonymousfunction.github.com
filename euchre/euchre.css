@@ -15,6 +15,7 @@ html body {
 	padding: 0 7px;
 	font-weight: bold;
 	margin: 3px 0 0 3px;
+	cursor: pointer;
 }
 #game {
 	text-align: center;
@@ -33,6 +34,7 @@ html body {
 	margin: 0 5px;
 	font-size: 1.3em;
 	border-radius: 5px;
+	cursor: pointer;
 }
 .hidden {
 	display: none;
@@ -61,6 +63,13 @@ html body {
 	clear: both;
 	border-top: 1pt solid white;
 	padding: 10px 5px;
+}
+#board div.thinking {
+	background: url("images/waiting.gif") no-repeat center;
+	background-color: white;
+}
+.play {
+	cursor: default;
 }
 #board .play {
 	background: white;
