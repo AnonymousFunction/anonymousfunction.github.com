@@ -173,14 +173,18 @@ var Euchre = function(){
 			//Delete card from hand after user plays it
 			$(this).remove();
 		
-			//TODO - don't hardcode this
-			opponentOneTurn();
+			//TODO - don't hardcode this whose turn it is
+			//TODO - Make the CPU look like it's thinking to give the user time to 
+			//follow the trick
+			$("#opponentOnePlay").addClass("thinking");
+			setTimeout(function(){opponentOneTurn();}, 2000);
 		});
 	};
 	
 	var opponentOneTurn = function(){
 		console.log("Who has the trick?", HAS_TRICK);
 		consoleLogHand("Opponent One", PLAYERS.OPPONENT_ONE);
+		
 		
 		var hand = PLAYERS.OPPONENT_ONE;
 		var cardToPlay;
@@ -223,6 +227,9 @@ var Euchre = function(){
 				cardToPlay = hand[0];
 			}
 		}
+
+		//Make the CPU look like it's done thinking before playing		
+		$("#opponentOnePlay").removeClass("thinking");
 		
 		//Play the card the the board and remove it from the hand
 		$("#opponentOnePlay").html(cardToPlay.value + " " + cardToPlay.suit)

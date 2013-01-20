@@ -64,6 +64,10 @@ html body {
 	border-top: 1pt solid white;
 	padding: 10px 5px;
 }
+#board div.thinking {
+	background: url("images/waiting.gif") no-repeat center;
+	background-color: white;
+}
 .play {
 	cursor: default;
 }
