@@ -182,11 +182,52 @@ var Euchre = function(){
 		console.log("Who has the trick?", HAS_TRICK);
 		consoleLogHand("Opponent One", PLAYERS.OPPONENT_ONE);
 		
-		if (hasToFollowSuit(PLAYERS.OPPONENT_ONE)) {
+		var hand = PLAYERS.OPPONENT_ONE;
+		var cardToPlay;
+		
+		if (hasToFollowSuit(hand)) {
 			console.log("Must follow suit");
+			if (HAS_TRICK == TEAM.OPPONENT) {
+				//TODO - We have the trick, throw lowest value suit card
+				//Just play the first suited card for now
+				for (var card in hand){
+					if (hand[card].cssClass == LED_SUIT) {
+						cardToPlay = hand[card];
+						break;
+					}
+				}
+			} else {
+				//TODO - If I can take the trick, throw highest suit card
+				//TODO - Else throw lowest value suit card
+				
+				//Just play the first suited card for now
+				for (var card in hand){
+					if (hand[card].cssClass == LED_SUIT) {
+						cardToPlay = hand[card];
+						break;
+					}
+				}
+			}
 		} else {
 			console.log("Can't follow suit");
+			if (HAS_TRICK == TEAM.OPPONENT) {
+				//TODO - We have the suit, throw lowest off suit card, do NOT play trump
+				
+				//Just play the first card for now
+				cardToPlay = hand[0];
+			} else {
+				//TODO - If I have trump, throw the lowest value trump card
+				//TODO - Else throw lowest value off suit card
+				
+				//Just play the first card for now
+				cardToPlay = hand[0];
+			}
 		}
+		
+		//Play the card the the board and remove it from the hand
+		$("#opponentOnePlay").html(cardToPlay.value + " " + cardToPlay.suit)
+			.removeClass(ALL_SUITS_CSS).addClass(cardToPlay.cssClass);
+		$("#opponentOne .hiddenHand span:first").remove();
 	};
 	
 	var hasToFollowSuit = function(playerHand){
