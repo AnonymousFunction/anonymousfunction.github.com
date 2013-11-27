@@ -1,0 +1,45 @@
+body {
+  padding: 0;
+}
+header {
+  background-color: rgb(57, 159, 199);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+header #title {
+  color: white;
+  font-family: monospace;
+  font-weight: normal;
+  text-shadow: 2px 2px #414141;
+  height: 40px;
+  font-size: 2.0em;
+  padding-top: 5px;
+}
+header nav {
+  background-color: rgb(206, 204, 204);
+  box-shadow: 0 4px 2px -2px gray;
+}
+header nav ul {
+  list-style: none;
+  display: inline;
+  padding: 0;
+}
+header nav ul li {
+  display: inline;
+}
+header nav ul li:not(:last-child):after
+{
+  padding: 0 10px;
+  content: ' |';
+}
+a {
+  color: #414141;
+  text-decoration: none;
+  font-family: sans-serif;
+}
+#wrapper {
+  margin-top: 70px;
+}
