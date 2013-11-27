@@ -42,6 +42,9 @@ header a {
   text-decoration: none;
   font-family: sans-serif;
 }
+.exampleTitle {
+  font-weight: bold;
+}
 #wrapper {
   margin-top: 70px;
 }
