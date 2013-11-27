@@ -37,7 +37,7 @@ header nav ul li:not(:last-child):after
   padding: 0 10px;
   content: ' |';
 }
-a {
+header a {
   color: #414141;
   text-decoration: none;
   font-family: sans-serif;
@@ -50,4 +50,18 @@ a {
 }
 #welcomeText {
   text-align: justify;
+}
+#about {
+  text-align: center;
+  margin: 0 auto;
+}
+#about img {
+  border-radius: 70px;
+  box-shadow: 2px 2px 2px;
+}
+#rich {
+  padding-top: 5px;
+}
+#ted {
+  margin-top: 10px;
 }
