@@ -1,9 +1,11 @@
 body {
   padding: 0;
+  color: #414141;
+  font-family: sans-serif;
 }
 header {
   background-color: rgb(57, 159, 199);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -42,4 +44,7 @@ a {
 }
 #wrapper {
   margin-top: 70px;
+}
+#welcome {
+  text-align: center;
 }
