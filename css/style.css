@@ -48,3 +48,6 @@ a {
 #welcome {
   text-align: center;
 }
+#welcomeText {
+  text-align: justify;
+}
