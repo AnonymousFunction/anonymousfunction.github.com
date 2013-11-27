@@ -1,30 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-<script type="text/javascript">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Anonymous Function</title>
+	<!-- TODO: Write something sweet here -->
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	
+	<!-- <link rel="stylesheet" href="css/style.css" /> -->
+	
+	<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-33217753-1']);
+	_gaq.push(['_trackPageview']);
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-33217753-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-	</head>
-	<body>
-		<h1>Anonymous Function</h1>
-		<h2>Responsive and Dynamic Web Solutions</h2>
-		<h3>We make websites and enjoy doing it.  If you're interested in working with us contact us <a href="mailto:anonymous.function.web@gmail.com">anonymous.function.web@gmail.com</a></h3>
-
-		<img alt="Rich McLaughlin" src="http://www.gravatar.com/avatar/05432e373cccd968574a630904fa0247?s=128&d=identicon&r=PG" />	
-		<h4>Rich McLaughlin</h4>
-
-		<img alt="Ted VanToll" src="http://www.gravatar.com/avatar/83fa9332d8b2d6449a40977b94ac6a6c?s=128&d=identicon&r=PG" />		
-
-		<h4><a href="http://tjvantoll.com">Ted VanToll</a></h4>
-	</body>
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+	</script>		
+</head>
+<body>
+	<style>
+	body {
+		padding: 0;
+	}
+	header {
+		background-color: rgb(57, 159, 199);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		text-align: center;
+	}
+	header #title {
+		color: white;
+		font-family: monospace;
+		font-weight: normal;
+		text-shadow: 2px 2px #414141;
+		height: 40px;
+		font-size: 2.0em;
+		padding-top: 5px;
+	}
+	header nav {
+		background-color: rgb(206, 204, 204);
+		box-shadow: 0 4px 2px -2px gray;
+	}
+	header nav ul {
+		list-style: none;
+		display: inline;
+		padding: 0;
+	}
+	header nav ul li {
+		display: inline;
+	}
+	header nav ul li:not(:last-child):after
+	{
+		padding: 0 10px;
+		content: ' |';
+	}
+	a {
+		color: #414141;
+		text-decoration: none;
+		font-family: sans-serif;
+	}
+	#wrapper {
+		margin-top: 70px;
+	}
+	</style>
+	<header>
+		<div id="title">Anonymous Function</div>
+		<nav>
+			<ul>
+				<li><a href="#/home">HOME</a></li>
+				<li><a href="#/code">CODE</a></li>					
+				<li><a href="#/fun">FUN</a></li>
+				<li><a href="#/about">ABOUT</a></li>
+			</ul>
+		</nav>
+	</header>
+	<div id="wrapper">					
+		<div id="content">
+			STUFF GOES HERE!
+		</div>
+	</div>
+</body>
 </html>
