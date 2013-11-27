@@ -2,72 +2,88 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Anonymous Function - Responsive and Dynamic Web Solutions</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Anonymous Function</title>
 	<!-- TODO: Write something sweet here -->
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 	
-	<link rel="stylesheet" href="css/style.css" />
+	<!-- <link rel="stylesheet" href="css/style.css" /> -->
 	
 	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-33217753-1']);
-		_gaq.push(['_trackPageview']);
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-33217753-1']);
+	_gaq.push(['_trackPageview']);
 
-		(function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
 	</script>		
 </head>
 <body>
+	<style>
+	body {
+		padding: 0;
+	}
+	header {
+		background-color: rgb(57, 159, 199);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		text-align: center;
+	}
+	header #title {
+		color: white;
+		font-family: monospace;
+		font-weight: normal;
+		text-shadow: 2px 2px #414141;
+		height: 40px;
+		font-size: 2.0em;
+		padding-top: 5px;
+	}
+	header nav {
+		background-color: rgb(206, 204, 204);
+		box-shadow: 0 4px 2px -2px gray;
+	}
+	header nav ul {
+		list-style: none;
+		display: inline;
+		padding: 0;
+	}
+	header nav ul li {
+		display: inline;
+	}
+	header nav ul li:not(:last-child):after
+	{
+		padding: 0 10px;
+		content: ' |';
+	}
+	a {
+		color: #414141;
+		text-decoration: none;
+		font-family: sans-serif;
+	}
+	#wrapper {
+		margin-top: 70px;
+	}
+	</style>
 	<header>
-		<h1>Anonymous Function</h1>
+		<div id="title">Anonymous Function</div>
 		<nav>
 			<ul>
-				<li><a href="#What_We_Do">What We Do</a></li>
-				<li><a href="#What_We_Have_Done">What We've Done</a></li>
-				<li><a href="#Who_We_Are">Who We Are</a></li>					
-				<li><a href="#Hire_Us">Hire Us</a></li>
+				<li><a href="#/home">HOME</a></li>
+				<li><a href="#/code">CODE</a></li>					
+				<li><a href="#/fun">FUN</a></li>
+				<li><a href="#/about">ABOUT</a></li>
 			</ul>
 		</nav>
 	</header>
 	<div id="wrapper">					
 		<div id="content">
-			<h2>Simple, custom web solutions.  We specialize in 
-			<h2>Responsive and Dynamic Web Solutions - You know your business, we know the web.  We make websites and enjoy doing it.</h2>
-			
-			<a name="What_We_Do"></a>
-			<h2>What We Do</h2>
-			<p>
-			We specialize in lightweight web solutions for small business and specialize in response design.  You tell us what your business need is and we build a cross-platform solution. In layman's terms, we build websites that work on your PC, tablet, and phone and you pay us.</p>
-			<p>Now, I know what you're thinking.  You look at this website and think "This looks like shit, why would I pay these guys?"</p>
-			<p>Well, let me tell you, Mr. Jackass.  We've got a lot of experience and credentials that are totally legit and shit.</p>
-			
-			<a name="Our_Work"></a>
-			<h2>Our Work</h2>
-			<p>Our most recent site is <a href="http://detlor.com/test" target="_blank">detlor.com</a>
-			We have worked on everything from personal sites to small business needs to Fortune 500 systems. We built a bunch of shit for AO, but you can't see it.  We've also built stuff for Vertafore and Liquid Web, so sign up and pay us and you can see it.</p>
-			
-			<a name="Who_We_Are"></a>
-			<h2>Who We Are</h2>
-			<img alt="Rich McLaughlin" src="http://www.gravatar.com/avatar/05432e373cccd968574a630904fa0247?s=128&d=identicon&r=PG" />	
-			<h4>Rich McLaughlin</h4>
-
-			<img alt="Ted VanToll" src="http://www.gravatar.com/avatar/83fa9332d8b2d6449a40977b94ac6a6c?s=128&d=identicon&r=PG" />		
-			<h4><a href="http://tjvantoll.com">Ted VanToll</a></h4>
-
-			<p>We have worked together building web systems since graduating college, which was a long time ago now.</p>
-			<p>We both like Sonic video games and are pretty badass at them<br/>
-			Between the two of us, we been to like 12 different countries.<br/>
-			Rich is a Software Engineer and lives in Michigan. He is a University of Michigan alumnus. He is awesome at guitar. He is a member of Pearl Jam's Ten Club.  He loves to travel.</p>
-			<p>Ted is a Web Designer and lives in Michigan. He is a Central Michigan University alumnus. He was the 2006 Intergalactic Machine Dance Champion. He has twin boys. He watches dogs do the nasty and then sells the puppies.</p>
-
-			<a name="Hire_Us"></a>
-			<h2>Hire Us</h2>
-			<p>If you're interested in working with us contact us <a href="mailto:anonymous.function.web@gmail.com">anonymous.function.web@gmail.com</a></p>
+			STUFF GOES HERE!
 		</div>
 	</div>
 
