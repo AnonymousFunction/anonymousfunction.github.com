@@ -61,10 +61,14 @@ header a {
 #about img {
   border-radius: 70px;
   box-shadow: 2px 2px 2px;
+  max-width: 400px;
 }
 #rich {
   padding-top: 5px;
 }
 #ted {
   margin-top: 10px;
+}
+#about .aboutText {
+  text-align: justify;
 }
