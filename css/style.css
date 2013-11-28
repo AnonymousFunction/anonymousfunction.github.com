@@ -57,11 +57,11 @@ header a {
 #about {
   text-align: center;
   margin: 0 auto;
+  max-width: 400px;
 }
 #about img {
   border-radius: 70px;
   box-shadow: 2px 2px 2px;
-  max-width: 400px;
 }
 #rich {
   padding-top: 5px;
