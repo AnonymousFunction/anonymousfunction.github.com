@@ -1,0 +1,154 @@
+body {
+	margin: 0;
+}
+#hud {
+	background-color: black;
+	height: 56px;
+	width: 256px;
+}
+#minimap {
+	background-color: #616161;
+	position: absolute;
+	height: 32px;
+	width: 64px;
+	left: 16px;
+	top: 16px;
+}
+#beacon {
+	background-color: #71D200;
+	position: absolute;
+	height: 4px;
+	width: 4px;
+	left: 44px;
+	top: 44px;
+}
+#rupees {
+	color: white;
+	font-size: 10px;
+	font-family: monospace;
+	position: absolute;
+	top: 14px;
+	left: 86px;
+}
+#keys {
+	color: white;
+	font-size: 10px;
+	font-family: monospace;
+	position: absolute;
+	top: 28px;
+	left: 86px;
+}
+#bombs {
+	color: white;
+	font-size: 10px;
+	font-family: monospace;
+	position: absolute;
+	top: 36px;
+	left: 86px;
+}
+#b-label {
+	color: white;
+	font-size: 10px;
+	font-family: monospace;
+	position: absolute;
+	top: 14px;
+	left: 128px;
+	background-color: black;
+	z-index: 100;
+}
+#b-box {
+	border: 1pt solid blue;
+	position: absolute;
+	top: 20px;
+	left: 122px;
+	width: 16px;
+	height: 24px;
+	border-radius: 2px;	
+}
+#a-label {
+	color: white;
+	font-size: 10px;
+	font-family: monospace;
+	position: absolute;
+	top: 14px;
+	left: 152px;
+	background-color: black;
+	z-index: 100;
+}
+#a-box {
+	border: 1pt solid blue;
+	position: absolute;
+	top: 20px;
+	left: 146px;
+	width: 16px;
+	height: 24px;
+	border-radius: 2px;
+}
+#life-header {
+	color: red;
+	font-family: monospace;
+	font-size: 12px;
+	position: absolute;
+	top: 12px;
+	left: 186px;
+	font-style: normal;
+}
+#hearts-bottom {
+	color: red;
+	font-family: monospace;
+	font-size: 14px;
+	position: absolute;
+	top: 35px;
+	left: 175px;
+}
+#viewport {
+	height: 176px;
+	width: 256px;
+	background: url("../images/overworld_map.png");
+	background-repeat: no-repeat;
+	background-position-x: -2048px; /* 256px x-axis change */
+	background-position-y: -1232px;	/* 176px y-axis change */
+	/* 16 columns @ 256px = 16px per col */
+	/* 11 rows @ 176px = 16px per row */
+}
+.sprite {
+	height: 16px;
+	width: 16px;
+}
+#link {
+	position: absolute;
+	top: 152px;
+	left: 112px;
+}
+#link.up {
+	background: url("../images/link_up.gif") no-repeat;	
+	margin-left: 2px;
+}
+#link.up.sword {
+	background: url("../images/sword_up.png") no-repeat;	
+	margin-left: 2px;
+	height: 28px;
+	margin-top: -12px;
+}
+#link.down {
+	background: url("../images/link_down.gif") no-repeat;	
+}
+#link.down.sword {
+	background: url("../images/sword_down.png") no-repeat;
+	height: 27px;
+}
+#link.left {
+	background: url("../images/link_left.gif") no-repeat;	
+}
+#link.left.sword {
+	background: url("../images/sword_left.png") no-repeat;	
+	margin-left: -11px;
+	width: 27px;
+}
+#link.right {
+	background: url("../images/link_right.gif") no-repeat;	
+}
+#link.right.sword {
+	background: url("../images/sword_right.png") no-repeat;
+	width: 27px;
+}
