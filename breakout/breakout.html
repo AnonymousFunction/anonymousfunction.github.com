@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	</head>	
+	<body>
+		<style>
+			body {
+			    padding: 0;
+			    margin: 0;
+			    background-color: #7A7A7A;
+			}
+			#board {
+			    background-color: #1A1A1A;
+			    height: 600px;
+			    width: 600px;
+			    margin: 0 auto;
+			}
+			#bricks {
+			    width: 428px;
+			    margin: 0 auto;
+			    padding-top: 50px;
+			}
+			#bricks .brick-row span {
+			    display: inline-block;
+			    width: 50px;
+			    height: 10px;
+			    margin-right: 3px;
+			}
+			#bricks .brick-row.red span {
+			    background-color: #B93435;
+			}
+			#bricks .brick-row.orange span {
+			    background-color: #B85922;
+			}
+			#bricks .brick-row.brown span {
+			    background-color: #A46814;
+			}
+			#bricks .brick-row.yellow span {
+			    background-color: #929400;
+			}
+			#bricks .brick-row.green span {
+			    background-color: #3D932A;
+			}
+			#bricks .brick-row.blue span {
+			    background-color: #302BC5;
+			}
+			#instructions {
+				color: whitesmoke;
+				font-family: 'Press Start 2P', cursive;
+				font-size: 16pt;
+				text-align: center;
+				padding-top: 80px;
+			}
+			#ball {
+			    height: 7px;
+			    width: 7px;
+			    background-color: white;
+			    position: absolute;
+			    top: 360px;
+			}
+			#paddle {
+			    height: 10px;
+			    width: 50px;
+			    background-color: #0088FF;
+			    position: absolute;
+			    top: 580px;
+			    left: 0px;
+			}
+			#debug {
+				text-align: center;
+			}
+		</style>
+		<div id="board">
+		    <div id="bricks">
+		        <div class="brick-row red">
+		            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+		        </div>
+		        <div class="brick-row orange">
+		            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+		        </div>
+		        <div class="brick-row brown">
+		            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+		        </div>
+		        <div class="brick-row yellow">
+		            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+		        </div>
+		        <div class="brick-row green">
+		            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+		        </div>
+		        <div class="brick-row blue">
+		            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+		        </div>
+		    </div>
+		    <div id="instructions">PRESS SPACEBAR TO START</div>
+		    <div id="ball"></div>
+		    <div id="paddle"></div>
+		</div>
+		<div id="debug">
+			<input type="button" id="wallSound" value="Wall Sound">
+			<input type="button" id="paddleSound" value="Paddle Sound">
+			<input type="button" id="brickSound" value="Brick Sound">
+			<input type="button" id="reloadButton" value="Reload">
+		</div>
+	</body>
+	<script type="text/javascript">
+		var LEFT = 37;
+		var RIGHT = 39;
+		var A = 97;
+		var S = 115;
+		var PADDLE_MOVE = 25;
+		var horizontalAngle = 0;
+		var verticalAngle = 0;
+		var newYPos = 0;
+		var newXPos = 0;
+
+		var gameInProgress = false;
+
+		var board = $("#board");
+		var paddle = $("#paddle");
+		var ball = $("#ball");
+		var instructions = $("#instructions");
+		var UP = "up", DOWN = "down", LEFT = "left", RIGHT = "right";
+		var x_dir = null, y_dir = DOWN;
+
+		var initializeBoard = function(){
+			gameInProgress = false;
+			paddle.css("left", board.offset().left + "px");
+			ball.css("left", board.offset().left + board.width()/2 + "px");
+			ball.css("top", "360px");
+			instructions.show();
+		};
+
+		var resetBoard = function(){
+			gameInProgress = false;
+			ball.css("left", board.offset().left + board.width()/2 + "px");
+			ball.css("top", "360px");
+			instructions.show();
+		};
+
+		paddle.css("left", board.offset().left + "px");
+		ball.css("left", board.offset().left + board.width()/2 + "px");
+
+		board.mousemove(function( event ) {
+		  var msg = "Handler for .mousemove() called at ";
+		  var x = event.pageX;
+		  // console.log("x", x);
+		  if (x > board.offset().left + board.width() - paddle.width() || x < 0) {
+		      return;
+		  }
+		  paddle.css("left", event.pageX + "px");
+		});
+
+		var paddleSound = new Audio("sound1.mp3");
+		$("#paddleSound").click(function(){
+			paddleSound.play();
+		});
+
+		var wallSound = new Audio("sound2.mp3");
+		$("#wallSound").click(function(){
+			wallSound.play();
+		});
+		
+		var brickSound = new Audio("sound3.mp3");
+		$("#brickSound").click(function(){
+			brickSound.play();
+		});
+
+		$("#reloadButton").click(function(){
+			window.location.href = window.location.href;
+		});
+
+		$(document).keypress(function(e){
+		    var k = e ? e.which : window.event.keyCode;
+		    if (k == 32) {
+		    	if (gameInProgress) {
+		    		return;
+		    	}
+		        gameInProgress = true;
+		        $("#instructions").hide();
+		        dropBall();
+		    }
+		});
+
+		var dropBall = function(){
+			ball.animate({top: paddle.offset().top - ball.height()}, 1000, function(){
+				var result = checkForHit();
+				if (!result) {
+					resetBoard();
+					return;
+				}
+
+				if (result == LEFT) {
+					x_dir = LEFT;
+					y_dir = ball.offset().top == 0 ? DOWN : UP;
+//					bounceBall(board.height()/2, board.offset().left);
+                    bounceBall(newYPos, newXPos);
+				} else if (result == RIGHT) {
+					x_dir = RIGHT;
+					y_dir = ball.offset().top == 0 ? DOWN : UP;
+					//bounceBall(board.height()/2, board.width() + board.offset().left - ball.width());
+					bounceBall(newYPos, newXPos);
+				}
+				paddleSound.play();	
+			});
+		};
+
+		var bounceBall = function(top, left) {
+			console.log("bouncing ball");
+			console.log("x_dir", x_dir);
+			console.log("y_dir", y_dir);
+			ball.animate({top: top, left: left}, 2000, function(){
+				var result = checkForHit();
+				if (!result) {
+					resetBoard();
+					return;
+				}
+
+				if (result == LEFT) {
+					//TODO - determine new coordinate
+					x_dir = ball.offset().left == 0 ? RIGHT : LEFT;
+					y_dir = ball.offset().top == 0 ? DOWN : UP;
+				} else if (result == RIGHT) {
+					//TODO - determine new coordinate
+					x_dir = ball.offset().left == board.width ? LEFT : RIGHT;
+					y_dir = ball.offset().top == 0 ? DOWN : UP;
+				}
+
+				if (x_dir == LEFT && y_dir == UP) {
+					console.log("need to go left up");
+					//TODO - figure real left value
+					bounceBall(0, randomLeftPosition(board.offset().left, ball.offset().left));
+				} else if (x_dir == LEFT && y_dir == DOWN) {
+					console.log("need to go left down");
+					//TODO - figure real left value
+					bounceBall(paddle.offset().top - ball.height(), randomLeftPosition(board.offset().left, ball.offset().left));
+				} else if (x_dir == RIGHT && y_dir == UP) {
+					console.log("need to go right up");
+					//TODO - figure real left value
+					bounceBall(0, randomLeftPosition(ball.offset().left + ball.width(), board.width() + board.offset().left - ball.width()));
+				} else if (x_dir == RIGHT && y_dir == DOWN) {
+					console.log("need to go right down");
+					//TODO - figure real left value
+					bounceBall(paddle.offset().top - ball.height(), randomLeftPosition(ball.offset().left, board.width() + board.offset().left - ball.width()));
+				}
+				paddleSound.play();			
+			});
+		};
+
+		var checkForHit = function(){
+			if (ball.offset().top == 0) {
+				console.log("ceiling hit");
+				return x_dir;
+			}
+			if (ball.offset().top + ball.height() < paddle.offset().top) {
+				console.log("wall hit");
+				return x_dir == RIGHT ? LEFT : RIGHT;
+			}
+			//if the right side of the ball is less than the left side of the paddle
+			//or the left side of the ball is greater than the right side of the paddle: FAIL
+			if (ball.offset().left + ball.width() < paddle.offset().left ||
+				ball.offset().left > paddle.offset().left + paddle.width()) {
+				return false;		
+			} else {
+				//if the right side of the ball is less that the center
+				if (ball.offset().left + ball.width() < paddle.offset().left + paddle.width()/2) {
+					determineNewAngle();
+					return LEFT;
+				} else {
+					determineNewAngle();  
+					return RIGHT;
+				}
+			}
+		};
+
+		var determineNewAngle = function(){
+			var ballCenter = ball.offset().left + (ball.width()/2);
+			var paddleCenter = paddle.offset().left + (paddle.width()/2);
+
+
+			//horizontalAngle = Math.abs(parseInt((ball.offset().left - paddle.offset().left - paddle.width()/2)/.416));
+			//horizontalAngle = parseInt(Math.abs(paddleCenter-ballCenter) * 2.4);
+			//verticalAngle = parseInt(90 - horizontalAngle);
+			verticalAngle = parseInt(Math.abs(paddleCenter-ballCenter) * 2.4);
+			horizontalAngle = parseInt(90 - verticalAngle);
+
+            //								 Right side of the board                 Right side of the ball
+            var ballDistanceFromRightWall = (board.offset().left + board.width()) - (ball.offset().left + ball.width());
+
+            console.log("horizontalAngle", horizontalAngle);
+            console.log("verticalAngle", verticalAngle);
+            console.log("ball distance from right wall", ballDistanceFromRightWall);
+            //newYPos = board.height() - (Math.abs(ballDistanceFromRightWall * Math.tan(horizontalAngle)));
+            var triangleHeight = ballDistanceFromRightWall*Math.sin(toDegrees(horizontalAngle))/Math.sin(toDegrees(verticalAngle));
+            console.log("triangle height", triangleHeight);
+
+			newYPos = board.height() - triangleHeight;            
+            if (newYPos >= board.height()) {
+                newYPos = board.height() - 60;
+            } else if (newYPos < 0) {
+                newYPos = 0;
+            }
+            newXPos = board.offset().left + board.width() - ball.width();
+            console.log("newXPos", newXPos);
+            console.log("newYPos", newYPos);
+
+			//console.log("new y position:", parseInt((board.width() + board.offset().left - ball.offset().left + (ball.width()/2)) * Math.abs(Math.tan(horizontalAngle))));
+		};
+
+		var randomLeftPosition = function(min, max){
+			return Math.floor(Math.random()*(max-min+1)+min);
+		};
+
+		var toDegrees = function(angle) {
+			return angle / 180 * Math.PI;
+		}
+
+		initializeBoard();
+
+
+	</script>
+</html>
