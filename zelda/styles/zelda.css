@@ -173,6 +173,8 @@ body {
 }
 #left-right {
 	height: 30px;
+	width: 90px;
+	background-color: black;
 }
 #left {
 	height: 30px;
