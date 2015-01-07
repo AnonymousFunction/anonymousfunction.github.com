@@ -61,7 +61,7 @@ $(document).ready(function(){
 			link.css("left", newLeft + "px");		
 		} else {
 			var origMapLeft = parseInt(viewport.css("background-position-x"));
-			if (origMapLeft < -256) {
+			if (origMapLeft <= -256) {
 				var newMapLeft = origMapLeft + 256;
 				viewport.css("background-position-x", newMapLeft + "px");
 
