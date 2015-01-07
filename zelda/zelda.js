@@ -43,40 +43,60 @@ $(document).ready(function(){
 	updateMapXVal();
 	updateMapYVal();
 
+	var moveLeft = function(){
+
+	};
+
+	var moveRight = function(){
+		link.removeClass("up down left").addClass("right");	
+
+		if (!canWalkThruWalls() && currentMap[linkY] && currentMap[linkY][linkX+1] === 0) {
+			console.log("link can't move right");
+			return;
+		} else {
+			// console.log("link can move right");
+			linkX++;
+		}
+
+		var originaLeft = parseInt(link.css("left"));
+		var newLeft = originaLeft + 16;
+		
+		if (newLeft < 256) {
+			link.css("left", newLeft + "px");	
+		} else {
+			var origMapLeft = parseInt(viewport.css("background-position-x"));
+			if (origMapLeft > -4096) {				
+				var newMapLeft = origMapLeft - 256;
+				viewport.css("background-position-x", newMapLeft + "px");
+
+				var origBeaconLeft = parseInt(beacon.css("left"));
+				var newBeaconLeft = origBeaconLeft + 4;
+				beacon.css("left", newBeaconLeft + "px");
+
+				link.css("left", "0px");
+				linkX = 0;
+				mapX++;
+			}	
+		}
+	};
+
+	var moveUp = function(){
+
+	};
+
+	var moveDown = function(){
+
+	};
+
+	$("#right").on("click", function(){
+		moveRight();
+	});
+
 	$("body").keydown(function(e){
 		var isCave = false;
 		//right
 		if (e.which == 39) {
-			link.removeClass("up down left").addClass("right");	
-
-			if (!canWalkThruWalls() && currentMap[linkY] && currentMap[linkY][linkX+1] === 0) {
-				console.log("link can't move right");
-				return;
-			} else {
-				// console.log("link can move right");
-				linkX++;
-			}
-
-			var originaLeft = parseInt(link.css("left"));
-			var newLeft = originaLeft + 16;
-			
-			if (newLeft < 256) {
-				link.css("left", newLeft + "px");	
-			} else {
-				var origMapLeft = parseInt(viewport.css("background-position-x"));
-				if (origMapLeft > -4096) {				
-					var newMapLeft = origMapLeft - 256;
-					viewport.css("background-position-x", newMapLeft + "px");
-
-					var origBeaconLeft = parseInt(beacon.css("left"));
-					var newBeaconLeft = origBeaconLeft + 4;
-					beacon.css("left", newBeaconLeft + "px");
-
-					link.css("left", "0px");
-					linkX = 0;
-					mapX++;
-				}	
-			}
+			moveRight();
 		}
 		//left
 		if (e.which == 37) {
