@@ -221,7 +221,7 @@ $(document).ready(function(){
 		moveDown();
 	});
 
-	$("#b-button").on("click", function(){
+	$("#a-button").on("click", function(){
 		doSword();
 	});
 
