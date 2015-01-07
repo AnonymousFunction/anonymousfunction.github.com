@@ -223,6 +223,24 @@ body {
 	border-radius: 20px;
 	text-shadow: 2px 1px #414141;
 }
+#b-button-background {
+	background-color: white;
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	top: 270px;
+	left: 157px;
+	border-radius: 2px;
+}
+#b-button-label {
+	position: absolute;
+	top: 309px;
+	left: 184px;
+	color: #CD3333;
+	width: 30px;
+	height: 30px;
+	font-family: sans-serif;
+}
 #a-button {
 	position: absolute;
 	top: 272px;
@@ -234,4 +252,21 @@ body {
 	text-align: center;
 	border-radius: 20px;
 	text-shadow: 2px 1px #414141;
+}
+#a-button-background {
+	background-color: white;
+	position: absolute;
+	width: 36px;
+	height: 36px;
+	top: 270px;
+	left: 202px;
+	border-radius: 2px;
+}
+#a-button-label {
+	position: absolute;
+	top: 309px;
+	left: 226px;
+	color: #CD3333;
+	width: 30px;
+	font-family: sans-serif;
 }
