@@ -205,6 +205,10 @@ $(document).ready(function(){
 		moveDown();
 	});
 
+	$("#b-button").on("click", function(){
+		doSword();
+	});
+
 	$("body").keydown(function(e){
 		//right
 		if (e.which == 39) {
