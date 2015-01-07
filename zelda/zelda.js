@@ -37,11 +37,23 @@ $(document).ready(function(){
 		}
 	};
 
+	var updateBGXVal = function(){
+		$("#bgXVal").text($("#viewport").css("background-position-x"));
+	};
+
+	var updateBGYVal = function(){
+		$("#bgYVal").text($("#viewport").css("background-position-y"));
+	};
+
+
 	updateLinkXVal();
 	updateLinkYVal();
 
 	updateMapXVal();
 	updateMapYVal();
+
+	updateBGXVal();
+	updateBGYVal();
 
 	var moveLeft = function(){
 		link.removeClass("up down right").addClass("left");
@@ -203,6 +215,8 @@ $(document).ready(function(){
 		setCurrentMap(mapX,mapY);
 		updateMapXVal();
 		updateMapYVal();
+		updateBGXVal();
+		updateBGYVal();
 	};
 
 	$("#left").on("click", function(){
