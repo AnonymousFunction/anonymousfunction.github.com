@@ -74,6 +74,8 @@ $(document).ready(function(){
 				mapX--;
 			}
 		}
+
+		updateMapValues();
 	};
 
 	var moveRight = function(){
@@ -107,6 +109,8 @@ $(document).ready(function(){
 				mapX++;
 			}	
 		}
+
+		updateMapValues();
 	};
 
 	var moveUp = function(){
@@ -143,6 +147,8 @@ $(document).ready(function(){
 				mapY--;
 			}
 		}
+
+		updateMapValues();
 	};
 
 	var moveDown = function(){
@@ -179,6 +185,8 @@ $(document).ready(function(){
 				mapY++;
 			}
 		}
+
+		updateMapValues();
 	};
 
 	var doSword = function(){
@@ -187,6 +195,14 @@ $(document).ready(function(){
 		setTimeout(function(){
 			link.removeClass("sword");
 		}, 200);
+	};
+
+	var updateMapValues = function(){
+		updateLinkXVal();
+		updateLinkYVal();
+		setCurrentMap(mapX,mapY);
+		updateMapXVal();
+		updateMapYVal();
 	};
 
 	$("#left").on("click", function(){
@@ -230,12 +246,5 @@ $(document).ready(function(){
 		if (e.which == 32) {
 			doSword();
 		}
-
-		updateLinkXVal();
-		updateLinkYVal();
-		setCurrentMap(mapX,mapY);
-		updateMapXVal();
-		updateMapYVal();
-
 	});
 });
