@@ -173,7 +173,7 @@ body {
 	border-left: 2px solid white;
 	border-top: 2px solid white;
 	border-right: 2px solid white;
-	border-radius: 2px 2px 0 0px;
+	/*border-radius: 2px 2px 0 0px;*/
 }
 #left-right {
 	height: 30px;
@@ -188,7 +188,7 @@ body {
 	border-left: 2px solid white;
 	border-top: 2px solid white;
 	border-bottom: 2px solid white;
-	border-radius: 2px 0 0 2px;
+	/*border-radius: 2px 0 0 2px;*/
 }
 #right {
 	height: 30px;
@@ -199,7 +199,7 @@ body {
 	border-right: 2px solid white;
 	border-top: 2px solid white;
 	border-bottom: 2px solid white;
-	border-radius: 0px 2px 2px 0px;
+	/*border-radius: 0px 2px 2px 0px;*/
 }
 #down {
 	height: 30px;
@@ -209,7 +209,7 @@ body {
 	border-left: 2px solid white;
 	border-bottom: 2px solid white;
 	border-right: 2px solid white;
-	border-radius: 2px;
+	/*border-radius: 2px;*/
 }
 #b-button {
 	position: absolute;
