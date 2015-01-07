@@ -1,5 +1,9 @@
+html {
+	width: 256px;
+}
 body {
 	margin: 0;
+	width: 256px;
 }
 #hud {
 	background-color: black;
