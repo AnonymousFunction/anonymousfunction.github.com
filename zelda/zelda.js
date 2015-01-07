@@ -135,7 +135,7 @@ $(document).ready(function(){
 		} else {
 			var origMapTop = parseInt(viewport.css("background-position-y"));
 			if (origMapTop < 0) {
-				var newMapTop = origMapTop + 176;
+				var newMapTop = origMapTop - 76;
 				viewport.css("background-position-y", newMapTop + "px");
 
 				var origBeaconTop = parseInt(beacon.css("top"));
