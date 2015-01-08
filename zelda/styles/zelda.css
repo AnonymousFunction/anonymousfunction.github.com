@@ -87,6 +87,12 @@ body {
 	height: 24px;
 	border-radius: 2px;
 }
+#a-box-item img {
+    width: 10px;
+    position: absolute;
+    top: 25px;
+    left: 150px;
+}
 #life-header {
 	color: red;
 	font-family: monospace;
