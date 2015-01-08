@@ -68,6 +68,11 @@ body {
 	height: 24px;
 	border-radius: 2px;	
 }
+#b-box-item img {
+    position: absolute;
+    top: 30px;
+    left: 129px;
+}
 #a-label {
 	color: white;
 	font-size: 10px;
@@ -88,10 +93,9 @@ body {
 	border-radius: 2px;
 }
 #a-box-item img {
-    width: 10px;
     position: absolute;
-    top: 25px;
-    left: 150px;
+    top: 26px;
+    left: 152px;
 }
 #life-header {
 	color: red;

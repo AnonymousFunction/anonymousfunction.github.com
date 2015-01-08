@@ -209,6 +209,15 @@ $(document).ready(function(){
 		}, 200);
 	};
 
+	var doBoomerang = function(){
+        console.log("boom");
+		link.addClass("sword");
+		new Audio("sword.wav").play();
+		setTimeout(function(){
+			link.removeClass("sword");
+		}, 200);
+	};
+
 	var updateMapValues = function(){
 		updateLinkXVal();
 		updateLinkYVal();
@@ -239,6 +248,10 @@ $(document).ready(function(){
 		doSword();
 	});
 
+    $("#b-button").on("click", function(){
+		doBoomerang();
+	});
+
 	$("body").keydown(function(e){
 		//right
 		if (e.which == 39) {
@@ -259,6 +272,10 @@ $(document).ready(function(){
 		//sword
 		if (e.which == 32) {
 			doSword();
+		}
+		//boomerang 'b'
+		if (e.which == 66) {
+			doBoomerang();
 		}
 	});
 });
