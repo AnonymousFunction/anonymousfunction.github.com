@@ -9,6 +9,7 @@ $(document).ready(function(){
 
 	var viewport = $("#viewport");
 	var link = $("#link");
+    var boomerang = $("#boomerang");
 	var beacon = $("#beacon");
 	link.addClass("up");
 
@@ -210,12 +211,14 @@ $(document).ready(function(){
 	};
 
 	var doBoomerang = function(){
-        console.log("boom");
-		link.addClass("sword");
-		new Audio("sword.wav").play();
-		setTimeout(function(){
-			link.removeClass("sword");
-		}, 200);
+//        boomerang.removeClass("hidden");
+        boomerang.addClass("throw");
+
+        setTimeout(function(){
+            boomerang.removeClass("throw");
+
+//            boomerang.addClass("hidden");
+        }, 400);
 	};
 
 	var updateMapValues = function(){
