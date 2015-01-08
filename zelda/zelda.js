@@ -211,13 +211,10 @@ $(document).ready(function(){
 	};
 
 	var doBoomerang = function(){
-//        boomerang.removeClass("hidden");
         boomerang.addClass("throw");
 
         setTimeout(function(){
             boomerang.removeClass("throw");
-
-//            boomerang.addClass("hidden");
         }, 400);
 	};
 
