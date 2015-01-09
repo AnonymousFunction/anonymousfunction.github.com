@@ -1,7 +1,7 @@
 $(document).ready(function(){
     //set viewport size
-    var scale = window.innerWidth/256;
-    $("meta[name=viewport]").attr("content", "initial-scale=" + scale + "å, user-scalable=no");
+    var scale = Number(window.innerWidth/256).toFixed(2);
+    $("meta[name=viewport]").attr("content", "initial-scale=" + scale + ", user-scalable=no");
 
 
 	var overworldSound = new Audio("sounds/overworld.mp3");
