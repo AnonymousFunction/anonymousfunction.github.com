@@ -1,5 +1,7 @@
 $(document).ready(function(){
-	// new Audio("overworld.mp3").play();
+	var overworldSound = new Audio("sounds/overworld.mp3");
+    var swordSound = new Audio("sounds/sword.wav");
+    var boomerangSound = new Audio("sounds/boomerang.wav");
 
 	var linkX = 7;
 	var linkY = 6;
@@ -204,7 +206,7 @@ $(document).ready(function(){
 
 	var doSword = function(){
 		link.addClass("sword");
-		new Audio("sword.wav").play();
+		swordSound.play();
 		setTimeout(function(){
 			link.removeClass("sword");
 		}, 200);
@@ -213,7 +215,11 @@ $(document).ready(function(){
 	var doBoomerang = function(){
         boomerang.addClass("throw");
 
+
+        boomerangSound.play();
+
         setTimeout(function(){
+            boomerangSound.play();
             boomerang.removeClass("throw");
         }, 400);
 	};
@@ -273,8 +279,8 @@ $(document).ready(function(){
 		if (e.which == 32) {
 			doSword();
 		}
-		//boomerang 'b'
-		if (e.which == 66) {
+		//boomerang 'left cmd'
+		if (e.which == 91) {
 			doBoomerang();
 		}
 	});
