@@ -1,8 +1,13 @@
 $(document).ready(function(){
     //set viewport size
-    var scale = Number(window.innerWidth/256).toFixed(2);
-    $("meta[name=viewport]").attr("content", "initial-scale=" + scale + ", user-scalable=no");
+    var widthScale = Number(window.innerWidth/256).toFixed(2);
+    var heightScale = Number(window.innerHeight/346).toFixed(2);
 
+    if (widthScale <= heightScale) {
+        $("meta[name=viewport]").attr("content", "initial-scale=" + widthScale + ", user-scalable=no");
+    } else {
+        $("meta[name=viewport]").attr("content", "initial-scale=" + heightScale + ", user-scalable=no");
+    }
 
 	var overworldSound = new Audio("sounds/overworld.mp3");
     var swordSound = new Audio("sounds/sword.wav");
