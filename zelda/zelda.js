@@ -215,12 +215,21 @@ $(document).ready(function(){
 	var doBoomerang = function(){
         boomerang.addClass("throw");
 
+        if (link.hasClass("up")) {
+            boomerang.addClass("up");
+        } else if (link.hasClass("down")) {
+            boomerang.addClass("down");
+        } else if (link.hasClass("left")) {
+            boomerang.addClass("left");
+        } else if (link.hasClass("right")) {
+            boomerang.addClass("right");
+        }
 
         boomerangSound.play();
 
         setTimeout(function(){
             boomerangSound.play();
-            boomerang.removeClass("throw");
+            boomerang.removeClass("throw up down left right");
         }, 400);
 	};
 

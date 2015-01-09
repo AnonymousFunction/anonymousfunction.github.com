@@ -138,11 +138,21 @@ body {
     width: 5px;
     -webkit-transition: .2s ease;
 }
+#boomerang.up {
+    margin-top: -48px;
+}
+#boomerang.down {
+    margin-top: 48px;
+}
+#boomerang.left {
+    margin-left: -48px;
+}
+#boomerang.right {
+    margin-left: 48px;
+}
 #boomerang.throw {
     -webkit-transform: rotate(720deg);
     -webkit-transition: .2s ease;
-
-    margin-top: -48px;
 }
 .hidden {
     display: none;
