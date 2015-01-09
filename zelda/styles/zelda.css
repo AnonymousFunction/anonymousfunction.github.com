@@ -134,9 +134,9 @@ body {
     top: 152px;
     left: 112px;
     margin-left: 5px;
+    margin-top: 2px;
     height: 8px;
     width: 5px;
-    -webkit-transition: .2s ease;
 }
 #boomerang.up {
     margin-top: -48px;
@@ -152,7 +152,7 @@ body {
 }
 #boomerang.throw {
     -webkit-transform: rotate(720deg);
-    -webkit-transition: .2s ease;
+    -webkit-transition: .2s linear;
 }
 .hidden {
     display: none;

@@ -74,6 +74,7 @@ $(document).ready(function(){
 
 		if (newLeft >= 0) {		
 			link.css("left", newLeft + "px");		
+			boomerang.css("left", newLeft + "px");
 		} else {
 			var origMapLeft = parseInt(viewport.css("background-position-x"));
 			if (origMapLeft <= -256) {
@@ -85,6 +86,7 @@ $(document).ready(function(){
 				beacon.css("left", newBeaconLeft + "px");
 
 				link.css("left", "240px");
+				boomerang.css("left", "240px");
 				linkX = 15;
 				mapX--;
 			}
@@ -109,6 +111,7 @@ $(document).ready(function(){
 		
 		if (newLeft < 256) {
 			link.css("left", newLeft + "px");	
+			boomerang.css("left", newLeft + "px");
 		} else {
 			var origMapLeft = parseInt(viewport.css("background-position-x"));
 			if (origMapLeft > -4096) {				
@@ -120,6 +123,7 @@ $(document).ready(function(){
 				beacon.css("left", newBeaconLeft + "px");
 
 				link.css("left", "0px");
+				boomerang.css("left", "0px");
 				linkX = 0;
 				mapX++;
 			}	
@@ -147,6 +151,7 @@ $(document).ready(function(){
 
 		if (newTop >= 56) {
 			link.css("top", newTop + "px");	
+			boomerang.css("top", newTop + "px");
 		} else {
 			var origMapTop = parseInt(viewport.css("background-position-y"));
 			if (origMapTop < 0) {
@@ -158,6 +163,7 @@ $(document).ready(function(){
 				beacon.css("top", newBeaconTop + "px");
 
 				link.css("top", "216px");
+				boomerang.css("top", "216px");
 				linkY = 10;
 				mapY--;
 			}
@@ -183,6 +189,7 @@ $(document).ready(function(){
 		if (newTop < 232) {
 			//Moving down one square
 			link.css("top", newTop + "px");
+			boomerang.css("top", newTop + "px");
 		} else {
 			//Bottom of map, have to change map
 			var origMapTop = parseInt(viewport.css("background-position-y"));
@@ -196,6 +203,7 @@ $(document).ready(function(){
 				beacon.css("top", newBeaconTop + "px");
 
 				link.css("top", "56px");
+				boomerang.css("top", "56px");
 				linkY = 0;
 				mapY++;
 			}
