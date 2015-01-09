@@ -230,84 +230,58 @@ body {
     left: 48px;
     top: 281px;
 }
-#controller-up {
-    position: absolute;
-    color: #747474;
-    left: 44px;
-    top: 246px;
-    font-size: 26px;
-    height: 22px;
-}
-#controller-down {
-    position: absolute;
-    color: #747474;
-    left: 44px;
-    top: 310px;
-    height: 22px;
-    -webkit-transform: rotate(180deg);
-}
-#controller-left {
-    position: absolute;
-    color: #747474;
-    left: 14px;
-    top: 280px;
-    height: 22px;
-    -webkit-transform: rotate(270deg);
-}
-#controller-right {
-    position: absolute;
-    color: #747474;
-    left: 74px;
-    top: 280px;
-    height: 22px;
-    -webkit-transform: rotate(90deg);
-
-}
 #up {
 	height: 30px;
 	width: 30px;
-	background-color: black;
 	margin-left: 30px;
 	border-left: 2px solid white;
 	border-top: 2px solid white;
 	border-right: 2px solid white;
-	/*border-radius: 2px 2px 0 0px;*/
+    background: url("../images/controller_arrow.png") no-repeat;
+    background-size: 30px 30px;
+
 }
 #left-right {
 	height: 30px;
-	width: 94px;
+	width: 95px;
 	background-color: black;
 }
 #left {
 	height: 30px;
 	width: 30px;
-	background-color: black;
 	display: inline-block;
-	border-left: 2px solid white;
-	border-top: 2px solid white;
-	border-bottom: 2px solid white;
-	/*border-radius: 2px 0 0 2px;*/
+    margin-left: -1px;
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    background: url("../images/controller_arrow.png") no-repeat;
+    background-size: 30px 30px;
+    -webkit-transform: rotate(270deg);
 }
 #right {
 	height: 30px;
 	width: 30px;
 	background-color: black;
 	display: inline-block;
-	margin-left: 30px;
-	border-right: 2px solid white;
-	border-top: 2px solid white;
-	border-bottom: 2px solid white;
-	/*border-radius: 0px 2px 2px 0px;*/
+	margin-left: 28px;
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    background: url("../images/controller_arrow.png") no-repeat;
+    background-size: 30px 30px;
+    -webkit-transform: rotate(90deg);
 }
 #down {
 	height: 30px;
 	width: 30px;
 	background-color: black;
 	margin-left: 30px;
-	border-left: 2px solid white;
-	border-bottom: 2px solid white;
-	border-right: 2px solid white;
-	/*border-radius: 2px;*/
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    background: url("../images/controller_arrow.png") no-repeat;
+    background-size: 30px 30px;
+    -webkit-transform: rotate(180deg);
 }
 .gray-pattern {
     background-color: #666666;
