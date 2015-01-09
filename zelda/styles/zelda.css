@@ -254,6 +254,52 @@ body {
 	border-right: 2px solid white;
 	/*border-radius: 2px;*/
 }
+.gray-pattern {
+    background-color: #666666;
+    position: absolute;
+    width: 40px;
+    height: 16px;
+    left: 111px;
+    border-radius: 10px;
+}
+.gray-pattern-1 {
+    top: 237px;
+}
+.gray-pattern-2 {
+    top: 262px;
+}
+.gray-pattern-3 {
+    top: 287px;
+}
+
+#start-background {
+    background-color: white;
+    position: absolute;
+    width: 36px;
+    height: 24px;
+    top: 310px;
+    left: 108px;
+    border-radius: 2px;
+    border: 5px solid black;
+}
+#start-button {
+    background-color: black;
+    position: absolute;
+    width: 24px;
+    height: 11px;
+    top: 321px;
+    left: 119px;
+    border-radius: 10px;
+}
+#start-label {
+    color: #CD3333;
+    position: absolute;
+    top: 289px;
+    left: 116px;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: monospace;
+}
 #b-button {
 	position: absolute;
 	top: 272px;
