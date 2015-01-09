@@ -259,7 +259,7 @@ $(document).ready(function(){
 		moveRight();
 	});
 
-	$("#up").on("click", function(){
+	$("#up").on("tap", function(){
 		moveUp();
 	});
 
