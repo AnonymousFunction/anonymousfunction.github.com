@@ -296,8 +296,8 @@ $(document).ready(function(){
 		if (e.which == 32) {
 			doSword();
 		}
-		//boomerang 'left cmd'
-		if (e.which == 91) {
+		//boomerang 'z'
+		if (e.which == 90) {
 			doBoomerang();
 		}
 	});
