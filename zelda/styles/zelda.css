@@ -4,6 +4,9 @@ html {
 body {
 	margin: 0;
 }
+.ui-loader {
+    display: none; /* how to remove the need for this? jquery mobile does this crap*/
+}
 #hud {
 	background-color: black;
 	height: 56px;

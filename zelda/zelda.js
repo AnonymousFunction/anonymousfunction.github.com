@@ -251,11 +251,11 @@ $(document).ready(function(){
 		updateBGYVal();
 	};
 
-	$("#left").on("click", function(){
+	$("#left").on("tap", function(){
 		moveLeft();
 	});
 
-	$("#right").on("click", function(){
+	$("#right").on("tap", function(){
 		moveRight();
 	});
 
@@ -263,15 +263,15 @@ $(document).ready(function(){
 		moveUp();
 	});
 
-	$("#down").on("click", function(){
+	$("#down").on("tap", function(){
 		moveDown();
 	});
 
-	$("#a-button").on("click", function(){
+	$("#a-button").on("tap", function(){
 		doSword();
 	});
 
-    $("#b-button").on("click", function(){
+    $("#b-button").on("tap", function(){
 		doBoomerang();
 	});
 
