@@ -221,6 +221,15 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
+#controller-center {
+    border-radius: 60px;
+    position: absolute;
+    border: 1pt solid #747474;
+    height: 20px;
+    width: 20px;
+    left: 46px;
+    top: 279px;
+}
 #up {
 	height: 30px;
 	width: 30px;
