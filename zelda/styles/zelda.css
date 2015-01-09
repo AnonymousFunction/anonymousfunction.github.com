@@ -245,6 +245,7 @@ body {
 	height: 30px;
 	width: 95px;
 	background-color: black;
+    padding-bottom: 1px;
 }
 #left {
 	height: 30px;
