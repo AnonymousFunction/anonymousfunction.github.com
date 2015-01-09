@@ -7,6 +7,18 @@ body {
 .ui-loader {
     display: none; /* how to remove the need for this? jquery mobile does this crap*/
 }
+#about {
+    display: none;
+    position: absolute;
+    height: 176px;
+    width: 256px;
+    background: rgba(255,255,255,0.9);
+    top: 56px;
+    z-index: 200;
+    font-family: monospace;
+    text-shadow: 1px 1px #D0D0D0;
+    text-align: center;
+}
 #hud {
 	background-color: black;
 	height: 56px;

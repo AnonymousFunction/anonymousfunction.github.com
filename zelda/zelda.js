@@ -275,6 +275,10 @@ $(document).ready(function(){
 		doBoomerang();
 	});
 
+    $("#start-button").on("tap", function(){
+       $("#about").toggle();
+    });
+
 	$("body").keydown(function(e){
 		//right
 		if (e.which == 39) {
