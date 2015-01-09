@@ -333,7 +333,7 @@ body {
 #b-button {
 	position: absolute;
 	top: 272px;
-	left: 160px;
+	left: 170px;
 	background-color: #CD3333;
 	color: white;
 	width: 30px;
@@ -348,13 +348,13 @@ body {
 	width: 36px;
 	height: 36px;
 	top: 270px;
-	left: 157px;
+	left: 167px;
 	border-radius: 2px;
 }
 #b-button-label {
 	position: absolute;
 	top: 309px;
-	left: 184px;
+	left: 194px;
 	color: #CD3333;
 	width: 30px;
 	height: 30px;
@@ -363,7 +363,7 @@ body {
 #a-button {
 	position: absolute;
 	top: 272px;
-	left: 205px;
+	left: 215px;
 	background-color: #CD3333;
 	color: white;
 	width: 30px;
@@ -378,13 +378,13 @@ body {
 	width: 36px;
 	height: 36px;
 	top: 270px;
-	left: 202px;
+	left: 212px;
 	border-radius: 2px;
 }
 #a-button-label {
 	position: absolute;
 	top: 309px;
-	left: 226px;
+	left: 236px;
 	color: #CD3333;
 	width: 30px;
 	font-family: sans-serif;
