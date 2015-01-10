@@ -389,20 +389,18 @@ body {
 	width: 30px;
 	font-family: sans-serif;
 }
-#red-octorok {
+.red-octorok {
     position: absolute;
-    top: 152px;
-    left: 142px;
 }
-#red-octorok.up {
+.red-octorok.up {
     background: url("../images/red_octorok/up.gif") no-repeat;
 }
-#red-octorok.down {
+.red-octorok.down {
     background: url("../images/red_octorok/down.gif") no-repeat;
 }
-#red-octorok.left {
+.red-octorok.left {
     background: url("../images/red_octorok/left.gif") no-repeat;
 }
-#red-octorok.right {
+.red-octorok.right {
     background: url("../images/red_octorok/right.gif") no-repeat;
 }

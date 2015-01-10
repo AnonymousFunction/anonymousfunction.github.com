@@ -7,8 +7,6 @@
 		<link rel="stylesheet" type="text/css" href="styles/zelda.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-		<script src="movement.js"></script>
-		<script src="zelda.js"></script>
 	</head>
 	<body>
 		<div id="hud">
@@ -29,7 +27,7 @@
 		<div id="viewport">
 			<span id="link" class="sprite"></span>		
 			<span id="boomerang" class="sprite"></span>
-			<span id="red-octorok" class="sprite left"></span>
+            <span id="enemies"></span>
 		</div>
         <div id="about">
             The Legend of Zelda<br/><br/>
@@ -66,7 +64,10 @@
 			Link Y: <span id="linkYVal"></span>/10<br/>
 			Map X: <span id="mapXVal"></span>/15
 			Map Y: <span id="mapYVal"></span>/7<br/>
-			Area Map Defined: <span id="mapDefined"><span>
+			Area Map Defined: <span id="mapDefined"></span>
 		</div>
+        <script src="enemyMaps.js"></script>
+        <script src="movement.js"></script>
+        <script src="zelda.js"></script>
 	</body>
 </html>

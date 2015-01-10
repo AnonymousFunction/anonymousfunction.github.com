@@ -66,6 +66,7 @@ var movementMap = [
 var setCurrentMap = function(x, y){
 	//backwards because I'm treating the first index as down the screen/map to make it more readable
 	currentMap = movementMap[y][x];
+    setCurrentEnemyMap(x, y);
 };
 
 setCurrentMap(7,7);
