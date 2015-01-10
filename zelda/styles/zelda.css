@@ -389,3 +389,20 @@ body {
 	width: 30px;
 	font-family: sans-serif;
 }
+#red-octorok {
+    position: absolute;
+    top: 152px;
+    left: 142px;
+}
+#red-octorok.up {
+    background: url("../images/red_octorok/up.gif") no-repeat;
+}
+#red-octorok.down {
+    background: url("../images/red_octorok/down.gif") no-repeat;
+}
+#red-octorok.left {
+    background: url("../images/red_octorok/left.gif") no-repeat;
+}
+#red-octorok.right {
+    background: url("../images/red_octorok/right.gif") no-repeat;
+}
