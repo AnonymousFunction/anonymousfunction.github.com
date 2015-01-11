@@ -78,7 +78,7 @@ $(document).ready(function(){
 			console.log("link can't move left");
 			return;
 		} else {
-            if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX-1] != 0) {
+            if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX-1] &&  currentEnemyMap[linkY][linkX-1] != 0) {
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX-1]));
                 return;
             }
@@ -121,7 +121,7 @@ $(document).ready(function(){
 			console.log("link can't move right");
 			return;
 		} else {
-            if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX+1] != 0) {
+            if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX+1] && currentEnemyMap[linkY][linkX+1] != 0) {
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX+1]));
                 return;
             }
@@ -247,10 +247,35 @@ $(document).ready(function(){
 	};
 
 	var doSword = function(){
+        if (upInterval) {
+            upInterval.pause();
+        }
+        if (downInterval) {
+            downInterval.pause();
+        }
+        if (leftInterval) {
+            leftInterval.pause();
+        }
+        if (rightInterval) {
+            rightInterval.pause();
+        }
+
 		link.addClass("sword");
 		swordSound.play();
 		setTimeout(function(){
 			link.removeClass("sword");
+            if (upInterval) {
+                upInterval.play();
+            }
+            if (downInterval) {
+                downInterval.play();
+            }
+            if (leftInterval) {
+                leftInterval.play();
+            }
+            if (rightInterval) {
+                rightInterval.play();
+            }
 		}, 200);
 	};
 
@@ -321,21 +346,58 @@ $(document).ready(function(){
         doStart();
     });
 
+    var rightInterval;
+    var leftInterval;
+    var upInterval;
+    var downInterval;
+
 	$("body").keydown(function(e){
 		//right
 		if (e.which == 39) {
-			moveRight();
+            moveRight();
+            rightInterval = $.timer(function(){
+                moveRight();
+            }, 200);
+            rightInterval.play();
 		}
 		//left
 		if (e.which == 37) {
 			moveLeft();
+            leftInterval = $.timer(function(){
+                moveLeft();
+            }, 200);
+            leftInterval.play();
 		}
 		//up
 		if (e.which == 38) {
 			moveUp();
+            upInterval = $.timer(function(){
+                moveUp();
+            }, 200);
+            upInterval.play();
 		}
 		//down
 		if (e.which == 40) {
+			moveDown();
+            downInterval = $.timer(function(){
+                moveDown();
+            }, 200);
+            downInterval.play();
+		}
+		//right 'd'
+		if (e.which == 68) {
+            moveRight();
+		}
+		//left 'a'
+		if (e.which == 65) {
+			moveLeft();
+		}
+		//up 'w'
+		if (e.which == 87) {
+			moveUp();
+		}
+		//down 's'
+		if (e.which == 83) {
 			moveDown();
 		}
 		//sword
@@ -346,13 +408,36 @@ $(document).ready(function(){
 		if (e.which == 90) {
 			doBoomerang();
 		}
-		//start 's'
-		if (e.which == 83) {
+		//start 'q'
+		if (e.which == 81) {
 			doStart();
 		}
 		//'t'
 		if (e.which == 84) {
 			toggleController();
 		}
+	});
+
+    $("body").keyup(function(e){
+		//right
+		if (e.which == 39) {
+            rightInterval.stop();
+            rightInterval = undefined;
+		}
+        //left
+        if (e.which == 37) {
+            leftInterval.stop();
+            leftInterval = undefined;
+        }
+        //up
+        if (e.which == 38) {
+            upInterval.stop();
+            upInterval = undefined;
+        }
+        //down
+        if (e.which == 40) {
+            downInterval.stop();
+            downInterval = undefined;
+        }
 	});
 });
