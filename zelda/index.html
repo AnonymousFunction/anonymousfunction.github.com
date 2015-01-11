@@ -4,6 +4,7 @@
         <link rel="icon" type="image/png" href="images/cover.png">
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<title>Zelda</title>
+        <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="styles/zelda.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -12,17 +13,25 @@
 		<div id="hud">
 			<div id="minimap"></div>
 			<div id="beacon"></div>
-			<div id="rupees">$x0</div>
-			<div id="keys">Kx0</div>
-			<div id="bombs">Bx0</div>
-			<div id="b-label">B</div>
-			<div id="b-box"></div>
+            <div id="hud-icons">
+                <img src="images/hud_icons.png"/>
+            </div>
+			<div id="rupees">0</div>
+			<div id="keys">0</div>
+			<div id="bombs">0</div>
+            <div id="b-a-boxes">
+                <img src="images/b-a-boxes.png"/>
+            </div>
             <div id="b-box-item"><img src="images/boomerang.png"></div>
-            <div id="a-label">A</div>
-			<div id="a-box"></div>
 			<div id="a-box-item"><img src="images/sword.png"></div>
-			<div id="life-header">-LIFE-</div>
-			<div id="hearts-bottom">&hearts;&hearts;&hearts;</div>
+			<div id="life-header">
+                <img src="images/life.png">
+			</div>
+			<div id="hearts-bottom">
+                <img src="images/heart.png">
+                <img src="images/heart.png">
+                <img src="images/heart.png">
+            </div>
 		</div>
 		<div id="viewport">
 			<span id="link" class="sprite"></span>		

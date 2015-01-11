@@ -41,94 +41,78 @@ body {
 	left: 44px;
 	top: 44px;
 }
+#hud-icons {
+    height: 36px;
+    width: 17px;
+    position: absolute;
+    top: 12px;
+    left: 86px;
+    overflow: hidden;
+}
+#hud-icons img {
+    height: 36px;
+    position: relative;
+}
 #rupees {
 	color: white;
-	font-size: 10px;
-	font-family: monospace;
+	font-size: 9px;
 	position: absolute;
-	top: 14px;
-	left: 86px;
+	top: 16px;
+	left: 105px;
+    font-family: 'Press Start 2P', cursive;
 }
 #keys {
 	color: white;
-	font-size: 10px;
-	font-family: monospace;
+	font-size: 9px;
 	position: absolute;
-	top: 28px;
-	left: 86px;
+	top: 31px;
+	left: 105px;
+    font-family: 'Press Start 2P', cursive;
 }
 #bombs {
 	color: white;
-	font-size: 10px;
-	font-family: monospace;
+	font-size: 9px;
 	position: absolute;
-	top: 36px;
-	left: 86px;
+	top: 40px;
+	left: 105px;
+    font-family: 'Press Start 2P', cursive;
 }
-#b-label {
-	color: white;
-	font-size: 10px;
-	font-family: monospace;
-	position: absolute;
-	top: 14px;
-	left: 128px;
-	background-color: black;
-	z-index: 100;
-}
-#b-box {
-	border: 1pt solid blue;
-	position: absolute;
-	top: 20px;
-	left: 122px;
-	width: 16px;
-	height: 24px;
-	border-radius: 2px;	
+#b-a-boxes img {
+    position: absolute;
+    height: 32px;
+    top: 15px;
+    left: 118px;
 }
 #b-box-item img {
     position: absolute;
-    top: 30px;
+    top: 28px;
     left: 129px;
-}
-#a-label {
-	color: white;
-	font-size: 10px;
-	font-family: monospace;
-	position: absolute;
-	top: 14px;
-	left: 152px;
-	background-color: black;
-	z-index: 100;
-}
-#a-box {
-	border: 1pt solid blue;
-	position: absolute;
-	top: 20px;
-	left: 146px;
-	width: 16px;
-	height: 24px;
-	border-radius: 2px;
 }
 #a-box-item img {
     position: absolute;
-    top: 26px;
+    top: 24px;
     left: 152px;
 }
 #life-header {
-	color: red;
-	font-family: monospace;
-	font-size: 12px;
-	position: absolute;
-	top: 12px;
-	left: 186px;
-	font-style: normal;
+    position: absolute;
+    top: 9px;
+    left: 173px;
+}
+#life-header img {
+    height: 20px;
 }
 #hearts-bottom {
-	color: red;
-	font-family: monospace;
-	font-size: 14px;
 	position: absolute;
 	top: 35px;
 	left: 175px;
+}
+#hearts-bottom img {
+    height: 12px;
+    margin-left: -4px;
+}
+#hearts-bottom img:first-child {
+    height: 12px;
+    margin-left: 0px;
 }
 #viewport {
 	height: 176px;
