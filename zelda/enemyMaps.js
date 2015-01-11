@@ -57,19 +57,51 @@ var setCurrentEnemyMap = function(x, y){
 };
 
 var drawEnemies = function(){
-    $("#enemies").html("");
+    var enemies = $("#enemies");
+    enemies.html("");
+    var allEnemiesHtml = "";
+
     for (var x=0; x<16; x++){
         for (var y=0; y<11; y++) {
             if (currentEnemyMap[y] && getEnemyType(currentEnemyMap[y][x])) {
-                var allEnemiesHtml = $("#enemies").html();
-                var enemyHtml = "<div class='sprite up " +  getEnemyType(currentEnemyMap[y][x]) + "'" +
+                var enemyHtml = "<div data-enemy='" + getEnemyType(currentEnemyMap[y][x]) +  "' class='sprite enemy " +  getEnemyType(currentEnemyMap[y][x]) + "'" +
                     "style='top: " + (56 + (y * 16)) + "px; left: " + (x + 0) * 16 + "px';></div>";
                 allEnemiesHtml += enemyHtml;
                 console.log("enemy at x:" + x + " y:" + y + " = " + enemyHtml);
-                $("#enemies").html(allEnemiesHtml);
             }
         }
     }
+
+    enemies.html(allEnemiesHtml);
+    animateEnemies();
 };
 
-setCurrentEnemyMap(7,7);
+var animateEnemies = function(){
+    $(".enemy").each(function(){
+        var enemy = $(this);
+        console.log("enemy animate", enemy.attr("data-enemy"));
+        enemy.addClass(getRandomDirection());
+
+    });
+};
+
+var getRandomDirection = function(){
+    var random = Math.floor(Math.random() * (4)) + 1;
+
+    switch (random) {
+        case 1:
+            return "up";
+            break;
+        case 2:
+            return "down";
+            break;
+        case 3:
+            return "left";
+            break;
+        case 4:
+            return "right";
+            break;
+        default:
+            return "up";
+    }
+};
