@@ -271,6 +271,27 @@ $(document).ready(function(){
                 killSound.play();
                 drawEnemies();
             }
+        } else if (link.hasClass("left")) {
+            if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX-1] && currentEnemyMap[linkY][linkX-1] != 0) {
+                console.log("enemy attacked! " + getEnemyType(currentEnemyMap[linkY][linkX-1]));
+                currentEnemyMap[linkY][linkX-1] = 0;
+                killSound.play();
+                drawEnemies();
+            }
+        } else if (link.hasClass("up")) {
+            if (currentEnemyMap[linkY-1] && currentEnemyMap[linkY-1][linkX] != 0) {
+                console.log("enemy attacked! " + getEnemyType(currentEnemyMap[linkY-1][linkX]));
+                currentEnemyMap[linkY-1][linkX] = 0;
+                killSound.play();
+                drawEnemies();
+            }
+        } else if (link.hasClass("down")) {
+            if (currentEnemyMap[linkY+1] && currentEnemyMap[linkY+1][linkX] != 0) {
+                console.log("enemy attacked! " + getEnemyType(currentEnemyMap[linkY+1][linkX]));
+                currentEnemyMap[linkY+1][linkX] = 0;
+                killSound.play();
+                drawEnemies();
+            }
         }
 
 
