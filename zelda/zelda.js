@@ -78,7 +78,9 @@ $(document).ready(function(){
 			console.log("link can't move left");
 			return;
 		} else {
-			// console.log("link can move left");
+            if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX-1] != 0) {
+                console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX-1]));
+            }
 			linkX--;
 		}
 
@@ -118,7 +120,9 @@ $(document).ready(function(){
 			console.log("link can't move right");
 			return;
 		} else {
-			// console.log("link can move right");
+            if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX+1] != 0) {
+                console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX+1]));
+            }
 			linkX++;
 		}
 
@@ -161,7 +165,9 @@ $(document).ready(function(){
 			linkY--;
 			console.log("cave");
 		} else {
-			// console.log("link can move up");
+            if (currentEnemyMap[linkY-1] && currentEnemyMap[linkY-1][linkX] != 0) {
+                console.log("enemy " + getEnemyType(currentEnemyMap[linkY-1][linkX]));
+            }
 			linkY--;
 		}
 
@@ -201,7 +207,9 @@ $(document).ready(function(){
 			console.log("link can't move down");
 			return;
 		} else {
-			// console.log("link can move down");
+            if (currentEnemyMap[linkY+1] && currentEnemyMap[linkY+1][linkX] != 0) {
+                console.log("enemy " + getEnemyType(currentEnemyMap[linkY+1][linkX]));
+            }
 			linkY++;
 		}
 
