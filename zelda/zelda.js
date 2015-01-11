@@ -69,7 +69,10 @@ $(document).ready(function(){
 	updateBGYVal();
 
 	var moveLeft = function(){
-		link.removeClass("up down right").addClass("left");
+        if (!link.hasClass("left")) {
+            link.removeClass("up down right").addClass("left");
+            return;
+        }
 
 		if (!canWalkThruWalls() && currentMap[linkY] && currentMap[linkY][linkX-1] === 0) {
 			console.log("link can't move left");
@@ -106,7 +109,10 @@ $(document).ready(function(){
 	};
 
 	var moveRight = function(){
-		link.removeClass("up down left").addClass("right");	
+        if (!link.hasClass("right")) {
+            link.removeClass("up down left").addClass("right");
+            return;
+        }
 
 		if (!canWalkThruWalls() && currentMap[linkY] && currentMap[linkY][linkX+1] === 0) {
 			console.log("link can't move right");
@@ -143,7 +149,10 @@ $(document).ready(function(){
 	};
 
 	var moveUp = function(){
-		link.removeClass("down left right").addClass("up");
+        if (!link.hasClass("up")) {
+            link.removeClass("down left right").addClass("up");
+            return;
+        }
 
 		if (!canWalkThruWalls() && currentMap[linkY-1] && currentMap[linkY-1][linkX] === 0) {
 			console.log("link can't move up");
@@ -183,7 +192,10 @@ $(document).ready(function(){
 	};
 
 	var moveDown = function(){
-		link.removeClass("up left right").addClass("down");
+        if (!link.hasClass("down")) {
+            link.removeClass("up left right").addClass("down");
+            return;
+        }
 
 		if (!canWalkThruWalls() && currentMap[linkY+1] && currentMap[linkY+1][linkX] === 0) {
 			console.log("link can't move down");
