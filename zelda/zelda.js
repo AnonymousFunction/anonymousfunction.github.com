@@ -251,6 +251,14 @@ $(document).ready(function(){
         }, 400);
 	};
 
+    var doStart = function(){
+        $("#about").toggle();
+    };
+
+    var toggleController = function(){
+        $("#controller").toggle();
+    };
+
 	var updateMapValues = function(){
 		updateLinkXVal();
 		updateLinkYVal();
@@ -286,7 +294,7 @@ $(document).ready(function(){
 	});
 
     $("#start-button").on("tap", function(){
-       $("#about").toggle();
+        doStart();
     });
 
 	$("body").keydown(function(e){
@@ -313,6 +321,14 @@ $(document).ready(function(){
 		//boomerang 'z'
 		if (e.which == 90) {
 			doBoomerang();
+		}
+		//start 's'
+		if (e.which == 83) {
+			doStart();
+		}
+		//'t'
+		if (e.which == 84) {
+			toggleController();
 		}
 	});
 });
