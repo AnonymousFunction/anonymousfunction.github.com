@@ -108,11 +108,6 @@ body {
 }
 #hearts-bottom img {
     height: 12px;
-    margin-left: -4px;
-}
-#hearts-bottom img:first-child {
-    height: 12px;
-    margin-left: 0px;
 }
 #viewport {
 	height: 176px;

@@ -24,6 +24,8 @@ $(document).ready(function(){
 	var link = $("#link");
     var boomerang = $("#boomerang");
 	var beacon = $("#beacon");
+    var hearts = $("#hearts-bottom");
+
 	link.addClass("up");
 
 	var canWalkThruWalls = function(){
@@ -351,7 +353,20 @@ $(document).ready(function(){
 		updateBGYVal();
 	};
 
-	$("#left").on("tap", function(){
+    var currentHearts = 3;
+
+    var updateHealth = function(){
+        var heartsHtml = "";
+        for (var i = 0; i < currentHearts; i ++) {
+            heartsHtml += '<img src="images/heart.png">';
+        }
+
+        hearts.html(heartsHtml);
+    };
+
+    updateHealth();
+
+    $("#left").on("tap", function(){
 		moveLeft();
 	});
 
