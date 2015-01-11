@@ -12,6 +12,7 @@ $(document).ready(function(){
 	var overworldSound = new Audio("sounds/overworld.mp3");
     var swordSound = new Audio("sounds/sword.wav");
     var boomerangSound = new Audio("sounds/boomerang.wav");
+    var killSound = new Audio("sounds/kill.wav");
 
 	var linkX = 7;
 	var linkY = 6;
@@ -262,6 +263,17 @@ $(document).ready(function(){
 
 		link.addClass("sword");
 		swordSound.play();
+
+        if (link.hasClass("right")) {
+            if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX+1] && currentEnemyMap[linkY][linkX+1] != 0) {
+                console.log("enemy attacked! " + getEnemyType(currentEnemyMap[linkY][linkX+1]));
+                currentEnemyMap[linkY][linkX+1] = 0;
+                killSound.play();
+                drawEnemies();
+            }
+        }
+
+
 		setTimeout(function(){
 			link.removeClass("sword");
             if (upInterval) {
