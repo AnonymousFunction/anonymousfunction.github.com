@@ -60,7 +60,7 @@ var drawEnemies = function(){
     $("#enemies").html("");
     for (var x=0; x<16; x++){
         for (var y=0; y<11; y++) {
-            if (getEnemyType(currentEnemyMap[y][x])) {
+            if (currentEnemyMap[y] && getEnemyType(currentEnemyMap[y][x])) {
                 var allEnemiesHtml = $("#enemies").html();
                 var enemyHtml = "<div class='sprite up " +  getEnemyType(currentEnemyMap[y][x]) + "'" +
                     "style='top: " + (56 + (y * 16)) + "px; left: " + (x + 0) * 16 + "px';></div>";

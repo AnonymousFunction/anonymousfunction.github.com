@@ -1,4 +1,6 @@
 var currentMap;
+var currentMapX;
+var currentMapY;
 
 //default all maps
 for (var x=0; x<16; x++){
@@ -64,9 +66,14 @@ var movementMap = [
 ];
 
 var setCurrentMap = function(x, y){
-	//backwards because I'm treating the first index as down the screen/map to make it more readable
-	currentMap = movementMap[y][x];
-    setCurrentEnemyMap(x, y);
+    if (x != currentMapX || y != currentMapY) {
+        //backwards because I'm treating the first index as down the screen/map to make it more readable
+        console.log("map move");
+        currentMapX = x;
+        currentMapY = y;
+        currentMap = movementMap[y][x];
+        setCurrentEnemyMap(x, y);
+    }
 };
 
 setCurrentMap(7,7);
