@@ -65,7 +65,9 @@ var drawEnemies = function(){
         for (var y=0; y<11; y++) {
             if (currentEnemyMap[y] && getEnemyType(currentEnemyMap[y][x])) {
                 var enemyHtml = "<div data-enemy='" + getEnemyType(currentEnemyMap[y][x]) +  "' class='sprite enemy " +  getEnemyType(currentEnemyMap[y][x]) + "'" +
-                    "style='top: " + (56 + (y * 16)) + "px; left: " + (x + 0) * 16 + "px';></div>";
+                    "style='top: " + (56 + (y * 16)) + "px; left: " + (x + 0) * 16 + "px';" +
+                    "data-x='" + x + "'" +
+                    "data-y='" + y + "'></div>";
                 allEnemiesHtml += enemyHtml;
                 console.log("enemy at x:" + x + " y:" + y + " = " + enemyHtml);
             }
@@ -83,6 +85,63 @@ var animateEnemies = function(){
         enemy.addClass(getRandomDirection());
 
     });
+
+    var enemyTimer = $.timer(function(){
+        $(".enemy").each(function(){
+            var enemy = $(this);
+            enemy.removeClass("up down left right").addClass(getRandomDirection());
+
+            if (enemy.hasClass("up")) {
+                moveEnemyUp(enemy);
+            } else if (enemy.hasClass("down")) {
+                moveEnemyDown(enemy);
+            } else if (enemy.hasClass("left")) {
+                moveEnemyLeft(enemy);
+            } else if (enemy.hasClass("right")) {
+                moveEnemyRight(enemy);
+            }
+
+        });
+    }, 1500);
+
+    enemyTimer.play();
+};
+
+var moveEnemyUp = function(enemy){
+    var originalTop = parseInt(enemy.css("top"));
+    var newTop = originalTop - 16;
+    if (newTop < 56) {
+        return;
+    }
+
+    enemy.css("top", newTop + "px");
+};
+
+var moveEnemyDown = function(enemy){
+    var originalTop = parseInt(enemy.css("top"));
+    var newTop = originalTop + 16;
+    if (newTop > 56) {
+        return;
+    }
+    enemy.css("top", newTop + "px");
+};
+
+var moveEnemyLeft = function(enemy){
+    var originalLeft = parseInt(enemy.css("left"));
+    var newLeft = originalLeft - 16;
+    if (newLeft < 0) {
+        return;
+    }
+    enemy.css("left", newLeft + "px");
+};
+
+var moveEnemyRight = function(enemy){
+    var originalLeft = parseInt(enemy.css("left"));
+    var newLeft = originalLeft + 16;
+    if (newLeft >= 256) {
+        return;
+    }
+    enemy.css("left", newLeft + "px");
 };
 
 var getRandomDirection = function(){
