@@ -80,6 +80,7 @@ $(document).ready(function(){
 		} else {
             if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX-1] != 0) {
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX-1]));
+                return;
             }
 			linkX--;
 		}
@@ -122,6 +123,7 @@ $(document).ready(function(){
 		} else {
             if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX+1] != 0) {
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX+1]));
+                return;
             }
 			linkX++;
 		}
@@ -167,6 +169,7 @@ $(document).ready(function(){
 		} else {
             if (currentEnemyMap[linkY-1] && currentEnemyMap[linkY-1][linkX] != 0) {
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY-1][linkX]));
+                return;
             }
 			linkY--;
 		}
@@ -209,6 +212,7 @@ $(document).ready(function(){
 		} else {
             if (currentEnemyMap[linkY+1] && currentEnemyMap[linkY+1][linkX] != 0) {
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY+1][linkX]));
+                return;
             }
 			linkY++;
 		}
