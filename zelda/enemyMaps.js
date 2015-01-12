@@ -65,7 +65,7 @@ var drawEnemies = function(){
         for (var y=0; y<11; y++) {
             if (currentEnemyMap[y] && getEnemyType(currentEnemyMap[y][x])) {
                 var enemyHtml = "<div data-enemy='" + getEnemyType(currentEnemyMap[y][x]) +  "' class='sprite enemy " +  getEnemyType(currentEnemyMap[y][x]) + "'" +
-                    "style='top: " + (56 + (y * 16)) + "px; left: " + (x + 0) * 16 + "px';" +
+                    "style='top: " + (56 + (y * 16)) + "px; left: " + (x + 0) * 16 + "px'" +
                     "data-x='" + x + "'" +
                     "data-y='" + y + "'></div>";
                 allEnemiesHtml += enemyHtml;
@@ -115,6 +115,10 @@ var moveEnemyUp = function(enemy){
     }
 
     enemy.css("top", newTop + "px");
+
+    var originalY = parseInt(enemy.attr("data-y"));
+    var newY = originalY - 1;
+    enemy.attr("data-y", newY);
 };
 
 var moveEnemyDown = function(enemy){
@@ -124,6 +128,10 @@ var moveEnemyDown = function(enemy){
         return;
     }
     enemy.css("top", newTop + "px");
+
+    var originalY = parseInt(enemy.attr("data-y"));
+    var newY = originalY + 1;
+    enemy.attr("data-y", newY);
 };
 
 var moveEnemyLeft = function(enemy){
@@ -133,6 +141,10 @@ var moveEnemyLeft = function(enemy){
         return;
     }
     enemy.css("left", newLeft + "px");
+
+    var originalX = parseInt(enemy.attr("data-x"));
+    var newX = originalX - 1;
+    enemy.attr("data-x", newX);
 };
 
 var moveEnemyRight = function(enemy){
@@ -142,6 +154,14 @@ var moveEnemyRight = function(enemy){
         return;
     }
     enemy.css("left", newLeft + "px");
+
+    var originalX = parseInt(enemy.attr("data-x"));
+    var newX = originalX + 1;
+    enemy.attr("data-x", newX);
+};
+
+var getEnemyDomNodeAt = function(x, y){
+    return $("[data-x='" + x + "'][data-y='" + y + "']");
 };
 
 var getRandomDirection = function(){

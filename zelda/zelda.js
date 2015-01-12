@@ -267,32 +267,36 @@ $(document).ready(function(){
 		swordSound.play();
 
         if (link.hasClass("right")) {
-            if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX+1] && currentEnemyMap[linkY][linkX+1] != 0) {
-                console.log("enemy attacked! " + getEnemyType(currentEnemyMap[linkY][linkX+1]));
+            var enemy = getEnemyDomNodeAt(linkX+1, linkY);
+            if (enemy.length) {
+                console.log("enemy attacked! " + getEnemyType(enemy));
                 currentEnemyMap[linkY][linkX+1] = 0;
+                enemy.remove();
                 killSound.play();
-                drawEnemies();
             }
         } else if (link.hasClass("left")) {
-            if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX-1] && currentEnemyMap[linkY][linkX-1] != 0) {
-                console.log("enemy attacked! " + getEnemyType(currentEnemyMap[linkY][linkX-1]));
+            var enemy = getEnemyDomNodeAt(linkX-1, linkY);
+            if (enemy.length) {
+                console.log("enemy attacked! " + getEnemyType(enemy));
                 currentEnemyMap[linkY][linkX-1] = 0;
+                enemy.remove();
                 killSound.play();
-                drawEnemies();
             }
         } else if (link.hasClass("up")) {
-            if (currentEnemyMap[linkY-1] && currentEnemyMap[linkY-1][linkX] != 0) {
-                console.log("enemy attacked! " + getEnemyType(currentEnemyMap[linkY-1][linkX]));
+            var enemy = getEnemyDomNodeAt(linkX, linkY-1);
+            if (enemy.length) {
+                console.log("enemy attacked! " + getEnemyType(enemy));
                 currentEnemyMap[linkY-1][linkX] = 0;
+                enemy.remove();
                 killSound.play();
-                drawEnemies();
             }
         } else if (link.hasClass("down")) {
-            if (currentEnemyMap[linkY+1] && currentEnemyMap[linkY+1][linkX] != 0) {
-                console.log("enemy attacked! " + getEnemyType(currentEnemyMap[linkY+1][linkX]));
+            var enemy = getEnemyDomNodeAt(linkX, linkY+1);
+            if (enemy.length) {
+                console.log("enemy attacked! " + getEnemyType(enemy));
                 currentEnemyMap[linkY+1][linkX] = 0;
+                enemy.remove();
                 killSound.play();
-                drawEnemies();
             }
         }
 
