@@ -4,7 +4,7 @@ var createMapBuilder = function(){
 	for (var y=0; y<11; y++){
         mapBuilderHtml += "<div>";
 		for (var x=0; x<16; x++) {
-            mapBuilderHtml += "<input type='text' class='mb-input' value='0' data-mb-x='" + x + "' data-mb-y='" + y + "'/>";
+            mapBuilderHtml += "<input type='text' class='mb-input' value='1' data-mb-x='" + x + "' data-mb-y='" + y + "'/>";
 		}
         mapBuilderHtml += "</div>";
     }
