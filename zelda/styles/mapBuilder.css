@@ -1,0 +1,13 @@
+#map-builder {
+	position: absolute;
+	top: 56px;
+}
+#map-builder div {
+	display: inline-block;
+}
+.mb-input {
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin: 0;
+}
