@@ -49,7 +49,7 @@ var buildMap = function(){
 var drawCurrentMapBuilder = function(x, y){
     var mapBuilder = window["m" + x + y];
 
-    if (mapBuilder[y] && mapBuilder[y][x]) {
+    if (mapBuilder.length) {
         for (var y=0; y<11; y++){
             for (var x=0; x<16; x++) {
                 $("[data-mb-x='" + x + "'][data-mb-y='" + y + "']").val(mapBuilder[y][x]);
