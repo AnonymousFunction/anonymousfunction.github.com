@@ -144,6 +144,7 @@ var setCurrentMap = function(x, y){
         currentMapY = y;
         currentMap = movementMap[y][x];
         setCurrentEnemyMap(x, y);
+        drawCurrentMapBuilder(x, y);
     }
 };
 
