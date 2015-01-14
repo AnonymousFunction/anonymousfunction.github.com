@@ -3,6 +3,7 @@
 	top: 54px;
     width: 256px;
     z-index: 101;
+    display: none;
 }
 #map-builder div {
     display: block;
@@ -11,6 +12,11 @@
     border: 0;
     height: 16px;
 }
+
+#map-builder div div{
+    display: inline-block;
+}
+
 .mb-input {
     width: 12px;
     padding: 0;

@@ -81,7 +81,8 @@ $(document).ready(function(){
 			console.log("link can't move left");
 			return;
 		} else {
-            if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX-1] &&  currentEnemyMap[linkY][linkX-1] != 0) {
+            if (getEnemyDomNodeAt(linkX-1, linkY).length) {
+                console.log("take damage");
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX-1]));
                 return;
             }
@@ -124,7 +125,8 @@ $(document).ready(function(){
 			console.log("link can't move right");
 			return;
 		} else {
-            if (currentEnemyMap[linkY] && currentEnemyMap[linkY][linkX+1] && currentEnemyMap[linkY][linkX+1] != 0) {
+            if (getEnemyDomNodeAt(linkX+1, linkY).length) {
+                console.log("take damage");
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX+1]));
                 return;
             }
@@ -170,7 +172,8 @@ $(document).ready(function(){
 			linkY--;
 			console.log("cave");
 		} else {
-            if (currentEnemyMap[linkY-1] && currentEnemyMap[linkY-1][linkX] != 0) {
+            if (getEnemyDomNodeAt(linkX, linkY-1).length) {
+                console.log("take damage");
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY-1][linkX]));
                 return;
             }
@@ -213,7 +216,8 @@ $(document).ready(function(){
 			console.log("link can't move down");
 			return;
 		} else {
-            if (currentEnemyMap[linkY+1] && currentEnemyMap[linkY+1][linkX] != 0) {
+            if (getEnemyDomNodeAt(linkX, linkY+1).length) {
+                console.log("take damage");
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY+1][linkX]));
                 return;
             }
