@@ -1,4 +1,5 @@
 #map-builder {
+    display: none;
 	position: absolute;
 	top: 54px;
     width: 256px;
