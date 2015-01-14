@@ -109,6 +109,10 @@ body {
 #hearts-bottom img {
     height: 12px;
 }
+
+#hearts-bottom img.empty-heart {
+    height: 10.9px;
+}
 #viewport {
 	height: 176px;
 	width: 256px;

@@ -83,6 +83,7 @@ $(document).ready(function(){
 		} else {
             if (getEnemyDomNodeAt(linkX-1, linkY).length) {
                 console.log("take damage");
+                updateHealth(-1);
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX-1]));
                 return;
             }
@@ -127,6 +128,7 @@ $(document).ready(function(){
 		} else {
             if (getEnemyDomNodeAt(linkX+1, linkY).length) {
                 console.log("take damage");
+                updateHealth(-1);
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX+1]));
                 return;
             }
@@ -174,6 +176,7 @@ $(document).ready(function(){
 		} else {
             if (getEnemyDomNodeAt(linkX, linkY-1).length) {
                 console.log("take damage");
+                updateHealth(-1);
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY-1][linkX]));
                 return;
             }
@@ -218,6 +221,7 @@ $(document).ready(function(){
 		} else {
             if (getEnemyDomNodeAt(linkX, linkY+1).length) {
                 console.log("take damage");
+                updateHealth(-1);
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY+1][linkX]));
                 return;
             }
@@ -362,11 +366,24 @@ $(document).ready(function(){
 	};
 
     var currentHearts = 3;
+    var maxHearts = 3;
 
-    var updateHealth = function(){
+    var updateHealth = function(difference){
+        difference = difference || 0;
+        currentHearts += difference;
+
+        if (currentHearts <= 0) {
+            currentHearts = 0;
+            console.log("you died");
+        }
+
         var heartsHtml = "";
         for (var i = 0; i < currentHearts; i ++) {
             heartsHtml += '<img src="images/heart.png">';
+        }
+
+        for (var i = 0; i < maxHearts - currentHearts; i ++) {
+            heartsHtml += '<img src="images/empty-heart.png" class="empty-heart">';
         }
 
         hearts.html(heartsHtml);
