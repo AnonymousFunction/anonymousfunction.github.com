@@ -58,26 +58,26 @@ body {
 }
 #rupees {
 	color: white;
-	font-size: 9px;
+	font-size: 8px;
 	position: absolute;
 	top: 16px;
-	left: 105px;
+	left: 104px;
     font-family: 'Press Start 2P', cursive;
 }
 #keys {
 	color: white;
-	font-size: 9px;
+	font-size: 8px;
 	position: absolute;
 	top: 31px;
-	left: 105px;
+	left: 104px;
     font-family: 'Press Start 2P', cursive;
 }
 #bombs {
 	color: white;
-	font-size: 9px;
+	font-size: 8px;
 	position: absolute;
 	top: 40px;
-	left: 105px;
+	left: 104px;
     font-family: 'Press Start 2P', cursive;
 }
 #b-a-boxes img {
