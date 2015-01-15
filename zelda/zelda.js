@@ -383,7 +383,7 @@ $(document).ready(function(){
         }
 
         for (var i = 0; i < maxHearts - currentHearts; i ++) {
-            heartsHtml += '<img src="images/empty-heart.png" class="empty-heart">';
+            heartsHtml += '<img src="images/heart-empty.png" class="heart-empty">';
         }
 
         hearts.html(heartsHtml);

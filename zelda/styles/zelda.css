@@ -5,7 +5,7 @@ body {
 	margin: 0;
 }
 #debug {
-    display: none;
+    /*display: none;*/
 }
 .ui-loader {
     display: none; /* how to remove the need for this? jquery mobile does this crap*/
@@ -109,12 +109,8 @@ body {
 	top: 35px;
 	left: 175px;
 }
-#hearts-bottom img {
-    height: 12px;
-}
-
-#hearts-bottom img.empty-heart {
-    height: 10.9px;
+#hearts-bottom img:not(:nth-child(1)) {
+    margin-left: -1px;
 }
 #viewport {
 	height: 176px;
