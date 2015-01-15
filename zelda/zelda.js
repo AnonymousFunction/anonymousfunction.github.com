@@ -489,6 +489,14 @@ $(document).ready(function(){
 		if (e.which == 84) {
 			toggleController();
 		}
+		//'m'
+		if (e.which == 77) {
+			$("#map-builder").toggle();
+		}
+		//'n'
+		if (e.which == 78) {
+			$("#debug").toggle();
+		}
 	});
 
     $("body").keyup(function(e){
