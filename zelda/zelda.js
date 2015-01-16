@@ -271,6 +271,7 @@ $(document).ready(function(){
 	var enterCave = function(){
 		viewport.addClass("cave");
         $("#cave-sprites").removeClass("hidden");
+
         preCaveMapX = mapX;
         preCaveMapY = mapY;
         preCaveLinkX = linkX;
@@ -285,12 +286,16 @@ $(document).ready(function(){
         boomerang.css("left", "112px");
         linkX = 7;
 
+        var caveTextId = "cave-" + preCaveMapX + "-" + preCaveMapY;
+        $("#" + caveTextId).removeClass("hidden");
+
         currentMap = m_cave;
     };
 
     var exitCave = function(){
         viewport.removeClass("cave");
         $("#cave-sprites").addClass("hidden");
+        $(".cave-text").addClass("hidden");
 
         mapX = preCaveMapX;
         mapY = preCaveMapY;
