@@ -450,10 +450,18 @@ $(document).ready(function(){
 	})
 
 	$("#a-button").on("vmousedown", function(){
-		rightInterval.stop();
-		leftInterval.stop();
-		upInterval.stop();
-		downInterval.stop();
+		if (rightInterval) {
+			rightInterval.stop();
+		}
+		if (leftInterval) {
+			leftInterval.stop();
+		}
+		if (upInterval) {
+			upInterval.stop();
+		}
+		if (downInterval) {
+			downInterval.stop();
+		}
 
 		rightInterval = undefined;
 		leftInterval = undefined;
