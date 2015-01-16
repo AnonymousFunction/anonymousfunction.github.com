@@ -7,7 +7,19 @@
 var getEnemyType = function(enemyVal){
     switch (enemyVal) {
         case 1:
-            return "red-octorok";
+            return {
+                cssClass: "red-octorok",
+                speed: 1500,
+                hp: 1,
+                damage: 1
+            };
+        case 2:
+            return {
+                cssClass: "blue-octorok",
+                speed: 1250,
+                hp: 2,
+                damage: 1
+            };
         default:
             return "";
     }
@@ -23,12 +35,11 @@ for (var x=0; x<16; x++){
 }
 
 
-//Start Screen
 var e87 = [
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,1,0,0,0,2,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0],
@@ -64,8 +75,13 @@ var drawEnemies = function(){
     for (var x=0; x<16; x++){
         for (var y=0; y<11; y++) {
             if (currentEnemyMap[y] && getEnemyType(currentEnemyMap[y][x])) {
-                var enemyHtml = "<div data-enemy='" + getEnemyType(currentEnemyMap[y][x]) +  "' class='sprite enemy " +  getEnemyType(currentEnemyMap[y][x]) + "'" +
+                var enemy = getEnemyType(currentEnemyMap[y][x]);
+
+                var enemyHtml = "<div data-enemy='" + enemy.cssClass +  "' class='sprite enemy " +  enemy.cssClass + "'" +
                     "style='top: " + (56 + (y * 16)) + "px; left: " + (x + 0) * 16 + "px'" +
+                    "data-hp='" + enemy.hp + "'" +
+                    "data-damage='" + enemy.damage + "'" +
+                    "data-speed='" + enemy.speed + "'" +
                     "data-x='" + x + "'" +
                     "data-y='" + y + "'></div>";
                 allEnemiesHtml += enemyHtml;
@@ -109,7 +125,7 @@ var animateEnemies = function(){
             } else if (enemy.hasClass("right")) {
                 moveEnemyRight(enemy);
             }
-        }, 1500);
+        }, enemy.attr("data-speed"));
 
         enemyTimer.play();
         enemyTimers.push(enemyTimer);

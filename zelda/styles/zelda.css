@@ -386,3 +386,18 @@ body {
 .red-octorok.right {
     background: url("../images/red_octorok/right.gif") no-repeat;
 }
+.blue-octorok {
+    position: absolute;
+}
+.blue-octorok.up {
+    background: url("../images/blue_octorok/up.gif") no-repeat;
+}
+.blue-octorok.down {
+    background: url("../images/blue_octorok/down.gif") no-repeat;
+}
+.blue-octorok.left {
+    background: url("../images/blue_octorok/left.gif") no-repeat;
+}
+.blue-octorok.right {
+    background: url("../images/blue_octorok/right.gif") no-repeat;
+}
