@@ -400,21 +400,54 @@ $(document).ready(function(){
 
     updateHealth();
 
-    $("#left").on("tap", function(){
-		moveLeft();
-	});
+    var rightInterval;
+    var leftInterval;
+    var upInterval;
+    var downInterval;
 
-	$("#right").on("tap", function(){
-		moveRight();
-	});
-
-	$("#up").on("tap", function(){
+	$("#up").on("vmousedown", function(){
 		moveUp();
+        upInterval = $.timer(function(){
+            moveUp();
+        }, 200);
+        upInterval.play();
+	}).on("vmouseup", function(){
+        upInterval.stop();
+        upInterval = undefined;
 	});
 
-	$("#down").on("tap", function(){
+	$("#down").on("vmousedown", function(){
 		moveDown();
+        downInterval = $.timer(function(){
+            moveDown();
+        }, 200);
+        downInterval.play();
+	}).on("vmouseup", function(){
+        downInterval.stop();
+        downInterval = undefined;
 	});
+
+	$("#left").on("vmousedown", function(){
+		moveLeft();
+        leftInterval = $.timer(function(){
+            moveLeft();
+        }, 200);
+        leftInterval.play();
+	}).on("vmouseup", function(){
+        leftInterval.stop();
+        leftInterval = undefined;
+	});
+
+	$("#right").on("vmousedown", function(){
+		moveRight();
+        rightInterval = $.timer(function(){
+            moveRight();
+        }, 200);
+        rightInterval.play();
+	}).on("vmouseup", function(){
+        rightInterval.stop();
+        rightInterval = undefined;
+	})
 
 	$("#a-button").on("tap", function(){
 		doSword();
@@ -427,11 +460,6 @@ $(document).ready(function(){
     $("#start-button").on("tap", function(){
         doStart();
     });
-
-    var rightInterval;
-    var leftInterval;
-    var upInterval;
-    var downInterval;
 
 	$("body").keydown(function(e){
 		//right
