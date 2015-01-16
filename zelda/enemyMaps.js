@@ -24,7 +24,7 @@ for (var x=0; x<16; x++){
 
 
 //Start Screen
-var e77 = [
+var e87 = [
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -33,7 +33,7 @@ var e77 = [
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 ];
@@ -78,7 +78,15 @@ var drawEnemies = function(){
     animateEnemies();
 };
 
+var enemyTimers = [];
+
 var animateEnemies = function(){
+    for (var i in enemyTimers) {
+        enemyTimers[i].stop();
+    }
+
+    enemyTimers = [];
+
     $(".enemy").each(function(){
         var enemy = $(this);
         console.log("enemy animate", enemy.attr("data-enemy"));
@@ -86,9 +94,10 @@ var animateEnemies = function(){
 
     });
 
-    var enemyTimer = $.timer(function(){
-        $(".enemy").each(function(){
-            var enemy = $(this);
+    $(".enemy").each(function(){
+        var enemy = $(this);
+
+        var enemyTimer = $.timer(function(){
             enemy.removeClass("up down left right").addClass(getRandomDirection());
 
             if (enemy.hasClass("up")) {
@@ -100,11 +109,12 @@ var animateEnemies = function(){
             } else if (enemy.hasClass("right")) {
                 moveEnemyRight(enemy);
             }
+        }, 1500);
 
-        });
-    }, 1500);
+        enemyTimer.play();
+        enemyTimers.push(enemyTimer);
+    });
 
-    enemyTimer.play();
 };
 
 var moveEnemyUp = function(enemy){
