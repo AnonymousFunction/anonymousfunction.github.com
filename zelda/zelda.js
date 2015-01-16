@@ -454,6 +454,12 @@ $(document).ready(function(){
 		leftInterval.stop();
 		upInterval.stop();
 		downInterval.stop();
+
+		rightInterval = undefined;
+		leftInterval = undefined;
+		upInterval = undefined;
+		downInterval = undefined;
+		
 		doSword();
 	});
 
