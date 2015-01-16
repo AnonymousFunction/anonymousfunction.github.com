@@ -270,6 +270,7 @@ $(document).ready(function(){
 
 	var enterCave = function(){
 		viewport.addClass("cave");
+        $("#cave-sprites").removeClass("hidden");
         preCaveMapX = mapX;
         preCaveMapY = mapY;
         preCaveLinkX = linkX;
@@ -289,6 +290,7 @@ $(document).ready(function(){
 
     var exitCave = function(){
         viewport.removeClass("cave");
+        $("#cave-sprites").addClass("hidden");
 
         mapX = preCaveMapX;
         mapY = preCaveMapY;
