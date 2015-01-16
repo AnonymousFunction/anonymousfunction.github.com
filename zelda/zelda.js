@@ -175,7 +175,8 @@ $(document).ready(function(){
 		} else if (currentMap[linkY-1] && currentMap[linkY-1][linkX] === 2) {
 			linkY--;
 			console.log("cave");
-			switchToCave();
+			enterCave();
+            return;
 		} else {
             if (getEnemyDomNodeAt(linkX, linkY-1).length) {
                 console.log("take damage");
@@ -221,6 +222,11 @@ $(document).ready(function(){
 		if (!canWalkThruWalls() && currentMap[linkY+1] && currentMap[linkY+1][linkX] === 0) {
 			console.log("link can't move down");
 			return;
+        } else if (currentMap[linkY+1] && currentMap[linkY+1][linkX] === 3) {
+            linkY--;
+            console.log("exit cave");
+            exitCave();
+            return;
 		} else {
             if (getEnemyDomNodeAt(linkX, linkY+1).length) {
                 console.log("take damage");
@@ -260,9 +266,46 @@ $(document).ready(function(){
 		updateMapValues();
 	};
 
-	var switchToCave = function(){
+    var preCaveMapX, preCaveMapY, preCaveLinkX, preCaveLinkY, preCaveMovementMap;
+
+	var enterCave = function(){
 		viewport.addClass("cave");
-	};
+        preCaveMapX = mapX;
+        preCaveMapY = mapY;
+        preCaveLinkX = linkX;
+        preCaveLinkY = linkY;
+        preCaveMovementMap = currentMap;
+
+        link.css("top", "200px");
+        boomerang.css("top", "200px");
+        linkY = 9;
+
+        link.css("left", "112px");
+        boomerang.css("left", "112px");
+        linkX = 7;
+
+        currentMap = m_cave;
+    };
+
+    var exitCave = function(){
+        viewport.removeClass("cave");
+
+        mapX = preCaveMapX;
+        mapY = preCaveMapY;
+        linkX = preCaveLinkX;
+        linkY = preCaveLinkY;
+        currentMap  = preCaveMovementMap;
+
+        var linkTop = (linkY * 16) + 56;
+        var linkLeft = linkX * 16;
+
+        link.css("top", linkTop + "px");
+        boomerang.css("top", linkTop + "px");
+
+        link.css("left", linkLeft + "px");
+        boomerang.css("left", linkLeft + "px");
+
+    };
 
 	var doSword = function(){
         if (upInterval) {
