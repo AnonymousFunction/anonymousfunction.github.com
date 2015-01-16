@@ -115,7 +115,7 @@ body {
 #viewport {
 	height: 176px;
 	width: 256px;
-	background: url("../images/overworld_map.png");
+	background: url("../images/cave_map.png");
 	background-repeat: no-repeat;
 	background-position-x: -1792px; /* 256px x-axis change */
 	background-position-y: -1232px;	/* 176px y-axis change */
