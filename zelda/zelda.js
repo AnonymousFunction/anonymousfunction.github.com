@@ -450,6 +450,10 @@ $(document).ready(function(){
 	})
 
 	$("#a-button").on("tap", function(){
+		rightInterval.stop();
+		leftInterval.stop();
+		upInterval.stop();
+		downInterval.stop();
 		doSword();
 	});
 
