@@ -13,6 +13,8 @@ $(document).ready(function(){
     var swordSound = new Audio("sounds/sword.wav");
     var boomerangSound = new Audio("sounds/boomerang.wav");
     var killSound = new Audio("sounds/kill.wav");
+    var hitSound = new Audio("sounds/hit.wav");
+
 
 	var linkX = 7;
 	var linkY = 6;
@@ -329,6 +331,7 @@ $(document).ready(function(){
     		killSound.play();
 		} else {
 			enemy.attr("data-hp", enemyHealth - 1);
+    		hitSound.play();
 		}
 	};
 
