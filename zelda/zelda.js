@@ -268,9 +268,17 @@ $(document).ready(function(){
 
     var preCaveMapX, preCaveMapY, preCaveLinkX, preCaveLinkY, preCaveMovementMap;
 
+    var caveTextMap = {
+        "6-6": "BUY SOMETHIN' WILL YA!",
+        "7-7": "IT'S DANGEROUS TO GO\nALONE! TAKE THIS."
+    };
+
 	var enterCave = function(){
 		viewport.addClass("cave");
         $("#cave-sprites").removeClass("hidden");
+        var printCaveText = $("#printCaveText");
+
+        printCaveText.removeClass("hidden");
 
         preCaveMapX = mapX;
         preCaveMapY = mapY;
@@ -286,8 +294,28 @@ $(document).ready(function(){
         boomerang.css("left", "112px");
         linkX = 7;
 
-        var caveTextId = "cave-" + preCaveMapX + "-" + preCaveMapY;
-        $("#" + caveTextId).removeClass("hidden");
+        var caveText = caveTextMap[preCaveMapX + "-" + preCaveMapY];
+
+        var texty = "";
+
+        function getNextLetter() {
+            if (caveText.length) {
+                var toReturn = caveText[0];
+                var chopped = caveText.substring(1);
+                caveText = chopped;
+                return toReturn;
+            }
+
+            textInterval.stop();
+            return "";
+        }
+
+        var textInterval = $.timer(function(){
+            texty = printCaveText.text();
+            texty += getNextLetter();
+            printCaveText.text(texty);
+        }, 100);
+        textInterval.play();
 
         currentMap = m_cave;
     };
@@ -296,6 +324,7 @@ $(document).ready(function(){
         viewport.removeClass("cave");
         $("#cave-sprites").addClass("hidden");
         $(".cave-text").addClass("hidden");
+        $("#printCaveText").text("");
 
         mapX = preCaveMapX;
         mapY = preCaveMapY;
