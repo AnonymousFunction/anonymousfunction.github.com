@@ -122,6 +122,9 @@ body {
 	/* 16 columns @ 256px = 16px per col */
 	/* 11 rows @ 176px = 16px per row */
 }
+#viewport.cave {
+	background: url("../images/cave_map.png");
+}
 .sprite {
 	height: 16px;
 	width: 16px;

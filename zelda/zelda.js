@@ -175,6 +175,7 @@ $(document).ready(function(){
 		} else if (currentMap[linkY-1] && currentMap[linkY-1][linkX] === 2) {
 			linkY--;
 			console.log("cave");
+			switchToCave();
 		} else {
             if (getEnemyDomNodeAt(linkX, linkY-1).length) {
                 console.log("take damage");
@@ -257,6 +258,10 @@ $(document).ready(function(){
 		}
 
 		updateMapValues();
+	};
+
+	var switchToCave = function(){
+		viewport.addClass("cave");
 	};
 
 	var doSword = function(){
