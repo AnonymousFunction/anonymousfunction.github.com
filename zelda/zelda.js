@@ -449,7 +449,7 @@ $(document).ready(function(){
         rightInterval = undefined;
 	})
 
-	$("#a-button").on("tap", function(){
+	$("#a-button").on("vmousedown", function(){
 		rightInterval.stop();
 		leftInterval.stop();
 		upInterval.stop();
@@ -459,7 +459,7 @@ $(document).ready(function(){
 		leftInterval = undefined;
 		upInterval = undefined;
 		downInterval = undefined;
-		
+
 		doSword();
 	});
 
