@@ -405,6 +405,8 @@ $(document).ready(function(){
     var upInterval;
     var downInterval;
 
+    $.event.special.tap.tapholdThreshold = 100;
+
 	$("#up").on("vmousedown", function(){
 		moveUp();
         upInterval = $.timer(function(){
