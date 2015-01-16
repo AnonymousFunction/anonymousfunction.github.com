@@ -279,32 +279,27 @@ $(document).ready(function(){
             if (enemy.length) {
                 console.log("enemy attacked! " + getEnemyType(enemy));
                 currentEnemyMap[linkY][linkX+1] = 0;
-                enemy.remove();
-                killSound.play();
+                doEnemyDamage(enemy);
             }
         } else if (link.hasClass("left")) {
             var enemy = getEnemyDomNodeAt(linkX-1, linkY);
             if (enemy.length) {
                 console.log("enemy attacked! " + getEnemyType(enemy));
                 currentEnemyMap[linkY][linkX-1] = 0;
-                enemy.remove();
-                killSound.play();
+                doEnemyDamage(enemy);
             }
         } else if (link.hasClass("up")) {
             var enemy = getEnemyDomNodeAt(linkX, linkY-1);
             if (enemy.length) {
                 console.log("enemy attacked! " + getEnemyType(enemy));
                 currentEnemyMap[linkY-1][linkX] = 0;
-                enemy.remove();
-                killSound.play();
+                doEnemyDamage(enemy);
             }
         } else if (link.hasClass("down")) {
             var enemy = getEnemyDomNodeAt(linkX, linkY+1);
             if (enemy.length) {
                 console.log("enemy attacked! " + getEnemyType(enemy));
                 currentEnemyMap[linkY+1][linkX] = 0;
-                enemy.remove();
-                killSound.play();
             }
         }
 
@@ -324,6 +319,17 @@ $(document).ready(function(){
                 rightInterval.play();
             }
 		}, 200);
+	};
+
+	var doEnemyDamage = function(enemy){
+		var enemyHealth = parseInt(enemy.attr("data-hp"));
+
+		if (enemyHealth === 1) {
+			enemy.remove();
+    		killSound.play();
+		} else {
+			enemy.attr("data-hp", enemyHealth - 1);
+		}
 	};
 
 	var doBoomerang = function(){
