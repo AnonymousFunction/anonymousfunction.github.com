@@ -579,15 +579,15 @@ $(document).ready(function(){
     var upInterval;
     var downInterval;
 
-    $.event.special.tap.tapholdThreshold = 100;
+//    $.event.special.tap.tapholdThreshold = 100;
 
-	$("#up").on("vmousedown", function(){
+	$("#up").on("press", function(){
 		moveUp();
         upInterval = $.timer(function(){
             moveUp();
         }, 200);
         upInterval.play();
-	}).on("vmouseup", function(){
+	}).on("pressup", function(){
         upInterval.stop();
         upInterval = undefined;
 	});
