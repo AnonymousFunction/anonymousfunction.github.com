@@ -23,6 +23,7 @@ $(document).ready(function(){
 	var mapY = 7;
 
     var hasSword = false;
+    var hasBoomerang = false;
 
 	var viewport = $("#viewport");
 	var link = $("#link");
@@ -445,6 +446,10 @@ $(document).ready(function(){
 	};
 
 	var doBoomerang = function(){
+        if (!hasBoomerang) {
+            return;
+        }
+
         boomerang.addClass("throw");
 
         if (link.hasClass("up")) {
