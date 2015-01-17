@@ -14,6 +14,9 @@ $(document).ready(function(){
     var boomerangSound = new Audio("sounds/boomerang.wav");
     var killSound = new Audio("sounds/kill.wav");
     var hitSound = new Audio("sounds/hit.wav");
+    var hurtSound = new Audio("sounds/hurt.wav");
+    var textSound = new Audio("sounds/text.wav");
+    var findItemSound = new Audio("sounds/fanfare.wav");
 
 
 	var linkX = 7;
@@ -334,6 +337,7 @@ $(document).ready(function(){
             texty = printCaveText.text();
             texty += getNextLetter();
             printCaveText.text(texty);
+            textSound.play();
         }, 100);
         caveTextInterval.play();
 
@@ -368,7 +372,7 @@ $(document).ready(function(){
     };
 
     var findSword = function(){
-        console.log("you got the sword!!!");
+        findItemSound.play();
         hasSword = true;
         $("#a-box-item").removeClass("hidden");
         $("#cave-sword").remove();
