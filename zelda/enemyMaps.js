@@ -114,6 +114,10 @@ var animateEnemies = function(){
         var enemy = $(this);
 
         var enemyTimer = $.timer(function(){
+            if (isGamePaused) {
+                return;
+            }
+
             enemy.removeClass("up down left right").addClass(getRandomDirection());
 
             if (enemy.hasClass("up")) {

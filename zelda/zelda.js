@@ -1,3 +1,5 @@
+var isGamePaused = false;
+
 $(document).ready(function(){
     //set viewport size
     var widthScale = Number(window.innerWidth/256).toFixed(2);
@@ -92,7 +94,7 @@ $(document).ready(function(){
 	updateBGYVal();
 
 	var moveUp = function(){
-        if (!canLinkMove) {
+        if (!canLinkMove || isGamePaused) {
             return;
         }
 
@@ -153,7 +155,7 @@ $(document).ready(function(){
 	};
 
 	var moveDown = function(){
-        if (!canLinkMove) {
+        if (!canLinkMove || isGamePaused) {
             return;
         }
 
@@ -217,7 +219,7 @@ $(document).ready(function(){
 	};
 
     var moveLeft = function(){
-        if (!canLinkMove) {
+        if (!canLinkMove || isGamePaused) {
             return;
         }
 
@@ -273,7 +275,7 @@ $(document).ready(function(){
     };
 
     var moveRight = function(){
-        if (!canLinkMove) {
+        if (!canLinkMove || isGamePaused) {
             return;
         }
 
@@ -559,7 +561,8 @@ $(document).ready(function(){
 	};
 
     var doStart = function(){
-        $("#item-menu").slideToggle({ duration: 1000, easing: "linear" });
+        $("#item-menu").slideToggle({ easing: "linear" });
+        isGamePaused = !isGamePaused;
     };
 
     var toggleController = function(){
