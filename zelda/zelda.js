@@ -394,7 +394,7 @@ $(document).ready(function(){
     };
 
     var getItemDomNodeAt = function(x, y){
-        return $("[data-item-x='" + x + "'][data-item-y='" + y + "']");
+        return $("[data-item-x='" + x + "'][data-item-y='" + y + "']").not(".hidden");
     };
 
     var findItem = function(itemNode) {
