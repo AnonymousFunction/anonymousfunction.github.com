@@ -22,6 +22,8 @@ $(document).ready(function(){
 	var mapX = 7;
 	var mapY = 7;
 
+    var hasSword = false;
+
 	var viewport = $("#viewport");
 	var link = $("#link");
     var boomerang = $("#boomerang");
@@ -177,6 +179,9 @@ $(document).ready(function(){
 			console.log("cave");
 			enterCave();
             return;
+        } else if (currentMap[linkY-1] && currentMap[linkY-1][linkX] === "A") {
+			linkY--;
+            findSword();
 		} else {
             if (getEnemyDomNodeAt(linkX, linkY-1).length) {
                 console.log("take damage");
@@ -352,7 +357,18 @@ $(document).ready(function(){
 
     };
 
+    var findSword = function(){
+        console.log("you got the sword!!!");
+        hasSword = true;
+        $("#a-box-item").removeClass("hidden");
+        $("#cave-sword").remove();
+    };
+
 	var doSword = function(){
+        if (!hasSword) {
+            return;
+        }
+
         if (upInterval) {
             upInterval.pause();
         }
