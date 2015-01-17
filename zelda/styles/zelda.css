@@ -113,6 +113,20 @@ body {
 #hearts-bottom img:not(:nth-child(1)) {
     margin-left: -1px;
 }
+#item-menu {
+    position: absolute;
+    height: 176px;
+    width: 256px;
+    background: black;
+    display: none;
+    z-index: 200;
+}
+#inventory-background {
+    height: 145px;
+    top: 21px;
+    position: relative;
+    left: 16px;
+}
 #viewport {
 	height: 176px;
 	width: 256px;
@@ -170,6 +184,9 @@ body {
 }
 .hidden {
     display: none;
+}
+.invisible {
+    visibility: hidden;
 }
 #link {
 	position: absolute;

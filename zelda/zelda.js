@@ -536,7 +536,7 @@ $(document).ready(function(){
 	};
 
     var doStart = function(){
-        $("#about").toggle();
+        $("#item-menu").slideToggle({ easing: "linear" });
     };
 
     var toggleController = function(){
