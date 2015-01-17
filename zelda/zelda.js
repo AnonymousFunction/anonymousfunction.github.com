@@ -28,11 +28,17 @@ $(document).ready(function(){
     var hasSword = false;
     var hasBoomerang = false;
 
+    var currentHearts = 3;
+    var maxHearts = 3;
+
+    var rupeesCount = 0;
+
 	var viewport = $("#viewport");
 	var link = $("#link");
     var boomerang = $("#boomerang");
 	var beacon = $("#beacon");
     var hearts = $("#hearts-bottom");
+    var rupees = $("#rupees");
 
 	link.addClass("up");
 
@@ -501,9 +507,6 @@ $(document).ready(function(){
 		updateBGYVal();
 	};
 
-    var currentHearts = 3;
-    var maxHearts = 3;
-
     var updateHealth = function(difference){
         difference = difference || 0;
         currentHearts += difference;
@@ -526,6 +529,24 @@ $(document).ready(function(){
     };
 
     updateHealth();
+
+    var updateRupees = function(difference){
+        difference = difference || 0;
+
+        if (rupeesCount < 0) {
+            return;
+        }
+
+        rupeesCount += difference;
+
+        if (rupeesCount < 100) {
+            rupees.text("X" + rupeesCount);
+        } else {
+            rupees.text(rupeesCount);
+        }
+    };
+
+    updateRupees(255);
 
     var rightInterval;
     var leftInterval;
