@@ -50,6 +50,8 @@ $(document).ready(function(){
 		return $("#walkThruWalls:checked").val();
 	};
 
+    var canLinkMove = true;
+
 	var updateLinkXVal = function(){
 		$("#linkXVal").text(linkX);
 	};
@@ -90,6 +92,10 @@ $(document).ready(function(){
 	updateBGYVal();
 
 	var moveUp = function(){
+        if (!canLinkMove) {
+            return;
+        }
+
         if (!link.hasClass("up")) {
             link.removeClass("down left right").addClass("up");
             return;
@@ -147,6 +153,10 @@ $(document).ready(function(){
 	};
 
 	var moveDown = function(){
+        if (!canLinkMove) {
+            return;
+        }
+
         if (!link.hasClass("down")) {
             link.removeClass("up left right").addClass("down");
             return;
@@ -207,6 +217,10 @@ $(document).ready(function(){
 	};
 
     var moveLeft = function(){
+        if (!canLinkMove) {
+            return;
+        }
+
         if (!link.hasClass("left")) {
             link.removeClass("up down right").addClass("left");
             return;
@@ -259,6 +273,10 @@ $(document).ready(function(){
     };
 
     var moveRight = function(){
+        if (!canLinkMove) {
+            return;
+        }
+
         if (!link.hasClass("right")) {
             link.removeClass("up down left").addClass("right");
             return;
@@ -352,10 +370,12 @@ $(document).ready(function(){
                 var toReturn = caveText[0];
                 var chopped = caveText.substring(1);
                 caveText = chopped;
+                textSound.play();
                 return toReturn;
             }
 
             caveTextInterval.stop();
+            canLinkMove = true;
             return "";
         }
 
@@ -363,9 +383,9 @@ $(document).ready(function(){
             texty = printCaveText.text();
             texty += getNextLetter();
             printCaveText.text(texty);
-            textSound.play();
         }, 100);
         caveTextInterval.play();
+        canLinkMove = false;
 
         currentMap = m_cave;
     };
@@ -428,6 +448,9 @@ $(document).ready(function(){
         hasSword = true;
         $("#a-box-item").removeClass("hidden");
         $("#cave-sword").remove();
+        $("[data-cave='7-7']").remove();
+        $("#printCaveText").text("");
+        caveTextMap["7-7"] = "";
     };
 
 	var doSword = function(){
@@ -536,7 +559,7 @@ $(document).ready(function(){
 	};
 
     var doStart = function(){
-        $("#item-menu").slideToggle({ easing: "linear" });
+        $("#item-menu").slideToggle({ duration: 1000, easing: "linear" });
     };
 
     var toggleController = function(){
