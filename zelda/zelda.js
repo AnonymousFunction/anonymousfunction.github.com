@@ -32,6 +32,8 @@ $(document).ready(function(){
     var maxHearts = 3;
 
     var rupeesCount = 0;
+    var keyCount = 0;
+    var bombCount = 0;
 
 	var viewport = $("#viewport");
 	var link = $("#link");
@@ -39,6 +41,8 @@ $(document).ready(function(){
 	var beacon = $("#beacon");
     var hearts = $("#hearts-bottom");
     var rupees = $("#rupees");
+    var keys = $("#keys");
+    var bombs = $("#bombs");
 
 	link.addClass("up");
 
@@ -398,8 +402,24 @@ $(document).ready(function(){
     };
 
     var findItem = function(itemNode) {
-        if (itemNode.attr("data-item") === "sword") {
-            findSword();
+        var itemType = itemNode.attr("data-item");
+        var itemCost = parseInt(itemNode.attr("data-cost") || 0);
+
+        console.log("itemType", itemType);
+
+        switch (itemType) {
+            case "sword":
+                findSword();
+                break;
+            case "store-key":
+                if (rupeesCount >= itemCost) {
+                    findItemSound.play();
+                    updateRupees(-itemCost);
+                    updateKeys(1);
+                }
+                break;
+            default:
+                break;
         }
     };
 
@@ -573,6 +593,34 @@ $(document).ready(function(){
     };
 
     updateRupees(255);
+
+    var updateKeys = function(difference){
+        difference = difference || 0;
+
+        if (keyCount < 0) {
+            return;
+        }
+
+        keyCount += difference;
+
+        keys.text("X" + keyCount);
+    };
+
+    updateKeys(0);
+
+    var updateBombs = function(difference){
+        difference = difference || 0;
+
+        if (bombCount < 0) {
+            return;
+        }
+
+        bombCount += difference;
+
+        bombs.text("X" + bombCount);
+    };
+
+    updateBombs(0);
 
     var rightInterval;
     var leftInterval;
