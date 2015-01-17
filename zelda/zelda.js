@@ -85,102 +85,6 @@ $(document).ready(function(){
 	updateBGXVal();
 	updateBGYVal();
 
-	var moveLeft = function(){
-        if (!link.hasClass("left")) {
-            link.removeClass("up down right").addClass("left");
-            return;
-        }
-
-		if (!canWalkThruWalls() && currentMap[linkY] && currentMap[linkY][linkX-1] === 0) {
-			console.log("link can't move left");
-			return;
-		} else if (currentMap[linkY] && currentMap[linkY][linkX-1] === "A"){
-            linkX--;
-            findSword();
-		} else {
-            if (getEnemyDomNodeAt(linkX-1, linkY).length) {
-                console.log("take damage");
-                updateHealth(-1);
-                console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX-1]));
-                return;
-            }
-			linkX--;
-		}
-
-		var originaLeft = parseInt(link.css("left"));
-		var newLeft = originaLeft - 16;
-
-		if (newLeft >= 0) {		
-			link.css("left", newLeft + "px");		
-			boomerang.css("left", newLeft + "px");
-		} else {
-			var origMapLeft = parseInt(viewport.css("background-position-x"));
-			if (origMapLeft <= -256) {
-				var newMapLeft = origMapLeft + 256;
-				viewport.css("background-position-x", newMapLeft + "px");
-
-				var origBeaconLeft = parseInt(beacon.css("left"));
-				var newBeaconLeft = origBeaconLeft - 4;
-				beacon.css("left", newBeaconLeft + "px");
-
-				link.css("left", "240px");
-				boomerang.css("left", "240px");
-				linkX = 15;
-				mapX--;
-			}
-		}
-
-		updateMapValues();
-	};
-
-	var moveRight = function(){
-        if (!link.hasClass("right")) {
-            link.removeClass("up down left").addClass("right");
-            return;
-        }
-
-		if (!canWalkThruWalls() && currentMap[linkY] && currentMap[linkY][linkX+1] === 0) {
-			console.log("link can't move right");
-			return;
-        } else if (currentMap[linkY] && currentMap[linkY][linkX+1] === 'A') {
-            linkX++;
-            findSword();
-		} else {
-            if (getEnemyDomNodeAt(linkX+1, linkY).length) {
-                console.log("take damage");
-                updateHealth(-1);
-                console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX+1]));
-                return;
-            }
-			linkX++;
-		}
-
-		var originaLeft = parseInt(link.css("left"));
-		var newLeft = originaLeft + 16;
-		
-		if (newLeft < 256) {
-			link.css("left", newLeft + "px");	
-			boomerang.css("left", newLeft + "px");
-		} else {
-			var origMapLeft = parseInt(viewport.css("background-position-x"));
-			if (origMapLeft > -4096) {				
-				var newMapLeft = origMapLeft - 256;
-				viewport.css("background-position-x", newMapLeft + "px");
-
-				var origBeaconLeft = parseInt(beacon.css("left"));
-				var newBeaconLeft = origBeaconLeft + 4;
-				beacon.css("left", newBeaconLeft + "px");
-
-				link.css("left", "0px");
-				boomerang.css("left", "0px");
-				linkX = 0;
-				mapX++;
-			}	
-		}
-
-		updateMapValues();
-	};
-
 	var moveUp = function(){
         if (!link.hasClass("up")) {
             link.removeClass("down left right").addClass("up");
@@ -195,9 +99,6 @@ $(document).ready(function(){
 			console.log("cave");
 			enterCave();
             return;
-        } else if (currentMap[linkY-1] && currentMap[linkY-1][linkX] === "A") {
-			linkY--;
-            findSword();
 		} else {
             if (getEnemyDomNodeAt(linkX, linkY-1).length) {
                 console.log("take damage");
@@ -205,6 +106,13 @@ $(document).ready(function(){
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY-1][linkX]));
                 return;
             }
+
+            var itemNodes = getItemDomNodeAt(linkX, linkY-1);
+            if (itemNodes.length) {
+                findItem(itemNodes.eq(0));
+                console.log("found item")
+            }
+
 			linkY--;
 		}
 
@@ -248,9 +156,6 @@ $(document).ready(function(){
             console.log("exit cave");
             exitCave();
             return;
-        } else if (currentMap[linkY+1] && currentMap[linkY+1][linkX] === "A") {
-            linkY++;
-            findSword();
 		} else {
             if (getEnemyDomNodeAt(linkX, linkY+1).length) {
                 console.log("take damage");
@@ -258,6 +163,13 @@ $(document).ready(function(){
                 console.log("enemy " + getEnemyType(currentEnemyMap[linkY+1][linkX]));
                 return;
             }
+
+            var itemNodes = getItemDomNodeAt(linkX, linkY+1);
+            if (itemNodes.length) {
+                findItem(itemNodes.eq(0));
+                console.log("found item")
+            }
+
 			linkY++;
 		}
 
@@ -289,6 +201,110 @@ $(document).ready(function(){
 
 		updateMapValues();
 	};
+
+    var moveLeft = function(){
+        if (!link.hasClass("left")) {
+            link.removeClass("up down right").addClass("left");
+            return;
+        }
+
+        if (!canWalkThruWalls() && currentMap[linkY] && currentMap[linkY][linkX-1] === 0) {
+            console.log("link can't move left");
+            return;
+        } else {
+            if (getEnemyDomNodeAt(linkX-1, linkY).length) {
+                console.log("take damage");
+                updateHealth(-1);
+                console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX-1]));
+                return;
+            }
+
+            var itemNodes = getItemDomNodeAt(linkX-1, linkY);
+            if (itemNodes.length) {
+                findItem(itemNodes.eq(0));
+                console.log("found item")
+            }
+
+            linkX--;
+        }
+
+        var originaLeft = parseInt(link.css("left"));
+        var newLeft = originaLeft - 16;
+
+        if (newLeft >= 0) {
+            link.css("left", newLeft + "px");
+            boomerang.css("left", newLeft + "px");
+        } else {
+            var origMapLeft = parseInt(viewport.css("background-position-x"));
+            if (origMapLeft <= -256) {
+                var newMapLeft = origMapLeft + 256;
+                viewport.css("background-position-x", newMapLeft + "px");
+
+                var origBeaconLeft = parseInt(beacon.css("left"));
+                var newBeaconLeft = origBeaconLeft - 4;
+                beacon.css("left", newBeaconLeft + "px");
+
+                link.css("left", "240px");
+                boomerang.css("left", "240px");
+                linkX = 15;
+                mapX--;
+            }
+        }
+
+        updateMapValues();
+    };
+
+    var moveRight = function(){
+        if (!link.hasClass("right")) {
+            link.removeClass("up down left").addClass("right");
+            return;
+        }
+
+        if (!canWalkThruWalls() && currentMap[linkY] && currentMap[linkY][linkX+1] === 0) {
+            console.log("link can't move right");
+            return;
+        } else {
+            if (getEnemyDomNodeAt(linkX+1, linkY).length) {
+                console.log("take damage");
+                updateHealth(-1);
+                console.log("enemy " + getEnemyType(currentEnemyMap[linkY][linkX+1]));
+                return;
+            }
+
+            var itemNodes = getItemDomNodeAt(linkX+1, linkY);
+            if (itemNodes.length) {
+                findItem(itemNodes.eq(0));
+                console.log("found item")
+            }
+
+            linkX++;
+        }
+
+        var originaLeft = parseInt(link.css("left"));
+        var newLeft = originaLeft + 16;
+
+        if (newLeft < 256) {
+            link.css("left", newLeft + "px");
+            boomerang.css("left", newLeft + "px");
+        } else {
+            var origMapLeft = parseInt(viewport.css("background-position-x"));
+            if (origMapLeft > -4096) {
+                var newMapLeft = origMapLeft - 256;
+                viewport.css("background-position-x", newMapLeft + "px");
+
+                var origBeaconLeft = parseInt(beacon.css("left"));
+                var newBeaconLeft = origBeaconLeft + 4;
+                beacon.css("left", newBeaconLeft + "px");
+
+                link.css("left", "0px");
+                boomerang.css("left", "0px");
+                linkX = 0;
+                mapX++;
+            }
+        }
+
+        updateMapValues();
+    };
 
     var preCaveMapX, preCaveMapY, preCaveLinkX, preCaveLinkY, preCaveMovementMap;
 
@@ -375,6 +391,16 @@ $(document).ready(function(){
         link.css("left", linkLeft + "px");
         boomerang.css("left", linkLeft + "px");
 
+    };
+
+    var getItemDomNodeAt = function(x, y){
+        return $("[data-item-x='" + x + "'][data-item-y='" + y + "']");
+    };
+
+    var findItem = function(itemNode) {
+        if (itemNode.attr("data-item") === "sword") {
+            findSword();
+        }
     };
 
     var findSword = function(){
