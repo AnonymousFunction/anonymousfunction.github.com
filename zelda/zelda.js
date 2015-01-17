@@ -85,6 +85,9 @@ $(document).ready(function(){
 		if (!canWalkThruWalls() && currentMap[linkY] && currentMap[linkY][linkX-1] === 0) {
 			console.log("link can't move left");
 			return;
+		} else if (currentMap[linkY] && currentMap[linkY][linkX-1] === "A"){
+            linkX--;
+            findSword();
 		} else {
             if (getEnemyDomNodeAt(linkX-1, linkY).length) {
                 console.log("take damage");
@@ -130,6 +133,9 @@ $(document).ready(function(){
 		if (!canWalkThruWalls() && currentMap[linkY] && currentMap[linkY][linkX+1] === 0) {
 			console.log("link can't move right");
 			return;
+        } else if (currentMap[linkY] && currentMap[linkY][linkX+1] === 'A') {
+            linkX++;
+            findSword();
 		} else {
             if (getEnemyDomNodeAt(linkX+1, linkY).length) {
                 console.log("take damage");
@@ -229,10 +235,13 @@ $(document).ready(function(){
 			console.log("link can't move down");
 			return;
         } else if (currentMap[linkY+1] && currentMap[linkY+1][linkX] === 3) {
-            linkY--;
+            linkY++;
             console.log("exit cave");
             exitCave();
             return;
+        } else if (currentMap[linkY+1] && currentMap[linkY+1][linkX] === "A") {
+            linkY++;
+            findSword();
 		} else {
             if (getEnemyDomNodeAt(linkX, linkY+1).length) {
                 console.log("take damage");
