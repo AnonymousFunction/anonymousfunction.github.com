@@ -128,13 +128,15 @@ body {
 }
 .cave-text{
     position: absolute;
-    color: white;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 8px;
     top: 95px;
     left: 32px;
     width: 191px;
     text-align: center;
+}
+.text {
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
 }
 .sprite {
 	height: 16px;
