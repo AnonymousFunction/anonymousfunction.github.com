@@ -38,6 +38,7 @@ $(document).ready(function(){
     var bombCount = 0;
 
 	var viewport = $("#viewport");
+    var level = $("#level");
 	var link = $("#link");
     var boomerang = $("#boomerang");
 	var beacon = $("#beacon");
@@ -110,6 +111,11 @@ $(document).ready(function(){
 			linkY--;
 			console.log("cave");
 			enterCave();
+            return;
+		} else if (currentMap[linkY-1] && currentMap[linkY-1][linkX] === 4) {
+			linkY--;
+			console.log("dungeon");
+			enterDungeon();
             return;
 		} else {
             if (getEnemyDomNodeAt(linkX, linkY-1).length) {
@@ -363,7 +369,7 @@ $(document).ready(function(){
         var caveSprites = $("[data-cave='" + preCaveMapX + "-" + preCaveMapY + "']");
         caveSprites.removeClass("hidden");
 
-        var caveText = caveTextMap[preCaveMapX + "-" + preCaveMapY];
+        var caveText = caveTextMap[preCaveMapX + "-" + preCaveMapY] || "";
 
         var texty = "";
 
@@ -417,6 +423,43 @@ $(document).ready(function(){
         link.css("left", linkLeft + "px");
         boomerang.css("left", linkLeft + "px");
 
+    };
+
+    var preDungeonMapX, preDungeonMapY, preDungeonLinkX, preDungeonLinkY, preDungeonMovementMap;
+
+    var dungeonInfo = {
+        "7-3": {
+            levelName: "LEVEL-1",
+            "background-position-x": "-768px",
+            "background-position-y": "-1232px"
+        }
+    };
+
+    var enterDungeon = function(){
+        viewport.addClass("dungeon");
+
+        var dungeonStart = dungeonInfo[mapX + "-" + mapY];
+
+        level.text(dungeonStart.levelName);
+
+        viewport.css({
+            "background-position-x": dungeonStart["background-position-x"],
+            "background-position-y": dungeonStart["background-position-y"]
+        });
+
+        preDungeonMapX = mapX;
+        preDungeonMapY = mapY;
+        preDungeonLinkX = linkX;
+        preDungeonLinkY = linkY;
+        preDungeonMovementMap = currentMap;
+
+        link.css("top", "200px");
+        boomerang.css("top", "200px");
+        linkY = 9;
+
+        link.css("left", "112px");
+        boomerang.css("left", "112px");
+        linkX = 7;
     };
 
     var getItemDomNodeAt = function(x, y){

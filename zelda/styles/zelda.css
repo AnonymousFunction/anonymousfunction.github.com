@@ -28,6 +28,11 @@ body {
 	height: 56px;
 	width: 256px;
 }
+#level {
+    position: absolute;
+    top: 8px;
+    left: 15px;
+}
 #minimap {
 	background-color: #616161;
 	position: absolute;
@@ -139,6 +144,9 @@ body {
 }
 #viewport.cave {
 	background: url("../images/cave_map.png");
+}
+#viewport.dungeon {
+	background: url("../images/dungeons_map.png");
 }
 .cave-text{
     position: absolute;
