@@ -273,6 +273,8 @@ $(document).ready(function(){
         "7-7": "IT'S DANGEROUS TO GO\nALONE! TAKE THIS."
     };
 
+    var caveTextInterval;
+
 	var enterCave = function(){
 		viewport.addClass("cave");
         $("#cave-sprites").removeClass("hidden");
@@ -294,6 +296,9 @@ $(document).ready(function(){
         boomerang.css("left", "112px");
         linkX = 7;
 
+        var caveSprites = $("[data-cave='" + preCaveMapX + "-" + preCaveMapY + "']");
+        caveSprites.removeClass("hidden");
+
         var caveText = caveTextMap[preCaveMapX + "-" + preCaveMapY];
 
         var texty = "";
@@ -306,16 +311,16 @@ $(document).ready(function(){
                 return toReturn;
             }
 
-            textInterval.stop();
+            caveTextInterval.stop();
             return "";
         }
 
-        var textInterval = $.timer(function(){
+        caveTextInterval = $.timer(function(){
             texty = printCaveText.text();
             texty += getNextLetter();
             printCaveText.text(texty);
         }, 100);
-        textInterval.play();
+        caveTextInterval.play();
 
         currentMap = m_cave;
     };
@@ -325,6 +330,10 @@ $(document).ready(function(){
         $("#cave-sprites").addClass("hidden");
         $(".cave-text").addClass("hidden");
         $("#printCaveText").text("");
+
+        var caveSprites = $("[data-cave]");
+        caveSprites.addClass("hidden");
+        caveTextInterval.stop();
 
         mapX = preCaveMapX;
         mapY = preCaveMapY;
