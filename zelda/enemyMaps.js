@@ -13,7 +13,11 @@ var getEnemyType = function(enemyVal){
                 speed: 1500,
                 hp: 1,
                 damage: 1,
-                canCollide: false
+                canCollide: false,
+                moveUp: moveSingleUp,
+                moveDown: moveSingleDown,
+                moveLeft: moveSingleLeft,
+                moveRight: moveSingleRight
             };
         case "2":
             return {
@@ -21,7 +25,11 @@ var getEnemyType = function(enemyVal){
                 speed: 1250,
                 hp: 2,
                 damage: 1,
-                canCollide: false
+                canCollide: false,
+                moveUp: moveSingleUp,
+                moveDown: moveSingleDown,
+                moveLeft: moveSingleLeft,
+                moveRight: moveSingleRight
             };
         default:
             return;
@@ -137,13 +145,13 @@ var animateEnemies = function(){
             enemy.removeClass("up down left right").addClass(getRandomDirection());
 
             if (enemy.hasClass("up")) {
-                moveEnemyUp(enemy);
+                enemyType.moveUp(enemy);
             } else if (enemy.hasClass("down")) {
-                moveEnemyDown(enemy);
+                enemyType.moveDown(enemy);
             } else if (enemy.hasClass("left")) {
-                moveEnemyLeft(enemy);
+                enemyType.moveLeft(enemy);
             } else if (enemy.hasClass("right")) {
-                moveEnemyRight(enemy);
+                enemyType.moveRight(enemy);
             }
         }, enemyType.speed);
 
@@ -153,7 +161,7 @@ var animateEnemies = function(){
 
 };
 
-var moveEnemyUp = function(enemy){
+var moveSingleUp = function(enemy){
     var originalTop = parseInt(enemy.css("top"));
     var newTop = originalTop - 16;
     if (newTop < 56) {
@@ -167,7 +175,7 @@ var moveEnemyUp = function(enemy){
     enemy.attr("data-y", newY);
 };
 
-var moveEnemyDown = function(enemy){
+var moveSingleDown = function(enemy){
     var originalTop = parseInt(enemy.css("top"));
     var newTop = originalTop + 16;
     if (newTop > 216) {
@@ -180,7 +188,7 @@ var moveEnemyDown = function(enemy){
     enemy.attr("data-y", newY);
 };
 
-var moveEnemyLeft = function(enemy){
+var moveSingleLeft = function(enemy){
     var originalLeft = parseInt(enemy.css("left"));
     var newLeft = originalLeft - 16;
     if (newLeft < 0) {
@@ -193,7 +201,7 @@ var moveEnemyLeft = function(enemy){
     enemy.attr("data-x", newX);
 };
 
-var moveEnemyRight = function(enemy){
+var moveSingleRight = function(enemy){
     var originalLeft = parseInt(enemy.css("left"));
     var newLeft = originalLeft + 16;
     if (newLeft >= 256) {
