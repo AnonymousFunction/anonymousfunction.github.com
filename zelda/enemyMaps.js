@@ -31,6 +31,18 @@ var getEnemyType = function(enemyVal){
                 moveLeft: moveSingleLeft,
                 moveRight: moveSingleRight
             };
+        case "3":
+            return {
+                cssClass: "red-tektite",
+                speed: 2000,
+                hp: 1,
+                damage: 1,
+                canCollide: true,
+                moveUp: moveTektiteUp,
+                moveDown: moveTektiteDown,
+                moveLeft: moveTektiteLeft,
+                moveRight: moveTektiteRight
+            };
         default:
             return;
     }
@@ -44,6 +56,20 @@ for (var x=0; x<16; x++){
         window["e" + x + y] = [];
     }
 }
+
+var e67 =  [
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,3,0,0,0,0,0,0,0,0,3,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+];
 
 var e86 =  [
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -211,6 +237,59 @@ var moveSingleRight = function(enemy){
 
     var originalX = parseInt(enemy.attr("data-x"));
     var newX = originalX + 1;
+    enemy.attr("data-x", newX);
+};
+
+var moveTektiteUp = function(enemy){
+    var originalTop = parseInt(enemy.css("top"));
+    var newTop = originalTop - 48;
+    if (newTop < 56) {
+        return;
+    }
+
+    enemy.css("top", newTop + "px");
+
+    var originalY = parseInt(enemy.attr("data-y"));
+    var newY = originalY - 3;
+    enemy.attr("data-y", newY);
+};
+
+var moveTektiteDown = function(enemy){
+    var originalTop = parseInt(enemy.css("top"));
+    var newTop = originalTop + 48;
+    if (newTop > 216) {
+        return;
+    }
+    enemy.css("top", newTop + "px");
+
+    var originalY = parseInt(enemy.attr("data-y"));
+    var newY = originalY + 3;
+    enemy.attr("data-y", newY);
+};
+
+var moveTektiteLeft = function(enemy){
+    var originalLeft = parseInt(enemy.css("left"));
+    var newLeft = originalLeft - 48;
+    if (newLeft < 0) {
+        return;
+    }
+    enemy.css("left", newLeft + "px");
+
+    var originalX = parseInt(enemy.attr("data-x"));
+    var newX = originalX - 3;
+    enemy.attr("data-x", newX);
+};
+
+var moveTektiteRight = function(enemy){
+    var originalLeft = parseInt(enemy.css("left"));
+    var newLeft = originalLeft + 48;
+    if (newLeft >= 256) {
+        return;
+    }
+    enemy.css("left", newLeft + "px");
+
+    var originalX = parseInt(enemy.attr("data-x"));
+    var newX = originalX + 3;
     enemy.attr("data-x", newX);
 };
 

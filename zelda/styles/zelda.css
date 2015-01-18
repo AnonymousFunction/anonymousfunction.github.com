@@ -412,6 +412,7 @@ body {
 	width: 30px;
 	font-family: sans-serif;
 }
+
 .red-octorok {
     position: absolute;
     -webkit-transition: top 1s linear, left 1s linear;
@@ -428,6 +429,7 @@ body {
 .red-octorok.right {
     background: url("../images/red_octorok/right.gif") no-repeat;
 }
+
 .blue-octorok {
     position: absolute;
     -webkit-transition: top 1s linear, left 1s linear;
@@ -443,4 +445,10 @@ body {
 }
 .blue-octorok.right {
     background: url("../images/blue_octorok/right.gif") no-repeat;
+}
+
+.red-tektite {
+    position: absolute;
+    background: url("../images/red_tektite/up.gif") no-repeat;
+    -webkit-transition: top .4s linear, left .4s linear;
 }
