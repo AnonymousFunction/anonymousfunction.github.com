@@ -24,7 +24,7 @@ var getEnemyType = function(enemyVal){
                 canCollide: false
             };
         default:
-            return {};
+            return;
     }
 };
 
@@ -114,7 +114,6 @@ var animateEnemies = function(){
         var enemyType = getEnemyType(enemy.attr("data-enemy-type"));
 
         console.log("enemy animate", enemy.attr("data-enemy"));
-        console.log("enemyType", enemyType);
         enemy.addClass(getRandomDirection());
 
         var enemyTimer = $.timer(function(){
@@ -158,7 +157,7 @@ var moveEnemyUp = function(enemy){
 var moveEnemyDown = function(enemy){
     var originalTop = parseInt(enemy.css("top"));
     var newTop = originalTop + 16;
-    if (newTop > 56) {
+    if (newTop > 216) {
         return;
     }
     enemy.css("top", newTop + "px");
