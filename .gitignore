@@ -1,2 +1,6 @@
 
 anonymousfunction.github.com.iml
+
+node_modules/
+
+target/
