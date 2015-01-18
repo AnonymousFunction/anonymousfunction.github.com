@@ -60,13 +60,13 @@ module.exports = function(config) {
         // the default configuration
         // note the htmlReporter doesn't obey basePath, thus adding the common-web prefix here explicitly
         htmlReporter: {
-            outputDir: 'zelda/target/karma-reports/tests/',
+            outputDir: 'target/karma-reports/tests/',
             templatePath: 'node_modules/karma-html-reporter/jasmine_template.html'
         },
 
         //For bamboo to absorb the jasmine test output.
         junitReporter: {
-            outputFile: "zelda/target/surefire-reports/TEST-jasmine-junit.xml",
+            outputFile: "target/surefire-reports/TEST-jasmine-junit.xml",
             suite:''
         },
 
