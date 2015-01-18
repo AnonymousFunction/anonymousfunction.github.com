@@ -712,68 +712,68 @@ var downInterval;
 
 $.event.special.tap.tapholdThreshold = 100;
 
-$("#up").on("vmousedown", function(){
+$("#up").on("tap", function(){
     moveUp();
-    upInterval = $.timer(function(){
-        moveUp();
-    }, 200);
-    upInterval.play();
-}).on("vmouseup", function(){
-    upInterval.stop();
-    upInterval = undefined;
+//    upInterval = $.timer(function(){
+//        moveUp();
+//    }, 200);
+//    upInterval.play();
+//}).on("vmouseup", function(){
+//    upInterval.stop();
+//    upInterval = undefined;
 });
 
-$("#down").on("vmousedown", function(){
+$("#down").on("tap", function(){
     moveDown();
-    downInterval = $.timer(function(){
-        moveDown();
-    }, 200);
-    downInterval.play();
-}).on("vmouseup", function(){
-    downInterval.stop();
-    downInterval = undefined;
+//    downInterval = $.timer(function(){
+//        moveDown();
+//    }, 200);
+//    downInterval.play();
+//}).on("vmouseup", function(){
+//    downInterval.stop();
+//    downInterval = undefined;
 });
 
-$("#left").on("vmousedown", function(){
+$("#left").on("tap", function(){
     moveLeft();
-    leftInterval = $.timer(function(){
-        moveLeft();
-    }, 200);
-    leftInterval.play();
-}).on("vmouseup", function(){
-    leftInterval.stop();
-    leftInterval = undefined;
+//    leftInterval = $.timer(function(){
+//        moveLeft();
+//    }, 200);
+//    leftInterval.play();
+//}).on("vmouseup", function(){
+//    leftInterval.stop();
+//    leftInterval = undefined;
 });
 
-$("#right").on("vmousedown", function(){
+$("#right").on("tap", function(){
     moveRight();
-    rightInterval = $.timer(function(){
-        moveRight();
-    }, 200);
-    rightInterval.play();
-}).on("vmouseup", function(){
-    rightInterval.stop();
-    rightInterval = undefined;
+//    rightInterval = $.timer(function(){
+//        moveRight();
+//    }, 200);
+//    rightInterval.play();
+//}).on("vmouseup", function(){
+//    rightInterval.stop();
+//    rightInterval = undefined;
 })
 
-$("#a-button").on("vmousedown", function(){
-    if (rightInterval) {
-        rightInterval.stop();
-    }
-    if (leftInterval) {
-        leftInterval.stop();
-    }
-    if (upInterval) {
-        upInterval.stop();
-    }
-    if (downInterval) {
-        downInterval.stop();
-    }
-
-    rightInterval = undefined;
-    leftInterval = undefined;
-    upInterval = undefined;
-    downInterval = undefined;
+$("#a-button").on("tap", function(){
+//    if (rightInterval) {
+//        rightInterval.stop();
+//    }
+//    if (leftInterval) {
+//        leftInterval.stop();
+//    }
+//    if (upInterval) {
+//        upInterval.stop();
+//    }
+//    if (downInterval) {
+//        downInterval.stop();
+//    }
+//
+//    rightInterval = undefined;
+//    leftInterval = undefined;
+//    upInterval = undefined;
+//    downInterval = undefined;
 
     doSword();
 });
