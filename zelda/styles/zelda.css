@@ -414,6 +414,7 @@ body {
 }
 .red-octorok {
     position: absolute;
+    -webkit-transition: top 1s linear, left 1s linear;
 }
 .red-octorok.up {
     background: url("../images/red_octorok/up.gif") no-repeat;
@@ -429,6 +430,7 @@ body {
 }
 .blue-octorok {
     position: absolute;
+    -webkit-transition: top 1s linear, left 1s linear;
 }
 .blue-octorok.up {
     background: url("../images/blue_octorok/up.gif") no-repeat;

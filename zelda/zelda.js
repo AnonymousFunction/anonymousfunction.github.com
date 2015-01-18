@@ -558,6 +558,7 @@ var doSword = function(){
         if (enemy.length) {
             console.log("enemy attacked! " + getEnemyType(enemy));
             currentEnemyMap[linkY+1][linkX] = 0;
+            doEnemyDamage(enemy);
         }
     }
 
