@@ -5,23 +5,26 @@
  */
 
 var getEnemyType = function(enemyVal){
+    enemyVal = String(enemyVal);
     switch (enemyVal) {
-        case 1:
+        case "1":
             return {
                 cssClass: "red-octorok",
                 speed: 1500,
                 hp: 1,
-                damage: 1
+                damage: 1,
+                canCollide: false
             };
-        case 2:
+        case "2":
             return {
                 cssClass: "blue-octorok",
                 speed: 1250,
                 hp: 2,
-                damage: 1
+                damage: 1,
+                canCollide: false
             };
         default:
-            return "";
+            return {};
     }
 };
 
@@ -75,13 +78,14 @@ var drawEnemies = function(){
     for (var x=0; x<16; x++){
         for (var y=0; y<11; y++) {
             if (currentEnemyMap[y] && getEnemyType(currentEnemyMap[y][x])) {
-                var enemy = getEnemyType(currentEnemyMap[y][x]);
+                var enemyType = currentEnemyMap[y][x];
+                var enemy = getEnemyType(enemyType);
 
                 var enemyHtml = "<div data-enemy='" + enemy.cssClass +  "' class='sprite enemy " +  enemy.cssClass + "'" +
                     "style='top: " + (56 + (y * 16)) + "px; left: " + (x + 0) * 16 + "px'" +
                     "data-hp='" + enemy.hp + "'" +
                     "data-damage='" + enemy.damage + "'" +
-                    "data-speed='" + enemy.speed + "'" +
+                    "data-enemy-type='" + enemyType + "'" +
                     "data-x='" + x + "'" +
                     "data-y='" + y + "'></div>";
                 allEnemiesHtml += enemyHtml;
@@ -103,15 +107,15 @@ var animateEnemies = function(){
 
     enemyTimers = [];
 
-    $(".enemy").each(function(){
+    var allEnemies = $(".enemy");
+
+    allEnemies.each(function(){
         var enemy = $(this);
+        var enemyType = getEnemyType(enemy.attr("data-enemy-type"));
+
         console.log("enemy animate", enemy.attr("data-enemy"));
+        console.log("enemyType", enemyType);
         enemy.addClass(getRandomDirection());
-
-    });
-
-    $(".enemy").each(function(){
-        var enemy = $(this);
 
         var enemyTimer = $.timer(function(){
             if (isGamePaused) {
@@ -129,7 +133,7 @@ var animateEnemies = function(){
             } else if (enemy.hasClass("right")) {
                 moveEnemyRight(enemy);
             }
-        }, enemy.attr("data-speed"));
+        }, enemyType.speed);
 
         enemyTimer.play();
         enemyTimers.push(enemyTimer);
