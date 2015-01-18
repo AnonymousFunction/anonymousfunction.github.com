@@ -171,13 +171,13 @@ var animateEnemies = function(){
             enemy.removeClass("up down left right").addClass(getRandomDirection());
 
             if (enemy.hasClass("up")) {
-                enemyType.moveUp(enemy);
+                enemyType.moveUp(enemy, enemyType);
             } else if (enemy.hasClass("down")) {
-                enemyType.moveDown(enemy);
+                enemyType.moveDown(enemy, enemyType);
             } else if (enemy.hasClass("left")) {
-                enemyType.moveLeft(enemy);
+                enemyType.moveLeft(enemy, enemyType);
             } else if (enemy.hasClass("right")) {
-                enemyType.moveRight(enemy);
+                enemyType.moveRight(enemy, enemyType);
             }
         }, enemyType.speed);
 
@@ -187,60 +187,75 @@ var animateEnemies = function(){
 
 };
 
-var moveSingleUp = function(enemy){
+var moveSingleUp = function(enemy, enemyType){
     var originalTop = parseInt(enemy.css("top"));
     var newTop = originalTop - 16;
     if (newTop < 56) {
         return;
     }
 
-    enemy.css("top", newTop + "px");
-
+    var originalX = parseInt(enemy.attr("data-x"));
     var originalY = parseInt(enemy.attr("data-y"));
     var newY = originalY - 1;
-    enemy.attr("data-y", newY);
+
+    if (enemyType.canCollide || isEnemyDestinationAvailable(originalX, newY)) {
+        enemy.css("top", newTop + "px");
+        enemy.attr("data-y", newY);
+    }
 };
 
-var moveSingleDown = function(enemy){
+var moveSingleDown = function(enemy, enemyType){
     var originalTop = parseInt(enemy.css("top"));
     var newTop = originalTop + 16;
     if (newTop > 216) {
         return;
     }
-    enemy.css("top", newTop + "px");
 
+    var originalX = parseInt(enemy.attr("data-x"));
     var originalY = parseInt(enemy.attr("data-y"));
     var newY = originalY + 1;
-    enemy.attr("data-y", newY);
+
+    if (enemyType.canCollide || isEnemyDestinationAvailable(originalX, newY)) {
+        enemy.css("top", newTop + "px");
+        enemy.attr("data-y", newY);
+    }
 };
 
-var moveSingleLeft = function(enemy){
+var moveSingleLeft = function(enemy, enemyType){
     var originalLeft = parseInt(enemy.css("left"));
     var newLeft = originalLeft - 16;
     if (newLeft < 0) {
         return;
     }
-    enemy.css("left", newLeft + "px");
 
     var originalX = parseInt(enemy.attr("data-x"));
+    var originalY = parseInt(enemy.attr("data-y"));
     var newX = originalX - 1;
-    enemy.attr("data-x", newX);
+
+    if (enemyType.canCollide || isEnemyDestinationAvailable(newX, originalY)) {
+        enemy.css("left", newLeft + "px");
+        enemy.attr("data-x", newX);
+    }
 };
 
-var moveSingleRight = function(enemy){
+var moveSingleRight = function(enemy, enemyType){
     var originalLeft = parseInt(enemy.css("left"));
     var newLeft = originalLeft + 16;
     if (newLeft >= 256) {
         return;
     }
-    enemy.css("left", newLeft + "px");
 
     var originalX = parseInt(enemy.attr("data-x"));
+    var originalY = parseInt(enemy.attr("data-y"));
     var newX = originalX + 1;
-    enemy.attr("data-x", newX);
+
+    if (enemyType.canCollide || isEnemyDestinationAvailable(newX, originalY)) {
+        enemy.css("left", newLeft + "px");
+        enemy.attr("data-x", newX);
+    }
 };
 
-var moveTektiteUp = function(enemy){
+var moveTektiteUp = function(enemy, enemyType){
     var originalTop = parseInt(enemy.css("top"));
     var newTop = originalTop - 48;
     if (newTop < 56) {
@@ -254,7 +269,7 @@ var moveTektiteUp = function(enemy){
     enemy.attr("data-y", newY);
 };
 
-var moveTektiteDown = function(enemy){
+var moveTektiteDown = function(enemy, enemyType){
     var originalTop = parseInt(enemy.css("top"));
     var newTop = originalTop + 48;
     if (newTop > 216) {
@@ -267,7 +282,7 @@ var moveTektiteDown = function(enemy){
     enemy.attr("data-y", newY);
 };
 
-var moveTektiteLeft = function(enemy){
+var moveTektiteLeft = function(enemy, enemyType){
     var originalLeft = parseInt(enemy.css("left"));
     var newLeft = originalLeft - 48;
     if (newLeft < 0) {
@@ -280,7 +295,7 @@ var moveTektiteLeft = function(enemy){
     enemy.attr("data-x", newX);
 };
 
-var moveTektiteRight = function(enemy){
+var moveTektiteRight = function(enemy, enemyType){
     var originalLeft = parseInt(enemy.css("left"));
     var newLeft = originalLeft + 48;
     if (newLeft >= 256) {
@@ -316,4 +331,8 @@ var getRandomDirection = function(){
         default:
             return "up";
     }
+};
+
+var isEnemyDestinationAvailable = function(x, y) {
+    return currentMap[y] && currentMap[y][x] === 1;
 };
