@@ -359,7 +359,7 @@ var caveTextMap = {
 var caveTextInterval;
 
 var enterCave = function(){
-    overworldSound.pause();
+//    overworldSound.pause();
     viewport.addClass("cave");
     $("#cave-sprites").removeClass("hidden");
     var printCaveText = $("#printCaveText");
@@ -413,8 +413,8 @@ var enterCave = function(){
 };
 
 var exitCave = function(){
-    overworldSound.currentTime = 0;
-    overworldSound.play();
+//    overworldSound.currentTime = 0;
+//    overworldSound.play();
 
     viewport.removeClass("cave");
     $("#cave-sprites").addClass("hidden");
@@ -888,4 +888,4 @@ $("body").keyup(function(e){
     }
 });
 
-overworldSound.play();
+//overworldSound.play();
