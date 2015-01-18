@@ -26,7 +26,8 @@ module.exports = function(config) {
 
 
             //your Jasmine specs (tests) -->
-            'zelda/test/zelda.js'
+            'zelda/test/zelda.js',
+            'zelda/test/enemyMaps.js'
         ],
         frameworks: ['jasmine'],
 
