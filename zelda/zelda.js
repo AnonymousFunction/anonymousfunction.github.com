@@ -448,7 +448,9 @@ var dungeonInfo = {
     "7-3": {
         levelName: "LEVEL-1",
         "background-position-x": "-768px",
-        "background-position-y": "-1232px"
+        "background-position-y": "-1232px",
+        dungeonMapX: 3,
+        dungeonMapY: 7
     }
 };
 
