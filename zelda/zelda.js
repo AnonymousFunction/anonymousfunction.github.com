@@ -23,8 +23,9 @@ var linkY = 6;
 var mapX = 7;
 var mapY = 7;
 
-var hasSword = false;
 var hasBoomerang = false;
+var hasBlueCandle = false;
+var hasSword = false;
 
 var currentHearts = 3;
 var maxHearts = 3;
@@ -492,6 +493,14 @@ var findItem = function(itemNode) {
     console.log("itemType", itemType);
 
     switch (itemType) {
+        case "blue-candle":
+            if (rupeesCount >= itemCost) {
+                console.log("you got blue candle!");
+                findItemSound.play();
+                updateRupees(-itemCost);
+                findBlueCandle();
+            }
+            break;
         case "sword":
             findSword();
             break;
@@ -505,6 +514,11 @@ var findItem = function(itemNode) {
         default:
             break;
     }
+};
+
+var findBlueCandle = function(){
+    hasBlueCandle = true;
+    $("[data-inventory='blue-candle']").removeClass("hidden");
 };
 
 var findSword = function(){
