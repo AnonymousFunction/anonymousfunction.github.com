@@ -132,6 +132,14 @@ body {
     position: relative;
     left: 16px;
 }
+#help-menu {
+    position: absolute;
+    height: 176px;
+    width: 256px;
+    background: black;
+    display: none;
+    z-index: 300;
+}
 #viewport {
 	height: 176px;
 	width: 256px;

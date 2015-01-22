@@ -806,6 +806,18 @@ $("#start-button").on("tap", function(){
     doStart();
 });
 
+$(".help").on("tap", function(){
+   $("#help-menu").toggle();
+});
+
+$("#save").on("tap", function(){
+
+});
+
+$("#retry").on("tap", function(){
+
+});
+
 $("body").keydown(function(e){
     //right
     if (e.which == 39) {
