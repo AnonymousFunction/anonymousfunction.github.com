@@ -811,11 +811,12 @@ $(".help").on("tap", function(){
 });
 
 $("#save").on("tap", function(){
-
+    $.cookie("name", "Rich");
 });
 
 $("#retry").on("tap", function(){
-
+    var cookie = $.cookie("name");
+    console.log("cookie", cookie);
 });
 
 $("body").keydown(function(e){
