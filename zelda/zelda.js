@@ -928,7 +928,9 @@ var loadState = function(){
         console.log("cookie!!!");
 
         hasSword = cookie.hasSword;
-        setSwordState();
+        if (hasSword) {
+            setSwordState();
+        }
 
     } else {
         console.log("no cookie!!");
