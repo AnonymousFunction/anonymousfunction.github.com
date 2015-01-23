@@ -524,6 +524,10 @@ var findBlueCandle = function(){
 var findSword = function(){
     findItemSound.play();
     hasSword = true;
+    setSwordState();
+};
+
+var setSwordState = function(){
     $("#a-box-item").removeClass("hidden");
     $("#cave-sword").remove();
     $("[data-cave='7-7']").remove();
@@ -811,7 +815,7 @@ $(".help").on("tap", function(){
 });
 
 $("#save").on("tap", function(){
-    $.cookie("name", "Rich");
+    $.cookie("hasSword", hasSword);
 });
 
 $("#retry").on("tap", function(){
@@ -917,4 +921,18 @@ $("body").keyup(function(e){
     }
 });
 
-//overworldSound.play();
+var loadState = function(){
+    var cookie = $.cookie();
+
+    if (Object.keys(cookie).length) {
+        console.log("cookie!!!");
+
+        hasSword = cookie.hasSword;
+        setSwordState();
+
+    } else {
+        console.log("no cookie!!");
+    }
+};
+
+loadState();
