@@ -817,7 +817,12 @@ $(".help").on("tap", function(){
 });
 
 $("#save").on("tap", function(){
-    var zelda = { "hasSword": hasSword };
+    var zelda = {
+        hasSword: hasSword,
+        rupeesCount: rupeesCount,
+        keyCount: keyCount,
+        bombCount: bombCount
+    };
 
     localStorage.setItem('zelda', JSON.stringify(zelda));
 });
@@ -940,6 +945,18 @@ var loadState = function(){
 
     if (hasSword) {
         setSwordState();
+    }
+
+    if (state.keyCount) {
+        updateKeys(state.keyCount);
+    }
+
+    if (state.bombCount) {
+        updateBombs(state.bombCount);
+    }
+
+    if (state.rupeesCount) {
+        updateRupees(state.rupeesCount);
     }
 };
 
