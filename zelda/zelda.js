@@ -1,3 +1,4 @@
+//test commit from intellij
 //set viewport size
 var widthScale = Number(window.innerWidth/256).toFixed(2);
 var heightScale = Number(window.innerHeight/346).toFixed(2);
