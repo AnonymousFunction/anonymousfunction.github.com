@@ -1,4 +1,3 @@
-//test commit from intellij
 //set viewport size
 var widthScale = Number(window.innerWidth/256).toFixed(2);
 var heightScale = Number(window.innerHeight/346).toFixed(2);
@@ -816,7 +815,10 @@ $(".help").on("tap", function(){
 });
 
 $("#save").on("tap", function(){
-    $.cookie("hasSword", hasSword);
+
+    var zelda = { "hasSword": hasSword };
+
+    localStorage.setItem('zelda', JSON.stringify(zelda));
 });
 
 $("#retry").on("tap", function(){
@@ -923,18 +925,21 @@ $("body").keyup(function(e){
 });
 
 var loadState = function(){
-    var cookie = $.cookie();
+    var retrievedObject = localStorage.getItem("zelda");
 
-    if (Object.keys(cookie).length) {
-        console.log("cookie!!!");
+    if (!retrievedObject) {
+        console.log("no local storage!!");
+        return;
+    }
 
-        hasSword = cookie.hasSword;
-        if (hasSword) {
-            setSwordState();
-        }
+    var state = JSON.parse(retrievedObject);
 
-    } else {
-        console.log("no cookie!!");
+    console.log("state: ", state);
+
+    hasSword = state.hasSword;
+
+    if (hasSword) {
+        setSwordState();
     }
 };
 
