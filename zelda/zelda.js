@@ -8,6 +8,7 @@ if (widthScale <= heightScale) {
     $("meta[name=viewport]").attr("content", "initial-scale=" + heightScale + ", user-scalable=no");
 }
 
+var introSound = new Audio("sounds/intro.mp3");
 var overworldSound = new Audio("sounds/overworld.mp3");
 var swordSound = new Audio("sounds/sword.wav");
 var boomerangSound = new Audio("sounds/boomerang.wav");
@@ -815,15 +816,13 @@ $(".help").on("tap", function(){
 });
 
 $("#save").on("tap", function(){
-
     var zelda = { "hasSword": hasSword };
 
     localStorage.setItem('zelda', JSON.stringify(zelda));
 });
 
 $("#retry").on("tap", function(){
-    var cookie = $.cookie("name");
-    console.log("cookie", cookie);
+
 });
 
 $("body").keydown(function(e){
@@ -944,3 +943,5 @@ var loadState = function(){
 };
 
 loadState();
+
+introSound.play();
