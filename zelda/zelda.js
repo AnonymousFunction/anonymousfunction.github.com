@@ -53,6 +53,7 @@ var canWalkThruWalls = function(){
 
 var canLinkMove = true;
 var isGamePaused = false;
+var isGameIntro = true;
 
 var updateLinkXVal = function(){
     $("#linkXVal").text(linkX);
@@ -944,4 +945,6 @@ var loadState = function(){
 
 loadState();
 
-introSound.play();
+isGameIntro = true;
+
+//introSound.play();
