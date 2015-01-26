@@ -108,7 +108,7 @@
   var Invader = function(game, center) {
     this.game = game;
     this.center = center;
-    this.size = { x: 50, y: 20 };
+    this.size = { x: 50, y: 10 };
 
     // Invaders patrol from left to right and back again.
     // `this.patrolX` records the current (relative) position of the
@@ -138,13 +138,13 @@
       var x = 100 + (i % 8) * 55;
 
       // Place invaders in three rows.
-      var y = 40 + (i % 3) * 40;
+      var y = 40 + (i % 3) * 20;
       
       console.log("x:", x, "y:", y);
 
       // Create invader.
       invaders.push(new Invader(game, { x: x, y: y}));
-      invaders.push(new Invader(game, { x: x, y: y + 120}));
+      invaders.push(new Invader(game, { x: x, y: y + 60}));
     }
 
     return invaders;
