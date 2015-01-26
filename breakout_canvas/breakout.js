@@ -17,11 +17,11 @@
     // place game bodies.
     var gameSize = { x: canvas.width, y: canvas.height };
 
-    // Create the bodies array to hold the player, invaders and bullets.
+    // Create the bodies array to hold the player, bricks and bullets.
     this.bodies = [];
 
-    // Add the invaders to the bodies array.
-    this.bodies = this.bodies.concat(createInvaders(this));
+    // Add the bricks to the bodies array.
+    this.bodies = this.bodies.concat(createBricks(this));
 
     // Add the player to the bodies array.
     this.bodies = this.bodies.concat(new Player(this, gameSize));
@@ -82,72 +82,59 @@
       }
     },
 
-    // **invadersBelow()** returns true if `invader` is directly
-    // above at least one other invader.
-    invadersBelow: function(invader) {
-      // If filtered array is not empty, there are invaders below.
-      return this.bodies.filter(function(b) {
-        // Keep `b` if it is an invader, if it is in the same column
-        // as `invader`, and if it is somewhere below `invader`.
-        return b instanceof Invader &&
-          Math.abs(invader.center.x - b.center.x) < b.size.x &&
-          b.center.y > invader.center.y;
-      }).length > 0;
-    },
-
     // **addBody()** adds a body to the bodies array.
     addBody: function(body) {
       this.bodies.push(body);
     }
   };
 
-  // Invaders
+  // Bricks
   // --------
 
-  // **new Invader()** creates an invader.
-  var Invader = function(game, center) {
+  // **new Brick()** creates an brick.
+  var Brick = function(game, center) {
     this.game = game;
     this.center = center;
     this.size = { x: 50, y: 10 };
 
-    // Invaders patrol from left to right and back again.
+    // Bricks patrol from left to right and back again.
     // `this.patrolX` records the current (relative) position of the
-    // invader in their patrol.  It starts at 0, increases to 40, then
+    // brick in their patrol.  It starts at 0, increases to 40, then
     // decreases to 0, and so forth.
     this.patrolX = 0;
 
-    // The x speed of the invader.  A positive value moves the invader
+    // The x speed of the brick.  A positive value moves the brick
     // right. A negative value moves it left.
     this.speedX = 0.3;
   };
 
-  Invader.prototype = {
+  Brick.prototype = {
 
-    // **update()** updates the state of the invader for a single tick.
+    // **update()** updates the state of the brick for a single tick.
     update: function() {
 
     }
   };
 
-  // **createInvaders()** returns an array of twenty-four invaders.
-  var createInvaders = function(game) {
-    var invaders = [];
+  // **createBricks()** returns an array of twenty-four bricks.
+  var createBricks = function(game) {
+    var bricks = [];
     for (var i = 0; i < 24; i++) {
 
-      // Place invaders in eight columns.
+      // Place bricks in eight columns.
       var x = 100 + (i % 8) * 55;
 
-      // Place invaders in three rows.
+      // Place bricks in three rows.
       var y = 40 + (i % 3) * 20;
       
       console.log("x:", x, "y:", y);
 
-      // Create invader.
-      invaders.push(new Invader(game, { x: x, y: y}));
-      invaders.push(new Invader(game, { x: x, y: y + 60}));
+      // Create brick.
+      bricks.push(new Brick(game, { x: x, y: y}));
+      bricks.push(new Brick(game, { x: x, y: y + 60}));
     }
 
-    return invaders;
+    return bricks;
   };
 
   // Player
