@@ -8,6 +8,7 @@ if (widthScale <= heightScale) {
 }
 
 var fingerDown = false;
+var fingerX = 300;
 
 (function () {
 
@@ -239,13 +240,13 @@ var fingerDown = false;
         // **update()** updates the state of the player for a single tick.
         update: function () {
             // If left cursor key is down...
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT) || fingerX == "LEFT") {
                 if (this.center.x > 25) {
                     // ... move left.
                     this.center.x -= 3;
                 }
 
-            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
+            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT) || fingerX == "RIGHT") {
                 if (this.center.x < 575) {
                     this.center.x += 3;
                 }
@@ -386,12 +387,20 @@ var fingerDown = false;
     window.addEventListener('load', function () {
         new Game();
 
-        $("#breakout").on("vmousedown", function(){
+        $("#breakout").on("vmousedown", function(e){
+            if (e.clientX > 300) {
+                fingerX = "RIGHT";
+            } else {
+                fingerX = "LEFT"
+            }
+
             fingerDown = true;
+
         });
 
-        $("#breakout").on("vmouseup", function(){
+        $("#breakout").on("vmouseup", function(e){
             fingerDown = false;
+            fingerX = "";
         });
     });
 })();
