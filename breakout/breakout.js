@@ -7,6 +7,8 @@ if (widthScale <= heightScale) {
     $("meta[name=viewport]").attr("content", "initial-scale=" + heightScale + ", user-scalable=no");
 }
 
+var fingerDown = false;
+
 (function () {
 
     // Main game object
@@ -250,7 +252,7 @@ if (widthScale <= heightScale) {
             }
 
             // If Space key is down...
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || fingerDown) {
                 if (this.game.lives == 0) {
                     return;
                 }
@@ -383,5 +385,13 @@ if (widthScale <= heightScale) {
     // When the DOM is ready, create (and start) the game.
     window.addEventListener('load', function () {
         new Game();
+
+        $("#breakout").on("vmousedown", function(){
+            fingerDown = true;
+        });
+
+        $("#breakout").on("vmouseup", function(){
+            fingerDown = false;
+        });
     });
 })();
