@@ -212,12 +212,12 @@
       if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
         if (this.center.x > 25) {
           // ... move left.
-          this.center.x -= 2;
+          this.center.x -= 3;
         }
 
       } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
         if (this.center.x < 575) {
-            this.center.x += 2;
+            this.center.x += 3;
         }
       }
 
