@@ -77,6 +77,10 @@
 
       // Draw each body as a rectangle.
       for (var i = 0; i < this.bodies.length; i++) {
+        if (this.bodies[i].center.y < 0) {
+          delete this.bodies[i];
+          continue;
+        }
         if (this.bodies[i].color) {
             screen.fillStyle=this.bodies[i].color;
         } else {
