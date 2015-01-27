@@ -89,6 +89,18 @@
     // **addBody()** adds a body to the bodies array.
     addBody: function(body) {
       this.bodies.push(body);
+    },
+    
+    getBulletCount: function(){
+      var bulletCount = 0;
+      
+      for (var i = 0; i < this.bodies.length; i++) {
+          if (this.bodies[i] instanceof Bullet) {
+            bulletCount++;
+          }
+      }
+      
+      return bulletCount;
     }
   };
 
@@ -188,9 +200,8 @@
                                 { x: 0, y: -7 });
 
         // ... add the bullet to the game...
-        if (this.game.bulletCount < 3) {
+        if (this.game.getBulletCount() < 1) {
           this.game.addBody(bullet);
-          this.game.bulletCount++;
         }
       }
     }
@@ -265,13 +276,15 @@
   // 4. Left of `b1` is to the right of the right of `b2`.
   // 5. Top of `b1` is below the bottom of `b2`.
   var colliding = function(b1, b2) {
-    return !(
+    var isColliding = !(
       b1 === b2 ||
         b1.center.x + b1.size.x / 2 < b2.center.x - b2.size.x / 2 ||
         b1.center.y + b1.size.y / 2 < b2.center.y - b2.size.y / 2 ||
         b1.center.x - b1.size.x / 2 > b2.center.x + b2.size.x / 2 ||
         b1.center.y - b1.size.y / 2 > b2.center.y + b2.size.y / 2
     );
+    
+    return isColliding;
   };
 
   // Start game
