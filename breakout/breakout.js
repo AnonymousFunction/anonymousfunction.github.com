@@ -387,7 +387,7 @@ var fingerX = 300;
     window.addEventListener('load', function () {
         new Game();
 
-        $("#breakout").on("vmousedown", function(e){
+        $(document).on("vmousedown", function(e){
             if (e.clientX > 300) {
                 fingerX = "RIGHT";
             } else {
@@ -398,7 +398,7 @@ var fingerX = 300;
 
         });
 
-        $("#breakout").on("vmouseup", function(e){
+        $(document).on("vmouseup", function(e){
             fingerDown = false;
             fingerX = "";
         });
