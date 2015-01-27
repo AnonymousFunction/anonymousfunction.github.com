@@ -1,4 +1,4 @@
-var widthScale = Number(window.innerWidth/650).toFixed(2);
+var widthScale = Number(window.innerWidth/625).toFixed(2);
 var heightScale = Number(window.innerHeight/600).toFixed(2);
 
 if (widthScale <= heightScale) {
