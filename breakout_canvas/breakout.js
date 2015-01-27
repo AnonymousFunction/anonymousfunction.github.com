@@ -169,7 +169,8 @@
   // **new Player()** creates a player.
   var Player = function(game, gameSize) {
     this.game = game;
-    this.size = { x: 15, y: 15 };
+    this.size = { x: 50, y: 10 };
+    this.color = "#0088FF";
     this.center = { x: gameSize.x / 2, y: gameSize.y - this.size.y * 2 };
 
     // Create a keyboard object to track button presses.
