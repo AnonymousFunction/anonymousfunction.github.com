@@ -225,7 +225,7 @@
       if (this.keyboarder.isDown(this.keyboarder.KEYS.S)) {
         // ... create a bullet just above the player that will move upwards...
         var bullet = new Bullet({ x: this.center.x, y: this.center.y - this.size.y - 10 },
-                                { x: 1, y: -1 });
+                                { x: 2, y: -2 });
 
         // ... add the bullet to the game...
         if (this.game.getBulletCount() < 1) {
