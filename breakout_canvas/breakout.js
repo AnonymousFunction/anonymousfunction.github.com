@@ -53,17 +53,35 @@
     // **update()** runs the main game logic.
     update: function() {
       var self = this;
+      
+      for (var i = 0; i < this.bodies.length; i++) {
+        var collidingBodies = self.bodies.filter(function(b2) { return colliding(self.bodies[i], b2); });
+        if (self.bodies[i] instanceof Bullet && collidingBodies.length) {
+          console.log("bullet bounce");
+          
+          if (isSideHit(self.bodies[i], collidingBodies[0])) {
+            self.bodies[i].flipX();
+          } else if (isTopBottomHit(self.bodies[i], collidingBodies[0])){
+            self.bodies[i].flipY();
+          }
+          
+        }
+      }
 
       // `notCollidingWithAnything` returns true if passed body
       // is not colliding with anything.
       var notCollidingWithAnything = function(b1) {
+        if (b1 instanceof Bullet || b1 instanceof Player) {
+          return true;
+        }
+        
         return self.bodies.filter(function(b2) { return colliding(b1, b2); }).length === 0;
       };
 
       // Throw away bodies that are colliding with something. They
       // will never be updated or draw again.
       this.bodies = this.bodies.filter(notCollidingWithAnything);
-
+      
       // Call update on every body.
       for (var i = 0; i < this.bodies.length; i++) {
         this.bodies[i].update();
@@ -204,7 +222,7 @@
       if (this.keyboarder.isDown(this.keyboarder.KEYS.S)) {
         // ... create a bullet just above the player that will move upwards...
         var bullet = new Bullet({ x: this.center.x, y: this.center.y - this.size.y - 10 },
-                                { x: 0, y: -7 });
+                                { x: 1, y: -1 });
 
         // ... add the bullet to the game...
         if (this.game.getBulletCount() < 1) {
@@ -220,7 +238,7 @@
   // **new Bullet()** creates a new bullet.
   var Bullet = function(center, velocity) {
     this.center = center;
-    this.size = { x: 3, y: 3 };
+    this.size = { x: 10, y: 10 };
     this.velocity = velocity;
   };
 
@@ -231,7 +249,26 @@
 
       // Add velocity to center to move bullet.
       this.center.x += this.velocity.x;
+      
+      if (this.center.x >= 595 || this.center.x <= 5) {
+        this.flipX();
+      }
+
       this.center.y += this.velocity.y;
+      
+      if (this.center.y >= 595 || this.center.y <= 5) {
+        this.flipY();
+      }
+    },
+    
+    flipX: function(){
+      var oldVelocity = this.velocity;
+      this.velocity = { x: -1 * oldVelocity.x, y: oldVelocity.y }
+    },
+    
+    flipY: function(){
+      var oldVelocity = this.velocity;
+      this.velocity = { x: oldVelocity.x, y: -1 * oldVelocity.y }
     }
   };
 
@@ -292,6 +329,17 @@
     );
     
     return isColliding;
+  };
+  
+  var isSideHit = function(b1, b2){
+    return b1.center.x + b1.size.x / 2 == b2.center.x - b2.size.x / 2 ||
+    b1.center.x - b1.size.x / 2 == b2.center.x + b2.size.x / 2;
+  };
+  
+  var isTopBottomHit = function(b1, b2){
+    return b1.center.y + b1.size.y / 2 == b2.center.y - b2.size.y / 2 ||
+    b1.center.y - b1.size.y / 2 == b2.center.y + b2.size.y / 2;
+
   };
 
   // Start game
