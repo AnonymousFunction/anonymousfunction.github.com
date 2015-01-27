@@ -58,7 +58,7 @@
         var collidingBodies = self.bodies.filter(function(b2) { return colliding(self.bodies[i], b2); });
         if (self.bodies[i] instanceof Bullet && collidingBodies.length) {
           console.log("bullet bounce");
-          
+
           if (isSideHit(self.bodies[i], collidingBodies[0])) {
             self.bodies[i].flipX();
           } else if (isTopBottomHit(self.bodies[i], collidingBodies[0])){
@@ -84,6 +84,9 @@
       
       // Call update on every body.
       for (var i = 0; i < this.bodies.length; i++) {
+        if (this.bodies[i] instanceof Bullet && this.bodies[i].center.y > 585) {
+          //LOSE!!
+        }
         this.bodies[i].update();
       }
     },
