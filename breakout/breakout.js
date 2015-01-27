@@ -17,6 +17,10 @@
         // place game bodies.
         var gameSize = { x: canvas.width, y: canvas.height };
 
+        this.lives = 3;
+
+        this.score = 0;
+
         // Create the bodies array to hold the player, bricks and balls.
         this.bodies = [];
 
@@ -55,7 +59,9 @@
             var self = this;
 
             for (var i = 0; i < self.bodies.length; i++) {
+                //IF DEATH
                 if (self.bodies[i] instanceof Ball && self.bodies[i].center.y > 590) {
+                    self.lives--;
                     self.bodies = self.bodies.filter(function (b2) {
                         return self.bodies[i] != b2;
                     });
@@ -98,6 +104,9 @@
             for (var i = 0; i < this.bodies.length; i++) {
                 this.bodies[i].update();
             }
+
+            document.getElementById("score").innerText = this.score;
+            document.getElementById("lives").innerText = this.lives;
         },
 
         // **draw()** draws the game.
@@ -231,8 +240,12 @@
                 }
             }
 
-            // If S key is down...
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.S)) {
+            // If Space key is down...
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
+                if (this.game.lives == 0) {
+                    return;
+                }
+
                 // ... create a ball just above the player that will move upwards...
                 var ball = new Ball({ x: this.center.x, y: this.center.y - this.size.y - 10 },
                     { x: 2, y: -1 });
@@ -311,7 +324,7 @@
         };
 
         // Handy constants that give keyCodes human-readable names.
-        this.KEYS = { LEFT: 37, RIGHT: 39, S: 83 };
+        this.KEYS = { LEFT: 37, RIGHT: 39, SPACE: 32 };
     };
 
     // Other functions
