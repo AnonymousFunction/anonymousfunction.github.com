@@ -77,7 +77,11 @@
 
       // Draw each body as a rectangle.
       for (var i = 0; i < this.bodies.length; i++) {
-        screen.fillStyle="#FFFFFF";
+        if (this.bodies[i].color) {
+            screen.fillStyle=this.bodies[i].color;
+        } else {
+            screen.fillStyle="#FFFFFF";
+        }
         drawRect(screen, this.bodies[i]);
       }
     },
@@ -92,8 +96,9 @@
   // --------
 
   // **new Brick()** creates an brick.
-  var Brick = function(game, center) {
+  var Brick = function(game, color, center) {
     this.game = game;
+    this.color = color;
     this.center = center;
     this.size = { x: 50, y: 10 };
 
@@ -127,11 +132,32 @@
       // Place bricks in three rows.
       var y = 40 + (i % 3) * 20;
       
-      console.log("x:", x, "y:", y);
+      function getColor() {
+        switch (i % 3) {
+              case 0:
+                  return "#B93435";
+              case 1:
+                  return "#B85922";
+              case 2:
+                  return "#A46814";
+        }
+      }
+      
+        function getColor2() {
+          switch (i % 3) {
+                case 0:
+                    return "#929400";
+                case 1:
+                    return "#3D932A";
+                case 2:
+                    return "#302BC5";
+          }
+        }
 
+      
       // Create brick.
-      bricks.push(new Brick(game, { x: x, y: y}));
-      bricks.push(new Brick(game, { x: x, y: y + 60}));
+      bricks.push(new Brick(game, getColor(), { x: x, y: y}));
+      bricks.push(new Brick(game, getColor2(), { x: x, y: y + 60}));
     }
 
     return bricks;
