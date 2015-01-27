@@ -42,8 +42,6 @@ var fingerX = 300;
         // Add the player to the bodies array.
         this.bodies = this.bodies.concat(new Player(this, gameSize));
 
-        this.ballCount = 0;
-
         var self = this;
 
         // Main game tick function.  Loops forever, running 60ish times a second.
@@ -69,6 +67,14 @@ var fingerX = 300;
         // **update()** runs the main game logic.
         update: function () {
             var self = this;
+            var preBrickCount = 0;
+            var postBrickCount = 0;
+
+            for (var i = 0; i < self.bodies.length; i++) {
+                if (self.bodies[i] instanceof Brick) {
+                    preBrickCount++;
+                }
+            }
 
             for (var i = 0; i < self.bodies.length; i++) {
                 //IF DEATH
@@ -116,6 +122,15 @@ var fingerX = 300;
             for (var i = 0; i < this.bodies.length; i++) {
                 this.bodies[i].update();
             }
+
+            for (var i = 0; i < self.bodies.length; i++) {
+                if (self.bodies[i] instanceof Brick) {
+                    postBrickCount++;
+                }
+            }
+
+            var adjustScore = preBrickCount - postBrickCount;
+            this.score += adjustScore;
 
             document.getElementById("score").innerText = this.score;
             document.getElementById("lives").innerText = this.lives;
