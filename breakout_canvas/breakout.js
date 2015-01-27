@@ -101,16 +101,6 @@
     this.color = color;
     this.center = center;
     this.size = { x: 50, y: 10 };
-
-    // Bricks patrol from left to right and back again.
-    // `this.patrolX` records the current (relative) position of the
-    // brick in their patrol.  It starts at 0, increases to 40, then
-    // decreases to 0, and so forth.
-    this.patrolX = 0;
-
-    // The x speed of the brick.  A positive value moves the brick
-    // right. A negative value moves it left.
-    this.speedX = 0.3;
   };
 
   Brick.prototype = {
