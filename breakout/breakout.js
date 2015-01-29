@@ -275,7 +275,7 @@ var fingerX = 300;
 
                 // ... create a ball just above the player that will move upwards...
                 var ball = new Ball({ x: this.center.x, y: this.center.y - this.size.y - 10 },
-                    { x: 2, y: -1 });
+                    { x: 2, y: -2 });
 
                 // ... add the ball to the game...
                 if (this.game.getBallCount() < 1) {
