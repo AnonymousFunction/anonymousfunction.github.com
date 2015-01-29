@@ -1,12 +1,3 @@
-var widthScale = Number(window.innerWidth/625).toFixed(2);
-var heightScale = Number(window.innerHeight/600).toFixed(2);
-
-if (widthScale <= heightScale) {
-    $("meta[name=viewport]").attr("content", "initial-scale=" + widthScale + ", user-scalable=no");
-} else {
-    $("meta[name=viewport]").attr("content", "initial-scale=" + heightScale + ", user-scalable=no");
-}
-
 var fingerDown = false;
 var fingerX = 300;
 
@@ -412,5 +403,14 @@ var fingerX = 300;
             fingerDown = false;
             fingerX = "";
         });
+
+        var widthScale = Number(window.innerWidth/625).toFixed(2);
+        var heightScale = Number(window.innerHeight/600).toFixed(2);
+
+        if (widthScale <= heightScale) {
+            $("meta[name=viewport]").attr("content", "initial-scale=" + widthScale + ", user-scalable=no");
+        } else {
+            $("meta[name=viewport]").attr("content", "initial-scale=" + heightScale + ", user-scalable=no");
+        }
     });
 })();
