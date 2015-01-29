@@ -31,7 +31,9 @@ var fingerX = 300;
         this.bodies = this.bodies.concat(createBricks(this));
 
         // Add the player to the bodies array.
-        this.bodies = this.bodies.concat(new Player(this, gameSize));
+        this.player = new Player(this, gameSize);
+
+        this.bodies = this.bodies.concat(this.player);
 
         var self = this;
 
@@ -69,7 +71,8 @@ var fingerX = 300;
 
             for (var i = 0; i < self.bodies.length; i++) {
                 //IF DEATH
-                if (self.bodies[i] instanceof Ball && self.bodies[i].center.y > 590) {
+                //if bottom of the ball is past the top of the player
+                if (self.bodies[i] instanceof Ball && (self.bodies[i].center.y + self.bodies[i].size.y / 2 ) > (self.player.center.y - self.player.size.y / 2)) {
                     self.lives--;
                     self.bodies = self.bodies.filter(function (b2) {
                         return self.bodies[i] != b2;
