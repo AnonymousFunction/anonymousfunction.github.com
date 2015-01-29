@@ -10,6 +10,11 @@
 </head>
 <body>
 <style>
+    body {
+        outline: none;
+        height: 600px;
+        width: 600px;
+    }
     html {
         background-color: #1A1A1A;
         width: 600px;
@@ -23,8 +28,15 @@
         font-size: 16px;
         text-align: center;
     }
+    /* jQuery Mobile Overrides*/
     .ui-loader {
-        display: none; /* how to remove the need for this? jquery mobile does this crap*/
+        display: none;
+    }
+    .ui-page[style] {
+        height: 600px !important;
+        min-height: 600px !important;
+        overflow: hidden;
+        outline: none;
     }
 </style>
 <div class="text">
