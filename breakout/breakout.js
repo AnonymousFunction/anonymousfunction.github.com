@@ -87,12 +87,23 @@ var fingerX = 300;
                 if (self.bodies[i] instanceof Ball && collidingBodies.length) {
                     console.log("ball bounce");
 
-                    if (isSideHit(self.bodies[i], collidingBodies[0])) {
+                    if (collidingBodies[0] instanceof Player) {
+                        console.log("paddle hit");
+                        if (this.player.center.x - self.bodies[i].center.x < 0) {
+                            //right side of paddle
+                            self.bodies[i].velocity.x = 2;
+                            self.bodies[i].flipY();
+                        } else {
+                            //left of paddle
+                            self.bodies[i].velocity.x = -2;
+                            self.bodies[i].flipY();
+
+                        }
+                    } else if (isSideHit(self.bodies[i], collidingBodies[0])) {
                         self.bodies[i].flipX();
                     } else if (isTopBottomHit(self.bodies[i], collidingBodies[0])) {
                         self.bodies[i].flipY();
                     }
-
                 }
             }
 
