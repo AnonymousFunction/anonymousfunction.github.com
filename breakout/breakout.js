@@ -255,13 +255,13 @@ var fingerX = 300;
         // **update()** updates the state of the player for a single tick.
         update: function () {
             // If left cursor key is down...
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT) || fingerX == "LEFT") {
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT) || (fingerX && fingerX < this.center.x)) {
                 if (this.center.x > 25) {
                     // ... move left.
                     this.center.x -= 3;
                 }
 
-            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT) || fingerX == "RIGHT") {
+            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT) || (fingerX && fingerX > this.center.x)) {
                 if (this.center.x < 575) {
                     this.center.x += 3;
                 }
@@ -403,12 +403,7 @@ var fingerX = 300;
         new Game();
 
         $(document).on("vmousedown", function(e){
-            if (e.clientX > 300) {
-                fingerX = "RIGHT";
-            } else {
-                fingerX = "LEFT"
-            }
-
+            fingerX = e.clientX;
             fingerDown = true;
 
         });
