@@ -93,15 +93,26 @@ var fingerX = 300;
 
                     if (collidingBodies[0] instanceof Player) {
                         console.log("paddle hit");
-                        if (this.player.center.x - self.ball.center.x < 0) {
-                            //right side of paddle
-                            self.ball.velocity.x = 2;
-                            self.ball.flipY();
-                        } else {
-                            //left of paddle
+                        if (this.player.center.x - self.ball.center.x > 15) {
+                            //left side of paddle
                             self.ball.velocity.x = -2;
-                            self.ball.flipY();
-
+                            self.ball.velocity.y = -1;
+                        } else if (this.player.center.x - self.ball.center.x > 3) {
+                           //left-middle side of paddle
+                           self.ball.velocity.x = -1;
+                           self.ball.velocity.y = -2;
+                        } else if (this.player.center.x - self.ball.center.x < -15) {
+                            //right of paddle
+                            self.ball.velocity.x = 2;
+                            self.ball.velocity.y = -1;
+                        } else if (this.player.center.x - self.ball.center.x < -3) {
+                            //right-middle of paddle
+                            self.ball.velocity.x = 1;
+                            self.ball.velocity.y = -2;
+                        } else {
+                            //middle of the paddle
+                            self.ball.velocity.x = 0;
+                            self.ball.velocity.y = -2;
                         }
                     } else if (isSideHit(self.ball, collidingBodies[0])) {
                         self.ball.flipX();
@@ -254,7 +265,7 @@ var fingerX = 300;
         this.game = game;
         this.size = { x: 50, y: 10 };
         this.color = "#0088FF";
-        this.center = { x: gameSize.x / 2, y: gameSize.y - this.size.y * 2 };
+        this.center = { x: gameSize.x / 2, y: gameSize.y - this.size.y * 10 };
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
