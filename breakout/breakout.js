@@ -32,6 +32,8 @@ var fingerX = 300;
 
         // Add the player to the bodies array.
         this.player = new Player(this, gameSize);
+        
+        this.ball = null;
 
         this.bodies = this.bodies.concat(this.player);
 
@@ -68,44 +70,44 @@ var fingerX = 300;
                     preBrickCount++;
                 }
             }
-
-            for (var i = 0; i < self.bodies.length; i++) {
+            
+            if (self.ball) {
                 //IF DEATH
                 //if bottom of the ball is past the top of the player
-                if (self.bodies[i] instanceof Ball && (self.bodies[i].center.y + self.bodies[i].size.y / 2 ) > (self.player.center.y - self.player.size.y / 2)) {
+                if ((self.ball.center.y + self.ball.size.y / 2 ) > (self.player.center.y - self.player.size.y / 2)) {
                     self.lives--;
                     self.bodies = self.bodies.filter(function (b2) {
-                        return self.bodies[i] != b2;
+                        return self.ball != b2;
                     });
                 }
-            }
-
-            for (var i = 0; i < this.bodies.length; i++) {
+                
                 var collidingBodies = self.bodies.filter(function (b2) {
-                    return colliding(self.bodies[i], b2);
+                    return colliding(self.ball, b2);
                 });
-                if (self.bodies[i] instanceof Ball && collidingBodies.length) {
+
+                if (collidingBodies.length) {
                     console.log("ball bounce");
 
                     if (collidingBodies[0] instanceof Player) {
                         console.log("paddle hit");
-                        if (this.player.center.x - self.bodies[i].center.x < 0) {
+                        if (this.player.center.x - self.ball.center.x < 0) {
                             //right side of paddle
-                            self.bodies[i].velocity.x = 2;
-                            self.bodies[i].flipY();
+                            self.ball.velocity.x = 2;
+                            self.ball.flipY();
                         } else {
                             //left of paddle
-                            self.bodies[i].velocity.x = -2;
-                            self.bodies[i].flipY();
+                            self.ball.velocity.x = -2;
+                            self.ball.flipY();
 
                         }
-                    } else if (isSideHit(self.bodies[i], collidingBodies[0])) {
-                        self.bodies[i].flipX();
-                    } else if (isTopBottomHit(self.bodies[i], collidingBodies[0])) {
-                        self.bodies[i].flipY();
+                    } else if (isSideHit(self.ball, collidingBodies[0])) {
+                        self.ball.flipX();
+                    } else if (isTopBottomHit(self.ball, collidingBodies[0])) {
+                        self.ball.flipY();
                     }
                 }
             }
+
 
             // `notCollidingWithAnything` returns true if passed body
             // is not colliding with anything.
@@ -278,12 +280,13 @@ var fingerX = 300;
                     return;
                 }
 
-                // ... create a ball just above the player that will move upwards...
-                var ball = new Ball({ x: this.center.x, y: this.center.y - this.size.y - 10 },
-                    { x: 2, y: -2 });
-
                 // ... add the ball to the game...
                 if (this.game.getBallCount() < 1) {
+                    // ... create a ball just above the player that will move upwards...
+                    var ball = new Ball({ x: this.center.x, y: this.center.y - this.size.y - 10 },
+                        { x: 2, y: -2 });
+                        
+                    this.game.ball = ball;
                     this.game.addBody(ball);
                 }
             }
