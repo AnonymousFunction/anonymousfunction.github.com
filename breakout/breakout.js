@@ -79,8 +79,11 @@ var fingerX = 300;
                     self.bodies = self.bodies.filter(function (b2) {
                         return self.ball != b2;
                     });
+                    self.ball = null;
                 }
-                
+            }
+            
+            if (self.ball) {
                 var collidingBodies = self.bodies.filter(function (b2) {
                     return colliding(self.ball, b2);
                 });
