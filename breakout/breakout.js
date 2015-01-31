@@ -139,10 +139,11 @@ var fingerX = 300;
             // will never be updated or draw again.
             this.bodies = this.bodies.filter(notCollidingWithAnything);
 
-            // Call update on every body.
-            for (var i = 0; i < this.bodies.length; i++) {
-                this.bodies[i].update();
+            // Call update on ball and player.
+            if (this.ball) {
+                this.ball.update();
             }
+            this.player.update();
 
             for (var i = 0; i < self.bodies.length; i++) {
                 if (self.bodies[i] instanceof Brick) {
