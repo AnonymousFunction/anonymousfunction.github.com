@@ -262,13 +262,13 @@ var fingerX = 300;
         // **update()** updates the state of the player for a single tick.
         update: function () {
             // If left cursor key is down...
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT) || (fingerX && fingerX < this.center.x)) {
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT) || (fingerX && fingerX < 300)) {
                 if (this.center.x > 25) {
                     // ... move left.
                     this.center.x -= 3;
                 }
 
-            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT) || (fingerX && fingerX > this.center.x)) {
+            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT) || (fingerX && fingerX > 300)) {
                 if (this.center.x < 575) {
                     this.center.x += 3;
                 }
