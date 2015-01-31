@@ -72,3 +72,22 @@ header a {
 #about .aboutText {
   text-align: justify;
 }
+
+#games {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 400px;
+}
+#games img {
+  border-radius: 70px;
+  box-shadow: 2px 2px 2px;
+}
+
+#breakout img {
+  height: 100px;
+  width: 100px;
+}
+#zelda img {
+  height: 100px;
+  width: 100px;
+}
