@@ -257,18 +257,23 @@ var rotateDirection = "";
 //        screen.fillRect(body.center.x - body.size.x / 2, body.center.y - body.size.y / 2,
 //            body.size.x, body.size.y);
             
-        screen.beginPath();
+//        screen.beginPath();
         var x = body.center.x + body.size.x / 2;
         var y = body.center.y - body.size.y / 2;
-        screen.moveTo(x, y);
-        screen.lineTo(x - body.size.x, y);
-        screen.lineTo(x - body.size.x / 2, y - body.size.y / 2 );
+//        screen.moveTo(x, y);
+//        screen.lineTo(x - body.size.x, y);
+//        screen.lineTo(x - body.size.x / 2, y - body.size.y / 2 );
         
         if (rotateDirection === "left") {
             rotateLeft(screen);
         } else if (rotateDirection === "right") {
             rotateRight(screen);
         }
+        
+        var img=document.getElementById("ship");
+        
+        screen.drawImage(img, x, y);
+
 
         screen.fill();
     };
