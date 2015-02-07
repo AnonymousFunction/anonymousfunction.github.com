@@ -134,9 +134,25 @@ var rotateAngle = 0;
             }
             
             if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
-                this.center.y -= 1;
+                if (rotateAngle < 180) {
+                    this.center.x += 1;
+                } else if (rotateAngle < 360) {
+                    this.center.x -= 1;
+                }
+
+                if (rotateAngle > 90 && rotateAngle < 270) {
+                    this.center.y += 1;
+                } else {
+                    this.center.y -= 1;
+                }
+
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)) {
                 this.center.y += 1;
+                if (rotateAngle < 180) {
+                    this.center.x += 1;
+                } else if (rotateAngle < 360) {
+                    this.center.x -= 1;
+                }
             }
 
 
@@ -227,11 +243,20 @@ var rotateAngle = 0;
 
         if (rotateDirection === "left") {
             rotateAngle -= 5;
+            if (rotateAngle < 0) {
+                rotateAngle += 360;
+            }
+            console.log("angle", rotateAngle);
             screen.save();
             screen.translate(x,y);
             screen.rotate(rotateAngle * Math.PI / 180);
         } else if (rotateDirection === "right") {
             rotateAngle += 5;
+            if (rotateAngle > 360) {
+                rotateAngle -= 360;
+            }
+            console.log("angle", rotateAngle);
+
             screen.save();
             screen.translate(x,y);
             screen.rotate(rotateAngle * Math.PI / 180);
