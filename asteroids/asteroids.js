@@ -2,6 +2,7 @@ var fingerDown = false;
 var fingerX = 300;
 
 var rotateDirection = "";
+var rotateAngle = 0;
 
 (function () {
 
@@ -228,14 +229,16 @@ var rotateDirection = "";
     };
     
     var rotateRight = function(screen){
-        // Move registration point to the center of the canvas
-        screen.translate(300, 300);
+//        // Move registration point to the center of the canvas
+//        screen.translate(300, 300);
+//
+//        // Rotate 1 degree
+//        screen.rotate(4 * Math.PI / 180);
+//
+//        // Move registration point back to the top left corner of canvas
+//        screen.translate(-300, -300);
 
-        // Rotate 1 degree
-        screen.rotate(4 * Math.PI / 180);
 
-        // Move registration point back to the top left corner of canvas
-        screen.translate(-300, -300);
     };    
     
     var rotateLeft = function(screen){
@@ -263,16 +266,35 @@ var rotateDirection = "";
 //        screen.moveTo(x, y);
 //        screen.lineTo(x - body.size.x, y);
 //        screen.lineTo(x - body.size.x / 2, y - body.size.y / 2 );
-        
-        if (rotateDirection === "left") {
-            rotateLeft(screen);
-        } else if (rotateDirection === "right") {
-            rotateRight(screen);
-        }
-        
+
         var img=document.getElementById("ship");
-        
-        screen.drawImage(img, x, y);
+
+
+        if (rotateDirection === "left") {
+            rotateAngle -= 4;
+            screen.save();
+            screen.translate(300,300);
+            screen.translate(img.width/2, img.height/2);
+            screen.rotate(rotateAngle * Math.PI / 180);
+        } else if (rotateDirection === "right") {
+            rotateAngle += 4;
+            screen.save();
+            screen.translate(300,300);
+            screen.translate(img.width/2, img.height/2);
+            screen.rotate(rotateAngle * Math.PI / 180);
+        } else {
+            screen.save();
+            screen.translate(300,300);
+            screen.translate(img.width/2, img.height/2);
+            screen.rotate(rotateAngle * Math.PI / 180);
+        }
+
+        screen.drawImage(img, -img.width/2, -img.height/2);
+
+        screen.restore();
+
+
+//        screen.drawImage(img, x, y);
 
 
         screen.fill();
