@@ -112,7 +112,7 @@ var rotateAngle = 0;
     // **new Player()** creates a player.
     var Player = function (game, gameSize) {
         this.game = game;
-        this.size = { x: 50, y: 50 };
+        this.size = { x: 19, y: 25 };
         this.color = "white";
         this.center = { x: gameSize.x / 2, y: gameSize.y / 2 };
 
@@ -142,19 +142,6 @@ var rotateAngle = 0;
 
             // If Space key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || fingerDown) {
-                if (this.game.lives == 0) {
-                    return;
-                }
-
-                // ... add the ball to the game...
-                if (this.game.getBallCount() < 1) {
-                    // ... create a ball just above the player that will move upwards...
-                    var ball = new Ball({ x: this.center.x, y: this.center.y - this.size.y - 10 },
-                        { x: 2, y: -2 });
-
-                    this.game.ball = ball;
-                    this.game.addBody(ball);
-                }
             }
         }
     };
@@ -227,75 +214,36 @@ var rotateAngle = 0;
         // Handy constants that give keyCodes human-readable names.
         this.KEYS = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, SPACE: 32 };
     };
-    
-    var rotateRight = function(screen){
-//        // Move registration point to the center of the canvas
-//        screen.translate(300, 300);
-//
-//        // Rotate 1 degree
-//        screen.rotate(4 * Math.PI / 180);
-//
-//        // Move registration point back to the top left corner of canvas
-//        screen.translate(-300, -300);
-
-
-    };    
-    
-    var rotateLeft = function(screen){
-        // Move registration point to the center of the canvas
-        screen.translate(300, 300);
-
-        // Rotate 1 degree
-        screen.rotate(-4 * Math.PI / 180);
-
-        // Move registration point back to the top left corner of canvas
-        screen.translate(-300, -300);
-    };
 
     // Other functions
     // ---------------
 
     // **drawRect()** draws passed body as a rectangle to `screen`, the drawing context.
     var drawRect = function (screen, body) {
-//        screen.fillRect(body.center.x - body.size.x / 2, body.center.y - body.size.y / 2,
-//            body.size.x, body.size.y);
-            
-//        screen.beginPath();
         var x = body.center.x + body.size.x / 2;
         var y = body.center.y - body.size.y / 2;
-//        screen.moveTo(x, y);
-//        screen.lineTo(x - body.size.x, y);
-//        screen.lineTo(x - body.size.x / 2, y - body.size.y / 2 );
 
         var img=document.getElementById("ship");
 
-
         if (rotateDirection === "left") {
-            rotateAngle -= 4;
+            rotateAngle -= 5;
             screen.save();
-            screen.translate(300,300);
-            screen.translate(img.width/2, img.height/2);
+            screen.translate(x,y);
             screen.rotate(rotateAngle * Math.PI / 180);
         } else if (rotateDirection === "right") {
-            rotateAngle += 4;
+            rotateAngle += 5;
             screen.save();
-            screen.translate(300,300);
-            screen.translate(img.width/2, img.height/2);
+            screen.translate(x,y);
             screen.rotate(rotateAngle * Math.PI / 180);
         } else {
             screen.save();
-            screen.translate(300,300);
-            screen.translate(img.width/2, img.height/2);
+            screen.translate(x,y);
             screen.rotate(rotateAngle * Math.PI / 180);
         }
 
         screen.drawImage(img, -img.width/2, -img.height/2);
 
         screen.restore();
-
-
-//        screen.drawImage(img, x, y);
-
 
         screen.fill();
     };
