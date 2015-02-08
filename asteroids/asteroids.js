@@ -127,7 +127,7 @@ var rotateAngle = 0;
         // **update()** updates the state of the player for a single tick.
         update: function () {
             var MAX_VELOCITY = 2.0;
-            var BASE_VELOCITY_DELTA = 0.1;
+            var BASE_VELOCITY_DELTA = 0.05;
             var delta = 0;
 
             // If left cursor key is down...
