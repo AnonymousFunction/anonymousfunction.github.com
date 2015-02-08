@@ -115,6 +115,7 @@ var rotateAngle = 0;
         this.size = { x: 19, y: 25 };
         this.color = "white";
         this.center = { x: gameSize.x / 2, y: gameSize.y / 2 };
+        this.velocity = { x: 0, y: 0 };
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -135,26 +136,45 @@ var rotateAngle = 0;
             
             if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
                 if (rotateAngle < 180) {
-                    this.center.x += 1;
+                    this.velocity.x += 0.2;
                 } else if (rotateAngle < 360) {
-                    this.center.x -= 1;
+                    this.velocity.x -= 0.2;
                 }
 
-                if (rotateAngle > 90 && rotateAngle < 270) {
-                    this.center.y += 1;
-                } else {
-                    this.center.y -= 1;
+                if (this.velocity.x > 4.0) {
+                    this.velocity.x = 4.0;
+                } else if (this.velocity.x < -4.0) {
+                    this.velocity.x = -4.0;
                 }
 
-            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)) {
-                this.center.y += 1;
-                if (rotateAngle < 180) {
-                    this.center.x += 1;
-                } else if (rotateAngle < 360) {
-                    this.center.x -= 1;
+                if (rotateAngle > 90) {
+                    this.velocity.y += 0.2;
+                } else if (rotateAngle < 270) {
+                    this.velocity.y -= 0.2;
+                }
+
+                if (this.velocity.y > 4.0) {
+                    this.velocity.y = 4.0;
+                } else if (this.velocity.y < -4.0) {
+                    this.velocity.y = -4.0;
                 }
             }
 
+            this.center.x += this.velocity.x;
+
+            if (this.center.x > 600) {
+                this.center.x = 1;
+            } else if(this.center.x < 0) {
+                this.center.x = 599;
+            }
+
+            this.center.y += this.velocity.y;
+
+            if (this.center.y > 600) {
+                this.center.y = 1;
+            } else if(this.center.y < 0) {
+                this.center.y = 599;
+            }
 
             // If Space key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || fingerDown) {
