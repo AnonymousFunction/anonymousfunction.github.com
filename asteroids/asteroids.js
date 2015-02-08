@@ -36,6 +36,8 @@ var rotateAngle = 0;
 
         this.ball = null;
 
+        this.shotRecharge = 0;
+
         this.bodies = this.bodies.concat(this.player);
 
         var self = this;
@@ -64,7 +66,15 @@ var rotateAngle = 0;
         update: function () {
             var self = this;
 
-            this.player.update();
+//            this.player.update();
+
+            for (var i = 0; i < self.bodies.length; i++) {
+                self.bodies[i].update();
+            }
+
+            if (self.shotRecharge > 0) {
+                self.shotRecharge--;
+            }
         },
 
         // **draw()** draws the game.
@@ -84,7 +94,8 @@ var rotateAngle = 0;
                 } else {
                     screen.fillStyle = "#FFFFFF";
                 }
-                drawRect(screen, this.bodies[i]);
+
+                this.bodies[i].draw(screen);
             }
         },
 
@@ -103,7 +114,16 @@ var rotateAngle = 0;
             }
 
             return ballCount;
+        },
+
+        canShoot: function () {
+            return this.shotRecharge === 0;
+        },
+
+        resetShotRecharge: function () {
+            this.shotRecharge = 60;
         }
+
     };
 
     // Player
@@ -124,6 +144,44 @@ var rotateAngle = 0;
 
     Player.prototype = {
 
+        draw: function (screen) {
+            var x = this.center.x + this.size.x / 2;
+            var y = this.center.y - this.size.y / 2;
+
+            var img = document.getElementById(this.id);
+
+            if (rotateDirection === "left") {
+                rotateAngle -= 5;
+                if (rotateAngle < 0) {
+                    rotateAngle += 360;
+                }
+                console.log("angle", rotateAngle);
+                screen.save();
+                screen.translate(x, y);
+                screen.rotate(rotateAngle * Math.PI / 180);
+            } else if (rotateDirection === "right") {
+                rotateAngle += 5;
+                if (rotateAngle > 360) {
+                    rotateAngle -= 360;
+                }
+                console.log("angle", rotateAngle);
+
+                screen.save();
+                screen.translate(x, y);
+                screen.rotate(rotateAngle * Math.PI / 180);
+            } else {
+                screen.save();
+                screen.translate(x, y);
+                screen.rotate(rotateAngle * Math.PI / 180);
+            }
+
+            screen.drawImage(img, -img.width / 2, -img.height / 2);
+
+            screen.restore();
+
+            screen.fill();
+        },
+
         // **update()** updates the state of the player for a single tick.
         update: function () {
             var MAX_VELOCITY = 2.0;
@@ -138,7 +196,7 @@ var rotateAngle = 0;
             } else {
                 rotateDirection = "";
             }
-            
+
             if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
                 if (rotateAngle === 0 || rotateAngle === 360) {
                     this.velocity.x += 0;
@@ -165,7 +223,7 @@ var rotateAngle = 0;
                 if (rotateAngle === 0 || rotateAngle === 360) {
                     this.velocity.y -= BASE_VELOCITY_DELTA;
                 } else if (rotateAngle > 0 && rotateAngle < 90) {
-                    delta = parseFloat((90  - (rotateAngle - 90)) / 90 * BASE_VELOCITY_DELTA);
+                    delta = parseFloat((90 - (rotateAngle - 90)) / 90 * BASE_VELOCITY_DELTA);
                     this.velocity.y -= delta;
                 } else if (rotateAngle === 90) {
                     this.velocity.y -= 0;
@@ -175,7 +233,7 @@ var rotateAngle = 0;
                 } else if (rotateAngle === 180) {
                     this.velocity.y += BASE_VELOCITY_DELTA;
                 } else if (rotateAngle > 180 && rotateAngle < 270) {
-                    delta = parseFloat((90  - (rotateAngle - 180)) / 90 * BASE_VELOCITY_DELTA);
+                    delta = parseFloat((90 - (rotateAngle - 180)) / 90 * BASE_VELOCITY_DELTA);
                     this.velocity.y += delta;
                 } else if (rotateAngle === 270) {
                     this.velocity.y -= 0;
@@ -205,7 +263,7 @@ var rotateAngle = 0;
 
             if (this.center.x > 600) {
                 this.center.x = 1;
-            } else if(this.center.x < 0) {
+            } else if (this.center.x < 0) {
                 this.center.x = 599;
             }
 
@@ -213,12 +271,20 @@ var rotateAngle = 0;
 
             if (this.center.y > 600) {
                 this.center.y = 1;
-            } else if(this.center.y < 0) {
+            } else if (this.center.y < 0) {
                 this.center.y = 599;
             }
 
             // If Space key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || fingerDown) {
+                if (this.game.canShoot() && this.game.getBallCount() < 5) {
+                    var ball = new Ball({ x: this.center.x, y: this.center.y - this.size.y - 10 },
+                        { x: 2, y: -2 });
+
+                    this.game.ball = ball;
+                    this.game.addBody(ball);
+                    this.game.resetShotRecharge();
+                }
             }
         }
     };
@@ -229,11 +295,16 @@ var rotateAngle = 0;
     // **new Ball()** creates a new ball.
     var Ball = function (center, velocity) {
         this.center = center;
-        this.size = { x: 10, y: 10 };
+        this.size = { x: 2, y: 2 };
         this.velocity = velocity;
     };
 
     Ball.prototype = {
+
+        draw: function (screen) {
+            screen.fillRect(this.center.x - this.size.x / 2, this.center.y - this.size.y / 2,
+                this.size.x, this.size.y);
+        },
 
         // **update()** updates the state of the ball for a single tick.
         update: function () {
@@ -241,14 +312,18 @@ var rotateAngle = 0;
             // Add velocity to center to move ball.
             this.center.x += this.velocity.x;
 
-            if (this.center.x >= 595 || this.center.x <= 5) {
-                this.flipX();
+            if (this.center.x >= 598) {
+                this.center.x = 2;
+            } else if (this.center.x <= 2) {
+                this.center.x = 598;
             }
 
             this.center.y += this.velocity.y;
 
-            if (this.center.y >= 595 || this.center.y <= 5) {
-                this.flipY();
+            if (this.center.y >= 598) {
+                this.center.y = 2;
+            } else if (this.center.y <= 2) {
+                this.center.y = 598;
             }
         },
 
@@ -300,7 +375,7 @@ var rotateAngle = 0;
         var x = body.center.x + body.size.x / 2;
         var y = body.center.y - body.size.y / 2;
 
-        var img=document.getElementById(body.id);
+        var img = document.getElementById(body.id);
 
         if (rotateDirection === "left") {
             rotateAngle -= 5;
@@ -309,7 +384,7 @@ var rotateAngle = 0;
             }
             console.log("angle", rotateAngle);
             screen.save();
-            screen.translate(x,y);
+            screen.translate(x, y);
             screen.rotate(rotateAngle * Math.PI / 180);
         } else if (rotateDirection === "right") {
             rotateAngle += 5;
@@ -319,15 +394,15 @@ var rotateAngle = 0;
             console.log("angle", rotateAngle);
 
             screen.save();
-            screen.translate(x,y);
+            screen.translate(x, y);
             screen.rotate(rotateAngle * Math.PI / 180);
         } else {
             screen.save();
-            screen.translate(x,y);
+            screen.translate(x, y);
             screen.rotate(rotateAngle * Math.PI / 180);
         }
 
-        screen.drawImage(img, -img.width/2, -img.height/2);
+        screen.drawImage(img, -img.width / 2, -img.height / 2);
 
         screen.restore();
 
