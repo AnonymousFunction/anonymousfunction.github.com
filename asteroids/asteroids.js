@@ -79,6 +79,25 @@ var rotateAngle = 0;
             if (self.shotRecharge > 0) {
                 self.shotRecharge--;
             }
+
+            // `notCollidingWithAnything` returns true if passed body
+            // is not colliding with anything.
+            var notCollidingWithAnything = function (b1) {
+                return self.bodies.filter(function (b2) {
+                    if ((b1 instanceof Ball && b2 instanceof Player) ||(b2 instanceof Ball && b1 instanceof Player)) {
+                        return false;
+                    }
+                    if (b1 instanceof Asteroid && b2 instanceof Asteroid) {
+                        return false;
+                    }
+                    return colliding(b1, b2);
+                }).length === 0;
+            };
+
+            // Throw away bodies that are colliding with something. They
+            // will never be updated or draw again.
+            this.bodies = this.bodies.filter(notCollidingWithAnything);
+
         },
 
         // **draw()** draws the game.
@@ -149,7 +168,7 @@ var rotateAngle = 0;
     Player.prototype = {
 
         draw: function (screen) {
-            var x = this.center.x + this.size.x / 2;
+            var x = this.center.x - this.size.x / 2;
             var y = this.center.y - this.size.y / 2;
 
             var img = document.getElementById(this.id);
@@ -307,7 +326,7 @@ var rotateAngle = 0;
     Asteroid.prototype = {
 
         draw: function (screen) {
-            var x = this.center.x + this.size.x / 2;
+            var x = this.center.x - this.size.x / 2;
             var y = this.center.y - this.size.y / 2;
 
             var img = document.getElementById(this.id);
@@ -356,7 +375,7 @@ var rotateAngle = 0;
         var MAX_VELOCITY = 5.0;
         var delta = 0;
 
-        this.center = {x: ship.center.x + ship.size.x / 2, y: ship.center.y - ship.size.y / 2};
+        this.center = {x: ship.center.x - ship.size.x / 2, y: ship.center.y - ship.size.y / 2};
         this.size = { x: 2, y: 2 };
         this.framesRemaining = 200;
 
@@ -481,45 +500,6 @@ var rotateAngle = 0;
     // Other functions
     // ---------------
 
-    // **drawRect()** draws passed body as a rectangle to `screen`, the drawing context.
-    var drawRect = function (screen, body) {
-        var x = body.center.x + body.size.x / 2;
-        var y = body.center.y - body.size.y / 2;
-
-        var img = document.getElementById(body.id);
-
-        if (rotateDirection === "left") {
-            rotateAngle -= 5;
-            if (rotateAngle < 0) {
-                rotateAngle += 360;
-            }
-            console.log("angle", rotateAngle);
-            screen.save();
-            screen.translate(x, y);
-            screen.rotate(rotateAngle * Math.PI / 180);
-        } else if (rotateDirection === "right") {
-            rotateAngle += 5;
-            if (rotateAngle > 360) {
-                rotateAngle -= 360;
-            }
-            console.log("angle", rotateAngle);
-
-            screen.save();
-            screen.translate(x, y);
-            screen.rotate(rotateAngle * Math.PI / 180);
-        } else {
-            screen.save();
-            screen.translate(x, y);
-            screen.rotate(rotateAngle * Math.PI / 180);
-        }
-
-        screen.drawImage(img, -img.width / 2, -img.height / 2);
-
-        screen.restore();
-
-        screen.fill();
-    };
-
     // **colliding()** returns true if two passed bodies are colliding.
     // The approach is to test for five situations.  If any are true,
     // the bodies are definitely not colliding.  If none of them
@@ -539,17 +519,6 @@ var rotateAngle = 0;
             );
 
         return isColliding;
-    };
-
-    var isSideHit = function (b1, b2) {
-        return b1.center.x + b1.size.x / 2 == b2.center.x - b2.size.x / 2 ||
-            b1.center.x - b1.size.x / 2 == b2.center.x + b2.size.x / 2;
-    };
-
-    var isTopBottomHit = function (b1, b2) {
-        return b1.center.y + b1.size.y / 2 == b2.center.y - b2.size.y / 2 ||
-            b1.center.y - b1.size.y / 2 == b2.center.y + b2.size.y / 2;
-
     };
 
     // Start game
