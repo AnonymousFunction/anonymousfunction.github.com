@@ -80,6 +80,8 @@ var rotateAngle = 0;
                 self.shotRecharge--;
             }
 
+            var hitAsteroids = [];
+
             // `notCollidingWithAnything` returns true if passed body
             // is not colliding with anything.
             var notCollidingWithAnything = function (b1) {
@@ -90,7 +92,30 @@ var rotateAngle = 0;
                     if (b1 instanceof Asteroid && b2 instanceof Asteroid) {
                         return false;
                     }
-                    return colliding(b1, b2);
+                    var isColliding = colliding(b1, b2);
+
+                    if (isColliding) {
+                        var hasAsteroid = false;
+                        for (var i = 0; i < hitAsteroids.length; i ++) {
+                            if (hitAsteroids[i] == b1 || hitAsteroids[i] == b2) {
+                                hasAsteroid = true;
+                            }
+                        }
+
+                        if (!hasAsteroid) {
+                            console.log("asteroid hit");
+
+                            if (b1 instanceof Asteroid) {
+                                hitAsteroids.push(b1);
+                            }
+
+                            if (b2 instanceof Asteroid) {
+                                hitAsteroids.push(b2);
+                            }
+                        }
+                    }
+
+                    return isColliding;
                 }).length === 0;
             };
 
@@ -98,6 +123,15 @@ var rotateAngle = 0;
             // will never be updated or draw again.
             this.bodies = this.bodies.filter(notCollidingWithAnything);
 
+            if (hitAsteroids.length) {
+                for (var i = 0; i < hitAsteroids.length; i++) {
+                    if (hitAsteroids[i].size.x === 32) {
+                        console.log("new Asteroids built");
+                        self.bodies.push(new Asteroid(self, 16, { x: hitAsteroids[i].center.x, y: hitAsteroids[i].center.y}, { x: -hitAsteroids[i].velocity.x * 2, y: -hitAsteroids[i].velocity.y * 2}));
+                        self.bodies.push(new Asteroid(self, 16, { x: hitAsteroids[i].center.x, y: hitAsteroids[i].center.y}, { x: hitAsteroids[i].velocity.x * 2, y: hitAsteroids[i].velocity.y * 2}));
+                    }
+                }
+            }
         },
 
         // **draw()** draws the game.
@@ -361,8 +395,8 @@ var rotateAngle = 0;
 
         asteroids.push(new Asteroid(game, 32, { x: 50, y: 200}, { x: 0.2, y: 0.2}));
         asteroids.push(new Asteroid(game, 32, { x: 300, y: 50}, { x: -0.2, y: 0.2}));
-        asteroids.push(new Asteroid(game, 16, { x: 50, y: 550}, { x: 0.4, y: -0.4}));
-        asteroids.push(new Asteroid(game, 16, { x: 400, y: 400}, { x: 0.4, y: -0.4}));
+        asteroids.push(new Asteroid(game, 32, { x: 50, y: 550}, { x: 0.2, y: -0.2}));
+        asteroids.push(new Asteroid(game, 32, { x: 400, y: 400}, { x: 0.2, y: -0.2}));
 
         return asteroids;
     };
