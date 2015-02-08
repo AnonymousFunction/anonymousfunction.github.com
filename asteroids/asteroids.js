@@ -299,7 +299,7 @@ var rotateAngle = 0;
 //        { x: this.velocity.x, y: this.velocity.y }
         this.center = {x: ship.center.x, y: ship.center.y};
         this.size = { x: 2, y: 2 };
-        this.velocity = {x: 2, y: 2};
+        this.velocity = {x: 3, y: 3};
         this.framesRemaining = 200;
     };
 
