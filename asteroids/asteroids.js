@@ -280,7 +280,7 @@ var rotateAngle = 0;
             // If Space key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || fingerDown) {
                 if (this.game.canShoot() && this.game.getBallCount() < 5) {
-                    var ball = new Ball(this, rotateAngle);
+                    var ball = new Ball(this);
 
                     this.game.ball = ball;
                     this.game.addBody(ball);
@@ -294,13 +294,60 @@ var rotateAngle = 0;
     // ------
 
     // **new Ball()** creates a new ball.
-    var Ball = function (ship, shipRotateAngle) {
-//        { x: this.center.x, y: this.center.y - this.size.y - 10 },
-//        { x: this.velocity.x, y: this.velocity.y }
+    var Ball = function (ship) {
+        var MAX_VELOCITY = 5.0;
+        var delta = 0;
+
         this.center = {x: ship.center.x + ship.size.x / 2, y: ship.center.y - ship.size.y / 2};
         this.size = { x: 2, y: 2 };
-        this.velocity = {x: 3, y: 3};
         this.framesRemaining = 200;
+
+        this.velocity = { x: 0, y: 0 };
+
+        if (rotateAngle === 0 || rotateAngle === 360) {
+            this.velocity.x += 0;
+        } else if (rotateAngle > 0 && rotateAngle < 90) {
+            delta = parseFloat(rotateAngle / 90 * MAX_VELOCITY);
+            this.velocity.x += delta;
+        } else if (rotateAngle === 90) {
+            this.velocity.x += MAX_VELOCITY;
+        } else if (rotateAngle > 90 && rotateAngle < 180) {
+            delta = parseFloat((90 - (rotateAngle - 90)) / 90 * MAX_VELOCITY);
+            this.velocity.x += delta;
+        } else if (rotateAngle === 180) {
+            this.velocity.x += 0;
+        } else if (rotateAngle > 180 && rotateAngle < 270) {
+            delta = parseFloat((rotateAngle - 180) / 90 * MAX_VELOCITY);
+            this.velocity.x -= delta;
+        } else if (rotateAngle === 270) {
+            this.velocity.x -= MAX_VELOCITY;
+        } else {
+            delta = parseFloat((180 - (rotateAngle - 180)) / 90 * MAX_VELOCITY);
+            this.velocity.x -= delta;
+        }
+
+        if (rotateAngle === 0 || rotateAngle === 360) {
+            this.velocity.y -= MAX_VELOCITY;
+        } else if (rotateAngle > 0 && rotateAngle < 90) {
+            delta = parseFloat((90 - rotateAngle) / 90 * MAX_VELOCITY);
+            this.velocity.y -= delta;
+        } else if (rotateAngle === 90) {
+            this.velocity.y -= 0;
+        } else if (rotateAngle > 90 && rotateAngle < 180) {
+            delta = parseFloat((rotateAngle - 90) / 90 * MAX_VELOCITY);
+            this.velocity.y += delta;
+        } else if (rotateAngle === 180) {
+            this.velocity.y += MAX_VELOCITY;
+        } else if (rotateAngle > 180 && rotateAngle < 270) {
+            delta = parseFloat((90 - (rotateAngle - 180)) / 90 * MAX_VELOCITY);
+            this.velocity.y += delta;
+        } else if (rotateAngle === 270) {
+            this.velocity.y -= 0;
+        } else {
+            delta = parseFloat((rotateAngle - 270) / 90 * MAX_VELOCITY);
+            this.velocity.y -= delta;
+        }
+
     };
 
     Ball.prototype = {
