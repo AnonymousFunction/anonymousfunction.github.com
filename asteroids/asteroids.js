@@ -297,7 +297,7 @@ var rotateAngle = 0;
     var Ball = function (ship, shipRotateAngle) {
 //        { x: this.center.x, y: this.center.y - this.size.y - 10 },
 //        { x: this.velocity.x, y: this.velocity.y }
-        this.center = {x: ship.center.x, y: ship.center.y};
+        this.center = {x: ship.center.x + ship.size.x / 2, y: ship.center.y - ship.size.y / 2};
         this.size = { x: 2, y: 2 };
         this.velocity = {x: 3, y: 3};
         this.framesRemaining = 200;
