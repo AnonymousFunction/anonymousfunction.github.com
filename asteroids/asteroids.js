@@ -66,7 +66,9 @@ var rotateAngle = 0;
         update: function () {
             var self = this;
 
-//            this.player.update();
+            self.bodies = self.bodies.filter(function (b1) {
+                return !(b1 instanceof Ball && b1.framesRemaining === 0);
+            });
 
             for (var i = 0; i < self.bodies.length; i++) {
                 self.bodies[i].update();
@@ -278,7 +280,7 @@ var rotateAngle = 0;
             // If Space key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || fingerDown) {
                 if (this.game.canShoot() && this.game.getBallCount() < 5) {
-                    var ball = new Ball(this.center, rotateAngle);
+                    var ball = new Ball(this, rotateAngle);
 
                     this.game.ball = ball;
                     this.game.addBody(ball);
@@ -292,12 +294,13 @@ var rotateAngle = 0;
     // ------
 
     // **new Ball()** creates a new ball.
-    var Ball = function (shipCenter, shipRotateAngle) {
+    var Ball = function (ship, shipRotateAngle) {
 //        { x: this.center.x, y: this.center.y - this.size.y - 10 },
 //        { x: this.velocity.x, y: this.velocity.y }
-        this.center = {x: shipCenter.x, y: shipCenter.y};
+        this.center = {x: ship.center.x, y: ship.center.y};
         this.size = { x: 2, y: 2 };
         this.velocity = {x: 2, y: 2};
+        this.framesRemaining = 200;
     };
 
     Ball.prototype = {
@@ -326,6 +329,8 @@ var rotateAngle = 0;
             } else if (this.center.y <= 2) {
                 this.center.y = 598;
             }
+
+            this.framesRemaining--;
         },
 
         flipX: function () {
