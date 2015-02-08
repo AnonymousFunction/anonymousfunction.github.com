@@ -340,7 +340,10 @@ var rotateAngle = 0;
     var createAsteroids = function (game) {
         var asteroids = [];
 
-        asteroids.push(new Asteroid(game, { x: 50, y: 50}, { x: 1, y: 1}));
+        asteroids.push(new Asteroid(game, { x: 50, y: 200}, { x: 0.2, y: 0.2}));
+        asteroids.push(new Asteroid(game, { x: 300, y: 50}, { x: -0.2, y: 0.2}));
+        asteroids.push(new Asteroid(game, { x: 50, y: 550}, { x: 0.2, y: -0.2}));
+        asteroids.push(new Asteroid(game, { x: 400, y: 400}, { x: 0.2, y: -0.2}));
 
         return asteroids;
     };
