@@ -30,6 +30,8 @@ var rotateAngle = 0;
         // Create the bodies array to hold the player and balls.
         this.bodies = [];
 
+        this.bodies = this.bodies.concat(createAsteroids(this));
+
 
         // Add the player to the bodies array.
         this.player = new Player(this, gameSize);
@@ -288,6 +290,46 @@ var rotateAngle = 0;
                 }
             }
         }
+    };
+
+    // Asteroids
+    // --------
+
+    // **new Asteroid()** creates an brick.
+    var Asteroid = function (game, center, velocity) {
+        this.game = game;
+        this.center = center;
+        this.id = "asteroid-32";
+        this.size = { x: 32, y: 32 };
+        this.velocity = velocity;
+    };
+
+    Asteroid.prototype = {
+
+        draw: function (screen) {
+            var x = this.center.x + this.size.x / 2;
+            var y = this.center.y - this.size.y / 2;
+
+            var img = document.getElementById(this.id);
+
+            screen.drawImage(img, x, y);
+
+        },
+
+        // **update()** updates the state of the brick for a single tick.
+        update: function () {
+            this.center.x += this.velocity.x;
+            this.center.y += this.velocity.y;
+
+        }
+    };
+
+    var createAsteroids = function (game) {
+        var asteroids = [];
+
+        asteroids.push(new Asteroid(game, { x: 50, y: 50}, { x: 1, y: 1}));
+
+        return asteroids;
     };
 
     // Ball
