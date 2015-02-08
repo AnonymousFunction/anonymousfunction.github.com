@@ -189,7 +189,8 @@ var rotateAngle = 0;
     // **new Player()** creates a player.
     var Player = function (game, gameSize) {
         this.game = game;
-        this.size = { x: 19, y: 25 };
+        this.size = { x: 5, y: 5 };
+//        this.size = { x: 19, y: 25 };
         this.color = "white";
         this.center = { x: gameSize.x / 2, y: gameSize.y / 2 };
         this.velocity = { x: 0, y: 0 };
