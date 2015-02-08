@@ -140,29 +140,54 @@ var rotateAngle = 0;
             }
             
             if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
-                if (rotateAngle > 0 && rotateAngle < 180) {
-                    delta = parseFloat(rotateAngle / 180 * BASE_VELOCITY_DELTA);
+                if (rotateAngle === 0 || rotateAngle === 360) {
+                    this.velocity.x += 0;
+                } else if (rotateAngle > 0 && rotateAngle < 90) {
+                    delta = parseFloat(rotateAngle / 90 * BASE_VELOCITY_DELTA);
                     this.velocity.x += delta;
-                } else if (rotateAngle > 180 && rotateAngle < 360) {
-                    delta = parseFloat((rotateAngle - 180) / 180 * BASE_VELOCITY_DELTA);
+                } else if (rotateAngle === 90) {
+                    this.velocity.x += BASE_VELOCITY_DELTA;
+                } else if (rotateAngle > 90 && rotateAngle < 180) {
+                    delta = parseFloat((90 - (rotateAngle - 90)) / 90 * BASE_VELOCITY_DELTA);
+                    this.velocity.x += delta;
+                } else if (rotateAngle === 180) {
+                    this.velocity.x += 0;
+                } else if (rotateAngle > 180 && rotateAngle < 270) {
+                    delta = parseFloat((rotateAngle - 180) / 90 * BASE_VELOCITY_DELTA);
                     this.velocity.x -= delta;
+                } else if (rotateAngle === 270) {
+                    this.velocity.x -= BASE_VELOCITY_DELTA;
+                } else {
+                    delta = parseFloat((180 - (rotateAngle - 180)) / 90 * BASE_VELOCITY_DELTA);
+                    this.velocity.x -= delta;
+                }
+
+                if (rotateAngle === 0 || rotateAngle === 360) {
+                    this.velocity.y -= BASE_VELOCITY_DELTA;
+                } else if (rotateAngle > 0 && rotateAngle < 90) {
+                    delta = parseFloat((90  - (rotateAngle - 90)) / 90 * BASE_VELOCITY_DELTA);
+                    this.velocity.y -= delta;
+                } else if (rotateAngle === 90) {
+                    this.velocity.y -= 0;
+                } else if (rotateAngle > 90 && rotateAngle < 180) {
+                    delta = parseFloat((rotateAngle - 90) / 90 * BASE_VELOCITY_DELTA);
+                    this.velocity.y += delta;
+                } else if (rotateAngle === 180) {
+                    this.velocity.y += BASE_VELOCITY_DELTA;
+                } else if (rotateAngle > 180 && rotateAngle < 270) {
+                    delta = parseFloat((90  - (rotateAngle - 180)) / 90 * BASE_VELOCITY_DELTA);
+                    this.velocity.y += delta;
+                } else if (rotateAngle === 270) {
+                    this.velocity.y -= 0;
+                } else {
+                    delta = parseFloat((rotateAngle - 270) / 90 * BASE_VELOCITY_DELTA);
+                    this.velocity.y -= delta;
                 }
 
                 if (this.velocity.x > MAX_VELOCITY) {
                     this.velocity.x = MAX_VELOCITY;
                 } else if (this.velocity.x < -MAX_VELOCITY) {
                     this.velocity.x = -MAX_VELOCITY;
-                }
-
-                if (rotateAngle > 90 && rotateAngle < 270) {
-                    delta = parseFloat((rotateAngle - 90) / 180 * BASE_VELOCITY_DELTA);
-                    this.velocity.y += delta;
-                } else if (rotateAngle > 270) {
-                    delta = parseFloat((rotateAngle - 270) / 180 * BASE_VELOCITY_DELTA);
-                    this.velocity.y -= delta;
-                } else if (rotateAngle < 90) {
-                    delta = parseFloat((rotateAngle + 270) / 180 * BASE_VELOCITY_DELTA);
-                    this.velocity.y -= delta;
                 }
 
                 if (this.velocity.y > MAX_VELOCITY) {
