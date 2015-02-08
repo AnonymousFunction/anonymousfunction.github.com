@@ -116,6 +116,7 @@ var rotateAngle = 0;
         this.color = "white";
         this.center = { x: gameSize.x / 2, y: gameSize.y / 2 };
         this.velocity = { x: 0, y: 0 };
+        this.id = "ship";
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -141,10 +142,10 @@ var rotateAngle = 0;
                     this.velocity.x -= 0.2;
                 }
 
-                if (this.velocity.x > 4.0) {
-                    this.velocity.x = 4.0;
-                } else if (this.velocity.x < -4.0) {
-                    this.velocity.x = -4.0;
+                if (this.velocity.x > 3.0) {
+                    this.velocity.x = 3.0;
+                } else if (this.velocity.x < -3.0) {
+                    this.velocity.x = -3.0;
                 }
 
                 if (rotateAngle > 90) {
@@ -153,11 +154,15 @@ var rotateAngle = 0;
                     this.velocity.y -= 0.2;
                 }
 
-                if (this.velocity.y > 4.0) {
-                    this.velocity.y = 4.0;
-                } else if (this.velocity.y < -4.0) {
-                    this.velocity.y = -4.0;
+                if (this.velocity.y > 3.0) {
+                    this.velocity.y = 3.0;
+                } else if (this.velocity.y < -3.0) {
+                    this.velocity.y = -3.0;
                 }
+
+                this.id = "ship-move";
+            } else {
+                this.id = "ship";
             }
 
             this.center.x += this.velocity.x;
@@ -259,7 +264,7 @@ var rotateAngle = 0;
         var x = body.center.x + body.size.x / 2;
         var y = body.center.y - body.size.y / 2;
 
-        var img=document.getElementById("ship");
+        var img=document.getElementById(body.id);
 
         if (rotateDirection === "left") {
             rotateAngle -= 5;
