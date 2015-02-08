@@ -319,7 +319,20 @@ var rotateAngle = 0;
         // **update()** updates the state of the brick for a single tick.
         update: function () {
             this.center.x += this.velocity.x;
+
+            if (this.center.x >= 598) {
+                this.center.x = 2;
+            } else if (this.center.x <= 2) {
+                this.center.x = 598;
+            }
+
             this.center.y += this.velocity.y;
+
+            if (this.center.y >= 598) {
+                this.center.y = 2;
+            } else if (this.center.y <= 2) {
+                this.center.y = 598;
+            }
 
         }
     };
