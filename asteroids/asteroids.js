@@ -223,7 +223,7 @@ var rotateAngle = 0;
                 if (rotateAngle === 0 || rotateAngle === 360) {
                     this.velocity.y -= BASE_VELOCITY_DELTA;
                 } else if (rotateAngle > 0 && rotateAngle < 90) {
-                    delta = parseFloat((90 - (rotateAngle - 90)) / 90 * BASE_VELOCITY_DELTA);
+                    delta = parseFloat((90 - rotateAngle) / 90 * BASE_VELOCITY_DELTA);
                     this.velocity.y -= delta;
                 } else if (rotateAngle === 90) {
                     this.velocity.y -= 0;
@@ -278,8 +278,7 @@ var rotateAngle = 0;
             // If Space key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || fingerDown) {
                 if (this.game.canShoot() && this.game.getBallCount() < 5) {
-                    var ball = new Ball({ x: this.center.x, y: this.center.y - this.size.y - 10 },
-                        { x: 2, y: -2 });
+                    var ball = new Ball(this.center, rotateAngle);
 
                     this.game.ball = ball;
                     this.game.addBody(ball);
@@ -293,10 +292,12 @@ var rotateAngle = 0;
     // ------
 
     // **new Ball()** creates a new ball.
-    var Ball = function (center, velocity) {
-        this.center = center;
+    var Ball = function (shipCenter, shipRotateAngle) {
+//        { x: this.center.x, y: this.center.y - this.size.y - 10 },
+//        { x: this.velocity.x, y: this.velocity.y }
+        this.center = {x: shipCenter.x, y: shipCenter.y};
         this.size = { x: 2, y: 2 };
-        this.velocity = velocity;
+        this.velocity = {x: 2, y: 2};
     };
 
     Ball.prototype = {
