@@ -126,6 +126,10 @@ var rotateAngle = 0;
 
         // **update()** updates the state of the player for a single tick.
         update: function () {
+            var MAX_VELOCITY = 3.0;
+            var BASE_VELOCITY_DELTA = 0.1;
+            var delta = 0;
+
             // If left cursor key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
                 rotateDirection = "left";
@@ -136,28 +140,35 @@ var rotateAngle = 0;
             }
             
             if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
-                if (rotateAngle < 180) {
-                    this.velocity.x += 0.2;
-                } else if (rotateAngle < 360) {
-                    this.velocity.x -= 0.2;
+                if (rotateAngle > 0 && rotateAngle < 180) {
+                    delta = parseFloat(rotateAngle / 180 * BASE_VELOCITY_DELTA);
+                    this.velocity.x += delta;
+                } else if (rotateAngle > 180 && rotateAngle < 360) {
+                    delta = parseFloat((rotateAngle - 180) / 180 * BASE_VELOCITY_DELTA);
+                    this.velocity.x -= delta;
                 }
 
-                if (this.velocity.x > 3.0) {
-                    this.velocity.x = 3.0;
-                } else if (this.velocity.x < -3.0) {
-                    this.velocity.x = -3.0;
+                if (this.velocity.x > MAX_VELOCITY) {
+                    this.velocity.x = MAX_VELOCITY;
+                } else if (this.velocity.x < -MAX_VELOCITY) {
+                    this.velocity.x = -MAX_VELOCITY;
                 }
 
-                if (rotateAngle > 90) {
-                    this.velocity.y += 0.2;
-                } else if (rotateAngle < 270) {
-                    this.velocity.y -= 0.2;
+                if (rotateAngle > 90 && rotateAngle < 270) {
+                    delta = parseFloat((rotateAngle - 90) / 180 * BASE_VELOCITY_DELTA);
+                    this.velocity.y += delta;
+                } else if (rotateAngle > 270) {
+                    delta = parseFloat((rotateAngle - 270) / 180 * BASE_VELOCITY_DELTA);
+                    this.velocity.y -= delta;
+                } else if (rotateAngle < 90) {
+                    delta = parseFloat((rotateAngle + 270) / 180 * BASE_VELOCITY_DELTA);
+                    this.velocity.y -= delta;
                 }
 
-                if (this.velocity.y > 3.0) {
-                    this.velocity.y = 3.0;
-                } else if (this.velocity.y < -3.0) {
-                    this.velocity.y = -3.0;
+                if (this.velocity.y > MAX_VELOCITY) {
+                    this.velocity.y = MAX_VELOCITY;
+                } else if (this.velocity.y < -MAX_VELOCITY) {
+                    this.velocity.y = -MAX_VELOCITY;
                 }
 
                 this.id = "ship-move";
