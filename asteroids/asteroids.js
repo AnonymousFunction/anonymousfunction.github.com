@@ -315,11 +315,11 @@ var rotateAngle = 0;
     // --------
 
     // **new Asteroid()** creates an brick.
-    var Asteroid = function (game, center, velocity) {
+    var Asteroid = function (game, size, center, velocity) {
         this.game = game;
         this.center = center;
-        this.id = "asteroid-32";
-        this.size = { x: 32, y: 32 };
+        this.id = "asteroid-" + size;
+        this.size = { x: size, y: size };
         this.velocity = velocity;
     };
 
@@ -359,10 +359,10 @@ var rotateAngle = 0;
     var createAsteroids = function (game) {
         var asteroids = [];
 
-        asteroids.push(new Asteroid(game, { x: 50, y: 200}, { x: 0.2, y: 0.2}));
-        asteroids.push(new Asteroid(game, { x: 300, y: 50}, { x: -0.2, y: 0.2}));
-        asteroids.push(new Asteroid(game, { x: 50, y: 550}, { x: 0.2, y: -0.2}));
-        asteroids.push(new Asteroid(game, { x: 400, y: 400}, { x: 0.2, y: -0.2}));
+        asteroids.push(new Asteroid(game, 32, { x: 50, y: 200}, { x: 0.2, y: 0.2}));
+        asteroids.push(new Asteroid(game, 32, { x: 300, y: 50}, { x: -0.2, y: 0.2}));
+        asteroids.push(new Asteroid(game, 16, { x: 50, y: 550}, { x: 0.4, y: -0.4}));
+        asteroids.push(new Asteroid(game, 16, { x: 400, y: 400}, { x: 0.4, y: -0.4}));
 
         return asteroids;
     };
