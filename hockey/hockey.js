@@ -1,9 +1,3 @@
-var fingerDown = false;
-var fingerX = 300;
-
-var rotateDirection = "";
-var rotateAngle = 0;
-
 (function () {
 
     // Main game object
@@ -23,19 +17,12 @@ var rotateAngle = 0;
         // place game bodies.
         var gameSize = { x: canvas.width, y: canvas.height };
 
-        this.lives = 3;
-
-        this.score = 0;
-
         // Create the bodies array to hold the player and balls.
         this.bodies = [];
-
 
         // Add the player to the bodies array.
         this.player = new Player(this, gameSize);
         this.player2 = new Player2(this, gameSize);
-
-        this.shotRecharge = 0;
 
         this.bodies = this.bodies.concat(this.player);
         this.bodies = this.bodies.concat(this.player2);
@@ -250,10 +237,10 @@ var rotateAngle = 0;
         }
     };
     
-    // Player
+    // Player2
         // ------
 
-        // **new Player()** creates a player.
+        // **new Player2()** creates a player.
         var Player2 = function (game, gameSize) {
             this.game = game;
             this.size = { x: 55, y: 75 };
