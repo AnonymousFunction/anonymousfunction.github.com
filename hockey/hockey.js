@@ -108,6 +108,7 @@ var rotateAngle = 0;
         this.center = { x: gameSize.x / 2, y: gameSize.y / 2 };
         this.velocity = { x: 0, y: 0 };
         this.id = "player";
+        this.punchAnimate = 0;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -120,8 +121,6 @@ var rotateAngle = 0;
             var y = this.center.y - this.size.y / 2;
 
             var img = document.getElementById(this.id);
-
-
 
             screen.drawImage(img, x, y);
 
@@ -138,7 +137,6 @@ var rotateAngle = 0;
 
             // If left cursor key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
-            console.log("left")
                 this.velocity.x -= BASE_VELOCITY_DELTA;
                 
                 if (this.velocity.x < -MAX_VELOCITY) {
@@ -197,13 +195,28 @@ var rotateAngle = 0;
                         this.center.x = 599;
                     }
                 }
-            
-            
             }
 
             // If Space key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || fingerDown) {
+                if (this.punchAnimate === 0) {
+                    this.punchAnimate = 30;
+                } else if (this.punchAnimate > 0) {
+                    this.punchAnimate--;
+                }
+            } else {
+                if (this.punchAnimate > 0) {
+                    this.punchAnimate--;
+                }
+            }
+            
+
+            if (this.punchAnimate > 20 && this.punchAnimate <= 30) {
+                this.id = "player-ready";
+            } else if (this.punchAnimate >= 10 && this.punchAnimate <= 20) {
                 this.id = "player-high";
+            } else if (this.punchAnimate > 0 && this.punchAnimate < 10) {
+                this.id = "player-ready";
             } else {
                 this.id = "player";
             }
