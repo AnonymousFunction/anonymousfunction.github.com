@@ -109,6 +109,8 @@ var rotateAngle = 0;
         this.velocity = { x: 0, y: 0 };
         this.id = "player";
         this.punchAnimate = 0;
+        this.punchCooldown = 0;
+        this.punch = "";
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -197,16 +199,39 @@ var rotateAngle = 0;
                 }
             }
 
-            // If Space key is down...
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || fingerDown) {
-                if (this.punchAnimate === 0) {
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
+                if (this.punchCooldown === 0 && this.punchAnimate === 0) {
                     this.punchAnimate = 30;
-                } else if (this.punchAnimate > 0) {
-                    this.punchAnimate--;
+                    this.punchCooldown = 50;
+                    this.punch = "player-high";
+                } else {
+                    if (this.punchAnimate > 0) {
+                        this.punchAnimate--;
+                    }                    
+                    if (this.punchCooldown > 0) {
+                        this.punchCooldown--;
+                    }
+                }
+            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)) {
+                if (this.punchCooldown === 0 && this.punchAnimate === 0) {
+                    this.punchAnimate = 30;
+                    this.punchCooldown = 50;
+                    this.punch = "player-low";
+                } else {
+                    if (this.punchAnimate > 0) {
+                        this.punchAnimate--;
+                    }
+                    if (this.punchCooldown > 0) {
+                        this.punchCooldown--;
+                    }
                 }
             } else {
                 if (this.punchAnimate > 0) {
                     this.punchAnimate--;
+                }
+
+                if (this.punchCooldown > 0) {
+                    this.punchCooldown--;
                 }
             }
             
@@ -214,7 +239,7 @@ var rotateAngle = 0;
             if (this.punchAnimate > 20 && this.punchAnimate <= 30) {
                 this.id = "player-ready";
             } else if (this.punchAnimate >= 10 && this.punchAnimate <= 20) {
-                this.id = "player-high";
+                this.id = this.punch;
             } else if (this.punchAnimate > 0 && this.punchAnimate < 10) {
                 this.id = "player-ready";
             } else {
