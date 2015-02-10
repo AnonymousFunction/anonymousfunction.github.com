@@ -104,7 +104,7 @@ var rotateAngle = 0;
     // **new Player()** creates a player.
     var Player = function (game, gameSize) {
         this.game = game;
-        this.size = { x: 5, y: 5 };
+        this.size = { x: 55, y: 75 };
         this.center = { x: gameSize.x / 2, y: gameSize.y / 2 };
         this.velocity = { x: 0, y: 0 };
         this.id = "player";
@@ -120,7 +120,7 @@ var rotateAngle = 0;
 
         draw: function (screen) {
             var x = this.center.x - this.size.x / 2;
-            var y = this.center.y - this.size.y / 2;
+            var y = 150;
 
             var img = document.getElementById(this.id);
 
