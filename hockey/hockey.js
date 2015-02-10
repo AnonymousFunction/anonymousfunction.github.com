@@ -151,6 +151,7 @@
 
                 if (this.center.x + this.size.x / 2 > this.game.player2.center.x) {
                     this.velocity.x = 0;
+                    //TODO - don't return here, we need to continue the punch animation if they hold the key down
                     return;
                 }
 
