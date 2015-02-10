@@ -203,7 +203,7 @@ var rotateAngle = 0;
 
             // If Space key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || fingerDown) {
-                this.id = "player-high";
+                this.id = "player-low";
             } else {
                 this.id = "player";
             }
