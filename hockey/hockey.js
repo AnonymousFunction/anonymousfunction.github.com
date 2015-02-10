@@ -147,10 +147,10 @@ var rotateAngle = 0;
                 
                 this.center.x += this.velocity.x;
 
-                if (this.center.x > 600) {
-                    this.center.x = 1;
-                } else if (this.center.x < 0) {
-                    this.center.x = 599;
+                if (this.center.x > 550) {
+                    this.center.x = 550;
+                } else if (this.center.x < 50) {
+                    this.center.x = 50;
                 }
 
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
@@ -162,10 +162,10 @@ var rotateAngle = 0;
 
                 this.center.x += this.velocity.x;
 
-                if (this.center.x > 600) {
-                    this.center.x = 1;
-                } else if (this.center.x < 0) {
-                    this.center.x = 599;
+                if (this.center.x > 550) {
+                    this.center.x = 550;
+                } else if (this.center.x < 50) {
+                    this.center.x = 50;
                 }
             } else {
                 if (this.velocity.x > 0) {
@@ -177,10 +177,10 @@ var rotateAngle = 0;
 
                     this.center.x += this.velocity.x;
 
-                    if (this.center.x > 600) {
-                        this.center.x = 1;
-                    } else if (this.center.x < 0) {
-                        this.center.x = 599;
+                    if (this.center.x > 550) {
+                        this.center.x = 550;
+                    } else if (this.center.x < 50) {
+                        this.center.x = 50;
                     }
                 } else if (this.velocity.x < 0) {
                     this.velocity.x += .1;
@@ -191,10 +191,10 @@ var rotateAngle = 0;
 
                     this.center.x += this.velocity.x;
 
-                    if (this.center.x > 600) {
-                        this.center.x = 1;
-                    } else if (this.center.x < 0) {
-                        this.center.x = 599;
+                    if (this.center.x > 550) {
+                        this.center.x = 550;
+                    } else if (this.center.x < 50) {
+                        this.center.x = 50;
                     }
                 }
             }
