@@ -127,7 +127,7 @@
             var delta = 0;
 
             // If left cursor key is down...
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.A)) {
+            movement: if (this.keyboarder.isDown(this.keyboarder.KEYS.A)) {
                 this.velocity.x -= BASE_VELOCITY_DELTA;
                 
                 if (this.velocity.x < -MAX_VELOCITY) {
@@ -151,8 +151,7 @@
 
                 if (this.center.x + this.size.x / 2 > this.game.player2.center.x) {
                     this.velocity.x = 0;
-                    //TODO - don't return here, we need to continue the punch animation if they hold the key down
-                    return;
+                    break movement;
                 }
 
                 this.center.x += this.velocity.x;
@@ -172,7 +171,7 @@
 
                     if (this.center.x + this.size.x / 2 > this.game.player2.center.x) {
                         this.velocity.x = 0;
-                        return;
+                        break movement;
                     }
 
                     this.center.x += this.velocity.x;
@@ -288,7 +287,7 @@
                 var delta = 0;
 
                 // If left cursor key is down...
-                if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
+                movement: if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
                     this.velocity.x -= BASE_VELOCITY_DELTA;
 
                     if (this.velocity.x < -MAX_VELOCITY) {
@@ -297,7 +296,7 @@
 
                     if (this.center.x - this.size.x / 2 < this.game.player.center.x) {
                         this.velocity.x = 0;
-                        return;
+                        break movement;
                     }
 
                     this.center.x += this.velocity.x;
@@ -346,7 +345,7 @@
 
                         if (this.center.x - this.size.x / 2 < this.game.player.center.x) {
                             this.velocity.x = 0;
-                            return;
+                            break movement;
                         }
 
                         this.center.x += this.velocity.x;
