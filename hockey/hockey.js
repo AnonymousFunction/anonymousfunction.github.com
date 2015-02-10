@@ -33,10 +33,12 @@ var rotateAngle = 0;
 
         // Add the player to the bodies array.
         this.player = new Player(this, gameSize);
+        this.player2 = new Player2(this, gameSize);
 
         this.shotRecharge = 0;
 
         this.bodies = this.bodies.concat(this.player);
+        this.bodies = this.bodies.concat(this.player2);
 
         var self = this;
 
@@ -105,7 +107,7 @@ var rotateAngle = 0;
     var Player = function (game, gameSize) {
         this.game = game;
         this.size = { x: 55, y: 75 };
-        this.center = { x: gameSize.x / 2, y: gameSize.y / 2 };
+        this.center = { x: 200, y: gameSize.y / 2 };
         this.velocity = { x: 0, y: 0 };
         this.id = "player";
         this.punchAnimate = 0;
@@ -247,6 +249,156 @@ var rotateAngle = 0;
             }
         }
     };
+    
+    // Player
+        // ------
+
+        // **new Player()** creates a player.
+        var Player2 = function (game, gameSize) {
+            this.game = game;
+            this.size = { x: 55, y: 75 };
+            this.center = { x: 400, y: gameSize.y / 2 };
+            this.velocity = { x: 0, y: 0 };
+            this.id = "player-2";
+            this.punchAnimate = 0;
+            this.punchCooldown = 0;
+            this.punch = "";
+
+            // Create a keyboard object to track button presses.
+            this.keyboarder = new Keyboarder();
+        };
+
+        Player2.prototype = {
+
+            draw: function (screen) {
+                var x = this.center.x - this.size.x / 2;
+                var y = 150;
+
+                var img = document.getElementById(this.id);
+
+                screen.drawImage(img, x, y);
+
+                screen.restore();
+
+                screen.fill();
+            },
+
+            // **update()** updates the state of the player for a single tick.
+            update: function () {
+                var MAX_VELOCITY = 2.5;
+                var BASE_VELOCITY_DELTA = 0.5;
+                var delta = 0;
+
+                // If left cursor key is down...
+                if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
+                    this.velocity.x -= BASE_VELOCITY_DELTA;
+
+                    if (this.velocity.x < -MAX_VELOCITY) {
+                        this.velocity.x = -MAX_VELOCITY
+                    }
+
+                    this.center.x += this.velocity.x;
+
+                    if (this.center.x > 550) {
+                        this.center.x = 550;
+                    } else if (this.center.x < 50) {
+                        this.center.x = 50;
+                    }
+
+                } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
+                    this.velocity.x += BASE_VELOCITY_DELTA;
+
+                    if (this.velocity.x > MAX_VELOCITY) {
+                        this.velocity.x = MAX_VELOCITY
+                    }
+
+                    this.center.x += this.velocity.x;
+
+                    if (this.center.x > 550) {
+                        this.center.x = 550;
+                    } else if (this.center.x < 50) {
+                        this.center.x = 50;
+                    }
+                } else {
+                    if (this.velocity.x > 0) {
+                        this.velocity.x -= .1;
+
+                        if (this.velocity.x < 0) {
+                            this.velocity.x = 0;
+                        }
+
+                        this.center.x += this.velocity.x;
+
+                        if (this.center.x > 550) {
+                            this.center.x = 550;
+                        } else if (this.center.x < 50) {
+                            this.center.x = 50;
+                        }
+                    } else if (this.velocity.x < 0) {
+                        this.velocity.x += .1;
+
+                        if (this.velocity.x > 0) {
+                            this.velocity.x = 0;
+                        }
+
+                        this.center.x += this.velocity.x;
+
+                        if (this.center.x > 550) {
+                            this.center.x = 550;
+                        } else if (this.center.x < 50) {
+                            this.center.x = 50;
+                        }
+                    }
+                }
+
+                if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
+                    if (this.punchCooldown === 0 && this.punchAnimate === 0) {
+                        this.punchAnimate = 30;
+                        this.punchCooldown = 50;
+                        this.punch = "player-2-high";
+                    } else {
+                        if (this.punchAnimate > 0) {
+                            this.punchAnimate--;
+                        }
+                        if (this.punchCooldown > 0) {
+                            this.punchCooldown--;
+                        }
+                    }
+                } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)) {
+                    if (this.punchCooldown === 0 && this.punchAnimate === 0) {
+                        this.punchAnimate = 30;
+                        this.punchCooldown = 50;
+                        this.punch = "player-2-low";
+                    } else {
+                        if (this.punchAnimate > 0) {
+                            this.punchAnimate--;
+                        }
+                        if (this.punchCooldown > 0) {
+                            this.punchCooldown--;
+                        }
+                    }
+                } else {
+                    if (this.punchAnimate > 0) {
+                        this.punchAnimate--;
+                    }
+
+                    if (this.punchCooldown > 0) {
+                        this.punchCooldown--;
+                    }
+                }
+
+
+                if (this.punchAnimate > 20 && this.punchAnimate <= 30) {
+                    this.id = "player-2-ready";
+                } else if (this.punchAnimate >= 10 && this.punchAnimate <= 20) {
+                    this.id = this.punch;
+                } else if (this.punchAnimate > 0 && this.punchAnimate < 10) {
+                    this.id = "player-2-ready";
+                } else {
+                    this.id = "player-2";
+                }
+            }
+        };
 
 
     // Keyboard input tracking
