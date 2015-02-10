@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/jpg" href="cartridge.jpg">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>Hockey Fight</title>
+    <script src="/zelda/jquery.min.js"></script>
+    <script src="/zelda/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="hockey.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<style>
+    * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        -webkit-user-modify: none;
+        -webkit-highlight: none;
+        outline: none;
+    }
+    body {
+        height: 600px;
+        width: 600px;
+    }
+    html {
+        background-color: #1A1A1A;
+        width: 600px;
+    }
+    #hockey {
+        background-color: #82F7F6;
+    }
+    .text {
+        color: white;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 16px;
+        text-align: center;
+    }
+    /* jQuery Mobile Overrides*/
+    .ui-loader {
+        display: none;
+    }
+    .ui-page[style] {
+        height: 600px !important;
+        min-height: 600px !important;
+        overflow: hidden;
+        outline: none;
+    }
+</style>
+<canvas id="hockey" width="600" height="600"></canvas>
+<img src="player.gif" id="player"/>
+<img src="player_ready.gif" id="player-ready"/>
+<img src="player_low.gif" id="player-low"/>
+<img src="player_high.gif" id="player-high"/>
+</body>
+</html>
