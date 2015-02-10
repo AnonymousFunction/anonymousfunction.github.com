@@ -127,7 +127,7 @@
             var delta = 0;
 
             // If left cursor key is down...
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.A)) {
                 this.velocity.x -= BASE_VELOCITY_DELTA;
                 
                 if (this.velocity.x < -MAX_VELOCITY) {
@@ -142,7 +142,7 @@
                     this.center.x = 50;
                 }
 
-            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
+            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.D)) {
                 this.velocity.x += BASE_VELOCITY_DELTA;
 
                 if (this.velocity.x > MAX_VELOCITY) {
@@ -188,7 +188,7 @@
                 }
             }
 
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.W)) {
                 if (this.punchCooldown === 0 && this.punchAnimate === 0) {
                     this.punchAnimate = 30;
                     this.punchCooldown = 50;
@@ -201,7 +201,7 @@
                         this.punchCooldown--;
                     }
                 }
-            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)) {
+            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.S)) {
                 if (this.punchCooldown === 0 && this.punchAnimate === 0) {
                     this.punchAnimate = 30;
                     this.punchCooldown = 50;
@@ -414,7 +414,7 @@
         };
 
         // Handy constants that give keyCodes human-readable names.
-        this.KEYS = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, SPACE: 32 };
+        this.KEYS = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, SPACE: 32, W: 87, S: 83, A: 65, D: 68 };
     };
 
     // Other functions
