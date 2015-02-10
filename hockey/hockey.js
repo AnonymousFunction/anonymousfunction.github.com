@@ -149,6 +149,11 @@
                     this.velocity.x = MAX_VELOCITY
                 }
 
+                if (this.center.x + this.size.x / 2 > this.game.player2.center.x) {
+                    this.velocity.x = 0;
+                    return;
+                }
+
                 this.center.x += this.velocity.x;
 
                 if (this.center.x > 550) {
@@ -162,6 +167,11 @@
 
                     if (this.velocity.x < 0) {
                         this.velocity.x = 0;
+                    }
+
+                    if (this.center.x + this.size.x / 2 > this.game.player2.center.x) {
+                        this.velocity.x = 0;
+                        return;
                     }
 
                     this.center.x += this.velocity.x;
@@ -284,6 +294,11 @@
                         this.velocity.x = -MAX_VELOCITY
                     }
 
+                    if (this.center.x - this.size.x / 2 < this.game.player.center.x) {
+                        this.velocity.x = 0;
+                        return;
+                    }
+
                     this.center.x += this.velocity.x;
 
                     if (this.center.x > 550) {
@@ -326,6 +341,11 @@
 
                         if (this.velocity.x > 0) {
                             this.velocity.x = 0;
+                        }
+
+                        if (this.center.x - this.size.x / 2 < this.game.player.center.x) {
+                            this.velocity.x = 0;
+                            return;
                         }
 
                         this.center.x += this.velocity.x;
