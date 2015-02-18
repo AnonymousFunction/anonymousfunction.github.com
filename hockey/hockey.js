@@ -100,6 +100,7 @@
         this.punchAnimate = 0;
         this.punchCooldown = 0;
         this.punch = "";
+        this.canLandPunch = false;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -149,7 +150,7 @@
                     this.velocity.x = MAX_VELOCITY
                 }
 
-                if (this.center.x + this.size.x / 2 > this.game.player2.center.x) {
+                if (this.center.x + this.size.x / 4 > this.game.player2.center.x) {
                     this.velocity.x = 0;
                     break movement;
                 }
@@ -169,7 +170,7 @@
                         this.velocity.x = 0;
                     }
 
-                    if (this.center.x + this.size.x / 2 > this.game.player2.center.x) {
+                    if (this.center.x + this.size.x / 4 > this.game.player2.center.x) {
                         this.velocity.x = 0;
                         break movement;
                     }
@@ -237,12 +238,16 @@
 
             if (this.punchAnimate > 20 && this.punchAnimate <= 30) {
                 this.id = "player-ready";
+                this.canLandPunch = false;
             } else if (this.punchAnimate >= 10 && this.punchAnimate <= 20) {
                 this.id = this.punch;
+                this.canLandPunch = this.punch === "player-high" ? "high" : "low";
             } else if (this.punchAnimate > 0 && this.punchAnimate < 10) {
                 this.id = "player-ready";
+                this.canLandPunch = false;
             } else {
                 this.id = "player";
+                this.canLandPunch = false;
             }
         }
     };
@@ -294,7 +299,7 @@
                         this.velocity.x = -MAX_VELOCITY
                     }
 
-                    if (this.center.x - this.size.x / 2 < this.game.player.center.x) {
+                    if (this.center.x - this.size.x / 4 < this.game.player.center.x) {
                         this.velocity.x = 0;
                         break movement;
                     }
@@ -343,7 +348,7 @@
                             this.velocity.x = 0;
                         }
 
-                        if (this.center.x - this.size.x / 2 < this.game.player.center.x) {
+                        if (this.center.x - this.size.x / 4 < this.game.player.center.x) {
                             this.velocity.x = 0;
                             break movement;
                         }
@@ -394,8 +399,9 @@
                     }
                 }
 
-
-                if (this.punchAnimate > 20 && this.punchAnimate <= 30) {
+                if (this.game.player.canLandPunch === "high") {
+                    this.id = "player-2-face-hit";
+                } else if (this.punchAnimate > 20 && this.punchAnimate <= 30) {
                     this.id = "player-2-ready";
                 } else if (this.punchAnimate >= 10 && this.punchAnimate <= 20) {
                     this.id = this.punch;
