@@ -399,7 +399,9 @@
                     }
                 }
 
-                if (this.game.player.canLandPunch === "high") {
+                var distanceBetweenPlayers = this.game.player2.center.x - this.game.player.center.x;
+
+                if (this.game.player.canLandPunch === "high" && distanceBetweenPlayers <= 30) {
                     this.id = "player-2-face-hit";
                 } else if (this.punchAnimate > 20 && this.punchAnimate <= 30) {
                     this.id = "player-2-ready";
