@@ -82,7 +82,6 @@
         },
         
         moveScreenUp: function(){
-            console.log("")
             var origMapTop = parseInt(this.viewport.css("background-position-y"));
 
             if (origMapTop < 0) {
