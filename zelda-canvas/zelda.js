@@ -52,6 +52,56 @@
         // **update()** runs the main game logic.
         update: function () {
             var self = this;
+            
+            if (this.screenTransitionTime) {
+                if (this.screenTransitionDir === "up") {
+                    var origMapTop = parseInt(this.viewport.css("background-position-y"));
+
+                    if (origMapTop < 0) {
+                        var newMapTop = origMapTop + 2;
+                        this.viewport.css("background-position-y", newMapTop + "px");
+
+                        this.player.center.y += 2;
+                    }
+
+                    this.screenTransitionTime -= 2;
+                } else if (this.screenTransitionDir === "down") {
+                   var origMapTop = parseInt(this.viewport.css("background-position-y"));
+
+                    if (origMapTop > -1232) {
+                        var newMapTop = origMapTop - 2;
+                        this.viewport.css("background-position-y", newMapTop + "px");
+
+                        this.player.center.y -= 2;
+                    }
+
+                   this.screenTransitionTime -= 2;
+                } else if (this.screenTransitionDir === "left") {
+                    var origMapLeft = parseInt(this.viewport.css("background-position-x"));
+
+                    if (origMapLeft < 0) {
+                        var newMapLeft = origMapLeft + 2;
+                        this.viewport.css("background-position-x", newMapLeft + "px");
+
+                        this.player.center.x += 2;
+                    }
+
+                    this.screenTransitionTime -= 2;
+                } else if (this.screenTransitionDir === "right") {
+                    var origMapLeft = parseInt(this.viewport.css("background-position-x"));
+
+                    if (origMapLeft > -3840) {
+                        var newMapLeft = origMapLeft - 2;
+                        this.viewport.css("background-position-x", newMapLeft + "px");
+
+                        this.player.center.x -= 2;
+                    }
+
+                    this.screenTransitionTime -= 2;
+                }
+
+                return;
+            }
 
             for (var i = 0; i < self.bodies.length; i++) {
                 self.bodies[i].update();
@@ -82,47 +132,23 @@
         },
         
         moveScreenUp: function(){
-            var origMapTop = parseInt(this.viewport.css("background-position-y"));
-
-            if (origMapTop < 0) {
-                var newMapTop = origMapTop + 176;
-                this.viewport.css("background-position-y", newMapTop + "px");
-
-                this.player.center.y = 176;
-            }
+            this.screenTransitionTime = 176;
+            this.screenTransitionDir = "up";
         },
         
         moveScreenDown: function(){
-            var origMapTop = parseInt(this.viewport.css("background-position-y"));
-
-            if (origMapTop > -1232) {
-                var newMapTop = origMapTop - 176;
-                this.viewport.css("background-position-y", newMapTop + "px");
-
-                this.player.center.y = 0;
-            }
+            this.screenTransitionTime = 176;
+            this.screenTransitionDir = "down";
         },
                 
         moveScreenLeft: function(){
-            var origMapLeft = parseInt(this.viewport.css("background-position-x"));
-            
-            if (origMapLeft < 0) {
-                var newMapLeft = origMapLeft + 256;
-                this.viewport.css("background-position-x", newMapLeft + "px");
-                
-                this.player.center.x = 256;
-            }
+            this.screenTransitionTime = 256;
+            this.screenTransitionDir = "left";
         },      
           
         moveScreenRight: function(){
-            var origMapLeft = parseInt(this.viewport.css("background-position-x"));
-
-            if (origMapLeft > -3840) {
-                var newMapLeft = origMapLeft - 256;
-                this.viewport.css("background-position-x", newMapLeft + "px");
-
-                this.player.center.x = 0;
-            }
+            this.screenTransitionTime = 256;
+            this.screenTransitionDir = "right";
         }
     };
 
