@@ -9,6 +9,8 @@
         // In index.html, there is a canvas tag that the game will be drawn in.
         // Grab that canvas out of the DOM.
         var canvas = document.getElementById("zelda");
+        
+        this.viewport = $("#zelda");
 
         // Get the drawing context.  This contains functions that let you draw to the canvas.
         var screen = canvas.getContext('2d');
@@ -77,6 +79,50 @@
         // **addBody()** adds a body to the bodies array.
         addBody: function (body) {
             this.bodies.push(body);
+        },
+        
+        moveScreenUp: function(){
+            var origMapTop = parseInt(this.viewport.css("background-position-y"));
+
+            if (origMapTop < 0) {
+                var newMapTop = origMapTop + 176;
+                this.viewport.css("background-position-y", newMapTop + "px");
+
+                this.player.center.y = 176;
+            }
+        },
+        
+        moveScreenDown: function(){
+            var origMapTop = parseInt(this.viewport.css("background-position-y"));
+
+            if (origMapTop > -1232) {
+                var newMapTop = origMapTop - 176;
+                this.viewport.css("background-position-y", newMapTop + "px");
+
+                this.player.center.y = 0;
+            }
+        },
+                
+        moveScreenLeft: function(){
+            var origMapLeft = parseInt(this.viewport.css("background-position-x"));
+            
+            if (origMapLeft < 0) {
+                var newMapLeft = origMapLeft + 256;
+                this.viewport.css("background-position-x", newMapLeft + "px");
+                
+                this.player.center.x = 256;
+            }
+        },      
+          
+        moveScreenRight: function(){
+            var origMapLeft = parseInt(this.viewport.css("background-position-x"));
+
+            if (origMapLeft > -3840) {
+                var newMapLeft = origMapLeft - 256;
+                this.viewport.css("background-position-x", newMapLeft + "px");
+
+                this.player.center.x = 0;
+            }
         }
     };
 
@@ -90,6 +136,7 @@
         this.size = { x: 16, y: 16 };
         this.color = "#0088FF";
         this.center = { x: gameSize.x / 2, y: gameSize.y - this.size.y * 10 };
+        this.moveRate = 5;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -110,19 +157,27 @@
         update: function () {
             if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
                 if (this.center.y > 0) {
-                    this.center.y -= 1;
+                    this.center.y -= this.moveRate;
+                } else {
+                    this.game.moveScreenUp();
                 }
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)) {
-                if (this.center.y < 256) {
-                    this.center.y += 1;
+                if (this.center.y < 176) {
+                    this.center.y += this.moveRate;
+                } else {
+                    this.game.moveScreenDown();
                 }
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
                 if (this.center.x > 0) {
-                    this.center.x -= 1;
+                    this.center.x -= this.moveRate;
+                } else {
+                    this.game.moveScreenLeft();
                 }
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
                 if (this.center.x < 256) {
-                    this.center.x += 1;
+                    this.center.x += this.moveRate;
+                } else {
+                    this.game.moveScreenRight();
                 }
             }
 
