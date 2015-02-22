@@ -138,7 +138,7 @@
         this.center = { x: gameSize.x / 2, y: gameSize.y - this.size.y * 10 };
         this.moveRate = 1.3;
         this.spriteChangeCount = 0;
-        this.spriteCooldown = 5;
+        this.spriteCooldown = 6;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
