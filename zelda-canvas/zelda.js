@@ -131,12 +131,12 @@
 
     // **new Player()** creates a player.
     var Player = function (game, gameSize) {
-        this.id = "link";
+        this.id = "link-down-1";
         this.game = game;
         this.size = { x: 16, y: 16 };
         this.color = "#0088FF";
         this.center = { x: gameSize.x / 2, y: gameSize.y - this.size.y * 10 };
-        this.moveRate = 5;
+        this.moveRate = 2;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -156,24 +156,28 @@
         // **update()** updates the state of the player for a single tick.
         update: function () {
             if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
+                this.id = this.id === "link-up-2" ? "link-up-1" : "link-up-2";
                 if (this.center.y > 0) {
                     this.center.y -= this.moveRate;
                 } else {
                     this.game.moveScreenUp();
                 }
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)) {
+                this.id = this.id === "link-down-2" ? "link-down-1" : "link-down-2";
                 if (this.center.y < 176) {
                     this.center.y += this.moveRate;
                 } else {
                     this.game.moveScreenDown();
                 }
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
+                this.id = this.id === "link-left-2" ? "link-left-1" : "link-left-2";
                 if (this.center.x > 0) {
                     this.center.x -= this.moveRate;
                 } else {
                     this.game.moveScreenLeft();
                 }
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
+                this.id = this.id === "link-right-2" ? "link-right-1" : "link-right-2";
                 if (this.center.x < 256) {
                     this.center.x += this.moveRate;
                 } else {
