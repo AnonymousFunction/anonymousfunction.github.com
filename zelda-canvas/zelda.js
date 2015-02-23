@@ -6,26 +6,20 @@
     // **new Game()** Creates the game object with the game state and logic.
     var Game = function () {
 
-        // In index.html, there is a canvas tag that the game will be drawn in.
-        // Grab that canvas out of the DOM.
         var canvas = document.getElementById("zelda");
-        
         this.viewport = $("#zelda");
 
-        // Get the drawing context.  This contains functions that let you draw to the canvas.
         var screen = canvas.getContext('2d');
 
-        // Note down the dimensions of the canvas.  These are used to
-        // place game bodies.
         var gameSize = { x: canvas.width, y: canvas.height };
 
-        // Create the bodies array to hold the player, bricks and balls.
         this.bodies = [];
 
-        // Add the player to the bodies array.
         this.player = new Player(this, gameSize);
 
         this.bodies = this.bodies.concat(this.player);
+
+        this.map =  { x: 7, y: 7 };
 
         var self = this;
 
@@ -115,6 +109,9 @@
             $("#link-x-square").text(parseInt(Number(this.player.center.x).toFixed(0) / 16));
             $("#link-y-square").text(parseInt(Number(this.player.center.y).toFixed(0) / 16));
 
+            $("#map-x").text(this.map.x);
+            $("#map-y").text(this.map.y);
+
         },
 
         // **draw()** draws the game.
@@ -142,21 +139,25 @@
         moveScreenUp: function(){
             this.screenTransitionTime = 176;
             this.screenTransitionDir = "up";
+            this.map.y--;
         },
         
         moveScreenDown: function(){
             this.screenTransitionTime = 176;
             this.screenTransitionDir = "down";
+            this.map.y++;
         },
                 
         moveScreenLeft: function(){
             this.screenTransitionTime = 256;
             this.screenTransitionDir = "left";
+            this.map.x--;
         },      
           
         moveScreenRight: function(){
             this.screenTransitionTime = 256;
             this.screenTransitionDir = "right";
+            this.map.x++;
         }
     };
 
