@@ -112,8 +112,8 @@
             $("#link-x").text(Number(this.player.center.x).toFixed(2));
             $("#link-y").text(Number(this.player.center.y).toFixed(2));
 
-            $("#link-x-square").text(Number(Number(this.player.center.x).toFixed(0) / 16).toFixed(0));
-            $("#link-y-square").text(Number(Number(this.player.center.y).toFixed(0) / 16).toFixed(0));
+            $("#link-x-square").text(parseInt(Number(this.player.center.x).toFixed(0) / 16));
+            $("#link-y-square").text(parseInt(Number(this.player.center.y).toFixed(0) / 16));
 
         },
 
@@ -165,11 +165,11 @@
 
     // **new Player()** creates a player.
     var Player = function (game, gameSize) {
-        this.id = "link-down-1";
+        this.id = "link-up-1";
         this.game = game;
         this.size = { x: 16, y: 16 };
         this.color = "#0088FF";
-        this.center = { x: gameSize.x / 2, y: gameSize.y - this.size.y * 10 };
+        this.center = { x: gameSize.x / 2, y: gameSize.y / 2 };
         this.moveRate = 1.3;
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
@@ -181,12 +181,14 @@
     Player.prototype = {
     
         draw: function(screen){
-            var x = this.center.x - this.size.x / 2;
-            var y = this.center.y - this.size.y / 2;
+            var x = this.center.x;
+            var y = this.center.y;
 
             var img = document.getElementById(this.id);
 
-            screen.drawImage(img, x, y);
+            screen.drawImage(img, x - this.size.x / 2, y - this.size.y /2);
+            screen.fillStyle = "#0000FF";
+            screen.fillRect(x, y, 2, 2);
         },
 
         // **update()** updates the state of the player for a single tick.
