@@ -21,6 +21,8 @@
 
         this.map =  { x: 7, y: 7 };
 
+        this.movementMap = getCurrentMap(this.map.x, this.map.y);
+
         var self = this;
 
         // Main game tick function.  Loops forever, running 60ish times a second.
@@ -106,8 +108,8 @@
             $("#link-x").text(Number(this.player.center.x).toFixed(2));
             $("#link-y").text(Number(this.player.center.y).toFixed(2));
 
-            $("#link-x-square").text(parseInt(Number(this.player.center.x).toFixed(0) / 16));
-            $("#link-y-square").text(parseInt(Number(this.player.center.y).toFixed(0) / 16));
+            $("#link-x-square").text(this.player.tile.x);
+            $("#link-y-square").text(this.player.tile.y);
 
             $("#map-x").text(this.map.x);
             $("#map-y").text(this.map.y);
@@ -140,24 +142,28 @@
             this.screenTransitionTime = 176;
             this.screenTransitionDir = "up";
             this.map.y--;
+            this.movementMap = getCurrentMap(this.map.x, this.map.y);
         },
         
         moveScreenDown: function(){
             this.screenTransitionTime = 176;
             this.screenTransitionDir = "down";
             this.map.y++;
+            this.movementMap = getCurrentMap(this.map.x, this.map.y);
         },
                 
         moveScreenLeft: function(){
             this.screenTransitionTime = 256;
             this.screenTransitionDir = "left";
             this.map.x--;
+            this.movementMap = getCurrentMap(this.map.x, this.map.y);
         },      
           
         moveScreenRight: function(){
             this.screenTransitionTime = 256;
             this.screenTransitionDir = "right";
             this.map.x++;
+            this.movementMap = getCurrentMap(this.map.x, this.map.y);
         }
     };
 
@@ -171,6 +177,7 @@
         this.size = { x: 16, y: 16 };
         this.color = "#0088FF";
         this.center = { x: gameSize.x / 2, y: gameSize.y / 2 };
+        this.tile = {x: 8, y: 5};
         this.moveRate = 1.3;
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
@@ -247,6 +254,9 @@
                     this.game.moveScreenRight();
                 }
             }
+
+            this.tile.x = parseInt(Number(this.center.x).toFixed(0) / 16);
+            this.tile.y = parseInt(Number(this.center.y).toFixed(0) / 16);
 
             // If Space key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
