@@ -107,6 +107,14 @@
                 self.bodies[i].update();
             }
 
+            /* DEBUG */
+
+            $("#link-x").text(Number(this.player.center.x).toFixed(2));
+            $("#link-y").text(Number(this.player.center.y).toFixed(2));
+
+            $("#link-x-square").text(Number(Number(this.player.center.x).toFixed(0) / 16).toFixed(0));
+            $("#link-y-square").text(Number(Number(this.player.center.y).toFixed(0) / 16).toFixed(0));
+
         },
 
         // **draw()** draws the game.
@@ -239,9 +247,7 @@
 
             // If Space key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
-                if (this.game.lives == 0) {
-                    return;
-                }
+
             }
         }
     };

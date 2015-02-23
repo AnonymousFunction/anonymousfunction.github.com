@@ -37,9 +37,21 @@
         /* 16 columns @ 256px = 16px per col */
         /* 11 rows @ 176px = 16px per row */
     }
+    #debug {
+        position: absolute;
+        top: 236px;
+        font-family: monospace;
+    }
 </style>
 <canvas id="menu" width="256" height="56"></canvas>
 <canvas id="zelda" width="256" height="176"></canvas>
+
+<div id="debug">
+    Link X: <span id="link-x"></span>
+    Link Y: <span id="link-y"></span><br/>
+    Link X Square: <span id="link-x-square"></span>
+    Link Y Square: <span id="link-y-square"></span>
+</div>
 
 <img id="link-up-1" src="/zelda/images/link/link_up/frame_000.gif" style="display: none;"/>
 <img id="link-up-2" src="/zelda/images/link/link_up/frame_001.gif" style="display: none;"/>
