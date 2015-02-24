@@ -197,6 +197,10 @@
             screen.drawImage(img, x - this.size.x / 2, y - this.size.y /2);
             screen.fillStyle = "#0000FF";
             screen.fillRect(x, y, 2, 2);
+            screen.fillRect(x - this.size.x / 2, y, 2, 2);
+            screen.fillRect(x + this.size.x / 2, y, 2, 2);
+            screen.fillRect(x - this.size.x / 2, y + this.size.y / 2, 2, 2);
+            screen.fillRect(x + this.size.x / 2, y + this.size.y / 2, 2, 2);
         },
 
         // **update()** updates the state of the player for a single tick.
@@ -210,6 +214,13 @@
                 }
                 
                 if (this.center.y > 0) {
+                    var newCenterY = this.center.y - this.moveRate;
+                    var newTileY = parseInt(Number(newCenterY).toFixed(0) / 16);
+
+                    if (this.game.movementMap[newTileY][this.tile.x] === 0) {
+                        return;
+                    }
+
                     this.center.y -= this.moveRate;
                 } else {
                     this.game.moveScreenUp();
@@ -223,6 +234,13 @@
                 }
                 
                 if (this.center.y < 176) {
+                    var newCenterY = this.center.y + this.size.y / 2 + this.moveRate;
+                    var newTileY = parseInt(Number(newCenterY).toFixed(0) / 16);
+
+                    if (this.game.movementMap[newTileY][this.tile.x] === 0) {
+                        return;
+                    }
+
                     this.center.y += this.moveRate;
                 } else {
                     this.game.moveScreenDown();
@@ -236,6 +254,13 @@
                 }
                             
                 if (this.center.x > 0) {
+                    var newCenterX = this.center.x - this.size.x / 2 + this.moveRate;
+                    var newTileX = parseInt(Number(newCenterX).toFixed(0) / 16);
+
+                    if (this.game.movementMap[this.tile.y][newTileX] === 0) {
+                        return;
+                    }
+
                     this.center.x -= this.moveRate;
                 } else {
                     this.game.moveScreenLeft();
@@ -249,6 +274,13 @@
                 }
             
                 if (this.center.x < 256) {
+                    var newCenterX = this.center.x + this.size.x / 2 + this.moveRate;
+                    var newTileX = parseInt(Number(newCenterX).toFixed(0) / 16);
+
+                    if (this.game.movementMap[this.tile.y][newTileX] === 0) {
+                        return;
+                    }
+
                     this.center.x += this.moveRate;
                 } else {
                     this.game.moveScreenRight();
