@@ -237,7 +237,7 @@
                     var newCenterY = this.center.y + this.size.y / 2 + this.moveRate;
                     var newTileY = parseInt(Number(newCenterY).toFixed(0) / 16);
 
-                    if (this.game.movementMap[newTileY][this.tile.x] === 0) {
+                    if (this.game.movementMap[newTileY] && this.game.movementMap[newTileY][this.tile.x] === 0) {
                         return;
                     }
 
