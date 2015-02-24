@@ -256,8 +256,10 @@
                 if (this.center.x > 0) {
                     var newCenterX = this.center.x - this.size.x / 2 + this.moveRate;
                     var newTileX = parseInt(Number(newCenterX).toFixed(0) / 16);
+                    var bottomY = this.center.y + this.size.y / 2;
+                    var bottomTileY = parseInt(Number(bottomY).toFixed(0) / 16);
 
-                    if (this.game.movementMap[this.tile.y][newTileX] === 0) {
+                    if (this.game.movementMap[this.tile.y][newTileX] === 0 || this.game.movementMap[bottomTileY][newTileX] === 0) {
                         return;
                     }
 
@@ -276,8 +278,10 @@
                 if (this.center.x < 256) {
                     var newCenterX = this.center.x + this.size.x / 2 + this.moveRate;
                     var newTileX = parseInt(Number(newCenterX).toFixed(0) / 16);
+                    var bottomY = this.center.y + this.size.y / 2;
+                    var bottomTileY = parseInt(Number(bottomY).toFixed(0) / 16);
 
-                    if (this.game.movementMap[this.tile.y][newTileX] === 0) {
+                    if (this.game.movementMap[this.tile.y][newTileX] === 0 || this.game.movementMap[bottomTileY][newTileX] === 0) {
                         return;
                     }
 
