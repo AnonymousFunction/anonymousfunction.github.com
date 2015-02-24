@@ -195,27 +195,26 @@
             var img = document.getElementById(this.id);
 
             screen.drawImage(img, x - this.size.x / 2, y - this.size.y /2);
-            screen.fillStyle = "black";
 
-            //Boundary dots
-            //center
-            screen.fillRect(x, y, 1, 1);
+            //center dot
+            //screen.fillStyle = "black";
+            //screen.fillRect(x, y, 1, 1);
 
             //up-down boundaries
-            screen.fillStyle = "red";
-            screen.fillRect(x - 4, y, 1, 1);
-            screen.fillRect(x + 4, y, 1, 1);
-            screen.fillRect(x - 4, y - this.size.y / 2, 1, 1);
-            screen.fillRect(x + 4, y - this.size.y / 2, 1, 1);
-            screen.fillRect(x - 4, y + this.size.y / 2, 1, 1);
-            screen.fillRect(x + 4, y + this.size.y / 2, 1, 1);
+            //screen.fillStyle = "red";
+            //screen.fillRect(x - 4, y, 1, 1);
+            //screen.fillRect(x + 4, y, 1, 1);
+            //screen.fillRect(x - 4, y - this.size.y / 2, 1, 1);
+            //screen.fillRect(x + 4, y - this.size.y / 2, 1, 1);
+            //screen.fillRect(x - 4, y + this.size.y / 2, 1, 1);
+            //screen.fillRect(x + 4, y + this.size.y / 2, 1, 1);
 
             //left-right boundaries
-            screen.fillStyle = "blue";
-            screen.fillRect(x - this.size.x / 2, y, 1, 1);
-            screen.fillRect(x + this.size.x / 2, y, 1, 1);
-            screen.fillRect(x - this.size.x / 2, y + this.size.y / 2, 1, 1);
-            screen.fillRect(x + this.size.x / 2, y + this.size.y / 2, 1, 1);
+            //screen.fillStyle = "blue";
+            //screen.fillRect(x - this.size.x / 2, y, 1, 1);
+            //screen.fillRect(x + this.size.x / 2, y, 1, 1);
+            //screen.fillRect(x - this.size.x / 2, y + this.size.y / 2, 1, 1);
+            //screen.fillRect(x + this.size.x / 2, y + this.size.y / 2, 1, 1);
         },
 
         // **update()** updates the state of the player for a single tick.
