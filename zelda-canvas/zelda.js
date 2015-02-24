@@ -203,12 +203,12 @@
 
             //up-down boundaries
             screen.fillStyle = "red";
-            screen.fillRect(x - this.size.x / 3, y, 1, 1);
-            screen.fillRect(x + this.size.x / 3, y, 1, 1);
-            screen.fillRect(x - this.size.x / 3, y - this.size.y / 2, 1, 1);
-            screen.fillRect(x + this.size.x / 3, y - this.size.y / 2, 1, 1);
-            screen.fillRect(x - this.size.x / 3, y + this.size.y / 2, 1, 1);
-            screen.fillRect(x + this.size.x / 3, y + this.size.y / 2, 1, 1);
+            screen.fillRect(x - 4, y, 1, 1);
+            screen.fillRect(x + 4, y, 1, 1);
+            screen.fillRect(x - 4, y - this.size.y / 2, 1, 1);
+            screen.fillRect(x + 4, y - this.size.y / 2, 1, 1);
+            screen.fillRect(x - 4, y + this.size.y / 2, 1, 1);
+            screen.fillRect(x + 4, y + this.size.y / 2, 1, 1);
 
             //left-right boundaries
             screen.fillStyle = "blue";
@@ -231,8 +231,13 @@
                 if (this.center.y > 0) {
                     var newCenterY = this.center.y - this.moveRate;
                     var newTileY = parseInt(Number(newCenterY).toFixed(0) / 16);
+                    var leftBoundary = this.center.x - 4;
+                    var leftBoundaryTile = parseInt(Number(leftBoundary).toFixed(0) / 16);
+                    var rightBoundary = this.center.x + 4;
+                    var rightBoundaryTile = parseInt(Number(rightBoundary).toFixed(0) / 16);
 
-                    if (this.game.movementMap[newTileY][this.tile.x] === 0) {
+
+                    if (this.game.movementMap[newTileY][leftBoundaryTile] === 0 || this.game.movementMap[newTileY][rightBoundaryTile] === 0) {
                         return;
                     }
 
@@ -251,8 +256,12 @@
                 if (this.center.y < 176) {
                     var newCenterY = this.center.y + this.size.y / 2 + this.moveRate;
                     var newTileY = parseInt(Number(newCenterY).toFixed(0) / 16);
+                    var leftBoundary = this.center.x - 4;
+                    var leftBoundaryTile = parseInt(Number(leftBoundary).toFixed(0) / 16);
+                    var rightBoundary = this.center.x + 4;
+                    var rightBoundaryTile = parseInt(Number(rightBoundary).toFixed(0) / 16);
 
-                    if (this.game.movementMap[newTileY] && this.game.movementMap[newTileY][this.tile.x] === 0) {
+                    if (this.game.movementMap[newTileY] && (this.game.movementMap[newTileY][leftBoundaryTile] === 0 || this.game.movementMap[newTileY][rightBoundaryTile] === 0)) {
                         return;
                     }
 
