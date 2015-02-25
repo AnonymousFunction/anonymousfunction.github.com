@@ -129,7 +129,7 @@
                 } else {
                     screen.fillStyle = "#FFFFFF";
                 }
-                
+
                 this.bodies[i].draw(screen);
             }
             
@@ -146,10 +146,13 @@
             menuScreen.fillRect(16 + (this.map.x * 4), 16 + (this.map.y * 4), 4, 4);
             
             var img = document.getElementById("hud-icons");
-            menuScreen.drawImage(img, 12, 86);           
+            menuScreen.drawImage(img, 86, 12, 18, 36);
              
             img = document.getElementById("b-a-boxes");
-            menuScreen.drawImage(img, 15, 118);
+            menuScreen.drawImage(img, 118, 15, 52, 32); 
+                        
+            img = document.getElementById("life-header");
+            menuScreen.drawImage(img, 173, 9, 68, 20);
         },
 
         // **addBody()** adds a body to the bodies array.
@@ -223,7 +226,6 @@
             var y = this.center.y;
 
             var img = document.getElementById(this.id);
-
             screen.drawImage(img, x - this.size.x / 2, y - this.size.y /2);
 
             //center dot
