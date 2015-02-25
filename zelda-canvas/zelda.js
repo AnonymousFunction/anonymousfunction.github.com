@@ -137,6 +137,8 @@
         },
         
         drawMenu: function(menuScreen) {
+            menuScreen.clearRect(0, 0, 256, 56);
+
             //Gray background
             menuScreen.fillStyle = "#616161";
             menuScreen.fillRect(16, 16, 64, 32);
@@ -153,6 +155,12 @@
                         
             img = document.getElementById("life-header");
             menuScreen.drawImage(img, 173, 9, 68, 20);
+            
+            menuScreen.fillStyle = "white";
+            menuScreen.font = "8px 'Press Start 2P";
+            menuScreen.fillText("255", 96, 24);
+            menuScreen.fillText("X0", 96, 40);
+            menuScreen.fillText("X0", 96, 48);
         },
 
         // **addBody()** adds a body to the bodies array.
