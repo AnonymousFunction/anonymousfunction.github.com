@@ -10,6 +10,7 @@
         this.viewport = $("#zelda");
 
         var screen = canvas.getContext('2d');
+        var menuScreen = document.getElementById("menu").getContext("2d");
 
         var gameSize = { x: canvas.width, y: canvas.height };
 
@@ -32,7 +33,7 @@
             self.update();
 
             // Draw game bodies.
-            self.draw(screen, gameSize);
+            self.draw(screen, menuScreen, gameSize);
 
             // Queue up the next call to tick with the browser.
             requestAnimationFrame(tick);
@@ -102,7 +103,7 @@
             for (var i = 0; i < self.bodies.length; i++) {
                 self.bodies[i].update();
             }
-
+            
             /* DEBUG */
 
             $("#link-x").text(Number(this.player.center.x).toFixed(2));
@@ -117,7 +118,7 @@
         },
 
         // **draw()** draws the game.
-        draw: function (screen, gameSize) {
+        draw: function (screen, menuScreen, gameSize) {
             // Clear away the drawing from the previous tick.
             screen.clearRect(0, 0, gameSize.x, gameSize.y);
 
@@ -131,6 +132,16 @@
                 
                 this.bodies[i].draw(screen);
             }
+            
+            this.drawMiniMap(menuScreen);
+        },
+        
+        drawMiniMap: function(menuScreen) {
+            menuScreen.fillStyle = "#616161";
+            menuScreen.fillRect(16, 16, 64, 32);            
+            
+            menuScreen.fillStyle = "#71D200;";
+            menuScreen.fillRect(16 + (this.map.x * 4), 16 + (this.map.y * 4), 4, 4);
         },
 
         // **addBody()** adds a body to the bodies array.
@@ -164,6 +175,17 @@
             this.screenTransitionDir = "right";
             this.map.x++;
             this.movementMap = getCurrentMap(this.map.x, this.map.y);
+        },
+
+        enterCave: function(){
+            console.log("cave");
+            
+            this.viewport.css("background", "url('/zelda/images/cave_map.png')");
+            this.movementMap = getCaveMap();
+            
+            this.player.center.x = 128;
+            this.player.center.y = 160;
+
         }
     };
 
@@ -239,8 +261,13 @@
                     if (this.game.movementMap[newTileY][leftBoundaryTile] === 0 || this.game.movementMap[newTileY][rightBoundaryTile] === 0) {
                         return;
                     }
-
+                    
                     this.center.y -= this.moveRate;
+                    
+                    var newTileX = parseInt(Number(this.center.x).toFixed(0) / 16);
+                    if (this.game.movementMap[newTileY][newTileX] === 2) {
+                        this.game.enterCave();
+                    }
                 } else {
                     this.game.moveScreenUp();
                 }

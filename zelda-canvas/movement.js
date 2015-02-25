@@ -1606,7 +1606,7 @@ var m141 =  [
     [0,0,0,0,0,1,0,0,0,0,1,1,1,1,1,1],
     [0,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1],
     [1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1],
-    [1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     [0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
     [0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
     [0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1],
@@ -1838,4 +1838,8 @@ var movementMap = [
 var getCurrentMap = function(x, y){
     //backwards because I'm treating the first index as down the screen/map to make it more readable
     return movementMap[y][x];
+};
+
+var getCaveMap = function(){
+    return m_cave;
 };
