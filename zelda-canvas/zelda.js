@@ -133,15 +133,23 @@
                 this.bodies[i].draw(screen);
             }
             
-            this.drawMiniMap(menuScreen);
+            this.drawMenu(menuScreen);
         },
         
-        drawMiniMap: function(menuScreen) {
+        drawMenu: function(menuScreen) {
+            //Gray background
             menuScreen.fillStyle = "#616161";
-            menuScreen.fillRect(16, 16, 64, 32);            
-            
+            menuScreen.fillRect(16, 16, 64, 32);
+
+            //Beacon
             menuScreen.fillStyle = "#71D200;";
             menuScreen.fillRect(16 + (this.map.x * 4), 16 + (this.map.y * 4), 4, 4);
+            
+            var img = document.getElementById("hud-icons");
+            menuScreen.drawImage(img, 12, 86);           
+             
+            img = document.getElementById("b-a-boxes");
+            menuScreen.drawImage(img, 15, 118);
         },
 
         // **addBody()** adds a body to the bodies array.
