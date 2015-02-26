@@ -423,7 +423,8 @@
         }
         
         $("#controller").mousedown(function(e){
-        alert("1");
+        alert("x " + e.pageX);
+        alert("y " + e.pageY);
             console.log("e.pageX", e.pageX, "e.pageY", e.pageY);
             if (e.pageX >= 40 && e.pageX <= 74 && e.pageY >= 240 && e.pageY <= 276) {
                 TOUCH.UP = true;
