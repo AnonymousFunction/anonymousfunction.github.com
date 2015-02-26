@@ -279,7 +279,7 @@
             
             
             // If Space key is down...
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) && this.swordTimer === 0 && this.swordWait === 0 && this.swordRelease) {
+            if ((this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || TOUCH.A) && this.swordTimer === 0 && this.swordWait === 0 && this.swordRelease) {
                 if (this.id.indexOf("up") > -1) {
                     this.id = "sword-up";
                     this.center.y -= 12;
@@ -466,9 +466,9 @@
         $("#controller").on("touchstart", function(e){
             var x = e.originalEvent.touches[0].pageX;
             var y = e.originalEvent.touches[0].pageY;
-            
+
             console.log("x", x, "y", y);
-            
+
             if (x >= 40 && x <= 74 && y >= 240 && y <= 276) {
                 TOUCH.UP = true;
             } else if (x >= 40 && x <= 74 && y >= 307 && y <= 340) {
@@ -477,11 +477,15 @@
                 TOUCH.LEFT = true;
             } else if (x >= 74 && x <= 104 && y >= 274 && y <= 308) {
                 TOUCH.RIGHT = true;
+            } else if (x >= 167 && x <= 203 && y >= 270 && y <= 308) {
+                TOUCH.B = true;
+            } else if (x >= 212 && x <= 248 && y >= 270 && y <= 308) {
+                TOUCH.A = true;
             }
         });
         
         $("#controller").on("touchend", function(){
-            TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false };
+            TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false, B: false, A: false };
         });
     });
 })();
