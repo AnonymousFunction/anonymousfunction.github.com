@@ -265,7 +265,7 @@
 
         // **update()** updates the state of the player for a single tick.
         update: function () {
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.UP) || TOUCH.UP) {
                 if (this.spriteChangeCount === 0 || this.id.indexOf("up") === -1) {
                     this.id = this.id === "link-up-2" ? "link-up-1" : "link-up-2";
                     this.spriteChangeCount = this.spriteCooldown;
@@ -404,29 +404,7 @@
         this.KEYS = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, SPACE: 32 };
     };
 
-    // Other functions
-    // ---------------
-
-    // **colliding()** returns true if two passed bodies are colliding.
-    // The approach is to test for five situations.  If any are true,
-    // the bodies are definitely not colliding.  If none of them
-    // are true, the bodies are colliding.
-    // 1. b1 is the same body as b2.
-    // 2. Right of `b1` is to the left of the left of `b2`.
-    // 3. Bottom of `b1` is above the top of `b2`.
-    // 4. Left of `b1` is to the right of the right of `b2`.
-    // 5. Top of `b1` is below the bottom of `b2`.
-    var colliding = function (b1, b2) {
-        var isColliding = !(
-            b1 === b2 ||
-                b1.center.x + b1.size.x / 2 < b2.center.x - b2.size.x / 2 ||
-                b1.center.y + b1.size.y / 2 < b2.center.y - b2.size.y / 2 ||
-                b1.center.x - b1.size.x / 2 > b2.center.x + b2.size.x / 2 ||
-                b1.center.y - b1.size.y / 2 > b2.center.y + b2.size.y / 2
-            );
-
-        return isColliding;
-    };
+    var TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false };
 
     // Start game
     // ----------
@@ -443,5 +421,14 @@
         } else {
             $("meta[name=viewport]").attr("content", "initial-scale=" + heightScale + ", user-scalable=no");
         }
+        
+        $("#controller").mousedown(function(e){
+            console.log("e.pageX", e.pageX, "e.pageY", e.pageY);
+            if (e.pageX >= 40 && e.pageX <= 74 && e.pageY >= 240 && e.pageY <= 276) {
+                TOUCH.UP = true;
+            }
+        }).mouseup(function(){
+            TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false };
+        });
     });
 })();
