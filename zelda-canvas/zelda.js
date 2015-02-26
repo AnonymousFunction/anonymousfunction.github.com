@@ -295,7 +295,7 @@
                 } else {
                     this.game.moveScreenUp();
                 }
-            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN)) {
+            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.DOWN) || TOUCH.DOWN) {
                 if (this.spriteChangeCount === 0 || this.id.indexOf("down") === -1) {
                     this.id = this.id === "link-down-2" ? "link-down-1" : "link-down-2";
                     this.spriteChangeCount = this.spriteCooldown;
@@ -319,7 +319,7 @@
                 } else {
                     this.game.moveScreenDown();
                 }
-            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
+            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT) || TOUCH.LEFT) {
                 if (this.spriteChangeCount === 0 || this.id.indexOf("left") === -1) {
                     this.id = this.id === "link-left-2" ? "link-left-1" : "link-left-2";
                     this.spriteChangeCount = this.spriteCooldown;
@@ -341,7 +341,7 @@
                 } else {
                     this.game.moveScreenLeft();
                 }
-            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
+            } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT) || TOUCH.RIGHT) {
                 if (this.spriteChangeCount === 0 || this.id.indexOf("right") === -1) {
                     this.id = this.id === "link-right-2" ? "link-right-1" : "link-right-2";
                     this.spriteChangeCount = this.spriteCooldown;
@@ -425,9 +425,17 @@
         $("#controller").on("touchstart", function(e){
             var x = e.originalEvent.touches[0].pageX;
             var y = e.originalEvent.touches[0].pageY;
-            console.log("e.pageX", x, "e.pageY", y);
+            
+            console.log("x", x, "y", y);
+            
             if (x >= 40 && x <= 74 && y >= 240 && y <= 276) {
                 TOUCH.UP = true;
+            } else if (x >= 40 && x <= 74 && y >= 307 && y <= 340) {
+                TOUCH.DOWN = true;
+            } else if (x >= 10 && x <= 42 && y >= 274 && y <= 308) {
+                TOUCH.LEFT = true;
+            } else if (x >= 74 && x <= 104 && y >= 274 && y <= 308) {
+                TOUCH.RIGHT = true;
             }
         });
         
