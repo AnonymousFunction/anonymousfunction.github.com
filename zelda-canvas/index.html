@@ -38,14 +38,23 @@
         /* 16 columns @ 256px = 16px per col */
         /* 11 rows @ 176px = 16px per row */
     }
+    #controller {
+        position: absolute;
+        top: 232px;
+        height: 115px;
+        width: 256px;
+        background: url("/zelda/images/controller.png");
+        background-size: 256px;
+    }
     #debug {
         position: absolute;
-        top: 236px;
+        top: 350px;
         font-family: monospace;
     }
 </style>
 <canvas id="menu" width="256" height="56"></canvas>
 <canvas id="zelda" width="256" height="176"></canvas>
+<canvas id="controller" width="256" height="115"></canvas>
 
 <div id="debug">
     Link X: <span id="link-x"></span>
@@ -59,6 +68,7 @@
 <img id="hud-icons" src="/zelda/images/hud_icons.png" style="display: none;"/>
 <img id="b-a-boxes" src="/zelda/images/b-a-boxes.png" style="display: none;"/>
 <img id="life-header" src="/zelda/images/life.png" style="display: none;"/>
+<img id="controller-img" src="/zelda/images/controller.png" style="display: none;"/>
 
 <img id="link-up-1" src="/zelda/images/link/link_up/frame_000.gif" style="display: none;"/>
 <img id="link-up-2" src="/zelda/images/link/link_up/frame_001.gif" style="display: none;"/>

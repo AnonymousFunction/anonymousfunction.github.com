@@ -11,6 +11,7 @@
 
         var screen = canvas.getContext('2d');
         var menuScreen = document.getElementById("menu").getContext("2d");
+        var controllerScreen = document.getElementById("controller").getContext("2d");
 
         var gameSize = { x: canvas.width, y: canvas.height };
 
@@ -33,7 +34,7 @@
             self.update();
 
             // Draw game bodies.
-            self.draw(screen, menuScreen, gameSize);
+            self.draw(screen, menuScreen, controllerScreen, gameSize);
 
             // Queue up the next call to tick with the browser.
             requestAnimationFrame(tick);
@@ -118,7 +119,7 @@
         },
 
         // **draw()** draws the game.
-        draw: function (screen, menuScreen, gameSize) {
+        draw: function (screen, menuScreen, controllerScreen, gameSize) {
             // Clear away the drawing from the previous tick.
             screen.clearRect(0, 0, gameSize.x, gameSize.y);
 
@@ -134,6 +135,7 @@
             }
             
             this.drawMenu(menuScreen);
+            this.drawController(controllerScreen);
         },
         
         drawMenu: function(menuScreen) {
@@ -161,6 +163,10 @@
             menuScreen.fillText("255", 96, 24);
             menuScreen.fillText("X0", 96, 40);
             menuScreen.fillText("X0", 96, 48);
+        },
+        
+        drawController: function(controllerScreen){
+
         },
 
         // **addBody()** adds a body to the bodies array.
