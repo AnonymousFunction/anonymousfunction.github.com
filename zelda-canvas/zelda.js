@@ -422,14 +422,16 @@
             $("meta[name=viewport]").attr("content", "initial-scale=" + heightScale + ", user-scalable=no");
         }
         
-        $("#controller").mousedown(function(e){
-        alert("x " + e.pageX);
-        alert("y " + e.pageY);
-            console.log("e.pageX", e.pageX, "e.pageY", e.pageY);
-            if (e.pageX >= 40 && e.pageX <= 74 && e.pageY >= 240 && e.pageY <= 276) {
+        $("#controller").on("touchstart", function(e){
+            var x = e.originalEvent.touches[0].pageX;
+            var y = e.originalEvent.touches[0].pageY;
+            console.log("e.pageX", x, "e.pageY", y);
+            if (x >= 40 && x <= 74 && y >= 240 && y <= 276) {
                 TOUCH.UP = true;
             }
-        }).mouseup(function(){
+        });
+        
+        $("#controller").on("touchend", function(){
             TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false };
         });
     });
