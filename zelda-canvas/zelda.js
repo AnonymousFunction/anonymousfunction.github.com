@@ -228,8 +228,10 @@
         this.moveRate = 1.3;
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
-        this.swordCooldown = 20;
+        this.swordCooldown = 10;
         this.swordTimer = 0;
+        this.swordWaitCooldown = 20;
+        this.swordWait = 0;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -267,9 +269,46 @@
 
         // **update()** updates the state of the player for a single tick.
         update: function () {
+            if (this.swordWait > 0) {
+                this.swordWait--;
+            }
             if (this.swordTimer > 0) {
                 this.swordTimer--;
                 return;
+            }
+            
+            
+            // If Space key is down...
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) && this.swordTimer === 0 && this.swordWait === 0 && this.swordRelease) {
+                if (this.id.indexOf("up") > -1) {
+                    this.id = "sword-up";
+                    this.center.y -= 12;
+                } else if (this.id.indexOf("down") > -1) {
+                    this.id = "sword-down";
+                } else if (this.id.indexOf("left") > -1) {
+                    this.id = "sword-left";
+                    this.center.x -= 13;
+                }  else if (this.id.indexOf("right") > -1) {
+                    this.id = "sword-right";
+                }
+                this.swordTimer = this.swordCooldown;
+                this.swordWait = this.swordWaitCooldown;
+                this.swordRelease = false;
+                
+                return;
+            } else {
+                if (this.id === "sword-up") {
+                    this.id = "link-up-1";
+                    this.center.y += 12;
+                } else if (this.id == "sword-down") {
+                    this.id = "link-down-1";
+                } else if (this.id === "sword-left") {
+                    this.center.x += 13;
+                    this.id = "link-left-1";
+                }  else if (this.id === "sword-right") {
+                    this.id = "link-right-1";
+                }
+                this.swordRelease = true;
             }
         
             if (this.keyboarder.isDown(this.keyboarder.KEYS.UP) || TOUCH.UP) {
@@ -374,32 +413,6 @@
 
             this.tile.x = parseInt(Number(this.center.x).toFixed(0) / 16);
             this.tile.y = parseInt(Number(this.center.y).toFixed(0) / 16);
-
-            // If Space key is down...
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.SPACE)) {
-                if (this.swordTimer === 0) {
-                    if (this.id.indexOf("up") > -1) {
-                        this.id = "sword-up";
-                    } else if (this.id.indexOf("down") > -1) {
-                       this.id = "sword-down";
-                    } else if (this.id.indexOf("left") > -1) {
-                       this.id = "sword-left";
-                    }  else if (this.id.indexOf("right") > -1) {
-                       this.id = "sword-right";
-                    }
-                    this.swordTimer = this.swordCooldown;
-                }
-            } else {
-                if (this.id === "sword-up") {
-                    this.id = "link-up-1";
-                } else if (this.id == "sword-down") {
-                   this.id = "link-down-1";
-                } else if (this.id === "sword-left") {
-                   this.id = "link-left-1";
-                }  else if (this.id === "sword-right") {
-                   this.id = "link-right-1";
-                }
-            }
         }
     };
 
