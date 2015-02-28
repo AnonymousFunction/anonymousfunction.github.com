@@ -9,6 +9,7 @@
         // In index.html, there is a canvas tag that the game will be drawn in.
         // Grab that canvas out of the DOM.
         var canvas = document.getElementById("paper");
+        this.viewport = $("#paper");
 
         // Get the drawing context.  This contains functions that let you draw to the canvas.
         var screen = canvas.getContext('2d');
@@ -16,6 +17,8 @@
         // Note down the dimensions of the canvas.  These are used to
         // place game bodies.
         var gameSize = { x: canvas.width, y: canvas.height };
+        
+        this.background = { x: 1 };
 
         // Create the bodies array to hold the player and balls.
         this.bodies = [];
@@ -78,13 +81,25 @@
             }
             
             var img = document.getElementById("pencil");
-            screen.drawImage(img, -35, 500);
-            screen.drawImage(img, 390, 500);
+            screen.drawImage(img, -35 + this.background.x, 500);
+            screen.drawImage(img, 390 + this.background.x, 500);
+            screen.drawImage(img, 815 + this.background.x, 500);
+            screen.drawImage(img, 1240 + this.background.x, 500);
+            screen.drawImage(img, 2090 + this.background.x, 500);
         },
 
         // **addBody()** adds a body to the bodies array.
         addBody: function (body) {
             this.bodies.push(body);
+        },
+        
+        moveBackground: function(){
+            this.background.x -= 2;
+         
+            var origLeft = parseInt(this.viewport.css("background-position-x"));
+            var newLeft = origLeft - 1;
+            this.viewport.css("background-position-x", newLeft + "px");
+            
         }
 
     };
@@ -95,10 +110,12 @@
     // **new Player()** creates a player.
     var Player = function (game, gameSize) {
         this.game = game;
-        this.size = { x: 55, y: 75 };
+        this.size = { x: 32, y: 64 };
         this.center = { x: 200, y: gameSize.y / 2 };
         this.velocity = { x: 0, y: 0 };
         this.id = "player";
+        this.spriteChangeCount = 0;
+        this.spriteCooldown = 6;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -122,7 +139,7 @@
         // **update()** updates the state of the player for a single tick.
         update: function () {
             var MAX_VELOCITY = 2.5;
-            var BASE_VELOCITY_DELTA = 0.5;
+            var BASE_VELOCITY_DELTA = 2.5;
             var delta = 0;
 
             // If left cursor key is down...
@@ -142,6 +159,13 @@
                 }
 
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
+                if (this.spriteChangeCount === 0) {
+                    this.id = this.id === "player" ? "player-1" : "player";
+                    this.spriteChangeCount = this.spriteCooldown;
+                } else {
+                    this.spriteChangeCount--;
+                }
+                
                 this.velocity.x += BASE_VELOCITY_DELTA;
 
                 if (this.velocity.x > MAX_VELOCITY) {
@@ -150,8 +174,9 @@
 
                 this.center.x += this.velocity.x;
 
-                if (this.center.x > 550) {
-                    this.center.x = 550;
+                if (this.center.x > 300) {
+                    this.center.x = 300;
+                    this.game.moveBackground();
                 } else if (this.center.x < 50) {
                     this.center.x = 50;
                 }
