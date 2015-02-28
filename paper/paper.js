@@ -130,12 +130,17 @@
     var Player = function (game, gameSize) {
         this.game = game;
         this.size = { x: 32, y: 64 };
-        this.center = { x: 200, y: gameSize.y / 2 };
+        this.center = { x: 200, y: 495 };
         this.velocity = { x: 0, y: 0 };
         this.id = "player";
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
         this.moveRate = 3;
+        this.isJumping = false;
+        this.jumpDuration = 21;
+        this.jumpFrames = 0;
+        this.jumpTime = 22;
+        this.jumpCooldown = 0;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -145,7 +150,7 @@
 
         draw: function (screen) {
             var x = this.center.x - this.size.x / 2;
-            var y = 460;
+            var y = this.center.y - this.size.y / 2;
 
             var img = document.getElementById(this.id);
 
@@ -158,8 +163,24 @@
 
         // **update()** updates the state of the player for a single tick.
         update: function () {
+            if (this.isJumping) {
+                if (this.jumpFrames > 10) {
+                    this.center.y -= 3;
+                } else if (this.jumpFrames >= 0) {
+                    this.center.y += 3;
+                }
+                this.jumpFrames--;
+                            
+                this.jumpCooldown--;
+                
+                if (this.jumpCooldown === 0) {
+                    this.isJumping = false;
+                }
+            }
+        
+        
             // If left cursor key is down...
-            movement: if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
                 if (this.spriteChangeCount === 0) {
                     this.id = this.id === "player" ? "player-1" : "player";
                     this.spriteChangeCount = this.spriteCooldown;
@@ -183,9 +204,6 @@
                         this.center.x = 50;
                     }
                 }
-                
-
-
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
                 if (this.spriteChangeCount === 0) {
                     this.id = this.id === "player" ? "player-1" : "player";
@@ -207,6 +225,15 @@
                     this.game.moveBackgroundRight();
                 } else if (this.center.x < 50) {
                     this.center.x = 50;
+                }
+            }
+            
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
+                if (!this.isJumping) {
+                    console.log("jump");
+                    this.isJumping = true;
+                    this.jumpCooldown = this.jumpTime;
+                    this.jumpFrames = this.jumpDuration;
                 }
             }
         }
