@@ -18,7 +18,7 @@
         // place game bodies.
         var gameSize = { x: canvas.width, y: canvas.height };
         
-        this.background = { x: 1 };
+        this.background = { x: 0 };
 
         // Create the bodies array to hold the player and balls.
         this.bodies = [];
@@ -102,13 +102,23 @@
             this.bodies.push(body);
         },
         
-        moveBackground: function(){
+        moveBackgroundRight: function(){
             this.background.x -= 2;
          
             var origLeft = parseInt(this.viewport.css("background-position-x"));
             var newLeft = origLeft - 1;
             this.viewport.css("background-position-x", newLeft + "px");
             
+        },
+        
+        moveBackgroundLeft: function(){
+            if (this.background.x < 0) {
+                this.background.x += 2;
+
+                var origLeft = parseInt(this.viewport.css("background-position-x"));
+                var newLeft = origLeft + 1;
+                this.viewport.css("background-position-x", newLeft + "px");
+            }
         }
 
     };
@@ -125,6 +135,7 @@
         this.id = "player";
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
+        this.moveRate = 3;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -147,25 +158,33 @@
 
         // **update()** updates the state of the player for a single tick.
         update: function () {
-            var MAX_VELOCITY = 2.5;
-            var BASE_VELOCITY_DELTA = 2.5;
-            var delta = 0;
-
             // If left cursor key is down...
             movement: if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
-                this.velocity.x -= BASE_VELOCITY_DELTA;
-
-                if (this.velocity.x < -MAX_VELOCITY) {
-                    this.velocity.x = -MAX_VELOCITY
+                if (this.spriteChangeCount === 0) {
+                    this.id = this.id === "player" ? "player-1" : "player";
+                    this.spriteChangeCount = this.spriteCooldown;
+                } else {
+                    this.spriteChangeCount--;
                 }
-
-                this.center.x += this.velocity.x;
+                
+                this.center.x -= this.moveRate;
 
                 if (this.center.x > 550) {
                     this.center.x = 550;
                 } else if (this.center.x < 50) {
                     this.center.x = 50;
                 }
+                
+                if (this.game.background.x < 0) {
+                    if (this.center.x < 300) {
+                        this.center.x = 300;
+                        this.game.moveBackgroundLeft();
+                    } else if (this.center.x < 50) {
+                        this.center.x = 50;
+                    }
+                }
+                
+
 
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
                 if (this.spriteChangeCount === 0) {
@@ -174,50 +193,20 @@
                 } else {
                     this.spriteChangeCount--;
                 }
-                
-                this.velocity.x += BASE_VELOCITY_DELTA;
+               
+                this.center.x += this.moveRate;
 
-                if (this.velocity.x > MAX_VELOCITY) {
-                    this.velocity.x = MAX_VELOCITY
-                }
-
-                this.center.x += this.velocity.x;
-
-                if (this.center.x > 300) {
-                    this.center.x = 300;
-                    this.game.moveBackground();
+                if (this.center.x > 550) {
+                    this.center.x = 550;
                 } else if (this.center.x < 50) {
                     this.center.x = 50;
                 }
-            } else {
-                if (this.velocity.x > 0) {
-                    this.velocity.x -= .1;
-
-                    if (this.velocity.x < 0) {
-                        this.velocity.x = 0;
-                    }
-
-                    this.center.x += this.velocity.x;
-
-                    if (this.center.x > 550) {
-                        this.center.x = 550;
-                    } else if (this.center.x < 50) {
-                        this.center.x = 50;
-                    }
-                } else if (this.velocity.x < 0) {
-                    this.velocity.x += .1;
-
-                    if (this.velocity.x > 0) {
-                        this.velocity.x = 0;
-                    }
-
-                    this.center.x += this.velocity.x;
-
-                    if (this.center.x > 550) {
-                        this.center.x = 550;
-                    } else if (this.center.x < 50) {
-                        this.center.x = 50;
-                    }
+                
+                if (this.center.x > 300) {
+                    this.center.x = 300;
+                    this.game.moveBackgroundRight();
+                } else if (this.center.x < 50) {
+                    this.center.x = 50;
                 }
             }
         }
