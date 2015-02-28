@@ -210,12 +210,30 @@
         enterCave: function(){
             console.log("cave");
             
-            this.viewport.css("background", "url('/zelda/images/cave_map.png')");
-            this.movementMap = getCaveMap();
-            
-            this.player.center.x = 128;
-            this.player.center.y = 160;
+            this.preCaveMap = this.movementMap;
+            this.preCavePlayerX = this.player.center.x;
+            this.preCavePlayerY = this.player.center.y;
+            this.isInCave = true;
+            this.preCaveBackgroundX = this.viewport.css("background-position-x")
+            this.preCaveBackgroundY = this.viewport.css("background-position-y")
 
+            this.movementMap = getCaveMap();
+            this.player.center.x = 128;
+            this.player.center.y = 150;
+            
+            this.viewport.css("background", "url('images/cave_map.png')");
+        },
+        
+        exitCave: function(){
+            console.log("exit cave");
+            this.viewport.css("background", "url('images/overworld_map.png')");
+            this.viewport.css("background-position-x", this.preCaveBackgroundX);
+            this.viewport.css("background-position-y", this.preCaveBackgroundY);
+
+            this.movementMap = this.preCaveMap;
+            this.player.center.x = this.preCavePlayerX;
+            this.player.center.y = this.preCavePlayerY;
+            this.isInCave = false;
         }
     };
 
@@ -364,6 +382,11 @@
                     var rightBoundaryTile = parseInt(Number(rightBoundary).toFixed(0) / 16);
 
                     if (this.game.movementMap[newTileY] && (this.game.movementMap[newTileY][leftBoundaryTile] === 0 || this.game.movementMap[newTileY][rightBoundaryTile] === 0)) {
+                        return;
+                    }
+                    
+                    if (this.game.movementMap[newTileY] && this.game.movementMap[newTileY][leftBoundaryTile] === 3) {
+                        this.game.exitCave();
                         return;
                     }
 
