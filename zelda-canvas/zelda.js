@@ -125,12 +125,6 @@
 
             // Draw each body as a rectangle.
             for (var i = 0; i < this.bodies.length; i++) {
-                if (this.bodies[i].color) {
-                    screen.fillStyle = this.bodies[i].color;
-                } else {
-                    screen.fillStyle = "#FFFFFF";
-                }
-
                 this.bodies[i].draw(screen);
             }
             
@@ -222,6 +216,9 @@
             this.player.center.y = 150;
             
             this.viewport.css("background", "url('images/cave_map.png')");
+
+            this.bodies.push(new Fire(this, { x: 80, y: 72 }));
+            this.bodies.push(new Fire(this, { x: 176, y: 72 }));
         },
         
         exitCave: function(){
@@ -234,6 +231,38 @@
             this.player.center.x = this.preCavePlayerX;
             this.player.center.y = this.preCavePlayerY;
             this.isInCave = false;
+            
+            this.bodies = _.filter(this.bodies, function(body) {
+                return !(body instanceof Fire);
+            });
+        }
+    };
+    
+    var Fire = function(game, center){
+        this.id = "cave-fire";
+        this.game = game;
+        this.size = { x: 16, y: 16 };
+        this.center = { x: center.x, y: center.y };
+        this.spriteChangeCount = 0;
+        this.spriteCooldown = 10;
+    };
+    
+    Fire.prototype = {
+        draw: function(screen){
+            var x = this.center.x;
+            var y = this.center.y;
+
+            var img = document.getElementById(this.id);
+            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+        },
+        
+        update: function() {
+            if (this.spriteChangeCount === 0) {
+                this.id = this.id === "cave-fire" ? "cave-fire-1" : "cave-fire";
+                this.spriteChangeCount = this.spriteCooldown;
+            } else {
+                this.spriteChangeCount--;
+            }
         }
     };
 
