@@ -103,7 +103,7 @@
         },
         
         moveBackgroundRight: function(){
-            this.background.x -= 2;
+            this.background.x -= 3;
          
             var origLeft = parseInt(this.viewport.css("background-position-x"));
             var newLeft = origLeft - 1;
@@ -113,7 +113,7 @@
         
         moveBackgroundLeft: function(){
             if (this.background.x < 0) {
-                this.background.x += 2;
+                this.background.x += 3;
 
                 var origLeft = parseInt(this.viewport.css("background-position-x"));
                 var newLeft = origLeft + 1;
@@ -137,9 +137,9 @@
         this.spriteCooldown = 6;
         this.moveRate = 3;
         this.isJumping = false;
-        this.jumpDuration = 21;
+        this.jumpDuration = 31;
         this.jumpFrames = 0;
-        this.jumpTime = 22;
+        this.jumpTime = 32;
         this.jumpCooldown = 0;
 
         // Create a keyboard object to track button presses.
@@ -164,7 +164,7 @@
         // **update()** updates the state of the player for a single tick.
         update: function () {
             if (this.isJumping) {
-                if (this.jumpFrames > 10) {
+                if (this.jumpFrames > 15) {
                     this.center.y -= 3;
                 } else if (this.jumpFrames >= 0) {
                     this.center.y += 3;
