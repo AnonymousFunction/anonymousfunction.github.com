@@ -20,7 +20,7 @@
 4. Draw image
 5. Scale image to final size
 
-# Animation Tips
+# Drawing Animation Stills
 
 1. Draw image on a single layer
 2. Layer Style / Blending Options:
@@ -30,3 +30,16 @@
 4. Uncheck "Effects" on new layer
 5. Ctrl+A, Ctrl+X on new layer
 6. Use lightened, original layer as frame of reference for drawing next animation still
+
+# Saving
+
+1. Convert Image Mode to RGB 8 bits/pixel
+2. Scale the image to 10% of the original height and width
+3. Make the layer you wish to save the only visible layer
+4. Save as a PNG image
+
+# Testing Animation
+
+1. After saving, open all PNG images in order as new windows
+2. Close all other windows that are not a part of the animation
+2. Hold Ctrl+Tab or Ctrl+Shift+Tab to automatically switch between windows, simulating the animation
