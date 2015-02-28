@@ -8,6 +8,7 @@
     <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
     <script src="/lib/jquery/jquery.min.js"></script>
     <script src="/lib/jquery/jquery.mobile.custom.min.js"></script>
+    <script src="/zelda/jquery.timer.js"></script>
     <script src="/lib/underscore/underscore-min.js"></script>
     <script type="text/javascript" src="movement.js"></script>
     <script type="text/javascript" src="zelda.js"></script>
@@ -29,7 +30,11 @@
     .text {
         color: white;
         font-family: 'Press Start 2P', cursive;
-        font-size: 16px;
+        position: absolute;
+        font-size: 8px;
+        top: 90px;
+        left: 34px;
+        width: 186px;
         text-align: center;
     }
     #menu {
@@ -75,6 +80,8 @@
     Map X: <span id="map-x"></span>
     Map Y: <span id="map-y"></span><br/>
 </div>
+
+<div id="cave-text" class="text"></div>
 
 <img id="hud-icons" src="images/hud_icons.png" style="display: none;"/>
 <img id="b-a-boxes" src="images/b-a-boxes.png" style="display: none;"/>

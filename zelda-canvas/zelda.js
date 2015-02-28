@@ -10,6 +10,8 @@
         this.viewport = $("#zelda");
 
         var screen = canvas.getContext('2d');
+        this.screen = screen;
+        
         var menuScreen = document.getElementById("menu").getContext("2d");
         var controllerScreen = document.getElementById("controller").getContext("2d");
 
@@ -136,6 +138,36 @@
             
             this.drawMenu(menuScreen);
             this.drawController(controllerScreen);
+            
+            if (this.doCaveText) {
+                var player = this.player;
+                player.canMove = false;
+                var caveText = "IT'S DANGEROUS TO GO\nALONE! TAKE THIS.";
+
+                var texty = "";
+
+                function getNextLetter() {
+                    if (caveText.length) {
+                        var toReturn = caveText[0];
+                        var chopped = caveText.substring(1);
+                        caveText = chopped;
+                        return toReturn;
+                    }
+
+                    caveTextInterval.stop();
+                    player.canMove = true;
+                    return "";
+                }
+
+                caveTextInterval = $.timer(function(){
+                    texty = $("#cave-text").text();
+                    texty += getNextLetter();
+                    $("#cave-text").text(texty);
+                }, 100);
+                
+                caveTextInterval.play();
+                this.doCaveText = false;
+            }
         },
         
         drawMenu: function(menuScreen) {
@@ -208,8 +240,6 @@
         },
 
         enterCave: function(){
-            console.log("cave");
-            
             this.preCaveMap = this.movementMap;
             this.preCavePlayerX = this.player.center.x;
             this.preCavePlayerY = this.player.center.y;
@@ -226,6 +256,8 @@
             this.addBody(new CaveFire(this, { x: 80, y: 72 }));
             this.addBody(new CaveFire(this, { x: 176, y: 72 }));
             this.addBody(new OldMan(this, { x: 128, y: 72 }));
+                        
+            this.doCaveText = true;
         },
         
         exitCave: function(){
@@ -242,6 +274,8 @@
             this.bodies = _.filter(this.bodies, function(body) {
                 return !(body instanceof CaveFire || body instanceof OldMan);
             });
+            
+            $("#cave-text").text("");
         }
     };
     
@@ -264,6 +298,7 @@
         this.swordTimer = 0;
         this.swordWaitCooldown = 20;
         this.swordWait = 0;
+        this.canMove = true;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -301,6 +336,10 @@
 
         // **update()** updates the state of the player for a single tick.
         update: function () {
+            if (!this.canMove) {
+                return;
+            }
+        
             if (this.swordWait > 0) {
                 this.swordWait--;
             }
