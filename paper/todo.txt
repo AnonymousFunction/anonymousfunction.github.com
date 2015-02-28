@@ -8,3 +8,7 @@ Climbing (left-hand up)
 Climbing (right-hand up)
 Squating
 Squating flipped
+Jumping
+Jumping flipped
+Hanging from a ledge
+Knocked back (taking damage)
