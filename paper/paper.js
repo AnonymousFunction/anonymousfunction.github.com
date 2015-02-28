@@ -182,7 +182,7 @@
         
             // If left cursor key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
-                if (this.spriteChangeCount === 0) {
+                if (this.spriteChangeCount === 0 || this.id.indexOf("running-right") > -1) {
                     if (this.spriteForward) {
                         if (this.id.indexOf("1") > -1) {
                             this.id = "dude-running-left-2";
@@ -228,7 +228,7 @@
                     }
                 }
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
-                if (this.spriteChangeCount === 0) {
+                if (this.spriteChangeCount === 0 || this.id.indexOf("running-left") > -1) {
                     if (this.spriteForward) {
                         if (this.id.indexOf("1") > -1) {
                             this.id = "dude-running-right-2";
