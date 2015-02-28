@@ -154,7 +154,12 @@
              
             img = document.getElementById("b-a-boxes");
             menuScreen.drawImage(img, 118, 15, 52, 32); 
-                        
+            
+            if (this.player.hasSword) {
+                img = document.getElementById("sword-img");
+                menuScreen.drawImage(img, 152, 24, 7, 16);
+            }
+
             img = document.getElementById("life-header");
             menuScreen.drawImage(img, 173, 9, 68, 20);
             
@@ -228,6 +233,7 @@
         this.moveRate = 1.3;
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
+        this.hasSword = true;
         this.swordCooldown = 10;
         this.swordTimer = 0;
         this.swordWaitCooldown = 20;
