@@ -273,6 +273,16 @@
                 }
             }
             
+            if (this.isJumping) {
+                if (this.id.indexOf("right") > -1) {
+                    this.id = "dude-running-right-1";
+                    this.spriteForward = true;
+                } else if (this.id.indexOf("left") > -1) {
+                    this.id = "dude-running-left-1";
+                    this.spriteForward = true;
+                }
+            }
+            
             if (this.keyboarder.isDown(this.keyboarder.KEYS.UP)) {
                 if (!this.isJumping) {
                     console.log("jump");
