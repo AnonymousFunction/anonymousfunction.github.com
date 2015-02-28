@@ -123,9 +123,16 @@
             // Clear away the drawing from the previous tick.
             screen.clearRect(0, 0, gameSize.x, gameSize.y);
 
-            _.each(this.bodies, function(body){
+            var bodiesNotLink = _.filter(this.bodies, function(body){
+                return !(body instanceof Player);
+            });
+           
+            //draw Link last
+            _.each(bodiesNotLink, function(body){
                 body.draw(screen);
             });
+            
+            this.player.draw(screen);
             
             this.drawMenu(menuScreen);
             this.drawController(controllerScreen);
@@ -216,9 +223,9 @@
             
             this.viewport.css("background", "url('images/cave_map.png')");
 
-            this.bodies.push(new CaveFire(this, { x: 80, y: 72 }));
-            this.bodies.push(new CaveFire(this, { x: 176, y: 72 }));
-            this.bodies.push(new OldMan(this, { x: 128, y: 72 }));
+            this.addBody(new CaveFire(this, { x: 80, y: 72 }));
+            this.addBody(new CaveFire(this, { x: 176, y: 72 }));
+            this.addBody(new OldMan(this, { x: 128, y: 72 }));
         },
         
         exitCave: function(){
