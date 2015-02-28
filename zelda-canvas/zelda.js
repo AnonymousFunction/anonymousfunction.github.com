@@ -217,8 +217,9 @@
             
             this.viewport.css("background", "url('images/cave_map.png')");
 
-            this.bodies.push(new Fire(this, { x: 80, y: 72 }));
-            this.bodies.push(new Fire(this, { x: 176, y: 72 }));
+            this.bodies.push(new CaveFire(this, { x: 80, y: 72 }));
+            this.bodies.push(new CaveFire(this, { x: 176, y: 72 }));
+            this.bodies.push(new OldMan(this, { x: 128, y: 72 }));
         },
         
         exitCave: function(){
@@ -233,39 +234,11 @@
             this.isInCave = false;
             
             this.bodies = _.filter(this.bodies, function(body) {
-                return !(body instanceof Fire);
+                return !(body instanceof CaveFire || body instanceof OldMan);
             });
         }
     };
     
-    var Fire = function(game, center){
-        this.id = "cave-fire";
-        this.game = game;
-        this.size = { x: 16, y: 16 };
-        this.center = { x: center.x, y: center.y };
-        this.spriteChangeCount = 0;
-        this.spriteCooldown = 10;
-    };
-    
-    Fire.prototype = {
-        draw: function(screen){
-            var x = this.center.x;
-            var y = this.center.y;
-
-            var img = document.getElementById(this.id);
-            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
-        },
-        
-        update: function() {
-            if (this.spriteChangeCount === 0) {
-                this.id = this.id === "cave-fire" ? "cave-fire-1" : "cave-fire";
-                this.spriteChangeCount = this.spriteCooldown;
-            } else {
-                this.spriteChangeCount--;
-            }
-        }
-    };
-
     // Player
     // ------
 
@@ -385,6 +358,11 @@
                         return;
                     }
                     
+                    //invisible cave 'ceiling', needs to chop off the y-axis forgiveness
+                    if (this.game.isInCave && this.center.y - this.moveRate <= 88) {
+                        return;
+                    }
+                    
                     this.center.y -= this.moveRate;
                     
                     var newTileX = parseInt(Number(this.center.x).toFixed(0) / 16);
@@ -471,6 +449,54 @@
 
             this.tile.x = parseInt(Number(this.center.x).toFixed(0) / 16);
             this.tile.y = parseInt(Number(this.center.y).toFixed(0) / 16);
+        }
+    };
+    
+    var CaveFire = function(game, center){
+        this.id = "cave-fire";
+        this.game = game;
+        this.size = { x: 16, y: 16 };
+        this.center = { x: center.x, y: center.y };
+        this.spriteChangeCount = 0;
+        this.spriteCooldown = 10;
+    };
+    
+    CaveFire.prototype = {
+        draw: function(screen){
+            var x = this.center.x;
+            var y = this.center.y;
+
+            var img = document.getElementById(this.id);
+            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+        },
+        
+        update: function() {
+            if (this.spriteChangeCount === 0) {
+                this.id = this.id === "cave-fire" ? "cave-fire-1" : "cave-fire";
+                this.spriteChangeCount = this.spriteCooldown;
+            } else {
+                this.spriteChangeCount--;
+            }
+        }
+    };
+    
+    var OldMan = function(game, center){
+        this.id = "old-man";
+        this.game = game;
+        this.size = { x: 16, y: 16 };
+        this.center = { x: center.x, y: center.y };
+    };
+
+    OldMan.prototype = {
+        draw: function(screen){
+            var x = this.center.x;
+            var y = this.center.y;
+
+            var img = document.getElementById(this.id);
+            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+        },
+
+        update: function() { 
         }
     };
 
