@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="paper.js"></script>
+</head>
+<body>
+<style>
+    * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-modify: none;
+    -webkit-highlight: none;
+    outline: none;
+    }
+    body {
+    height: 600px;
+    width: 600px;
+    }
+    html {
+    background-color: #EAEAEA;
+    width: 600px;
+    }
+    #paper {
+        background: url("paper-background.jpg")
+    }
+</style>
+<canvas id="paper" width="600" height="600"></canvas>
+<img id="pencil" src="pencil.png" style="display: none;"/>
+<img id="player" src="player.png" style="display: none;"/>
+</body>
+</html>
