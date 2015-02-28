@@ -1,0 +1,10 @@
+- Sprites to add - 
+
+Standing
+Running (multiple images)
+Standing flipped
+Running flipped
+Climbing (left-hand up)
+Climbing (right-hand up)
+Squating
+Squating flipped
