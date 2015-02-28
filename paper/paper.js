@@ -132,9 +132,10 @@
         this.size = { x: 32, y: 64 };
         this.center = { x: 200, y: 495 };
         this.velocity = { x: 0, y: 0 };
-        this.id = "dude-running-right-0";
+        this.id = "dude-running-right-1";
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
+        this.spriteForward = true;
         this.moveRate = 3;
         this.isJumping = false;
         this.jumpDuration = 31;
@@ -182,7 +183,29 @@
             // If left cursor key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
                 if (this.spriteChangeCount === 0) {
-                    this.id = this.id === "dude-running-right-0" ? "dude-running-right-1" : "dude-running-right-0";
+                    if (this.spriteForward) {
+                        if (this.id.indexOf("1") > -1) {
+                            this.id = "dude-running-left-2";
+                        } else if (this.id.indexOf("2") > -1) {
+                            this.id = "dude-running-left-3";
+                        } else if (this.id.indexOf("3") > -1) {
+                            this.id = "dude-running-left-4";
+                        } else if (this.id.indexOf("4") > -1) {
+                            this.id = "dude-running-left-5";
+                            this.spriteForward = false;
+                        }
+                    } else {
+                        if (this.id.indexOf("5") > -1) {
+                            this.id = "dude-running-left-4";
+                        } else if (this.id.indexOf("4") > -1) {
+                            this.id = "dude-running-left-3";
+                        } else if (this.id.indexOf("3") > -1) {
+                            this.id = "dude-running-left-2";
+                        } else if (this.id.indexOf("2") > -1) {
+                            this.id = "dude-running-left-1";
+                            this.spriteForward = true;
+                        }
+                    }
                     this.spriteChangeCount = this.spriteCooldown;
                 } else {
                     this.spriteChangeCount--;
@@ -206,7 +229,29 @@
                 }
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
                 if (this.spriteChangeCount === 0) {
-                    this.id = this.id === "dude-running-right-0" ? "dude-running-right-1" : "dude-running-right-0";
+                    if (this.spriteForward) {
+                        if (this.id.indexOf("1") > -1) {
+                            this.id = "dude-running-right-2";
+                        } else if (this.id.indexOf("2") > -1) {
+                            this.id = "dude-running-right-3";
+                        } else if (this.id.indexOf("3") > -1) {
+                            this.id = "dude-running-right-4";                        
+                        } else if (this.id.indexOf("4") > -1) {
+                            this.id = "dude-running-right-5";
+                            this.spriteForward = false;
+                        }
+                    } else {
+                        if (this.id.indexOf("5") > -1) {
+                            this.id = "dude-running-right-4";
+                        } else if (this.id.indexOf("4") > -1) {
+                            this.id = "dude-running-right-3";
+                        } else if (this.id.indexOf("3") > -1) {
+                            this.id = "dude-running-right-2";
+                        } else if (this.id.indexOf("2") > -1) {
+                            this.id = "dude-running-right-1";
+                            this.spriteForward = true;
+                        }
+                    }
                     this.spriteChangeCount = this.spriteCooldown;
                 } else {
                     this.spriteChangeCount--;
