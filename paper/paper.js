@@ -132,7 +132,7 @@
         this.size = { x: 32, y: 64 };
         this.center = { x: 200, y: 495 };
         this.velocity = { x: 0, y: 0 };
-        this.id = "player";
+        this.id = "dude-running-right-0";
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
         this.moveRate = 3;
@@ -182,7 +182,7 @@
             // If left cursor key is down...
             if (this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)) {
                 if (this.spriteChangeCount === 0) {
-                    this.id = this.id === "player" ? "player-1" : "player";
+                    this.id = this.id === "dude-running-right-0" ? "dude-running-right-1" : "dude-running-right-0";
                     this.spriteChangeCount = this.spriteCooldown;
                 } else {
                     this.spriteChangeCount--;
@@ -206,7 +206,7 @@
                 }
             } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)) {
                 if (this.spriteChangeCount === 0) {
-                    this.id = this.id === "player" ? "player-1" : "player";
+                    this.id = this.id === "dude-running-right-0" ? "dude-running-right-1" : "dude-running-right-0";
                     this.spriteChangeCount = this.spriteCooldown;
                 } else {
                     this.spriteChangeCount--;
