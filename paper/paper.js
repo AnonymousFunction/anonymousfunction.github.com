@@ -63,7 +63,22 @@
         draw: function (screen, gameSize) {
             // Clear away the drawing from the previous tick.
             screen.clearRect(0, 0, gameSize.x, gameSize.y);
-
+            
+            var img = document.getElementById("eraser");
+            screen.drawImage(img, 420 + this.background.x, 365);
+            
+            img = document.getElementById("paperclip");
+            screen.drawImage(img, 390 + this.background.x, 365);
+            screen.drawImage(img, 390 + this.background.x, 420);
+            screen.drawImage(img, 390 + this.background.x, 475);
+            
+            img = document.getElementById("pencil");
+            screen.drawImage(img, -35 + this.background.x, 500);
+            screen.drawImage(img, 390 + this.background.x, 500);
+            screen.drawImage(img, 815 + this.background.x, 500);
+            screen.drawImage(img, 1240 + this.background.x, 500);
+            screen.drawImage(img, 2090 + this.background.x, 500);
+            
             // Draw each body as a rectangle.
             for (var i = 0; i < this.bodies.length; i++) {
                 if (this.bodies[i].center.y < 0) {
@@ -79,13 +94,7 @@
 
                 this.bodies[i].draw(screen);
             }
-            
-            var img = document.getElementById("pencil");
-            screen.drawImage(img, -35 + this.background.x, 500);
-            screen.drawImage(img, 390 + this.background.x, 500);
-            screen.drawImage(img, 815 + this.background.x, 500);
-            screen.drawImage(img, 1240 + this.background.x, 500);
-            screen.drawImage(img, 2090 + this.background.x, 500);
+
         },
 
         // **addBody()** adds a body to the bodies array.
