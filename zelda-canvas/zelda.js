@@ -159,7 +159,7 @@
             menuScreen.drawImage(img, 173, 9, 68, 20);
             
             menuScreen.fillStyle = "white";
-            menuScreen.font = "8px 'Press Start 2P";
+            menuScreen.font = "8px 'Press Start 2P'";
             menuScreen.fillText("255", 96, 24);
             menuScreen.fillText("X0", 96, 40);
             menuScreen.fillText("X0", 96, 48);
