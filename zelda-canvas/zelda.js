@@ -123,10 +123,9 @@
             // Clear away the drawing from the previous tick.
             screen.clearRect(0, 0, gameSize.x, gameSize.y);
 
-            // Draw each body as a rectangle.
-            for (var i = 0; i < this.bodies.length; i++) {
-                this.bodies[i].draw(screen);
-            }
+            _.each(this.bodies, function(body){
+                body.draw(screen);
+            });
             
             this.drawMenu(menuScreen);
             this.drawController(controllerScreen);
