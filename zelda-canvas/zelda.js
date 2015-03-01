@@ -299,6 +299,8 @@
         this.swordWaitCooldown = 20;
         this.swordWait = 0;
         this.canMove = true;
+        
+        this.swordSound = new Audio("/zelda/sounds/sword.wav");
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -365,6 +367,9 @@
                 this.swordTimer = this.swordCooldown;
                 this.swordWait = this.swordWaitCooldown;
                 this.swordRelease = false;
+                
+                this.swordSound.play();
+
                 
                 return;
             } else {
