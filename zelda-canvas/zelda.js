@@ -139,34 +139,8 @@
             this.drawMenu(menuScreen);
             this.drawController(controllerScreen);
             
-            if (this.doCaveText) {
-                var player = this.player;
-                player.canMove = false;
-                var caveText = "IT'S DANGEROUS TO GO\nALONE! TAKE THIS.";
-
-                var texty = "";
-
-                function getNextLetter() {
-                    if (caveText.length) {
-                        var toReturn = caveText[0];
-                        var chopped = caveText.substring(1);
-                        caveText = chopped;
-                        return toReturn;
-                    }
-
-                    caveTextInterval.stop();
-                    player.canMove = true;
-                    return "";
-                }
-
-                caveTextInterval = $.timer(function(){
-                    texty = $("#cave-text").text();
-                    texty += getNextLetter();
-                    $("#cave-text").text(texty);
-                }, 100);
-                
-                caveTextInterval.play();
-                this.doCaveText = false;
+            if (this.isWriteText) {
+                this.printText();
             }
         },
         
@@ -204,6 +178,38 @@
         
         drawController: function(controllerScreen){
 
+        },
+        
+        printText: function(){
+            var player = this.player;
+            player.canMove = false;
+            var caveText = "IT'S DANGEROUS TO GO\nALONE! TAKE THIS.";
+
+            var texty = "";
+
+            function getNextLetter() {
+                if (caveText.length) {
+                    var toReturn = caveText[0];
+                    var chopped = caveText.substring(1);
+                    caveText = chopped;
+                    return toReturn;
+                }
+
+                caveTextInterval.stop();
+                player.canMove = true;
+                return "";
+            }
+
+            caveTextInterval = $.timer(function(){
+                texty = $("#cave-text").text();
+                texty += getNextLetter();
+                $("#cave-text").text(texty);
+            }, 100);
+                            
+            Sound.text.play();
+
+            caveTextInterval.play();
+            this.isWriteText = false;
         },
 
         // **addBody()** adds a body to the bodies array.
@@ -257,7 +263,7 @@
             this.addBody(new CaveFire(this, { x: 176, y: 72 }));
             this.addBody(new OldMan(this, { x: 128, y: 72 }));
                         
-            this.doCaveText = true;
+            this.isWriteText = true;
         },
         
         exitCave: function(){
@@ -548,12 +554,18 @@
     };
     
     var Sound = (function(){
-        var sword = new Audio("/zelda/sounds/sword.wav");
+        var sword = new Audio("sounds/sword.wav");
+        var text = new Audio("sounds/text.mp3");
         
         return {
             sword: {
                play: function(){
                    sword.play();
+               }
+            },
+            text: {
+               play: function(){
+                   text.play();
                }
             }
         }
