@@ -26,6 +26,8 @@
         this.map =  { x: 7, y: 7 };
 
         this.movementMap = getCurrentMap(this.map.x, this.map.y);
+        
+        this.isPaused = false;
 
         var self = this;
 
@@ -183,7 +185,7 @@
         printText: function(){
             var player = this.player;
             player.canMove = false;
-            var caveText = "IT'S DANGEROUS TO GO\nALONE! TAKE THIS.";
+            var caveText = this.caveProperties.text;
 
             var texty = "";
 
@@ -246,6 +248,7 @@
         },
 
         enterCave: function(){
+            var self = this;
             this.preCaveMap = this.movementMap;
             this.preCavePlayerX = this.player.center.x;
             this.preCavePlayerY = this.player.center.y;
@@ -258,10 +261,12 @@
             this.player.center.y = 150;
             
             this.viewport.css("background", "url('images/cave_map.png')");
-
-            this.addBody(new CaveFire(this, { x: 80, y: 72 }));
-            this.addBody(new CaveFire(this, { x: 176, y: 72 }));
-            this.addBody(new OldMan(this, { x: 128, y: 72 }));
+            
+            this.caveProperties = getCaveProperties(this)[self.map.x + "_" + self.map.y];
+            
+            _.each(this.caveProperties.bodies, function(body){
+                self.addBody(body);
+            });
                         
             this.isWriteText = true;
         },
@@ -278,13 +283,35 @@
             this.isInCave = false;
             
             this.bodies = _.filter(this.bodies, function(body) {
-                return !(body instanceof CaveFire || body instanceof OldMan);
+                return body instanceof Player;
             });
             
             $("#cave-text").text("");
         }
     };
-    
+
+    var getCaveProperties = function(game){
+        return {
+            "6_6": {
+                text: "BUY SOMETHIN' WILL YA!",
+                bodies: [
+                    new CaveFire(game, { x: 80, y: 72 }),
+                    new CaveFire(game, { x: 176, y: 72 }),
+                    new Merchant(game, { x: 128, y: 72 })
+                ]
+            },
+            "7_7": {
+                text: "IT'S DANGEROUS TO GO\nALONE! TAKE THIS.",
+                bodies: [
+                    new CaveFire(game, { x: 80, y: 72 }),
+                    new CaveFire(game, { x: 176, y: 72 }),
+                    new OldMan(game, { x: 128, y: 72 }),
+                    new Sword(game, { x: 128, y: 100 }),
+                ]
+            }
+        }
+    };
+
     // Player
     // ------
 
@@ -499,6 +526,10 @@
                     this.game.moveScreenRight();
                 }
             }
+            
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.ENTER)) {
+                this.game.isPaused = true;
+            }
 
             this.tile.x = parseInt(Number(this.center.x).toFixed(0) / 16);
             this.tile.y = parseInt(Number(this.center.y).toFixed(0) / 16);
@@ -553,6 +584,47 @@
         }
     };
     
+    var Merchant = function(game, center){
+        this.id = "merchant";
+        this.game = game;
+        this.size = { x: 16, y: 16 };
+        this.center = { x: center.x, y: center.y };
+    };
+
+    Merchant.prototype = {
+        draw: function(screen){
+            var x = this.center.x;
+            var y = this.center.y;
+
+            var img = document.getElementById(this.id);
+            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+        },
+
+        update: function() {
+        }
+    };
+    
+
+    var Sword = function(game, center){
+        this.id = "sword-item";
+        this.game = game;
+        this.size = { x: 16, y: 16 };
+        this.center = { x: center.x, y: center.y };
+    };
+
+    Sword.prototype = {
+        draw: function(screen){
+            var x = this.center.x;
+            var y = this.center.y;
+
+            var img = document.getElementById(this.id);
+            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+        },
+
+        update: function() {
+        }
+    };
+    
     var Sound = (function(){
         var sword = new Audio("sounds/sword.wav");
         var text = new Audio("sounds/text.mp3");
@@ -597,7 +669,7 @@
         };
 
         // Handy constants that give keyCodes human-readable names.
-        this.KEYS = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, SPACE: 32 };
+        this.KEYS = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, SPACE: 32, ENTER: 13 };
     };
 
     var TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false };
