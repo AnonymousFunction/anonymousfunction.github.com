@@ -171,9 +171,9 @@
             
             menuScreen.fillStyle = "white";
             menuScreen.font = "8px 'Press Start 2P'";
-            menuScreen.fillText("255", 96, 24);
-            menuScreen.fillText("X0", 96, 40);
-            menuScreen.fillText("X0", 96, 48);
+            $("#rupees").text("255");
+            $("#keys").text("X0");
+            $("#bombs").text("X0");
         },
         
         drawController: function(controllerScreen){
@@ -560,12 +560,12 @@
         return {
             sword: {
                play: function(){
-                   sword.play();
+//                   sword.play();
                }
             },
             text: {
                play: function(){
-                   text.play();
+//                   text.play();
                }
             }
         }

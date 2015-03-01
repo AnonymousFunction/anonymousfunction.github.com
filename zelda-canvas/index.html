@@ -30,12 +30,29 @@
     .text {
         color: white;
         font-family: 'Press Start 2P', cursive;
-        position: absolute;
         font-size: 8px;
+    }
+    #cave-text {
+        position: absolute;
         top: 90px;
         left: 34px;
         width: 186px;
         text-align: center;
+    }
+    #rupees {
+        position: absolute;
+        top: 16px;
+        left: 96px;
+    }
+    #keys {
+        position: absolute;
+        top: 31px;
+        left: 96px;
+    }
+    #bombs {
+        position: absolute;
+        top: 40px;
+        left: 96px;
     }
     #menu {
         position: absolute;
@@ -72,14 +89,9 @@
 <canvas id="zelda" width="256" height="176"></canvas>
 <canvas id="controller" width="256" height="115"></canvas>
 
-<div id="debug">
-    Link X: <span id="link-x"></span>
-    Link Y: <span id="link-y"></span><br/>
-    Link X Tile: <span id="link-x-square"></span>
-    Link Y Tile: <span id="link-y-square"></span><br/>
-    Map X: <span id="map-x"></span>
-    Map Y: <span id="map-y"></span><br/>
-</div>
+<span id="rupees" class="text"></span>
+<span id="keys" class="text"></span>
+<span id="bombs" class="text"></span>
 
 <div id="cave-text" class="text"></div>
 
@@ -114,5 +126,15 @@
 <!--<audio controls autoplay="autoplay" loop="loop" hidden="hidden">-->
     <!--<source src="/zelda/sounds/overworld.mp3" type="audio/mpeg">-->
 <!--</audio>-->
+
+<div id="debug">
+    Link X: <span id="link-x"></span>
+    Link Y: <span id="link-y"></span><br/>
+    Link X Tile: <span id="link-x-square"></span>
+    Link Y Tile: <span id="link-y-square"></span><br/>
+    Map X: <span id="map-x"></span>
+    Map Y: <span id="map-y"></span><br/>
+</div>
+
 </body>
 </html>
