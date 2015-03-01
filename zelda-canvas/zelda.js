@@ -317,16 +317,27 @@
     };
 
     var getCaveProperties = function(game){
-        return {
-            "6_6": {
-                text: "BUY SOMETHIN' WILL YA!",
+        var player = game.player;
+        var _6_6 = {
+            text: "BUY SOMETHIN' WILL YA!",
+            bodies: [
+                new CaveFire(game, { x: 80, y: 72 }),
+                new CaveFire(game, { x: 176, y: 72 }),
+                new Merchant(game, { x: 128, y: 72 })
+            ]
+        };
+        
+        var _7_7;
+        if (player.hasSword) {
+            _7_7 = {
+                text: "",
                 bodies: [
                     new CaveFire(game, { x: 80, y: 72 }),
-                    new CaveFire(game, { x: 176, y: 72 }),
-                    new Merchant(game, { x: 128, y: 72 })
+                    new CaveFire(game, { x: 176, y: 72 })
                 ]
-            },
-            "7_7": {
+            }
+        } else {
+            _7_7 = {
                 text: "IT'S DANGEROUS TO GO\nALONE! TAKE THIS.",
                 bodies: [
                     new CaveFire(game, { x: 80, y: 72 }),
@@ -335,6 +346,11 @@
                     new Sword(game, { x: 128, y: 100 }),
                 ]
             }
+        }
+        
+        return {
+            "6_6": _6_6,
+            "7_7": _7_7
         }
     };
 
