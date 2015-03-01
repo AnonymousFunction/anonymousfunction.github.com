@@ -104,10 +104,24 @@
 
                 return;
             }
-
+            
             for (var i = 0; i < self.bodies.length; i++) {
                 self.bodies[i].update();
             }
+            
+            //Check to see if Link is colliding with any objects
+            _.each(self.bodies, function(body){
+                if (!(body instanceof Player)) {
+                    if (doBodiesCollide(self.player, body)) {
+                        if (body instanceof Sword) {
+                            self.player.hasSword = true;
+                            self.removeBody(body);
+                            $("#cave-text").text("");
+                            self.removeBodyByType(OldMan)
+                        }
+                    }
+                }
+            });
             
             /* DEBUG */
 
@@ -217,6 +231,18 @@
         // **addBody()** adds a body to the bodies array.
         addBody: function (body) {
             this.bodies.push(body);
+        },        
+        
+        removeBody: function (b2) {
+            this.bodies = _.filter(this.bodies, function(b1){
+                return b1 != b2;
+            })
+        },        
+        
+        removeBodyByType: function (type) {
+            this.bodies = _.filter(this.bodies, function(b1){
+                return !(b1 instanceof type);
+            })
         },
         
         moveScreenUp: function(){
@@ -326,7 +352,7 @@
         this.moveRate = 1.3;
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
-        this.hasSword = true;
+        this.hasSword = false;
         this.swordCooldown = 10;
         this.swordTimer = 0;
         this.swordWaitCooldown = 20;
@@ -383,7 +409,7 @@
             
             
             // If Space key is down...
-            if ((this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || TOUCH.A) && this.swordTimer === 0 && this.swordWait === 0 && this.swordRelease) {
+            if ((this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || TOUCH.A) && this.hasSword && this.swordTimer === 0 && this.swordWait === 0 && this.swordRelease) {
                 if (this.id.indexOf("up") > -1) {
                     this.id = "sword-up";
                     this.center.y -= 12;
@@ -398,9 +424,9 @@
                 this.swordTimer = this.swordCooldown;
                 this.swordWait = this.swordWaitCooldown;
                 this.swordRelease = false;
-                
+
                 Sound.sword.play();
-                
+
                 return;
             } else {
                 if (this.id === "sword-up") {
@@ -608,7 +634,7 @@
     var Sword = function(game, center){
         this.id = "sword-item";
         this.game = game;
-        this.size = { x: 16, y: 16 };
+        this.size = { x: 7, y: 16 };
         this.center = { x: center.x, y: center.y };
     };
 
@@ -673,6 +699,27 @@
     };
 
     var TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false };
+    
+    // **colliding()** returns true if two passed bodies are colliding.
+    // The approach is to test for five situations.  If any are true,
+    // the bodies are definitely not colliding.  If none of them
+    // are true, the bodies are colliding.
+    // 1. b1 is the same body as b2.
+    // 2. Right of `b1` is to the left of the left of `b2`.
+    // 3. Bottom of `b1` is above the top of `b2`.
+    // 4. Left of `b1` is to the right of the right of `b2`.
+    // 5. Top of `b1` is below the bottom of `b2`.
+    var doBodiesCollide = function (b1, b2) {
+        var isColliding = !(
+            b1 === b2 ||
+                b1.center.x + b1.size.x / 2 < b2.center.x - b2.size.x / 2 ||
+                b1.center.y + b1.size.y / 2 < b2.center.y - b2.size.y / 2 ||
+                b1.center.x - b1.size.x / 2 > b2.center.x + b2.size.x / 2 ||
+                b1.center.y - b1.size.y / 2 > b2.center.y + b2.size.y / 2
+            );
+
+        return isColliding;
+    };
 
     // Start game
     // ----------
