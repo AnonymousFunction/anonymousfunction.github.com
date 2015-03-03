@@ -783,18 +783,22 @@
             this.direction = "up";
             this.id = "sword-power-up";
             this.size = { x: 8, y: 16 };
+            this.center.x--;
         } else if (swordDirection.indexOf("down") > -1) {
             this.direction = "down";
             this.id = "sword-power-down";
             this.size = { x: 8, y: 16 };
+            this.center.x++;
         } else if (swordDirection.indexOf("left") > -1) {
             this.direction = "left";
             this.id = "sword-power-left";
             this.size = { x: 16, y: 8 };
+            this.center.y++;
         } else if (swordDirection.indexOf("right") > -1) {
             this.direction = "right";            
             this.id = "sword-power-right";
             this.size = { x: 16, y: 8 };
+            this.center.y++;
         }
         
     };
