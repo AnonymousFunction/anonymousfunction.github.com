@@ -244,12 +244,17 @@
                 return !(b1 instanceof type);
             })
         },
+        
+        clearObjectsOnScreenTransition: function(){
+            this.removeBodyByType(SwordPower);
+        },
 
         moveScreenUp: function () {
             this.screenTransitionTime = 176;
             this.screenTransitionDir = "up";
             this.map.y--;
             this.movementMap = getCurrentMap(this.map.x, this.map.y);
+            this.clearObjectsOnScreenTransition();
         },
 
         moveScreenDown: function () {
@@ -257,6 +262,7 @@
             this.screenTransitionDir = "down";
             this.map.y++;
             this.movementMap = getCurrentMap(this.map.x, this.map.y);
+            this.clearObjectsOnScreenTransition();
         },
 
         moveScreenLeft: function () {
@@ -264,6 +270,7 @@
             this.screenTransitionDir = "left";
             this.map.x--;
             this.movementMap = getCurrentMap(this.map.x, this.map.y);
+            this.clearObjectsOnScreenTransition();
         },
 
         moveScreenRight: function () {
@@ -271,6 +278,7 @@
             this.screenTransitionDir = "right";
             this.map.x++;
             this.movementMap = getCurrentMap(this.map.x, this.map.y);
+            this.clearObjectsOnScreenTransition();
         },
 
         enterCave: function () {
