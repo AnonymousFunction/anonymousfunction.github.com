@@ -865,18 +865,23 @@
         this.id = "boomerang";
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
-        this.velocity = 3;
+        this.velocity = 4;
         this.center = { x: center.x, y: center.y };
         this.size = { x: 5, y: 8 };
-        this.direction;
-        
+        this.throwDistance = 54;
+        this.returnToLink = false;
+
         if (boomerangDirection.indexOf("up") > -1) {
             this.direction = "up";
+            this.endpoint = { x: this.center.x, y: this.center.y - this.throwDistance };
         } else if (boomerangDirection.indexOf("down") > -1) {
             this.direction = "down";
+            this.endpoint = { x: this.center.x, y: this.center.y + this.throwDistance };
         } else if (boomerangDirection.indexOf("left") > -1) {
             this.direction = "left";
+            this.endpoint = { x: this.center.x - this.throwDistance, y: this.center.y };
         } else if (boomerangDirection.indexOf("right") > -1) {
+            this.endpoint = { x: this.center.x + this.throwDistance, y: this.center.y };
             this.direction = "right";            
         }
     };
@@ -891,14 +896,49 @@
         },
 
         update: function () {
-            if (this.direction === "up") {
-                this.center.y -= this.velocity;
+            var link = this.game.player;
+            if (this.returnToLink) {
+                if (doBodiesCollide(link, this)) {
+                    this.game.removeBody(this);
+                    return;
+                }
+
+                if (this.center.x > link.center.x) {
+                    this.center.x -= this.velocity;
+                } else {
+                    this.center.x += this.velocity;
+                }
+
+                if (this.center.y > link.center.y) {
+                    this.center.y -= this.velocity;
+                } else {
+                    this.center.y += this.velocity;
+                }
+
+            } else if (this.direction === "up") {
+                if ((this.center.y - this.velocity) > this.endpoint.y) {
+                    this.center.y -= this.velocity;
+                } else {
+                    this.returnToLink = true;
+                }
             } else if (this.direction === "down") {
-                this.center.y += this.velocity;
+                if ((this.center.y + this.velocity) < this.endpoint.y) {
+                    this.center.y += this.velocity;
+                } else {
+                    this.returnToLink = true;
+                }
             } else if (this.direction === "left") {
-                this.center.x -= this.velocity;
+                if ((this.center.x - this.velocity) > this.endpoint.x) {
+                    this.center.x -= this.velocity;
+                } else {
+                    this.returnToLink = true;
+                }
             } else if (this.direction === "right") {
-                this.center.x += this.velocity;
+                if ((this.center.x + this.velocity) < this.endpoint.x) {
+                    this.center.x += this.velocity;
+                } else {
+                    this.returnToLink = true;
+                }
             }
 
             if (this.center.x < 0 || this.center.x > 256 || this.center.y < 0 || this.center.y > 176) {
