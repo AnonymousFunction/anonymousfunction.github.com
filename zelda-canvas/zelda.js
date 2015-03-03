@@ -847,6 +847,53 @@
              
         }
     };
+    
+    var Boomerang = function (game, center, boomerangDirection) {
+        this.game = game;
+        this.id = "boomerang";
+        this.spriteChangeCount = 0;
+        this.spriteCooldown = 6;
+        this.velocity = 3;
+        this.center = { x: center.x, y: center.y };
+        this.size = { x: 5, y: 8 };
+        this.direction;
+        
+        if (boomerangDirection.indexOf("up") > -1) {
+            this.direction = "up";
+        } else if (boomerangDirection.indexOf("down") > -1) {
+            this.direction = "down";
+        } else if (boomerangDirection.indexOf("left") > -1) {
+            this.direction = "left";
+        } else if (boomerangDirection.indexOf("right") > -1) {
+            this.direction = "right";            
+        }
+    };
+    
+    Boomerang.prototype = {
+        draw: function (screen) {
+            var x = this.center.x;
+            var y = this.center.y;
+
+            var img = document.getElementById(this.id);
+            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+        },
+
+        update: function () {
+            if (this.direction === "up") {
+                this.center.y -= this.velocity;
+            } else if (this.direction === "down") {
+                this.center.y += this.velocity;
+            } else if (this.direction === "left") {
+                this.center.x -= this.velocity;
+            } else if (this.direction === "right") {
+                this.center.x += this.velocity;
+            }
+
+            if (this.center.x < 0 || this.center.x > 256 || this.center.y < 0 || this.center.y > 176) {
+                this.game.removeBody(this);
+            }
+        }
+    };
 
     var Sound = (function () {
         var sword = new Audio("sounds/sword.wav");
