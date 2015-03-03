@@ -244,6 +244,12 @@
                 return !(b1 instanceof type);
             })
         },
+
+        hasBodyByType: function(type) {
+            return Boolean(_.find(this.bodies, function(body){
+                return body instanceof type;
+            }));
+        },
         
         clearObjectsOnScreenTransition: function(){
             this.removeBodyByType(SwordPower);
@@ -355,7 +361,7 @@
                     new CaveFire(game, { x: 80, y: 72 }),
                     new CaveFire(game, { x: 176, y: 72 }),
                     new OldMan(game, { x: 128, y: 72 }),
-                    new Sword(game, { x: 128, y: 100 }),
+                    new Sword(game, { x: 128, y: 100 })
                 ]
             }
         }
@@ -471,6 +477,12 @@
                     this.id = "link-right-1";
                 }
                 this.swordRelease = true;
+            }
+
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.C)) {
+                if (!this.game.hasBodyByType(Boomerang)) {
+                    this.game.addBody(new Boomerang(this.game, this.center, this.id));
+                }
             }
 
             if (this.keyboarder.isDown(this.keyboarder.KEYS.UP) || TOUCH.UP) {
@@ -939,7 +951,7 @@
         };
 
         // Handy constants that give keyCodes human-readable names.
-        this.KEYS = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, SPACE: 32, ENTER: 13 };
+        this.KEYS = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, SPACE: 32, ENTER: 13, C: 67 };
     };
 
     var TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false };
