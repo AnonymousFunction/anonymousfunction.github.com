@@ -190,6 +190,22 @@
             $("#rupees").text("255");
             $("#keys").text("X0");
             $("#bombs").text("X0");
+            
+            //hearts
+            var heartsX = 175;
+            var heartsY = 37;
+            if (this.player.hearts <= 8) {
+                for (var i = 0; i < this.player.hearts; i++) {
+                    img = document.getElementById("full-heart");
+                    menuScreen.drawImage(img, heartsX, heartsY, 9, 10);
+                    heartsX += 8;
+                }
+                for (var i = 0; i < this.player.maxHearts - this.player.hearts; i++) {
+                    img = document.getElementById("empty-heart");
+                    menuScreen.drawImage(img, heartsX, heartsY, 9, 10);
+                    heartsX += 8;
+                }
+            }
         },
 
         drawController: function (controllerScreen) {
@@ -392,6 +408,8 @@
         this.swordWaitCooldown = 20;
         this.swordWait = 0;
         this.canMove = true;
+        this.maxHearts = 3;
+        this.hearts = 3;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
