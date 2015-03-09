@@ -779,8 +779,17 @@
 
         update: function () {
             if (this.spriteChangeCount === 0) {
-                this.id = this.id === "red-octorok-up-1" ? "red-octorok-up-2" : "red-octorok-up-1";
                 this.spriteChangeCount = this.spriteCooldown;
+
+                if (this.direction === "up") {
+                    this.id = this.id === "red-octorok-up-1" ? "red-octorok-up-2" : "red-octorok-up-1";
+                } else if (this.direction === "down") {
+                    this.id = this.id === "red-octorok-down-1" ? "red-octorok-down-2" : "red-octorok-down-1";
+                } else if (this.direction === "left") {
+                    this.id = this.id === "red-octorok-left-1" ? "red-octorok-left-2" : "red-octorok-left-1";
+                } else if (this.direction === "right") {
+                    this.id = this.id === "red-octorok-right-1" ? "red-octorok-right-2" : "red-octorok-right-1";
+                }
             } else {
                 this.spriteChangeCount--;
             }
