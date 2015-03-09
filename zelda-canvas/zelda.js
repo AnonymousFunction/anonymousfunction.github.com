@@ -105,6 +105,11 @@
                 return;
             }
 
+            if (this.needToSpawnEnemies) {
+                this.spawnEnemies();
+                this.needToSpawnEnemies = false;
+            }
+
             for (var i = 0; i < self.bodies.length; i++) {
                 self.bodies[i].update();
             }
@@ -268,7 +273,21 @@
         },
         
         clearObjectsOnScreenTransition: function(){
-            this.removeBodyByType(SwordPower);
+            var self = this;
+            var clearArray = [SwordPower, RedOctorok];
+
+            _.each(clearArray, function(type){
+                self.removeBodyByType(type);
+            });
+        },
+
+        spawnEnemies: function(){
+            var self = this;
+            this.enemies = getEnemyLocations(this)[this.map.x + "_" + this.map.y] || { bodies: [] };
+
+            _.each(this.enemies.bodies, function (body) {
+                self.addBody(body);
+            });
         },
 
         moveScreenUp: function () {
@@ -277,6 +296,7 @@
             this.map.y--;
             this.movementMap = getCurrentMap(this.map.x, this.map.y);
             this.clearObjectsOnScreenTransition();
+            this.needToSpawnEnemies = true;
         },
 
         moveScreenDown: function () {
@@ -285,6 +305,7 @@
             this.map.y++;
             this.movementMap = getCurrentMap(this.map.x, this.map.y);
             this.clearObjectsOnScreenTransition();
+            this.needToSpawnEnemies = true;
         },
 
         moveScreenLeft: function () {
@@ -293,6 +314,7 @@
             this.map.x--;
             this.movementMap = getCurrentMap(this.map.x, this.map.y);
             this.clearObjectsOnScreenTransition();
+            this.needToSpawnEnemies = true;
         },
 
         moveScreenRight: function () {
@@ -301,6 +323,7 @@
             this.map.x++;
             this.movementMap = getCurrentMap(this.map.x, this.map.y);
             this.clearObjectsOnScreenTransition();
+            this.needToSpawnEnemies = true;
         },
 
         enterCave: function () {
@@ -309,8 +332,8 @@
             this.preCavePlayerX = this.player.center.x;
             this.preCavePlayerY = this.player.center.y;
             this.isInCave = true;
-            this.preCaveBackgroundX = this.viewport.css("background-position-x")
-            this.preCaveBackgroundY = this.viewport.css("background-position-y")
+            this.preCaveBackgroundX = this.viewport.css("background-position-x");
+            this.preCaveBackgroundY = this.viewport.css("background-position-y");
 
             this.movementMap = getCaveMap();
             this.player.center.x = 128;
@@ -385,6 +408,20 @@
         return {
             "6_6": _6_6,
             "7_7": _7_7
+        }
+    };
+
+    var getEnemyLocations = function(game){
+        var player = game.player;
+
+        var _8_7 = {
+            bodies: [
+                new RedOctorok(game, { x: 80, y: 72 })
+            ]
+        };
+
+        return {
+            "8_7": _8_7
         }
     };
 
@@ -709,6 +746,26 @@
             screen.font="8px 'Press Start 2P'";
             screen.fillStyle="white";
             screen.fillText(this.price, x - 10, y + 20);
+        },
+
+        update: function () {
+        }
+    };
+
+    var RedOctorok = function (game, center) {
+        this.id = "red-octorok";
+        this.game = game;
+        this.size = { x: 16, y: 16 };
+        this.center = { x: center.x, y: center.y };
+    };
+
+    RedOctorok.prototype = {
+        draw: function (screen) {
+            var x = this.center.x;
+            var y = this.center.y;
+
+            var img = document.getElementById(this.id);
+            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
         },
 
         update: function () {
