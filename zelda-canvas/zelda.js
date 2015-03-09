@@ -17,6 +17,8 @@
 
         var gameSize = { x: canvas.width, y: canvas.height };
 
+        this.size = gameSize;
+
         this.bodies = [];
 
         this.player = new Player(this, gameSize);
@@ -416,7 +418,10 @@
 
         var _8_7 = {
             bodies: [
-                new RedOctorok(game, { x: 80, y: 72 })
+                new RedOctorok(game, "up", { x: 128, y: 72 }),
+                new RedOctorok(game, "down", { x: 100, y: 72 }),
+                new RedOctorok(game, "left", { x: 100, y: 72 }),
+                new RedOctorok(game, "right", { x: 100, y: 72 })
             ]
         };
 
@@ -752,11 +757,15 @@
         }
     };
 
-    var RedOctorok = function (game, center) {
-        this.id = "red-octorok";
+    var RedOctorok = function (game, direction, center) {
+        this.id = "red-octorok-up-1";
         this.game = game;
         this.size = { x: 16, y: 16 };
         this.center = { x: center.x, y: center.y };
+        this.spriteChangeCount = 0;
+        this.spriteCooldown = 8;
+        this.velocity = .4;
+        this.direction = direction;
     };
 
     RedOctorok.prototype = {
@@ -769,6 +778,30 @@
         },
 
         update: function () {
+            if (this.spriteChangeCount === 0) {
+                this.id = this.id === "red-octorok-up-1" ? "red-octorok-up-2" : "red-octorok-up-1";
+                this.spriteChangeCount = this.spriteCooldown;
+            } else {
+                this.spriteChangeCount--;
+            }
+
+            if (this.direction === "up") {
+                if (this.center.y - this.velocity > this.size.y / 2) {
+                    this.center.y -= this.velocity;
+                }
+            } else if (this.direction === "down") {
+                if (this.center.y + this.velocity < this.game.size.y - this.size.y / 2) {
+                    this.center.y += this.velocity;
+                }
+            } else if (this.direction === "left") {
+                if (this.center.x - this.velocity > this.size.x / 2) {
+                    this.center.x -= this.velocity;
+                }
+            } else if (this.direction === "right") {
+                if (this.center.x + this.velocity < this.game.size.x - this.size.x / 2) {
+                    this.center.x += this.velocity;
+                }
+            }
         }
     };
 
