@@ -126,10 +126,28 @@
                             $("#cave-text").text("");
                             self.removeBodyByType(OldMan)
                         } else if (body instanceof RedOctorok) {
+                            if (self.player.isSwingingSword()) {
+                                self.removeBody(body);
+                            }
                         }
                     }
                 }
             });
+
+            var swordPower = this.getFirstBodyByType(SwordPower);
+
+            if (swordPower) {
+                _.each(self.bodies, function (body) {
+                    if (!(body instanceof Player) && !(body instanceof SwordPower)) {
+                        if (doBodiesCollide(swordPower, body)) {
+                            if (body instanceof RedOctorok) {
+                                self.removeBody(body);
+                                self.removeBody(swordPower);
+                            }
+                        }
+                    }
+                });
+            }
 
             /* DEBUG */
 
@@ -255,6 +273,12 @@
         // **addBody()** adds a body to the bodies array.
         addBody: function (body) {
             this.bodies.push(body);
+        },
+
+        getFirstBodyByType: function (type) {
+            return _.find(this.bodies, function(body){
+                return body instanceof type;
+            });
         },
 
         removeBody: function (b2) {
@@ -443,7 +467,7 @@
         this.moveRate = 1.3;
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
-        this.hasSword = false;
+        this.hasSword = true; //Game Genie style, son!
         this.swordCooldown = 10;
         this.swordTimer = 0;
         this.swordWaitCooldown = 20;
@@ -484,6 +508,10 @@
             //screen.fillRect(x + this.size.x / 2, y, 1, 1);
             //screen.fillRect(x - this.size.x / 2, y + this.size.y / 2, 1, 1);
             //screen.fillRect(x + this.size.x / 2, y + this.size.y / 2, 1, 1);
+        },
+
+        isSwingingSword: function(){
+            return Boolean(this.swordTimer);
         },
 
         // **update()** updates the state of the player for a single tick.
@@ -967,8 +995,7 @@
         this.spriteCooldown = 6;
         this.velocity = 3;
         this.center = { x: center.x, y: center.y };
-        this.direction;
-        
+
         if (swordDirection.indexOf("up") > -1) {
             this.direction = "up";
             this.id = "sword-power-up";
