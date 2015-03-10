@@ -125,6 +125,7 @@
                             self.removeBody(body);
                             $("#cave-text").text("");
                             self.removeBodyByType(OldMan)
+                        } else if (body instanceof RedOctorok) {
                         }
                     }
                 }
@@ -418,10 +419,9 @@
 
         var _8_7 = {
             bodies: [
-                new RedOctorok(game, "up", { x: 128, y: 72 }),
-                new RedOctorok(game, "down", { x: 100, y: 72 }),
-                new RedOctorok(game, "left", { x: 100, y: 72 }),
-                new RedOctorok(game, "right", { x: 100, y: 72 })
+                new RedOctorok(game, "up", { x: 200, y: 100 }),
+                new RedOctorok(game, "down", { x: 86, y: 40 }),
+                new RedOctorok(game, "down", { x: 86, y: 134 })
             ]
         };
 
@@ -539,11 +539,11 @@
                 this.swordRelease = true;
             }
 
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.C)) {
-                if (!this.game.hasBodyByType(Boomerang)) {
-                    this.game.addBody(new Boomerang(this.game, this.center, this.id));
-                }
-            }
+//            if (this.keyboarder.isDown(this.keyboarder.KEYS.C)) {
+//                if (!this.game.hasBodyByType(Boomerang)) {
+//                    this.game.addBody(new Boomerang(this.game, this.center, this.id));
+//                }
+//            }
 
             if (this.keyboarder.isDown(this.keyboarder.KEYS.UP) || TOUCH.UP) {
                 if (this.spriteChangeCount === 0 || this.id.indexOf("up") === -1) {
@@ -760,12 +760,15 @@
     var RedOctorok = function (game, direction, center) {
         this.id = "red-octorok-up-1";
         this.game = game;
-        this.size = { x: 16, y: 16 };
+        this.size = { x: 14, y: 14 };
         this.center = { x: center.x, y: center.y };
+        this.tile = {}; //does this need to be defaulted?
         this.spriteChangeCount = 0;
         this.spriteCooldown = 8;
         this.velocity = .4;
         this.direction = direction;
+        this.changeDirectionCooldown = 160;
+        this.changeDirectionCount = 0;
     };
 
     RedOctorok.prototype = {
@@ -778,6 +781,17 @@
         },
 
         update: function () {
+            this.tile.x = parseInt(Number(this.center.x).toFixed(0) / 16);
+            this.tile.y = parseInt(Number(this.center.y).toFixed(0) / 16);
+
+            if (this.changeDirectionCount === 0) {
+                this.changeDirectionCount = this.changeDirectionCooldown;
+                this.direction = getRandomDirection();
+                this.spriteChangeCount = 0;
+            } else {
+                this.changeDirectionCount--;
+            }
+
             if (this.spriteChangeCount === 0) {
                 this.spriteChangeCount = this.spriteCooldown;
 
@@ -796,18 +810,58 @@
 
             if (this.direction === "up") {
                 if (this.center.y - this.velocity > this.size.y / 2) {
+                    var newCenterY = this.center.y - this.velocity;
+                    var newTileY = parseInt(Number(newCenterY).toFixed(0) / 16);
+                    var leftBoundary = this.center.x - 4;
+                    var leftBoundaryTile = parseInt(Number(leftBoundary).toFixed(0) / 16);
+                    var rightBoundary = this.center.x + 4;
+                    var rightBoundaryTile = parseInt(Number(rightBoundary).toFixed(0) / 16);
+
+                    if (this.game.movementMap[newTileY][leftBoundaryTile] === 0 || this.game.movementMap[newTileY][rightBoundaryTile] === 0) {
+                        return;
+                    }
+
                     this.center.y -= this.velocity;
                 }
             } else if (this.direction === "down") {
                 if (this.center.y + this.velocity < this.game.size.y - this.size.y / 2) {
+                    var newCenterY = this.center.y + this.size.y / 2 + this.velocity;
+                    var newTileY = parseInt(Number(newCenterY).toFixed(0) / 16);
+                    var leftBoundary = this.center.x - 4;
+                    var leftBoundaryTile = parseInt(Number(leftBoundary).toFixed(0) / 16);
+                    var rightBoundary = this.center.x + 4;
+                    var rightBoundaryTile = parseInt(Number(rightBoundary).toFixed(0) / 16);
+
+                    if (this.game.movementMap[newTileY] && (this.game.movementMap[newTileY][leftBoundaryTile] === 0 || this.game.movementMap[newTileY][rightBoundaryTile] === 0)) {
+                        return;
+                    }
+
                     this.center.y += this.velocity;
                 }
             } else if (this.direction === "left") {
                 if (this.center.x - this.velocity > this.size.x / 2) {
+                    var newCenterX = this.center.x - this.size.x / 2 + this.velocity;
+                    var newTileX = parseInt(Number(newCenterX).toFixed(0) / 16);
+                    var bottomY = this.center.y + this.size.y / 2;
+                    var bottomTileY = parseInt(Number(bottomY).toFixed(0) / 16);
+
+                    if (this.game.movementMap[this.tile.y][newTileX] === 0 || this.game.movementMap[bottomTileY][newTileX] === 0) {
+                        return;
+                    }
+
                     this.center.x -= this.velocity;
                 }
             } else if (this.direction === "right") {
                 if (this.center.x + this.velocity < this.game.size.x - this.size.x / 2) {
+                    var newCenterX = this.center.x + this.size.x / 2 + this.velocity;
+                    var newTileX = parseInt(Number(newCenterX).toFixed(0) / 16);
+                    var bottomY = this.center.y + this.size.y / 2;
+                    var bottomTileY = parseInt(Number(bottomY).toFixed(0) / 16);
+
+                    if (this.game.movementMap[this.tile.y][newTileX] === 0 || this.game.movementMap[bottomTileY][newTileX] === 0) {
+                        return;
+                    }
+
                     this.center.x += this.velocity;
                 }
             }
@@ -1132,6 +1186,27 @@
             );
 
         return isColliding;
+    };
+
+    var getRandomDirection = function(){
+        var random = Math.floor(Math.random() * (4)) + 1;
+
+        switch (random) {
+            case 1:
+                return "up";
+                break;
+            case 2:
+                return "down";
+                break;
+            case 3:
+                return "left";
+                break;
+            case 4:
+                return "right";
+                break;
+            default:
+                return "up";
+        }
     };
 
     // Start game
