@@ -344,7 +344,7 @@
 
             this.viewport.css("background", "url('images/cave_map.png')");
 
-            this.caveProperties = getCaveProperties(this)[self.map.x + "_" + self.map.y];
+            this.caveProperties = getCaveProperties(this)[self.map.x + "_" + self.map.y] || { bodies: [], text: "FINISH THIS CAVE, RICH!" };
 
             _.each(this.caveProperties.bodies, function (body) {
                 self.addBody(body);
