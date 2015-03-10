@@ -342,7 +342,7 @@
             this.player.center.x = 128;
             this.player.center.y = 150;
 
-            this.viewport.css("background", "url('images/cave_map.png')");
+            this.viewport.addClass("cave");
 
             this.caveProperties = getCaveProperties(this)[self.map.x + "_" + self.map.y] || { bodies: [], text: "FINISH THIS CAVE, RICH!" };
 
@@ -354,8 +354,7 @@
         },
 
         exitCave: function () {
-            console.log("exit cave");
-            this.viewport.css("background", "url('images/overworld_map.png')");
+            this.viewport.removeClass("cave");
             this.viewport.css("background-position-x", this.preCaveBackgroundX);
             this.viewport.css("background-position-y", this.preCaveBackgroundY);
 
