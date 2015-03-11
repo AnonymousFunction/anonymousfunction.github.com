@@ -467,7 +467,7 @@
         this.moveRate = 1.3;
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
-        this.hasSword = true; //Game Genie style, son!
+        this.hasSword = false;
         this.swordCooldown = 10;
         this.swordTimer = 0;
         this.swordWaitCooldown = 20;
