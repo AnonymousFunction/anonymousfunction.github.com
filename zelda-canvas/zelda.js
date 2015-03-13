@@ -33,6 +33,11 @@
 
         var self = this;
 
+        //Game Genie
+        $("#sword-checkbox").click(function(){
+            self.player.hasSword = !self.player.hasSword;
+        });
+
         // Main game tick function.  Loops forever, running 60ish times a second.
         var tick = function () {
 
@@ -545,8 +550,10 @@
                 this.swordTimer = this.swordCooldown;
                 this.swordWait = this.swordWaitCooldown;
                 this.swordRelease = false;
-                
-                this.game.addBody(new SwordPower(this.game, this.center, this.id));
+
+                if (!this.game.hasBodyByType(SwordPower)) {
+                    this.game.addBody(new SwordPower(this.game, this.center, this.id));
+                }
 
                 Sound.sword.play();
 
