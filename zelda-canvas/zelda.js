@@ -33,10 +33,15 @@
 
         var self = this;
 
-        //Game Genie
-        $("#sword-checkbox").click(function(){
+        // Start Game Genie
+        $("#sword-checkbox").click(function () {
             self.player.hasSword = !self.player.hasSword;
         });
+
+        $("#link-speed-input").val(self.player.moveRate).on("change", function(){
+            self.player.moveRate = Number($(this).val());
+        });
+        // End Game Genie
 
         // Main game tick function.  Loops forever, running 60ish times a second.
         var tick = function () {
@@ -61,7 +66,7 @@
         // **update()** runs the main game logic.
         update: function () {
             var self = this;
-            
+
             if (this.screenTransitionTime) {
                 if (this.screenTransitionDir === "up") {
                     var origMapTop = parseInt(this.viewport.css("background-position-y"));
@@ -221,7 +226,7 @@
             $("#rupees").text("255");
             $("#keys").text("X0");
             $("#bombs").text("X0");
-            
+
             //hearts
             var heartsX = 175;
             var heartsY = 37;
@@ -281,7 +286,7 @@
         },
 
         getFirstBodyByType: function (type) {
-            return _.find(this.bodies, function(body){
+            return _.find(this.bodies, function (body) {
                 return body instanceof type;
             });
         },
@@ -298,22 +303,22 @@
             })
         },
 
-        hasBodyByType: function(type) {
-            return Boolean(_.find(this.bodies, function(body){
+        hasBodyByType: function (type) {
+            return Boolean(_.find(this.bodies, function (body) {
                 return body instanceof type;
             }));
         },
-        
-        clearObjectsOnScreenTransition: function(){
+
+        clearObjectsOnScreenTransition: function () {
             var self = this;
             var clearArray = [SwordPower, RedOctorok];
 
-            _.each(clearArray, function(type){
+            _.each(clearArray, function (type) {
                 self.removeBodyByType(type);
             });
         },
 
-        spawnEnemies: function(){
+        spawnEnemies: function () {
             var self = this;
             this.enemies = getEnemyLocations(this)[this.map.x + "_" + this.map.y] || { bodies: [] };
 
@@ -442,7 +447,7 @@
         }
     };
 
-    var getEnemyLocations = function(game){
+    var getEnemyLocations = function (game) {
         var player = game.player;
 
         var _8_7 = {
@@ -515,7 +520,7 @@
             //screen.fillRect(x + this.size.x / 2, y + this.size.y / 2, 1, 1);
         },
 
-        isSwingingSword: function(){
+        isSwingingSword: function () {
             return Boolean(this.swordTimer);
         },
 
@@ -782,8 +787,8 @@
             var img = document.getElementById(this.id);
             screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
 
-            screen.font="8px 'Press Start 2P'";
-            screen.fillStyle="white";
+            screen.font = "8px 'Press Start 2P'";
+            screen.fillStyle = "white";
             screen.fillText(this.price, x - 10, y + 20);
         },
 
@@ -918,8 +923,8 @@
             var img = document.getElementById(this.id);
             screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
 
-            screen.font="8px 'Press Start 2P'";
-            screen.fillStyle="white";
+            screen.font = "8px 'Press Start 2P'";
+            screen.fillStyle = "white";
             screen.fillText(this.price, x - 10, y + 20);
         },
 
@@ -943,8 +948,8 @@
             var img = document.getElementById(this.id);
             screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
 
-            screen.font="8px 'Press Start 2P'";
-            screen.fillStyle="white";
+            screen.font = "8px 'Press Start 2P'";
+            screen.fillStyle = "white";
             screen.fillText(this.price, x - 10, y + 20);
         },
 
@@ -967,8 +972,8 @@
             var img = document.getElementById(this.id);
             screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
 
-            screen.font="8px 'Press Start 2P'";
-            screen.fillStyle="white";
+            screen.font = "8px 'Press Start 2P'";
+            screen.fillStyle = "white";
             screen.fillText("X", x + 6, y + 5);
         },
 
@@ -994,8 +999,8 @@
 
         update: function () {
         }
-    };    
-    
+    };
+
     var SwordPower = function (game, center, swordDirection) {
         this.game = game;
         this.spriteChangeCount = 0;
@@ -1019,12 +1024,12 @@
             this.size = { x: 16, y: 8 };
             this.center.y++;
         } else if (swordDirection.indexOf("right") > -1) {
-            this.direction = "right";            
+            this.direction = "right";
             this.id = "sword-power-right";
             this.size = { x: 16, y: 8 };
             this.center.y++;
         }
-        
+
     };
 
     SwordPower.prototype = {
@@ -1042,7 +1047,7 @@
             } else {
                 this.spriteChangeCount--;
             }
-            
+
             if (this.direction === "up") {
                 this.id = this.id === "sword-power-up" ? "sword-power-up-flash" : "sword-power-up";
                 this.center.y -= this.velocity;
@@ -1056,14 +1061,14 @@
                 this.id = this.id === "sword-power-right" ? "sword-power-right-flash" : "sword-power-right";
                 this.center.x += this.velocity;
             }
-            
+
             if (this.center.x < 0 || this.center.x > 256 || this.center.y < 0 || this.center.y > 176) {
                 this.game.removeBody(this);
             }
-             
+
         }
     };
-    
+
     var Boomerang = function (game, center, boomerangDirection) {
         this.game = game;
         this.id = "boomerang";
@@ -1086,10 +1091,10 @@
             this.endpoint = { x: this.center.x - this.throwDistance, y: this.center.y };
         } else if (boomerangDirection.indexOf("right") > -1) {
             this.endpoint = { x: this.center.x + this.throwDistance, y: this.center.y };
-            this.direction = "right";            
+            this.direction = "right";
         }
     };
-    
+
     Boomerang.prototype = {
         draw: function (screen) {
             var x = this.center.x;
@@ -1221,7 +1226,7 @@
         return isColliding;
     };
 
-    var getRandomDirection = function(){
+    var getRandomDirection = function () {
         var random = Math.floor(Math.random() * (4)) + 1;
 
         switch (random) {
