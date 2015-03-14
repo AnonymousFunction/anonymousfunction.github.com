@@ -34,18 +34,18 @@
         var self = this;
 
         // Start Game Genie
-        $("#toggle-game-genie").click(function(){
-           $("#game-genie").toggleClass("hidden");
+        $("#toggle-game-genie").click(function () {
+            $("#game-genie").toggleClass("hidden");
         });
         $("#sword-checkbox").click(function () {
             self.player.hasSword = !self.player.hasSword;
         });
 
-        $("#link-speed-input").val(self.player.moveRate).on("change", function(){
+        $("#link-speed-input").val(self.player.moveRate).on("change", function () {
             self.player.moveRate = Number($(this).val());
         });
 
-        $("#link-rupees-input").val(self.player.rupees).on("change", function(){
+        $("#link-rupees-input").val(self.player.rupees).on("change", function () {
             self.player.rupees = Number($(this).val());
         });
         // End Game Genie
@@ -420,21 +420,15 @@
             this.preCaveBackgroundX = this.viewport.css("background-position-x");
             this.preCaveBackgroundY = this.viewport.css("background-position-y");
 
-            this.viewport.css({
-                "background-position-x": "-768px",
-                "background-position-y": "-1232px"
-            });
-
             this.player.center.x = 128;
             this.player.center.y = 150;
 
-//            "7-3": {
-//                levelName: "LEVEL-1",
-//                    "background-position-x": "-768px",
-//                    "background-position-y": "-1232px",
-//                    dungeonMapX: 3,
-//                    dungeonMapY: 7
-//            }
+            this.dungeonProperties = getDungeonProperties(this)[self.map.x + "_" + self.map.y] || { bodies: [] };
+
+            this.viewport.css({
+                "background-position-x": this.dungeonProperties.startBackgroundX,
+                "background-position-y": this.dungeonProperties.startBackgroundY
+            });
 
             this.viewport.addClass("dungeon");
         }
@@ -479,6 +473,21 @@
         return {
             "6_6": _6_6,
             "7_7": _7_7
+        }
+    };
+
+    var getDungeonProperties = function (game) {
+        var player = game.player;
+        var _7_3 = {
+            bodies: [
+
+            ],
+            startBackgroundX: "-768px",
+            startBackgroundY: "-1232px"
+        };
+
+        return {
+            "7_3": _7_3
         }
     };
 
