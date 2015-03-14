@@ -34,12 +34,19 @@
         var self = this;
 
         // Start Game Genie
+        $("#toggle-game-genie").click(function(){
+           $("#game-genie").toggleClass("hidden");
+        });
         $("#sword-checkbox").click(function () {
             self.player.hasSword = !self.player.hasSword;
         });
 
         $("#link-speed-input").val(self.player.moveRate).on("change", function(){
             self.player.moveRate = Number($(this).val());
+        });
+
+        $("#link-rupees-input").val(self.player.rupees).on("change", function(){
+            self.player.rupees = Number($(this).val());
         });
         // End Game Genie
 
@@ -223,7 +230,7 @@
 
             menuScreen.fillStyle = "white";
             menuScreen.font = "8px 'Press Start 2P'";
-            $("#rupees").text("255");
+            $("#rupees").text(this.player.rupees < 100 ? "X" + this.player.rupees : this.player.rupees);
             $("#keys").text("X0");
             $("#bombs").text("X0");
 
@@ -485,6 +492,7 @@
         this.canMove = true;
         this.maxHearts = 3;
         this.hearts = 3;
+        this.rupees = 255;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();

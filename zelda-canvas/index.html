@@ -23,15 +23,18 @@
         -ms-user-select: none;
         user-select: none;
     }
+
     html, body {
         padding: 0;
         margin: 0;
     }
+
     .text {
         color: white;
         font-family: 'Press Start 2P', cursive;
         font-size: 8px;
     }
+
     #cave-text {
         position: absolute;
         top: 95px;
@@ -39,25 +42,30 @@
         width: 186px;
         text-align: center;
     }
+
     #rupees {
         position: absolute;
         top: 16px;
         left: 96px;
     }
+
     #keys {
         position: absolute;
         top: 31px;
         left: 96px;
     }
+
     #bombs {
         position: absolute;
         top: 40px;
         left: 96px;
     }
+
     #menu {
         position: absolute;
         background-color: black;
     }
+
     #zelda {
         position: absolute;
         top: 56px;
@@ -71,9 +79,11 @@
         /* 16 columns @ 256px = 16px per col */
         /* 11 rows @ 176px = 16px per row */
     }
+
     #zelda.cave {
         background: url("images/cave_map.png");
     }
+
     #controller {
         position: absolute;
         top: 232px;
@@ -82,11 +92,14 @@
         background: url("images/controller.png");
         background-size: 256px;
     }
+
     #debug {
-        display: none;
         position: absolute;
         top: 350px;
         font-family: monospace;
+    }
+    .hidden {
+        display: none;
     }
 </style>
 <canvas id="menu" width="256" height="56"></canvas>
@@ -161,19 +174,23 @@
 <img id="sword-right" src="images/sword_right.png" style="display: none;"/>
 
 <!--<audio controls autoplay="autoplay" loop="loop" hidden="hidden">-->
-    <!--<source src="/zelda/sounds/overworld.mp3" type="audio/mpeg">-->
+<!--<source src="/zelda/sounds/overworld.mp3" type="audio/mpeg">-->
 <!--</audio>-->
 
 <div id="debug">
-    Link X: <span id="link-x"></span>
-    Link Y: <span id="link-y"></span><br/>
-    Link X Tile: <span id="link-x-square"></span>
-    Link Y Tile: <span id="link-y-square"></span><br/>
-    Map X: <span id="map-x"></span>
-    Map Y: <span id="map-y"></span><br/>
-    Game Genie:<br/>
-    Sword: <input type="checkbox" id="sword-checkbox"/><br/>
-    Speed: <input type="number" id="link-speed-input" min="1.3" max="5.0" step="0.1"/>
+    <a href="javascript:void(0);" id="toggle-game-genie">Toggle Game Genie</a>
+
+    <div id="game-genie" class="hidden">
+        Link X: <span id="link-x"></span>
+        Link Y: <span id="link-y"></span><br/>
+        Link X Tile: <span id="link-x-square"></span>
+        Link Y Tile: <span id="link-y-square"></span><br/>
+        Map X: <span id="map-x"></span>
+        Map Y: <span id="map-y"></span><br/>
+        Sword: <input type="checkbox" id="sword-checkbox"/><br/>
+        Speed: <input type="number" id="link-speed-input" min="1.3" max="5.0" step="0.1"/><br/>
+        Rupees: <input type="number" id="link-rupees-input" min="0" max="255" step="1"/><br/>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -181,10 +198,13 @@
     _gaq.push(['_setAccount', 'UA-33217753-1']);
     _gaq.push(['_trackPageview']);
 
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
     })();
 </script>
 
