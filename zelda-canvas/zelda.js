@@ -409,6 +409,34 @@
             });
 
             $("#cave-text").text("");
+        },
+
+        enterDungeon: function () {
+            var self = this;
+            this.preCaveMap = this.movementMap;
+            this.preCavePlayerX = this.player.center.x;
+            this.preCavePlayerY = this.player.center.y;
+            this.isInCave = true;
+            this.preCaveBackgroundX = this.viewport.css("background-position-x");
+            this.preCaveBackgroundY = this.viewport.css("background-position-y");
+
+            this.viewport.css({
+                "background-position-x": "-768px",
+                "background-position-y": "-1232px"
+            });
+
+            this.player.center.x = 128;
+            this.player.center.y = 150;
+
+//            "7-3": {
+//                levelName: "LEVEL-1",
+//                    "background-position-x": "-768px",
+//                    "background-position-y": "-1232px",
+//                    dungeonMapX: 3,
+//                    dungeonMapY: 7
+//            }
+
+            this.viewport.addClass("dungeon");
         }
     };
 
@@ -623,6 +651,8 @@
                     var newTileX = parseInt(Number(this.center.x).toFixed(0) / 16);
                     if (this.game.movementMap[newTileY][newTileX] === 2) {
                         this.game.enterCave();
+                    } else if (this.game.movementMap[newTileY][newTileX] === 4) {
+                        this.game.enterDungeon();
                     }
                 } else {
                     this.game.moveScreenUp();
@@ -1267,8 +1297,10 @@
 
         if (widthScale <= heightScale) {
             $("meta[name=viewport]").attr("content", "initial-scale=" + widthScale + ", user-scalable=no");
+//            $('body').css('zoom', widthScale * 100 + "%");
         } else {
             $("meta[name=viewport]").attr("content", "initial-scale=" + heightScale + ", user-scalable=no");
+//            $('body').css('zoom', heightScale * 100 + "%");
         }
 
         $("#controller").on("touchstart", function (e) {
