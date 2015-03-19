@@ -535,7 +535,7 @@
         this.hearts = 3;
         this.rupees = 255;
         this.isInvincible = false;
-        this.invincibleCooldown = 120;
+        this.invincibleCooldown = 90;
         this.invincibleTimer = 0;
 
         // Create a keyboard object to track button presses.
@@ -603,6 +603,30 @@
 
             if (this.invincibleTimer > 0) {
                 this.invincibleTimer--;
+
+                if (this.invincibleTimer % 5 < 3) {
+                    if (this.id.indexOf("up") > -1) {
+                        this.id = "link-blink-up";
+                    } else if (this.id.indexOf("down") > -1) {
+                        this.id = "link-blink-down";
+                    } else if (this.id.indexOf("left") > -1) {
+                        this.id = "link-blink-left";
+                    } else if (this.id.indexOf("right") > -1) {
+                        this.id = "link-blink-right";
+                    }
+                } else {
+                    if (this.id.indexOf("up") > -1) {
+                        this.id = "link-up-1";
+                    } else if (this.id.indexOf("down") > -1) {
+                        this.id = "link-down-1";
+                    } else if (this.id.indexOf("left") > -1) {
+                        this.id = "link-left-1";
+                    } else if (this.id.indexOf("right") > -1) {
+                        this.id = "link-right-1";
+                    }
+                }
+
+                return;
             } else {
                 this.isInvincible = false;
             }
