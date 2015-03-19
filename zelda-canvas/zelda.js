@@ -145,6 +145,10 @@
                         } else if (body instanceof RedOctorok) {
                             if (self.player.isSwingingSword()) {
                                 self.removeBody(body);
+                            } else {
+                                if (!self.player.isInvincible) {
+                                    self.player.takeDamage(body)
+                                }
                             }
                         }
                     }
@@ -530,6 +534,9 @@
         this.maxHearts = 3;
         this.hearts = 3;
         this.rupees = 255;
+        this.isInvincible = false;
+        this.invincibleCooldown = 120;
+        this.invincibleTimer = 0;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -569,6 +576,17 @@
             return Boolean(this.swordTimer);
         },
 
+        takeDamage: function(enemy){
+            this.isInvincible = true;
+
+            this.hearts -= enemy.damage;
+            if (this.hearts < 0) {
+                this.hearts = 0;
+            }
+
+            this.invincibleTimer = this.invincibleCooldown;
+        },
+
         // **update()** updates the state of the player for a single tick.
         update: function () {
             if (!this.canMove) {
@@ -581,6 +599,12 @@
             if (this.swordTimer > 0) {
                 this.swordTimer--;
                 return;
+            }
+
+            if (this.invincibleTimer > 0) {
+                this.invincibleTimer--;
+            } else {
+                this.isInvincible = false;
             }
 
 
@@ -601,7 +625,7 @@
                 this.swordWait = this.swordWaitCooldown;
                 this.swordRelease = false;
 
-                if (!this.game.hasBodyByType(SwordPower)) {
+                if (!this.game.hasBodyByType(SwordPower) && this.hearts === this.maxHearts) {
                     this.game.addBody(new SwordPower(this.game, this.center, this.id));
                 }
 
@@ -855,6 +879,7 @@
         this.direction = direction;
         this.changeDirectionCooldown = 160;
         this.changeDirectionCount = 0;
+        this.damage = 1;
     };
 
     RedOctorok.prototype = {
