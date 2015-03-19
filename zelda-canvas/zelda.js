@@ -40,6 +40,9 @@
         $("#sword-checkbox").click(function () {
             self.player.hasSword = !self.player.hasSword;
         });
+        $("#invincible-checkbox").click(function () {
+            self.player.gameGenieInvincible = !self.player.gameGenieInvincible;
+        });
 
         $("#link-speed-input").val(self.player.moveRate).on("change", function () {
             self.player.moveRate = Number($(this).val());
@@ -534,8 +537,9 @@
         this.maxHearts = 3;
         this.hearts = 3;
         this.rupees = 255;
+        this.gameGenieInvincible = false;
         this.isInvincible = false;
-        this.invincibleCooldown = 90;
+        this.invincibleCooldown = 60;
         this.invincibleTimer = 0;
 
         // Create a keyboard object to track button presses.
@@ -577,6 +581,10 @@
         },
 
         takeDamage: function(enemy){
+            if (this.gameGenieInvincible) {
+                return;
+            }
+
             this.isInvincible = true;
 
             this.hearts -= enemy.damage;
