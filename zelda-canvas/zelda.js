@@ -44,6 +44,21 @@
             self.player.gameGenieInvincible = !self.player.gameGenieInvincible;
         });
 
+        $("#equip-select").on("change", function () {
+            var item = $(this).val();
+            switch (item) {
+                case "BlueCandle":
+                    self.player.equippedItem = new BlueCandle(self, 0, {x: 0, y: 0});
+                    break;
+                case "Boomerang":
+                    self.player.equippedItem = new Boomerang(self, 0, "");
+                    break;
+                default:
+                    self.player.equippedItem = "";
+                    break;
+            }
+        });
+
         $("#link-speed-input").val(self.player.moveRate).on("change", function () {
             self.player.moveRate = Number($(this).val());
         });
@@ -230,6 +245,12 @@
             if (this.player.hasSword) {
                 img = document.getElementById("sword-img");
                 menuScreen.drawImage(img, 152, 24, 7, 16);
+            }
+
+            if (this.player.equippedItem) {
+                var item = this.player.equippedItem;
+                img = document.getElementById(item.id);
+                menuScreen.drawImage(img, item.menu.x, item.menu.y, item.size.x, item.size.y);
             }
 
             img = document.getElementById("life-header");
@@ -533,6 +554,7 @@
         this.swordTimer = 0;
         this.swordWaitCooldown = 20;
         this.swordWait = 0;
+        this.equippedItem;
         this.canMove = true;
         this.maxHearts = 3;
         this.hearts = 3;
@@ -580,7 +602,7 @@
             return Boolean(this.swordTimer);
         },
 
-        takeDamage: function(enemy){
+        takeDamage: function (enemy) {
             if (this.gameGenieInvincible) {
                 return;
             }
@@ -880,6 +902,7 @@
         this.game = game;
         this.size = { x: 8, y: 16 };
         this.center = { x: center.x, y: center.y };
+        this.menu = {x: 128, y: 24};
     };
 
     BlueCandle.prototype = {
@@ -1180,6 +1203,7 @@
         this.spriteCooldown = 6;
         this.velocity = 4;
         this.center = { x: center.x, y: center.y };
+        this.menu = {x: 129, y: 28};
         this.size = { x: 5, y: 8 };
         this.throwDistance = 54;
         this.returnToLink = false;
