@@ -554,7 +554,7 @@
         this.swordTimer = 0;
         this.swordWaitCooldown = 20;
         this.swordWait = 0;
-        this.equippedItem;
+        this.equippedItem = null;
         this.canMove = true;
         this.maxHearts = 3;
         this.hearts = 3;
@@ -701,11 +701,15 @@
                 this.swordRelease = true;
             }
 
-//            if (this.keyboarder.isDown(this.keyboarder.KEYS.C)) {
-//                if (!this.game.hasBodyByType(Boomerang)) {
-//                    this.game.addBody(new Boomerang(this.game, this.center, this.id));
-//                }
-//            }
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.C)) {
+                if (this.equippedItem instanceof Boomerang) {
+                    if (!this.game.hasBodyByType(Boomerang)) {
+                        this.game.addBody(new Boomerang(this.game, this.center, this.id));
+                    }
+                } else if (this.equippedItem instanceof BlueCandle) {
+                    console.log("candle fire!")
+                }
+            }
 
             if (this.keyboarder.isDown(this.keyboarder.KEYS.UP) || TOUCH.UP) {
                 if (this.spriteChangeCount === 0 || this.id.indexOf("up") === -1) {
@@ -1201,7 +1205,7 @@
         this.id = "boomerang";
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
-        this.velocity = 4;
+        this.velocity = 3;
         this.center = { x: center.x, y: center.y };
         this.menu = {x: 129, y: 28};
         this.size = { x: 5, y: 8 };
