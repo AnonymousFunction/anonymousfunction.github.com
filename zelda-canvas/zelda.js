@@ -53,6 +53,9 @@
                 case "BlueCandle":
                     self.player.equippedItem = new BlueCandle(self, 0, {x: 0, y: 0});
                     break;
+                case "Bomb":
+                    self.player.equippedItem = new Bomb(self, {x: 0, y: 0 });
+                    break;
                 case "Boomerang":
                     self.player.equippedItem = new Boomerang(self, 0, "");
                     break;
@@ -68,6 +71,10 @@
 
         $("#link-rupees-input").val(self.player.rupees).on("change", function () {
             self.player.rupees = Number($(this).val());
+        });
+
+        $("#link-bombs-input").val(self.player.bombs).on("change", function () {
+            self.player.bombs = Number($(this).val());
         });
         // End Game Genie
 
@@ -277,7 +284,7 @@
             menuScreen.font = "8px 'Press Start 2P'";
             $("#rupees").text(this.player.rupees < 100 ? "X" + this.player.rupees : this.player.rupees);
             $("#keys").text("X0");
-            $("#bombs").text("X0");
+            $("#bombs").text("X" + this.player.bombs);
 
             //hearts
             var heartsX = 175;
@@ -576,6 +583,7 @@
         this.maxHearts = 3;
         this.hearts = 3;
         this.rupees = 255;
+        this.bombs = 4;
         this.gameGenieInvincible = false;
         this.gameGenieNoCollision = false;
         this.isInvincible = false;
@@ -921,6 +929,27 @@
     };
 
     Merchant.prototype = {
+        draw: function (screen) {
+            var x = this.center.x;
+            var y = this.center.y;
+
+            var img = document.getElementById(this.id);
+            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+        },
+
+        update: function () {
+        }
+    };
+
+    var Bomb = function (game, center) {
+        this.id = "bomb";
+        this.game = game;
+        this.size = { x: 8, y: 16 };
+        this.center = { x: center.x, y: center.y };
+        this.menu = {x: 128, y: 24};
+    };
+
+    Bomb.prototype = {
         draw: function (screen) {
             var x = this.center.x;
             var y = this.center.y;
