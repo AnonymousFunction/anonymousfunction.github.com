@@ -54,7 +54,7 @@
                     self.player.equippedItem = new BlueCandle(self, 0, {x: 0, y: 0});
                     break;
                 case "Bomb":
-                    self.player.equippedItem = new Bomb(self, {x: 0, y: 0 });
+                    self.player.equippedItem = new EquippedBomb(self, {x: 0, y: 0 });
                     break;
                 case "Boomerang":
                     self.player.equippedItem = new Boomerang(self, 0, "");
@@ -370,7 +370,7 @@
 
         clearObjectsOnScreenTransition: function () {
             var self = this;
-            var clearArray = [SwordPower, CandleFire, RedOctorok];
+            var clearArray = [SwordPower, CandleFire, RedOctorok, Bomb];
 
             _.each(clearArray, function (type) {
                 self.removeBodyByType(type);
@@ -746,8 +746,11 @@
                     }
                 } else if (this.equippedItem instanceof BlueCandle) {
                     if (!this.game.hasBodyByType(CandleFire)) {
-                        console.log("candle fire!");
                         this.game.addBody(new CandleFire(this.game, this));
+                    }
+                } else if (this.equippedItem instanceof EquippedBomb) {
+                    if (!this.game.hasBodyByType(Bomb)) {
+                        this.game.addBody(new Bomb(this.game, this));
                     }
                 }
             }
@@ -941,12 +944,47 @@
         }
     };
 
-    var Bomb = function (game, center) {
+    var EquippedBomb = function (game, center) {
         this.id = "bomb";
         this.game = game;
         this.size = { x: 8, y: 16 };
         this.center = { x: center.x, y: center.y };
         this.menu = {x: 128, y: 24};
+    };
+
+    EquippedBomb.prototype = {
+        draw: function (screen) {
+            var x = this.center.x;
+            var y = this.center.y;
+
+            var img = document.getElementById(this.id);
+            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+        },
+
+        update: function () {
+        }
+    };
+
+    var Bomb = function (game, player) {
+        this.id = "bomb";
+        this.game = game;
+        this.size = { x: 8, y: 16 };
+        this.explodeCountdown = 180;
+
+        switch (player.getDirection()) {
+            case "up":
+                this.center = { x: player.center.x, y: player.center.y - this.size.y };
+                break;
+            case "down":
+                this.center = { x: player.center.x, y: player.center.y + this.size.y };
+                break;
+            case "left":
+                this.center = { x: player.center.x - this.size.x * 2, y: player.center.y };
+                break;
+            case "right":
+                this.center = { x: player.center.x + this.size.x * 2, y: player.center.y };
+                break;
+        }
     };
 
     Bomb.prototype = {
@@ -959,6 +997,10 @@
         },
 
         update: function () {
+            this.explodeCountdown--;
+            if (!this.explodeCountdown) {
+                this.game.removeBody(this);
+            }
         }
     };
 
