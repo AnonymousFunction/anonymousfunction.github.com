@@ -188,6 +188,20 @@
                 });
             }
 
+            var candleFire = this.getFirstBodyByType(CandleFire);
+
+            if (candleFire) {
+                _.each(self.bodies, function (body) {
+                    if (!(body instanceof Player) && !(body instanceof CandleFire)) {
+                        if (doBodiesCollide(candleFire, body)) {
+                            if (body instanceof RedOctorok) {
+                                self.removeBody(body);
+                            }
+                        }
+                    }
+                });
+            }
+
             /* DEBUG */
 
             $("#link-x").text(Number(this.player.center.x).toFixed(2));
@@ -346,7 +360,7 @@
 
         clearObjectsOnScreenTransition: function () {
             var self = this;
-            var clearArray = [SwordPower, RedOctorok];
+            var clearArray = [SwordPower, CandleFire, RedOctorok];
 
             _.each(clearArray, function (type) {
                 self.removeBodyByType(type);
