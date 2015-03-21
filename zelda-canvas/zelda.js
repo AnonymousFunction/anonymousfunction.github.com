@@ -43,6 +43,9 @@
         $("#invincible-checkbox").click(function () {
             self.player.gameGenieInvincible = !self.player.gameGenieInvincible;
         });
+        $("#no-collision-checkbox").click(function () {
+            self.player.gameGenieNoCollision = !self.player.gameGenieNoCollision;
+        });
 
         $("#equip-select").on("change", function () {
             var item = $(this).val();
@@ -574,6 +577,7 @@
         this.hearts = 3;
         this.rupees = 255;
         this.gameGenieInvincible = false;
+        this.gameGenieNoCollision = false;
         this.isInvincible = false;
         this.invincibleCooldown = 60;
         this.invincibleTimer = 0;
@@ -757,7 +761,7 @@
                     var rightBoundaryTile = parseInt(Number(rightBoundary).toFixed(0) / 16);
 
 
-                    if (this.game.movementMap[newTileY][leftBoundaryTile] === 0 || this.game.movementMap[newTileY][rightBoundaryTile] === 0) {
+                    if (!this.gameGenieNoCollision && (this.game.movementMap[newTileY][leftBoundaryTile] === 0 || this.game.movementMap[newTileY][rightBoundaryTile] === 0)) {
                         return;
                     }
 
@@ -793,7 +797,7 @@
                     var rightBoundary = this.center.x + 4;
                     var rightBoundaryTile = parseInt(Number(rightBoundary).toFixed(0) / 16);
 
-                    if (this.game.movementMap[newTileY] && (this.game.movementMap[newTileY][leftBoundaryTile] === 0 || this.game.movementMap[newTileY][rightBoundaryTile] === 0)) {
+                    if (!this.gameGenieNoCollision && (this.game.movementMap[newTileY] && (this.game.movementMap[newTileY][leftBoundaryTile] === 0 || this.game.movementMap[newTileY][rightBoundaryTile] === 0))) {
                         return;
                     }
 
@@ -820,7 +824,7 @@
                     var bottomY = this.center.y + this.size.y / 2;
                     var bottomTileY = parseInt(Number(bottomY).toFixed(0) / 16);
 
-                    if (this.game.movementMap[this.tile.y][newTileX] === 0 || this.game.movementMap[bottomTileY][newTileX] === 0) {
+                    if (!this.gameGenieNoCollision && (this.game.movementMap[this.tile.y][newTileX] === 0 || this.game.movementMap[bottomTileY][newTileX] === 0)) {
                         return;
                     }
 
@@ -842,7 +846,7 @@
                     var bottomY = this.center.y + this.size.y / 2;
                     var bottomTileY = parseInt(Number(bottomY).toFixed(0) / 16);
 
-                    if (this.game.movementMap[this.tile.y][newTileX] === 0 || this.game.movementMap[bottomTileY][newTileX] === 0) {
+                    if (!this.gameGenieNoCollision && (this.game.movementMap[this.tile.y][newTileX] === 0 || this.game.movementMap[bottomTileY][newTileX] === 0)) {
                         return;
                     }
 
