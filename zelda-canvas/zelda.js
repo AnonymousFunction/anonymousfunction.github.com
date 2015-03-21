@@ -114,6 +114,10 @@
                     }
 
                     this.screenTransitionTime -= 2;
+
+                    if (this.screenTransitionTime === 0) {
+                        this.player.center.y -= 9;
+                    }
                 } else if (this.screenTransitionDir === "down") {
                     var origMapTop = parseInt(this.viewport.css("background-position-y"));
 
@@ -125,6 +129,10 @@
                     }
 
                     this.screenTransitionTime -= 2;
+
+                    if (this.screenTransitionTime === 0) {
+                        this.player.center.y += 8;
+                    }
                 } else if (this.screenTransitionDir === "left") {
                     var origMapLeft = parseInt(this.viewport.css("background-position-x"));
 
@@ -136,6 +144,10 @@
                     }
 
                     this.screenTransitionTime -= 2;
+
+                    if (this.screenTransitionTime === 0) {
+                        this.player.center.x -= 8;
+                    }
                 } else if (this.screenTransitionDir === "right") {
                     var origMapLeft = parseInt(this.viewport.css("background-position-x"));
 
@@ -147,6 +159,9 @@
                     }
 
                     this.screenTransitionTime -= 2;
+                    if (this.screenTransitionTime === 0) {
+                        this.player.center.x += 8;
+                    }
                 }
 
                 return;
