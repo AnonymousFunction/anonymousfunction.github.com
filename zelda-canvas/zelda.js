@@ -617,6 +617,18 @@
             this.invincibleTimer = this.invincibleCooldown;
         },
 
+        getDirection: function () {
+            if (this.id.indexOf("up") > -1) {
+                return "up";
+            } else if (this.id.indexOf("down") > -1) {
+                return "down";
+            } else if (this.id.indexOf("left") > -1) {
+                return "left";
+            } else if (this.id.indexOf("right") > -1) {
+                return "right";
+            }
+        },
+
         // **update()** updates the state of the player for a single tick.
         update: function () {
             if (!this.canMove) {
@@ -707,7 +719,10 @@
                         this.game.addBody(new Boomerang(this.game, this.center, this.id));
                     }
                 } else if (this.equippedItem instanceof BlueCandle) {
-                    console.log("candle fire!")
+                    if (!this.game.hasBodyByType(CandleFire)) {
+                        console.log("candle fire!");
+                        this.game.addBody(new CandleFire(this.game, this));
+                    }
                 }
             }
 
@@ -923,6 +938,63 @@
         },
 
         update: function () {
+        }
+    };
+
+    var CandleFire = function (game, player) {
+        this.id = "cave-fire";
+        this.game = game;
+        this.size = { x: 16, y: 16 };
+        this.spriteChangeCount = 0;
+        this.spriteCooldown = 10;
+        this.lifeCountdown = 210;
+        this.distance = 32;
+        this.velocity = 1.2;
+
+        this.center = { x: player.center.x, y: player.center.y };
+        this.direction = player.getDirection();
+    };
+
+    CandleFire.prototype = {
+        draw: function (screen) {
+            var x = this.center.x;
+            var y = this.center.y;
+
+            var img = document.getElementById(this.id);
+            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+        },
+
+        update: function () {
+            if (this.spriteChangeCount === 0) {
+                this.id = this.id === "cave-fire" ? "cave-fire-1" : "cave-fire";
+                this.spriteChangeCount = this.spriteCooldown;
+            } else {
+                this.spriteChangeCount--;
+            }
+
+            if (this.distance) {
+                switch (this.direction) {
+                    case "up":
+                        this.center.y -= this.velocity;
+                        break;
+                    case "down":
+                        this.center.y += this.velocity;
+                        break;
+                    case "left":
+                        this.center.x -= this.velocity;
+                        break;
+                    case "right":
+                        this.center.x += this.velocity;
+                        break;
+                }
+
+                this.distance--;
+            }
+
+            this.lifeCountdown--;
+            if (!this.lifeCountdown) {
+                this.game.removeBody(this);
+            }
         }
     };
 
