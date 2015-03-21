@@ -947,9 +947,9 @@
         this.size = { x: 16, y: 16 };
         this.spriteChangeCount = 0;
         this.spriteCooldown = 10;
-        this.lifeCountdown = 210;
-        this.distance = 32;
-        this.velocity = 1.2;
+        this.lifeCountdown = 180;
+        this.velocity = 0.8;
+        this.distance = 32 / this.velocity; //should travel exactly 2 tiles, regardless of speed
 
         this.center = { x: player.center.x, y: player.center.y };
         this.direction = player.getDirection();
