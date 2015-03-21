@@ -948,11 +948,25 @@
         this.spriteChangeCount = 0;
         this.spriteCooldown = 10;
         this.lifeCountdown = 180;
-        this.velocity = 0.8;
-        this.distance = 32 / this.velocity; //should travel exactly 2 tiles, regardless of speed
+        this.velocity = 0.6;
+        this.distance = 32;
 
-        this.center = { x: player.center.x, y: player.center.y };
         this.direction = player.getDirection();
+
+        switch (this.direction) {
+            case "up":
+                this.center = { x: player.center.x, y: player.center.y - this.size.y };
+                break;
+            case "down":
+                this.center = { x: player.center.x, y: player.center.y + this.size.y };
+                break;
+            case "left":
+                this.center = { x: player.center.x - this.size.x, y: player.center.y };
+                break;
+            case "right":
+                this.center = { x: player.center.x + this.size.x , y: player.center.y };
+                break;
+        }
     };
 
     CandleFire.prototype = {
