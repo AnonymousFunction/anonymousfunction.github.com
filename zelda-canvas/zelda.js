@@ -754,7 +754,7 @@
                 this.swordRelease = true;
             }
 
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.C)) {
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.C) || TOUCH.B) {
                 if (this.equippedItem instanceof Boomerang) {
                     if (!this.game.hasBodyByType(Boomerang)) {
                         this.game.addBody(new Boomerang(this.game, this.center, this.id));
