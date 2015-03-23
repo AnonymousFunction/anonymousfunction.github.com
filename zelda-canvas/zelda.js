@@ -768,7 +768,10 @@
                     }
                 } else if (this.equippedItem instanceof EquippedArrow) {
                     if (!this.game.hasBodyByType(Arrow)) {
-                        this.game.addBody(new Arrow(this.game, this));
+                        if (this.rupees) {
+                            this.game.addBody(new Arrow(this.game, this));
+                            this.rupees--;
+                        }
                     }
                 } else if (this.equippedItem instanceof EquippedBomb) {
                     if (!this.game.hasBodyByType(Bomb)) {
