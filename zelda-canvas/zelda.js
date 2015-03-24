@@ -1484,6 +1484,8 @@
         this.menu = {x: 129, y: 28};
         this.size = { x: 5, y: 8 };
         this.throwDistance = 72;
+        this.rotateAngle = 0;
+        this.rotateDelta = 18;
         this.returnToLink = false;
 
         if (boomerangDirection.indexOf("up") > -1) {
@@ -1507,11 +1509,23 @@
             var y = this.center.y;
 
             var img = document.getElementById(this.id);
-            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+
+            screen.save();
+            screen.translate(x, y);
+            screen.rotate(this.rotateAngle * Math.PI / 180);
+
+            //Offset from the new translated origin
+            screen.drawImage(img, -this.size.x / 2, -this.size.y / 2);
+
+            screen.restore();
+            screen.fill();
         },
 
         update: function () {
             var link = this.game.player;
+
+            this.rotateAngle += this.rotateDelta;
+
             if (this.returnToLink) {
                 if (doBodiesCollide(link, this)) {
                     this.game.removeBody(this);
