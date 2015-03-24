@@ -1483,7 +1483,7 @@
         this.center = { x: center.x, y: center.y };
         this.menu = {x: 129, y: 28};
         this.size = { x: 5, y: 8 };
-        this.throwDistance = 54;
+        this.throwDistance = 72;
         this.returnToLink = false;
 
         if (boomerangDirection.indexOf("up") > -1) {
@@ -1518,15 +1518,15 @@
                     return;
                 }
 
-                if (this.center.x > link.center.x) {
+                if (this.center.x > (link.center.x + link.size.x / 2)) {
                     this.center.x -= this.velocity;
-                } else {
+                } else if (this.center.x <= (link.center.x - link.size.x / 2)) {
                     this.center.x += this.velocity;
                 }
 
-                if (this.center.y > link.center.y) {
+                if (this.center.y > (link.center.y + link.size.y / 2)) {
                     this.center.y -= this.velocity;
-                } else {
+                } else if (this.center.y <= (link.center.y - link.size.y / 2)) {
                     this.center.y += this.velocity;
                 }
 
