@@ -1532,16 +1532,33 @@
                     return;
                 }
 
-                if (this.center.x > (link.center.x + link.size.x / 2)) {
-                    this.center.x -= this.velocity;
-                } else if (this.center.x <= (link.center.x - link.size.x / 2)) {
-                    this.center.x += this.velocity;
-                }
+                //Whichever axis Link throws the boomerang, return along that axis at the same velocity.
+                //But if he walks perpendicularly to the throw direction, we need to return along that axis
+                //just not as fast as the primary axis
+                if (this.direction === "up" || this.direction === "down") {
+                    if (this.center.x > (link.center.x + link.size.x / 2)) {
+                        this.center.x -= this.velocity - 1;
+                    } else if (this.center.x <= (link.center.x - link.size.x / 2)) {
+                        this.center.x += this.velocity - 1;
+                    }
 
-                if (this.center.y > (link.center.y + link.size.y / 2)) {
-                    this.center.y -= this.velocity;
-                } else if (this.center.y <= (link.center.y - link.size.y / 2)) {
-                    this.center.y += this.velocity;
+                    if (this.center.y > (link.center.y + link.size.y / 2)) {
+                        this.center.y -= this.velocity;
+                    } else if (this.center.y <= (link.center.y - link.size.y / 2)) {
+                        this.center.y += this.velocity;
+                    }
+                } else {
+                    if (this.center.x > (link.center.x + link.size.x / 2)) {
+                        this.center.x -= this.velocity;
+                    } else if (this.center.x <= (link.center.x - link.size.x / 2)) {
+                        this.center.x += this.velocity;
+                    }
+
+                    if (this.center.y > (link.center.y + link.size.y / 2)) {
+                        this.center.y -= this.velocity - 1;
+                    } else if (this.center.y <= (link.center.y - link.size.y / 2)) {
+                        this.center.y += this.velocity - 1;
+                    }
                 }
 
             } else if (this.direction === "up") {
