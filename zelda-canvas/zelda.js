@@ -60,7 +60,7 @@
                     self.player.equippedItem = new EquippedBomb(self, {x: 0, y: 0 });
                     break;
                 case "Boomerang":
-                    self.player.equippedItem = new Boomerang(self, 0, "");
+                    self.player.equippedItem = new Boomerang(self, self.player);
                     break;
                 default:
                     self.player.equippedItem = "";
@@ -760,7 +760,7 @@
             if (this.keyboarder.isDown(this.keyboarder.KEYS.C) || TOUCH.B) {
                 if (this.equippedItem instanceof Boomerang) {
                     if (!this.game.hasBodyByType(Boomerang)) {
-                        this.game.addBody(new Boomerang(this.game, this.center, this.id));
+                        this.game.addBody(new Boomerang(this.game, this));
                     }
                 } else if (this.equippedItem instanceof BlueCandle) {
                     if (!this.game.hasBodyByType(CandleFire)) {
@@ -1474,32 +1474,32 @@
         }
     };
 
-    var Boomerang = function (game, center, boomerangDirection) {
+    var Boomerang = function (game, player) {
         this.game = game;
         this.id = "boomerang";
-        this.spriteChangeCount = 0;
-        this.spriteCooldown = 6;
         this.velocity = 3;
-        this.center = { x: center.x, y: center.y };
+        this.center = { x: player.center.x, y: player.center.y };
         this.menu = {x: 129, y: 28};
         this.size = { x: 5, y: 8 };
         this.throwDistance = 72;
         this.rotateAngle = 0;
         this.rotateDelta = 18;
         this.returnToLink = false;
+        this.direction = player.getDirection();
 
-        if (boomerangDirection.indexOf("up") > -1) {
-            this.direction = "up";
-            this.endpoint = { x: this.center.x, y: this.center.y - this.throwDistance };
-        } else if (boomerangDirection.indexOf("down") > -1) {
-            this.direction = "down";
-            this.endpoint = { x: this.center.x, y: this.center.y + this.throwDistance };
-        } else if (boomerangDirection.indexOf("left") > -1) {
-            this.direction = "left";
-            this.endpoint = { x: this.center.x - this.throwDistance, y: this.center.y };
-        } else if (boomerangDirection.indexOf("right") > -1) {
-            this.endpoint = { x: this.center.x + this.throwDistance, y: this.center.y };
-            this.direction = "right";
+        switch (this.direction) {
+            case "up":
+                this.endpoint = { x: this.center.x, y: this.center.y - this.throwDistance };
+                break;
+            case "down":
+                this.endpoint = { x: this.center.x, y: this.center.y + this.throwDistance };
+                break;
+            case "left":
+                this.endpoint = { x: this.center.x - this.throwDistance, y: this.center.y };
+                break;
+            case "right":
+                this.endpoint = { x: this.center.x + this.throwDistance, y: this.center.y };
+                break;
         }
     };
 
