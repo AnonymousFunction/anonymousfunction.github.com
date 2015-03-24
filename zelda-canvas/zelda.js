@@ -1571,7 +1571,7 @@
             }
 
             if (this.center.x < 0 || this.center.x > 256 || this.center.y < 0 || this.center.y > 176) {
-                this.game.removeBody(this);
+                this.returnToLink = true;
             }
         }
     };
