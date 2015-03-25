@@ -388,7 +388,7 @@
 
         clearObjectsOnScreenTransition: function () {
             var self = this;
-            var clearArray = [SwordPower, CandleFire, RedOctorok, Bomb];
+            var clearArray = [SwordPower, CandleFire, RedOctorok, Bomb, Cloud, Boomerang];
 
             _.each(clearArray, function (type) {
                 self.removeBodyByType(type);
