@@ -1107,7 +1107,7 @@
         this.id = "bomb";
         this.game = game;
         this.size = { x: 8, y: 16 };
-        this.explodeCountdown = 180;
+        this.explodeCountdown = 160;
 
         switch (player.getDirection()) {
             case "up":
