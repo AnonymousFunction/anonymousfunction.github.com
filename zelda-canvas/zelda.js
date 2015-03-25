@@ -775,7 +775,10 @@
                     }
                 } else if (this.equippedItem instanceof EquippedBomb) {
                     if (!this.game.hasBodyByType(Bomb)) {
-                        this.game.addBody(new Bomb(this.game, this));
+                        if (this.bombs) {
+                            this.game.addBody(new Bomb(this.game, this));
+                            this.bombs--;
+                        }
                     }
                 }
             }
@@ -1043,11 +1046,11 @@
         }
     };
 
-    var createBombExplosion = function(game, center){
+    var createBombExplosion = function (game, center) {
         game.addBody(new Cloud(game, center));
-        game.addBody(new Cloud(game, { x: center.x, y: center.y-10 }));
-        game.addBody(new Cloud(game, { x: center.x-10, y: center.y+10 }));
-        game.addBody(new Cloud(game, { x: center.x+10, y: center.y+10 }));
+        game.addBody(new Cloud(game, { x: center.x, y: center.y - 10 }));
+        game.addBody(new Cloud(game, { x: center.x - 10, y: center.y + 10 }));
+        game.addBody(new Cloud(game, { x: center.x + 10, y: center.y + 10 }));
     };
 
     var Cloud = function (game, center) {
@@ -1074,7 +1077,7 @@
                 this.id = "cloud-3";
             } else if (this.countdown <= 14) {
                 this.id = "cloud-2";
-            } else if (this.countdown <= 21){
+            } else if (this.countdown <= 21) {
                 this.id = "cloud-1";
             }
 
@@ -1192,7 +1195,7 @@
                 this.center = { x: player.center.x - this.size.x, y: player.center.y };
                 break;
             case "right":
-                this.center = { x: player.center.x + this.size.x , y: player.center.y };
+                this.center = { x: player.center.x + this.size.x, y: player.center.y };
                 break;
         }
     };
