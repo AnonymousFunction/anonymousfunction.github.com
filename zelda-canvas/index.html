@@ -89,8 +89,11 @@
     }
 
     #zelda.paused {
-        background: black url("images/inventory_background.png") no-repeat 17px 22px;
+        background: black url("images/inventory_background.png") no-repeat;
         background-size: 81%;
+        /* TODO - sigh, important... need to fix this, the overworld map is inlining its position */
+        background-position-x: 17px !important;
+        background-position-y: 22px !important;
     }
 
     #controller {
