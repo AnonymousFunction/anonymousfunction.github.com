@@ -115,7 +115,7 @@
             }
 
             if (this.isPaused) {
-                if (this.player.keyboarder.isDown(this.player.keyboarder.KEYS.ENTER)) {
+                if (this.player.keyboarder.isDown(this.player.keyboarder.KEYS.ENTER) || TOUCH.START) {
                     this.unpause();
                 }
                 return;
@@ -931,7 +931,7 @@
                 }
             }
 
-            if (this.keyboarder.isDown(this.keyboarder.KEYS.ENTER)) {
+            if (this.keyboarder.isDown(this.keyboarder.KEYS.ENTER) || TOUCH.START) {
                 if (!this.game.unpauseTransitionTime) {
                     this.game.pause();
                 }
@@ -1721,7 +1721,7 @@
         this.KEYS = { UP: 38, DOWN: 40, LEFT: 37, RIGHT: 39, SPACE: 32, ENTER: 13, C: 67 };
     };
 
-    var TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false };
+    var TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false, B: false, A: false, START: false };
 
     // **colliding()** returns true if two passed bodies are colliding.
     // The approach is to test for five situations.  If any are true,
@@ -1801,11 +1801,13 @@
                 TOUCH.B = true;
             } else if (x >= 212 && x <= 248 && y >= 270 && y <= 308) {
                 TOUCH.A = true;
+            } else if (x >= 109 && x <= 152 && y >= 314 && y <= 344) {
+                TOUCH.START = true;
             }
         });
 
         $("#controller").on("touchend", function () {
-            TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false, B: false, A: false };
+            TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false, B: false, A: false, START: false };
         });
     });
 })();
