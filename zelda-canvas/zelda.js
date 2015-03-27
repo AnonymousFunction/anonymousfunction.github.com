@@ -105,6 +105,22 @@
         update: function () {
             var self = this;
 
+            if (this.pauseTransitionTime) {
+                this.pauseTransitionTime -= 2;
+                return;
+            }
+
+            if (this.unpauseTransitionTime) {
+                this.unpauseTransitionTime -= 2;
+            }
+
+            if (this.isPaused) {
+                if (this.player.keyboarder.isDown(this.player.keyboarder.KEYS.ENTER)) {
+                    this.unpause();
+                }
+                return;
+            }
+
             if (this.screenTransitionTime) {
                 if (this.screenTransitionDir === "up") {
                     var origMapTop = parseInt(this.viewport.css("background-position-y"));
@@ -243,27 +259,47 @@
 
         },
 
+        pause: function(){
+            if (!this.pauseTransitionTime) {
+                this.isPaused = true;
+                this.pauseTransitionTime = 176;
+                this.viewport.addClass("paused");
+            }
+        },
+
+        unpause: function() {
+            if (!this.pauseTransitionTime) {
+                this.isPaused = false;
+                this.viewport.removeClass("paused");
+                this.unpauseTransitionTime = 176;
+            }
+        },
+
         // **draw()** draws the game.
         draw: function (screen, menuScreen, controllerScreen, gameSize) {
             // Clear away the drawing from the previous tick.
             screen.clearRect(0, 0, gameSize.x, gameSize.y);
 
-            var bodiesNotLink = _.filter(this.bodies, function (body) {
-                return !(body instanceof Player);
-            });
+            if (this.isPaused) {
 
-            //draw Link last
-            _.each(bodiesNotLink, function (body) {
-                body.draw(screen);
-            });
+            } else {
+                var bodiesNotLink = _.filter(this.bodies, function (body) {
+                    return !(body instanceof Player);
+                });
 
-            this.player.draw(screen);
+                //draw Link last
+                _.each(bodiesNotLink, function (body) {
+                    body.draw(screen);
+                });
 
-            this.drawMenu(menuScreen);
-            this.drawController(controllerScreen);
+                this.player.draw(screen);
 
-            if (this.isWriteText) {
-                this.printText();
+                this.drawMenu(menuScreen);
+                this.drawController(controllerScreen);
+
+                if (this.isWriteText) {
+                    this.printText();
+                }
             }
         },
 
@@ -896,7 +932,9 @@
             }
 
             if (this.keyboarder.isDown(this.keyboarder.KEYS.ENTER)) {
-                this.game.isPaused = true;
+                if (!this.game.unpauseTransitionTime) {
+                    this.game.pause();
+                }
             }
 
             this.tile.x = parseInt(Number(this.center.x).toFixed(0) / 16);
