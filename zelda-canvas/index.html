@@ -93,7 +93,7 @@
         background-size: 81%;
         /* TODO - sigh, important... need to fix this, the overworld map is inlining its position */
         background-position-x: 17px !important;
-        background-position-y: 22px !important;
+        background-position-y: 0 !important;
     }
 
     #controller {
@@ -113,10 +113,23 @@
     .hidden {
         display: none;
     }
+    #about {
+        position: absolute;
+        width: 256px;
+        text-align: center;
+        top: 220px;
+    }
+
+    #about a {
+        color: white;
+        text-decoration: underline;
+    }
 </style>
 <canvas id="menu" width="256" height="56"></canvas>
 <canvas id="zelda" width="256" height="176"></canvas>
 <canvas id="controller" width="256" height="115"></canvas>
+
+<div id="about" class="text hidden"><a href="https://www.airpair.com/javascript/posts/the-legend-of-canvas" target="_blank">Recreated by Rich McLaughlin</a></div>
 
 <span id="rupees" class="text"></span>
 <span id="keys" class="text"></span>

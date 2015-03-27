@@ -264,6 +264,7 @@
                 this.isPaused = true;
                 this.pauseTransitionTime = 176;
                 this.viewport.addClass("paused");
+                $("#about").removeClass("hidden");
             }
         },
 
@@ -272,6 +273,7 @@
                 this.isPaused = false;
                 this.viewport.removeClass("paused");
                 this.unpauseTransitionTime = 176;
+                $("#about").addClass("hidden");
             }
         },
 
