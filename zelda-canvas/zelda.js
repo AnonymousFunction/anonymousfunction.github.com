@@ -23,6 +23,8 @@
 
         this.player = new Player(this, gameSize);
 
+        this.itemCursor = new ItemCursor(this);
+
         this.bodies = this.bodies.concat(this.player);
 
         this.map = { x: 7, y: 7 };
@@ -45,6 +47,9 @@
         });
         $("#no-collision-checkbox").click(function () {
             self.player.gameGenieNoCollision = !self.player.gameGenieNoCollision;
+        });
+        $("#boomerang-checkbox").click(function () {
+            self.player.hasBoomerang = !self.player.hasBoomerang;
         });
 
         $("#equip-select").on("change", function () {
@@ -115,9 +120,16 @@
             }
 
             if (this.isPaused) {
+                this.itemCursor.update();
+
                 if (this.player.keyboarder.isDown(this.player.keyboarder.KEYS.ENTER) || TOUCH.START) {
                     this.unpause();
+                } else if (this.player.keyboarder.isDown(this.player.keyboarder.KEYS.LEFT) || TOUCH.LEFT) {
+                    this.itemCursor.moveLeft();
+                } else if (this.player.keyboarder.isDown(this.player.keyboarder.KEYS.RIGHT) || TOUCH.RIGHT) {
+                    this.itemCursor.moveRight();
                 }
+
                 return;
             }
 
@@ -262,7 +274,7 @@
         pause: function(){
             if (!this.pauseTransitionTime) {
                 this.isPaused = true;
-                this.pauseTransitionTime = 176;
+                this.pauseTransitionTime = 50;
                 this.viewport.addClass("paused");
                 $("#about").removeClass("hidden");
             }
@@ -272,7 +284,7 @@
             if (!this.pauseTransitionTime) {
                 this.isPaused = false;
                 this.viewport.removeClass("paused");
-                this.unpauseTransitionTime = 176;
+                this.unpauseTransitionTime = 50;
                 $("#about").addClass("hidden");
             }
         },
@@ -281,9 +293,15 @@
         draw: function (screen, menuScreen, controllerScreen, gameSize) {
             // Clear away the drawing from the previous tick.
             screen.clearRect(0, 0, gameSize.x, gameSize.y);
+            var img;
 
             if (this.isPaused) {
+                this.itemCursor.draw(screen);
 
+                if (this.player.hasBoomerang) {
+                    img = document.getElementById("boomerang");
+                    screen.drawImage(img, 134, 29, 5, 8);
+                }
             } else {
                 var bodiesNotLink = _.filter(this.bodies, function (body) {
                     return !(body instanceof Player);
@@ -629,6 +647,7 @@
         this.moveRate = 1.3;
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
+        this.hasBoomerang = false;
         this.hasSword = false;
         this.swordCooldown = 10;
         this.swordTimer = 0;
@@ -941,6 +960,81 @@
 
             this.tile.x = parseInt(Number(this.center.x).toFixed(0) / 16);
             this.tile.y = parseInt(Number(this.center.y).toFixed(0) / 16);
+        }
+    };
+
+    var ItemCursor = function (game) {
+        this.game = game;
+        this.position = 1;
+        this.size = { x: 16, y: 16 };
+        this.center = { x: 137, y: 33 };
+        this.waitTime = 0;
+        this.waitCooldown = 15;
+    };
+
+    ItemCursor.prototype = {
+        draw: function (screen) {
+            var x = this.center.x;
+            var y = this.center.y;
+
+            screen.strokeStyle = "#FF0000";
+            screen.strokeRect(x - this.size.x / 2, y - this.size.y / 2,
+                this.size.x, this.size.y);
+
+            switch (this.position) {
+                case 1:
+                    this.center = { x: 137, y: 33 };
+                    break;
+                case 2:
+                    this.center = { x: 137 + (24 * 1), y: 33 };
+                    break;
+                case 3:
+                    this.center = { x: 137 + (24 * 2), y: 33 };
+                    break;
+                case 4:
+                    this.center = { x: 137 + (24 * 3), y: 33 };
+                    break;
+                case 5:
+                    this.center = { x: 137, y: 51 };
+                    break;
+                case 6:
+                    this.center = { x: 137 + (24 * 1), y: 51 };
+                    break;
+                case 7:
+                    this.center = { x: 137 + (24 * 2), y: 51};
+                    break;
+                case 8:
+                    this.center = { x: 137 + (24 * 3), y: 51};
+                    break;
+            }
+        },
+
+        update: function () {
+            if (this.waitTime) {
+                this.waitTime--;
+            }
+        },
+
+        moveLeft: function(){
+            if (!this.waitTime) {
+                this.position--;
+
+                if (this.position < 1) {
+                    this.position = 8;
+                }
+                this.waitTime = this.waitCooldown;
+            }
+        },
+
+        moveRight: function(){
+            if (!this.waitTime) {
+                this.position++;
+
+                if (this.position > 8) {
+                    this.position = 1;
+                }
+                this.waitTime = this.waitCooldown;
+            }
         }
     };
 
