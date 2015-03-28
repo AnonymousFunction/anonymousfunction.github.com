@@ -51,6 +51,9 @@
         $("#boomerang-checkbox").click(function () {
             self.player.hasBoomerang = !self.player.hasBoomerang;
         });
+        $("#blue-candle-checkbox").click(function () {
+            self.player.hasBlueCandle = !self.player.hasBlueCandle;
+        });
 
         $("#equip-select").on("change", function () {
             var item = $(this).val();
@@ -301,6 +304,14 @@
                 if (this.player.hasBoomerang) {
                     img = document.getElementById("boomerang");
                     screen.drawImage(img, 134, 29, 5, 8);
+                }
+                if (this.player.bombs) {
+                    img = document.getElementById("bomb");
+                    screen.drawImage(img, 156, 26, 8, 14);
+                }
+                if (this.player.hasBlueCandle) {
+                    img = document.getElementById("blue-candle");
+                    screen.drawImage(img, 204, 25, 8, 16);
                 }
             } else {
                 var bodiesNotLink = _.filter(this.bodies, function (body) {
@@ -648,6 +659,7 @@
         this.spriteChangeCount = 0;
         this.spriteCooldown = 6;
         this.hasBoomerang = false;
+        this.hasBlueCandle = false;
         this.hasSword = false;
         this.swordCooldown = 10;
         this.swordTimer = 0;
