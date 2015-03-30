@@ -1078,28 +1078,28 @@
         selectActive: function(){
             this.game.player.equippedItem = null;
             switch (this.position) {
-                case 1:
+                case 1: //Boomerang
                     this.game.player.equipBoomerang();
                     break;
-                case 2:
+                case 2: //Bomb
                     this.game.player.equipBomb();
                     break;
-                case 3:
+                case 3: //Arrow
                     this.game.player.equippedItem = null;
                     break;
-                case 4:
+                case 4: //Candle
                     this.game.player.equipBlueCandle();
                     break;
-                case 5:
+                case 5: //Whistle
                     this.game.player.equippedItem = null;
                     break;
-                case 6:
+                case 6: //Meat grumble grumble...
                     this.game.player.equippedItem = null;
                     break;
-                case 7:
+                case 7: //Potion/Map
                     this.game.player.equippedItem = null;
                     break;
-                case 8:
+                case 8: //Magic Rod
                     this.game.player.equippedItem = null;
                     break;
             }
