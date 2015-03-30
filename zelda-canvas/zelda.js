@@ -100,7 +100,7 @@
             var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
 
             var wiimote = _.find(gamepads, function(gamepad) {
-                return gamepad.id.indexOf("Wiimote") > -1;
+                return gamepad && gamepad.id && gamepad.id.indexOf("Wiimote") > -1;
             });
 
             if (wiimote) {
