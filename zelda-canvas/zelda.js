@@ -263,14 +263,14 @@
 
             /* DEBUG */
 
-            $("#link-x").text(Number(this.player.center.x).toFixed(2));
-            $("#link-y").text(Number(this.player.center.y).toFixed(2));
-
-            $("#link-x-square").text(this.player.tile.x);
-            $("#link-y-square").text(this.player.tile.y);
-
-            $("#map-x").text(this.map.x);
-            $("#map-y").text(this.map.y);
+//            $("#link-x").text(Number(this.player.center.x).toFixed(2));
+//            $("#link-y").text(Number(this.player.center.y).toFixed(2));
+//
+//            $("#link-x-square").text(this.player.tile.x);
+//            $("#link-y-square").text(this.player.tile.y);
+//
+//            $("#map-x").text(this.map.x);
+//            $("#map-y").text(this.map.y);
 
         },
 
