@@ -751,15 +751,21 @@
         },
 
         equipBlueCandle: function(){
-            this.equippedItem = new BlueCandle(this.game, 0, {x: 0, y: 0});
+            if (this.hasBlueCandle) {
+                this.equippedItem = new BlueCandle(this.game, 0, {x: 0, y: 0});
+            }
         },
 
         equipBomb: function(){
-            this.equippedItem = new EquippedBomb(this.game, {x: 0, y: 0 });
+            if (this.bombs) {
+                this.equippedItem = new EquippedBomb(this.game, {x: 0, y: 0 });
+            }
         },
 
         equipBoomerang: function(){
-            this.equippedItem = new Boomerang(this.game, this);
+            if (this.hasBoomerang) {
+                this.equippedItem = new Boomerang(this.game, this);
+            }
         },
 
         // **update()** updates the state of the player for a single tick.
@@ -1070,6 +1076,7 @@
         },
 
         selectActive: function(){
+            this.game.player.equippedItem = null;
             switch (this.position) {
                 case 1:
                     this.game.player.equipBoomerang();
@@ -1078,17 +1085,22 @@
                     this.game.player.equipBomb();
                     break;
                 case 3:
+                    this.game.player.equippedItem = null;
                     break;
                 case 4:
                     this.game.player.equipBlueCandle();
                     break;
                 case 5:
+                    this.game.player.equippedItem = null;
                     break;
                 case 6:
+                    this.game.player.equippedItem = null;
                     break;
                 case 7:
+                    this.game.player.equippedItem = null;
                     break;
                 case 8:
+                    this.game.player.equippedItem = null;
                     break;
             }
         }
