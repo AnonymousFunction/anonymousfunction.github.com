@@ -59,16 +59,16 @@
             var item = $(this).val();
             switch (item) {
                 case "Arrow":
-                    self.player.equippedItem = new EquippedArrow(self, {x: 0, y: 0});
+                    self.player.equipArrow();
                     break;
                 case "BlueCandle":
-                    self.player.equippedItem = new BlueCandle(self, 0, {x: 0, y: 0});
+                    self.player.equipBlueCandle();
                     break;
                 case "Bomb":
-                    self.player.equippedItem = new EquippedBomb(self, {x: 0, y: 0 });
+                    self.player.equipBomb();
                     break;
                 case "Boomerang":
-                    self.player.equippedItem = new Boomerang(self, self.player);
+                    self.player.equipBoomerang();
                     break;
                 default:
                     self.player.equippedItem = "";
@@ -280,6 +280,7 @@
                 this.pauseTransitionTime = 50;
                 this.viewport.addClass("paused");
                 $("#about").removeClass("hidden");
+                $("#cave-text").addClass("hidden");
             }
         },
 
@@ -289,6 +290,9 @@
                 this.viewport.removeClass("paused");
                 this.unpauseTransitionTime = 50;
                 $("#about").addClass("hidden");
+                $("#cave-text").removeClass("hidden");
+
+                this.itemCursor.selectActive();
             }
         },
 
@@ -742,6 +746,22 @@
             }
         },
 
+        equipArrow: function(){
+            this.equippedItem = new EquippedArrow(this.game, {x: 0, y: 0});
+        },
+
+        equipBlueCandle: function(){
+            this.equippedItem = new BlueCandle(this.game, 0, {x: 0, y: 0});
+        },
+
+        equipBomb: function(){
+            this.equippedItem = new EquippedBomb(this.game, {x: 0, y: 0 });
+        },
+
+        equipBoomerang: function(){
+            this.equippedItem = new Boomerang(this.game, this);
+        },
+
         // **update()** updates the state of the player for a single tick.
         update: function () {
             if (!this.canMove) {
@@ -1046,6 +1066,30 @@
                     this.position = 1;
                 }
                 this.waitTime = this.waitCooldown;
+            }
+        },
+
+        selectActive: function(){
+            switch (this.position) {
+                case 1:
+                    this.game.player.equipBoomerang();
+                    break;
+                case 2:
+                    this.game.player.equipBomb();
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    this.game.player.equipBlueCandle();
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
             }
         }
     };
