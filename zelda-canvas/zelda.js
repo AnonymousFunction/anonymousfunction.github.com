@@ -89,8 +89,48 @@
         });
         // End Game Genie
 
+        var buttonPressed = function(b) {
+            if (typeof(b) == "object") {
+                return b.pressed;
+            }
+            return b == 1.0;
+        };
+
+        var checkWiimoteControls = function(){
+            var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+
+            var wiimote = _.find(gamepads, function(gamepad) {
+                return gamepad.id.indexOf("Wiimote") > -1;
+            });
+
+            if (wiimote) {
+                TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false, B: false, A: false, START: false };
+
+                var gp = gamepads[0];
+                if (buttonPressed(gp.buttons[1]) || buttonPressed(gp.buttons[18])) {
+                    TOUCH.UP = true;
+                } else if (buttonPressed(gp.buttons[0]) || buttonPressed(gp.buttons[19])) {
+                    TOUCH.DOWN = true;
+                } else if (buttonPressed(gp.buttons[2]) ||buttonPressed(gp.buttons[20])) {
+                    TOUCH.LEFT = true;
+                }  else if (buttonPressed(gp.buttons[3]) || buttonPressed(gp.buttons[21])) {
+                    TOUCH.RIGHT = true;
+                }
+
+                if (buttonPressed(gp.buttons[10]) || buttonPressed(gp.buttons[11])) {
+                    TOUCH.A = true;
+                } else if (buttonPressed(gp.buttons[9]) || buttonPressed(gp.buttons[12])) {
+                    TOUCH.B = true;
+                } else if (buttonPressed(gp.buttons[7]) || buttonPressed(gp.buttons[15])) {
+                    TOUCH.START = true;
+                }
+            }
+        };
+
         // Main game tick function.  Loops forever, running 60ish times a second.
         var tick = function () {
+
+            checkWiimoteControls();
 
             // Update game state.
             self.update();
@@ -274,7 +314,7 @@
 
         },
 
-        pause: function(){
+        pause: function () {
             if (!this.pauseTransitionTime) {
                 this.isPaused = true;
                 this.pauseTransitionTime = 50;
@@ -284,7 +324,7 @@
             }
         },
 
-        unpause: function() {
+        unpause: function () {
             if (!this.pauseTransitionTime) {
                 this.isPaused = false;
                 this.viewport.removeClass("paused");
@@ -746,23 +786,23 @@
             }
         },
 
-        equipArrow: function(){
+        equipArrow: function () {
             this.equippedItem = new EquippedArrow(this.game, {x: 0, y: 0});
         },
 
-        equipBlueCandle: function(){
+        equipBlueCandle: function () {
             if (this.hasBlueCandle) {
                 this.equippedItem = new BlueCandle(this.game, 0, {x: 0, y: 0});
             }
         },
 
-        equipBomb: function(){
+        equipBomb: function () {
             if (this.bombs) {
                 this.equippedItem = new EquippedBomb(this.game, {x: 0, y: 0 });
             }
         },
 
-        equipBoomerang: function(){
+        equipBoomerang: function () {
             if (this.hasBoomerang) {
                 this.equippedItem = new Boomerang(this.game, this);
             }
@@ -1053,7 +1093,7 @@
             }
         },
 
-        moveLeft: function(){
+        moveLeft: function () {
             if (!this.waitTime) {
                 this.position--;
 
@@ -1064,7 +1104,7 @@
             }
         },
 
-        moveRight: function(){
+        moveRight: function () {
             if (!this.waitTime) {
                 this.position++;
 
@@ -1075,7 +1115,7 @@
             }
         },
 
-        selectActive: function(){
+        selectActive: function () {
             this.game.player.equippedItem = null;
             switch (this.position) {
                 case 1: //Boomerang
