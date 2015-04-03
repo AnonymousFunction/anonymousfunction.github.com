@@ -89,21 +89,21 @@
         });
         // End Game Genie
 
-        var buttonPressed = function(b) {
+        var buttonPressed = function (b) {
             if (typeof(b) == "object") {
                 return b.pressed;
             }
             return b == 1.0;
         };
 
-        var checkWiimoteControls = function(){
+        var checkWiimoteControls = function () {
             var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
 
-            var wiimote = _.find(gamepads, function(gamepad) {
+            var wiimote = _.find(gamepads, function (gamepad) {
                 return gamepad && gamepad.id && gamepad.id.indexOf("Wiimote") > -1;
             });
 
-            var nesController = _.find(gamepads, function(gamepad) {
+            var nesController = _.find(gamepads, function (gamepad) {
                 return gamepad && gamepad.id && gamepad.id.indexOf("USB Gamepad") > -1;
             });
 
@@ -115,9 +115,9 @@
                     TOUCH.UP = true;
                 } else if (buttonPressed(gp.buttons[0]) || buttonPressed(gp.buttons[19])) {
                     TOUCH.DOWN = true;
-                } else if (buttonPressed(gp.buttons[2]) ||buttonPressed(gp.buttons[20])) {
+                } else if (buttonPressed(gp.buttons[2]) || buttonPressed(gp.buttons[20])) {
                     TOUCH.LEFT = true;
-                }  else if (buttonPressed(gp.buttons[3]) || buttonPressed(gp.buttons[21])) {
+                } else if (buttonPressed(gp.buttons[3]) || buttonPressed(gp.buttons[21])) {
                     TOUCH.RIGHT = true;
                 }
 
@@ -140,7 +140,7 @@
                     TOUCH.DOWN = true;
                 } else if (gp.axes[0] == -1) {
                     TOUCH.LEFT = true;
-                }  else if (gp.axes[0] == 1) {
+                } else if (gp.axes[0] == 1) {
                     TOUCH.RIGHT = true;
                 }
 
@@ -280,18 +280,29 @@
             //Check to see if Link is colliding with any objects
             _.each(self.bodies, function (body) {
                 if (!(body instanceof Player)) {
-                    if (doBodiesCollide(self.player, body)) {
+                    var link = self.player;
+                    if (doBodiesCollide(link, body)) {
+                        //ITEMS
                         if (body instanceof Sword) {
-                            self.player.hasSword = true;
+                            link.hasSword = true;
                             self.removeBody(body);
                             $("#cave-text").text("");
                             self.removeBodyByType(OldMan)
-                        } else if (body instanceof RedOctorok) {
-                            if (self.player.isSwingingSword()) {
+                        } else if (body instanceof BlueCandle) {
+                            if (link.rupees >= body.price) {
+                                link.hasBlueCandle = true;
+                                link.rupees -= body.price;
+                                self.removeBody(body);
+                            }
+                        }
+
+                        //ENEMIES
+                        if (body instanceof RedOctorok) {
+                            if (link.isSwingingSword()) {
                                 self.removeBody(body);
                             } else {
-                                if (!self.player.isInvincible) {
-                                    self.player.takeDamage(body)
+                                if (!link.isInvincible) {
+                                    link.takeDamage(body)
                                 }
                             }
                         }
