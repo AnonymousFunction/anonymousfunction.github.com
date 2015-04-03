@@ -103,6 +103,10 @@
                 return gamepad && gamepad.id && gamepad.id.indexOf("Wiimote") > -1;
             });
 
+            var nesController = _.find(gamepads, function(gamepad) {
+                return gamepad && gamepad.id && gamepad.id.indexOf("USB Gamepad") > -1;
+            });
+
             if (wiimote) {
                 TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false, B: false, A: false, START: false };
 
@@ -122,6 +126,29 @@
                 } else if (buttonPressed(gp.buttons[9]) || buttonPressed(gp.buttons[12])) {
                     TOUCH.B = true;
                 } else if (buttonPressed(gp.buttons[7]) || buttonPressed(gp.buttons[15])) {
+                    TOUCH.START = true;
+                }
+            }
+
+            if (nesController) {
+                TOUCH = { UP: false, DOWN: false, LEFT: false, RIGHT: false, B: false, A: false, START: false };
+
+                var gp = gamepads[0];
+                if (gp.axes[1] == -1) {
+                    TOUCH.UP = true;
+                } else if (gp.axes[1] == 1) {
+                    TOUCH.DOWN = true;
+                } else if (gp.axes[0] == -1) {
+                    TOUCH.LEFT = true;
+                }  else if (gp.axes[0] == 1) {
+                    TOUCH.RIGHT = true;
+                }
+
+                if (buttonPressed(gp.buttons[1])) {
+                    TOUCH.A = true;
+                } else if (buttonPressed(gp.buttons[2])) {
+                    TOUCH.B = true;
+                } else if (buttonPressed(gp.buttons[9])) {
                     TOUCH.START = true;
                 }
             }
