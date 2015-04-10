@@ -339,6 +339,21 @@
                 });
             }
 
+            var bomb = this.getFirstBodyByType(Bomb);
+
+            if (bomb) {
+                _.each(self.bodies, function (body) {
+                    if (!(body instanceof Player) && !(body instanceof CandleFire)) {
+                        if (doBodiesCollide(bomb, body)) {
+                            if (body instanceof CaveEntrance) {
+                                body.show();
+                            }
+                        }
+                    }
+                });
+            }
+
+
             /* DEBUG */
 
 //            $("#link-x").text(Number(this.player.center.x).toFixed(2));
@@ -984,6 +999,12 @@
                         return;
                     }
 
+                    //Is Link trying to enter a secret cave that hasn't been blown up yet?
+                    var caveEntrance = this.game.getFirstBodyByType(CaveEntrance);
+                    if (caveEntrance && caveEntrance.isHidden() && doBodiesCollide(this, caveEntrance)) {
+                        return;
+                    }
+
                     //invisible cave 'ceiling', needs to chop off the y-axis forgiveness
                     if (this.game.isInCave && this.center.y - this.moveRate <= 88) {
                         return;
@@ -1223,7 +1244,7 @@
         this.id = "cave-entrance";
         this.hidden = true;
         this.game = game;
-        this.size = { x: 16, y: 16 };
+        this.size = { x: 16, y: 2 };
         this.center = { x: center.x, y: center.y };
         this.timer = 0;
     };
@@ -1238,7 +1259,15 @@
             var y = this.center.y;
 
             var img = document.getElementById(this.id);
-            screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+            screen.drawImage(img, x - this.size.x / 2, y - 8);
+        },
+
+        isHidden: function(){
+            return this.hidden;
+        },
+
+        show: function(){
+            this.hidden = false;
         },
 
         update: function () {
