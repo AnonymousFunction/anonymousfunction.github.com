@@ -619,6 +619,10 @@
 
             this.viewport.addClass("cave");
 
+            this.bodies = _.filter(this.bodies, function (body) {
+                return body instanceof Player;
+            });
+
             this.caveProperties = getCaveProperties(this)[self.map.x + "_" + self.map.y] || { bodies: [], text: "FINISH THIS CAVE, RICH!" };
 
             _.each(this.caveProperties.bodies, function (body) {
@@ -643,6 +647,7 @@
             });
 
             $("#cave-text").text("");
+            this.needToSpawnEnemies = true;
         },
 
         enterDungeon: function () {
