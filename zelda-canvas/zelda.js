@@ -688,6 +688,14 @@
             ]
         };
 
+        var _7_6 = {
+            text: "IT'S A SECRET\nTO EVERYBODY.",
+            bodies: [
+                new CaveFire(game, { x: 80, y: 72 }),
+                new CaveFire(game, { x: 176, y: 72 })
+            ]
+        };
+
         var _7_7;
         if (player.hasSword) {
             _7_7 = {
@@ -711,6 +719,7 @@
 
         return {
             "6_6": _6_6,
+            "7_6": _7_6,
             "7_7": _7_7
         }
     };
