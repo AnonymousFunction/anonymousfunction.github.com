@@ -179,6 +179,7 @@
         // **update()** runs the main game logic.
         update: function () {
             var self = this;
+            var link = self.player;
 
             if (this.pauseTransitionTime) {
                 this.pauseTransitionTime -= 2;
@@ -280,7 +281,6 @@
             //Check to see if Link is colliding with any objects
             _.each(self.bodies, function (body) {
                 if (!(body instanceof Player)) {
-                    var link = self.player;
                     if (doBodiesCollide(link, body)) {
                         //ITEMS
                         if (body instanceof Sword) {
@@ -339,14 +339,18 @@
                 });
             }
 
-            var bomb = this.getFirstBodyByType(Bomb);
+            var bombExplosion = this.getFirstBodyByType(BombExplosion);
 
-            if (bomb) {
+            if (bombExplosion) {
                 _.each(self.bodies, function (body) {
-                    if (!(body instanceof Player) && !(body instanceof CandleFire)) {
-                        if (doBodiesCollide(bomb, body)) {
+                    if (!(body instanceof BombExplosion)) {
+                        if (doBodiesCollide(bombExplosion, body)) {
                             if (body instanceof CaveEntrance) {
                                 body.show();
+                            } else if (body instanceof Player) {
+                                if (!link.isInvincible) {
+                                    link.takeDamage(bombExplosion)
+                                }
                             }
                         }
                     }
@@ -1403,10 +1407,38 @@
     };
 
     var createBombExplosion = function (game, center) {
+        //The BombExplosion actually does the damage, not the Cloud, I want to be able to easily
+        //reuse the Cloud for enemy spawning without them causing damage to anything.
+        game.addBody(new BombExplosion(game, center));
         game.addBody(new Cloud(game, center));
-        game.addBody(new Cloud(game, { x: center.x, y: center.y - 10 }));
-        game.addBody(new Cloud(game, { x: center.x - 10, y: center.y + 10 }));
-        game.addBody(new Cloud(game, { x: center.x + 10, y: center.y + 10 }));
+        game.addBody(new Cloud(game, { x: center.x - 12, y: center.y }));
+        game.addBody(new Cloud(game, { x: center.x + 12, y: center.y }));
+        game.addBody(new Cloud(game, { x: center.x - 6, y: center.y + 12 }));
+        game.addBody(new Cloud(game, { x: center.x + 6, y: center.y + 12}));
+        game.addBody(new Cloud(game, { x: center.x - 6, y: center.y - 12 }));
+        game.addBody(new Cloud(game, { x: center.x + 6, y: center.y - 12}));
+    };
+
+    var BombExplosion = function (game, center) {
+        this.game = game;
+        this.size = { x: 32, y: 32 };
+        this.center = { x: center.x, y: center.y };
+        this.lifeCountdown = 21;
+        this.damage = 1;
+    };
+
+    BombExplosion.prototype = {
+        draw: function (screen) {
+
+        },
+
+        update: function () {
+            if (this.lifeCountdown === 0) {
+                this.game.removeBody(this);
+            }
+
+            this.lifeCountdown--;
+        }
     };
 
     var Cloud = function (game, center) {
@@ -1466,7 +1498,7 @@
         this.id = "bomb";
         this.game = game;
         this.size = { x: 8, y: 16 };
-        this.explodeCountdown = 160;
+        this.explodeCountdown = 60;
 
         switch (player.getDirection()) {
             case "up":
