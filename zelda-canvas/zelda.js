@@ -351,6 +351,8 @@
                                 if (!link.isInvincible) {
                                     link.takeDamage(bombExplosion)
                                 }
+                            } else if (body instanceof RedOctorok) {
+                                self.removeBody(body);
                             }
                         }
                     }
