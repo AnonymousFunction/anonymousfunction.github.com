@@ -853,6 +853,22 @@
                 this.hearts = 0;
             }
 
+            //Knock link back when he gets hit.  Needs to take into account the screen edges and obstacles
+            switch (this.getDirection()){
+                case "up":
+                    this.center.y += 16;
+                    break;
+                case "down":
+                    this.center.y -= 16;
+                    break;
+                case "left":
+                    this.center.x += 16;
+                    break;
+                case "right":
+                    this.center.x -= 16;
+                    break;
+            }
+
             this.invincibleTimer = this.invincibleCooldown;
         },
 
