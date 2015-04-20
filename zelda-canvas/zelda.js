@@ -800,8 +800,8 @@
         this.isInvincible = false;
         this.invincibleCooldown = 60;
         this.invincibleTimer = 0;
-        this.attackOffsetY = 8;
-        this.attackOffsetX = 8;
+        this.attackOffsetY = 6;
+        this.attackOffsetX = 6;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
