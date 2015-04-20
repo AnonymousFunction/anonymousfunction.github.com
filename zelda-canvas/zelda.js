@@ -800,6 +800,8 @@
         this.isInvincible = false;
         this.invincibleCooldown = 60;
         this.invincibleTimer = 0;
+        this.attackOffsetY = 8;
+        this.attackOffsetX = 8;
 
         // Create a keyboard object to track button presses.
         this.keyboarder = new Keyboarder();
@@ -937,14 +939,20 @@
             if ((this.keyboarder.isDown(this.keyboarder.KEYS.SPACE) || TOUCH.A) && this.hasSword && this.swordTimer === 0 && this.swordWait === 0 && this.swordRelease) {
                 if (this.id.indexOf("up") > -1) {
                     this.id = "sword-up";
-                    this.center.y -= 12;
+                    this.center.y -= this.attackOffsetY;
+                    this.size = { x: 16, y: 28 };
                 } else if (this.id.indexOf("down") > -1) {
                     this.id = "sword-down";
+                    this.center.y += this.attackOffsetY;
+                    this.size = { x: 16, y: 28 };
                 } else if (this.id.indexOf("left") > -1) {
                     this.id = "sword-left";
-                    this.center.x -= 13;
+                    this.center.x -= this.attackOffsetX;
+                    this.size = { x: 28, y: 16 };
                 } else if (this.id.indexOf("right") > -1) {
                     this.id = "sword-right";
+                    this.center.x += this.attackOffsetX;
+                    this.size = { x: 28, y: 16 };
                 }
                 this.swordTimer = this.swordCooldown;
                 this.swordWait = this.swordWaitCooldown;
@@ -960,15 +968,20 @@
             } else {
                 if (this.id === "sword-up") {
                     this.id = "link-up-1";
-                    this.center.y += 12;
+                    this.center.y += this.attackOffsetY;
                 } else if (this.id == "sword-down") {
                     this.id = "link-down-1";
+                    this.center.y -= this.attackOffsetY;
                 } else if (this.id === "sword-left") {
-                    this.center.x += 13;
                     this.id = "link-left-1";
+                    this.center.x += this.attackOffsetX;
                 } else if (this.id === "sword-right") {
                     this.id = "link-right-1";
+                    this.center.x -= this.attackOffsetX;
                 }
+
+                //reset size because link's hitbox grows when attacking
+                this.size = { x: 16, y: 16 };
                 this.swordRelease = true;
             }
 
