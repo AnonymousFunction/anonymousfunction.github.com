@@ -1,5 +1,13 @@
 (function () {
 
+    window.requestAnimFrame = (function(){
+        return  window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.mozRequestAnimationFrame;
+    })();
+
     // Main game object
     // ----------------
 
@@ -166,7 +174,7 @@
             self.draw(screen, menuScreen, controllerScreen, gameSize);
 
             // Queue up the next call to tick with the browser.
-            requestAnimationFrame(tick);
+            window.requestAnimFrame(tick);
         };
 
         // Run the first game tick.  All future calls will be scheduled by
