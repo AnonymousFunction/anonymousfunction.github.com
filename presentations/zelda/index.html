@@ -31,6 +31,8 @@
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
+        <script src="/lib/underscore/underscore-min.js"></script>
+
 		<!--[if lt IE 9]>
         <script src="/lib/reveal.js-3.0.0/lib/js/html5shiv.js"></script>
         <![endif]-->
@@ -83,27 +85,26 @@
 				</section>
 
                 <section>
-                    <section>
-                        <h2>Basic Canvas</h2>
-                        <pre><code data-trim contenteditable>
+                    <h2>Basic Canvas</h2>
+                    <pre><code data-trim contenteditable>
 <style>
-    #zelda {
-        background: url("/zelda-canvas/images/overworld_map.png");
+    #my-canvas {
+        background: black;
     }
 </style>
 
-<canvas id="zelda" width="256" height="176"></canvas>
-                        </code></pre>
-                        <p>&darr;</p>
-                    </section>
-                    <section>
-                        <p>&uarr;</p>
-                        <img src="/zelda-canvas/images/overworld_map.png" >
-                    </section>
+<canvas id="my-canvas" width="100" height="100"></canvas>
+                    </code></pre>
+                    <p>
+                        <a href="http://jsfiddle.net/rsmclaug/uvdwn4q7/" target="_blank">Demo</a>
+                    </p>
                 </section>
 
                 <section>
                     <h2>Drawing to Canvas</h2>
+                    <p>
+                        <a href="http://jsfiddle.net/rsmclaug/7s90sznp/" target="_blank">Demo</a>
+                    </p>
                 </section>
 
                 <section>
@@ -482,6 +483,63 @@ gameLoop();
 					{ src: '/lib/reveal.js-3.0.0/plugin/notes/notes.js', async: true }
 				]
 			});
+
+            var buttonPressed = function (b) {
+                if (typeof(b) == "object") {
+                    return b.pressed;
+                }
+                return b == 1.0;
+            };
+
+            var controllerCooldown;
+
+            var resetControllerCooldown = function(){
+                controllerCooldown = 30;
+            };
+
+            resetControllerCooldown();
+
+            var gameLoop = function () {
+                var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+
+                var nesController = _.find(gamepads, function (gamepad) {
+                    return gamepad && gamepad.id && gamepad.id.indexOf("USB Gamepad") > -1;
+                });
+
+                if (controllerCooldown > 0) {
+                    controllerCooldown--;
+                }
+
+                if (nesController && controllerCooldown === 0) {
+                    var gp = gamepads[0];
+                    if (gp.axes[1] == -1) {
+                        window.Reveal.navigateUp();
+                        resetControllerCooldown();
+                    } else if (gp.axes[1] == 1) {
+                        window.Reveal.navigateDown();
+                        resetControllerCooldown();
+                    } else if (gp.axes[0] == -1) {
+                        window.Reveal.navigateLeft();
+                        resetControllerCooldown();
+                    } else if (gp.axes[0] == 1) {
+                        window.Reveal.navigateRight();
+                        resetControllerCooldown();
+                    }
+
+                    if (buttonPressed(gp.buttons[1])) {
+                        //
+                    } else if (buttonPressed(gp.buttons[2])) {
+                        //
+                    } else if (buttonPressed(gp.buttons[9])) {
+                        window.Reveal.togglePause();
+                        resetControllerCooldown();
+                    }
+                }
+
+                requestAnimationFrame(gameLoop);
+            };
+
+            gameLoop();
 
 		</script>
 
