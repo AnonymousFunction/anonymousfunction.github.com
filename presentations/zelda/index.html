@@ -56,8 +56,7 @@
                     <h2>About Me</h2>
                     <p>
                         Sr. Software Engineer - <a href="http://www.vertafore.com/" target="_blank">Vertafore</a><br/>
-                        JS Game Developer - <a href="http://anonymous-function.com/#/games" target="_blank">Anonymous Function</a>
-                        <p><small>Guitarist &middot; Wolverine &middot; Simpsons</small></p>
+                        JS Game Developer - <a href="http://anonymous-function.com/#/games" target="_blank">Anonymous Function</a><br/>
                     </p>
                 </section>
 
@@ -101,7 +100,25 @@
                 </section>
 
                 <section>
+                    <h2>How It Works</h2>
+                    <p>
+                        <img src="canvas_cartesian.png" id="coordinates"/>
+                    </p>
+                    <p><small>
+                        The Canvas grid functions like the Cartesian grid, but the y-axis is flipped.<br/>
+                        This is consistent with how content is rendered.
+                    </small></p>
+                </section>
+
+                <section>
                     <h2>Drawing to Canvas</h2>
+                    <pre><code data-trim contenteditable>
+var canvas = document.getElementById("my-canvas");
+var context = canvas.getContext("2d");
+
+context.fillStyle = "green";
+context.fillRect(10, 10, 100, 100);
+                    </code></pre>
                     <p>
                         <a href="http://jsfiddle.net/rsmclaug/7s90sznp/" target="_blank">Demo</a>
                     </p>
@@ -119,7 +136,7 @@ var gameLoop = function () {
 gameLoop();
                         </code></pre>
                         <p>
-                            <a href="http://jsfiddle.net/rsmclaug/xhh5ob99/" target="_blank">FPS Demo</a>
+                            <a href="http://jsfiddle.net/rsmclaug/xhh5ob99/" target="_blank">Demo</a>
                         </p>
                     </section>
                     <section>

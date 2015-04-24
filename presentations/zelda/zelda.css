@@ -16,3 +16,15 @@
     border: none;
     box-shadow: none;
 }
+
+#me {
+    border: none;
+    box-shadow: none;
+    border-radius: 65px;
+}
+
+#coordinates {
+    width: 50%;
+    border: none;
+    box-shadow: none;
+}
