@@ -48,7 +48,7 @@
 					<h2>The Legend of Canvas</h2>
 					<h4>Recreating the Legend of Zelda<br/>in HTML5 Canvas & JavaScript</h4>
 					<p>
-						<small>Created by <a href="http://anonymous-function.com/" target="_blank">Rich McLaughlin</a> / Available on <a href="https://github.com/RichMcL" target="_blank">GitHub</a></small><br/>
+						<small>Created by <a href="https://www.google.com/+RichMcLaughlin" target="_blank">Rich McLaughlin</a> / Available on <a href="https://github.com/RichMcL" target="_blank">GitHub</a></small><br/>
                     </p>
 				</section>
 
@@ -65,18 +65,20 @@
                     <p>
                         Read the tutorial on <a href="https://www.airpair.com/javascript/posts/the-legend-of-canvas" target="_blank">AirPair</a>
                     </p>
-                    -or-
                     <p>
                         Play <a href="http://anonymous-function.com/zelda-canvas/" target="_blank">Zelda</a> <img src="spin_triforce.gif" id="spinning-triforce">
                     </p>
-				</section>
+                    <p>
+                        Also: <a href="http://anonymous-function.com/breakout/" target="_blank">Breakout</a> - <a href="http://anonymous-function.com/asteroids/" target="_blank">Asteroids</a>
+                    </p>
+                </section>
 
                 <section>
                     <h2>Outline</h2>
                     <ul>
                         <li>Basic Canvas</li>
                         <li>Drawing to Canvas</li>
-                        <li>Overworld Map</li>
+                        <li>Map Background</li>
                         <li>Setting up a Game Loop</li>
                         <li>Using Sprites</li>
                         <li>Collision Detection</li>
@@ -117,10 +119,27 @@ var canvas = document.getElementById("my-canvas");
 var context = canvas.getContext("2d");
 
 context.fillStyle = "green";
-context.fillRect(10, 10, 100, 100);
+context.fillRect(10, 10, 100, 100); // x, y, w, h
                     </code></pre>
                     <p>
                         <a href="http://jsfiddle.net/rsmclaug/7s90sznp/" target="_blank">Demo</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Map Background</h2>
+                    <pre><code data-trim contenteditable>
+<style>
+    #zelda {
+        background: url("images/overworld_map.png") no-repeat;
+        background-position-x: -1792px; /* 256px offset */
+        background-position-y: -1232px; /* 176px offset */
+    }
+</style>
+                    </code></pre>
+                    <p>
+                        The background image has no real effect on the game.<br/>
+                        To Chrome Dev Tools!
                     </p>
                 </section>
 
@@ -150,6 +169,13 @@ gameLoop();
                             <a href="http://www.w3.org/TR/animation-timing/" target="_blank">W3C Docs</a>
                         </p>
                     </section>
+                </section>
+                <section>
+                    <h2>Plugs</h2>
+                    <p>
+                        Fri 5/22 - React Native @ Vertafore IP Expo<br/>
+                        Tue 6/16 - HTML5 Canvas @ <a href="http://www.meetup.com/Lansing-Javascript-Meetup/events/221726694/" target="_blank">Lansing JavaScript Meetup</a><br/>
+                    </p>
                 </section>
 
 
