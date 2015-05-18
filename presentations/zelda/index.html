@@ -182,6 +182,10 @@ gameLoop();
                         All objects are single points with a height and width.
                     </p>
                     <p>
+                        The image is drawn based on the object's position.<br/>
+                        Different images are drawn based on the object's state.
+                    </p>
+                    <p>
                         Live Code Example - See <a href="http://anonymous-function.com/zelda-canvas/zelda.js" target="_blank">Player.prototype.draw</a>
                     </p>
                 </section>
@@ -202,6 +206,20 @@ gameLoop();
                 <section>
                     <h2>Collision Detection</h2>
                     <p>- Items/Enemies -</p>
+                    <p>
+                        Each object has a center point, width, and height.<br/>
+                        For each game loop, we iterate over all objects and determine which collide based on their sizes
+                        <pre><code data-trim contenteditable>
+//example
+player.size = { x: 16, y: 16 };
+player.center = { x: 128, y: 88 };
+
+redOctorok.size = { x: 14, y: 14 };
+redOctorok.center = { x: 118, y: 88 };
+                        </code></pre>
+                        See <a href="http://anonymous-function.com/zelda-canvas/zelda.js" target="_blank">Game.prototype.update</a>
+
+                    </p>
                 </section>
 
                 <section>
@@ -209,6 +227,13 @@ gameLoop();
                     <p>
                         Fri 5/22 - React Native @ Vertafore IP Expo<br/>
                         Tue 6/16 - HTML5 Canvas @ <a href="http://www.meetup.com/Lansing-Javascript-Meetup/events/221726694/" target="_blank">Lansing JavaScript Meetup</a><br/>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Now you're playing with power</h2>
+                    <p>
+                        Questions?
                     </p>
                 </section>
 
