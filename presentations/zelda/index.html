@@ -40,6 +40,7 @@
 
 	<body>
 
+        <img src="contra.jpg" id="contra" style="height: 100%; display: none; margin: 0 auto;"/>
 		<div class="reveal">
 
 			<!-- Any section element inside of this container is displayed as a slide -->
@@ -292,8 +293,14 @@ redOctorok.center = { x: 118, y: 88 };
 
             var controllerCooldown;
 
+            var keyPresses = [];
+
             var resetControllerCooldown = function(){
-                controllerCooldown = 30;
+                controllerCooldown = 15;
+                console.log("_.last(keyPresses, 10)", _.last(keyPresses, 10).toString());
+                if (_.last(keyPresses, 10).toString() === "up,up,down,down,left,right,left,right,b,a") {
+                    document.getElementById("contra").style.display = "block";
+                }
             };
 
             resetControllerCooldown();
@@ -313,22 +320,28 @@ redOctorok.center = { x: 118, y: 88 };
                     var gp = gamepads[0];
                     if (gp.axes[1] == -1) {
                         window.Reveal.navigateUp();
+                        keyPresses.push("up");
                         resetControllerCooldown();
                     } else if (gp.axes[1] == 1) {
                         window.Reveal.navigateDown();
+                        keyPresses.push("down");
                         resetControllerCooldown();
                     } else if (gp.axes[0] == -1) {
                         window.Reveal.navigateLeft();
+                        keyPresses.push("left");
                         resetControllerCooldown();
                     } else if (gp.axes[0] == 1) {
                         window.Reveal.navigateRight();
+                        keyPresses.push("right");
                         resetControllerCooldown();
                     }
 
                     if (buttonPressed(gp.buttons[1])) {
-                        //
+                        keyPresses.push("a");
+                        resetControllerCooldown();
                     } else if (buttonPressed(gp.buttons[2])) {
-                        //
+                        keyPresses.push("b");
+                        resetControllerCooldown();
                     } else if (buttonPressed(gp.buttons[9])) {
                         window.Reveal.togglePause();
                         resetControllerCooldown();
