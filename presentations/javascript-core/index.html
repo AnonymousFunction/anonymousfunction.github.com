@@ -68,43 +68,68 @@
         <section>
             <h2>Namespaces</h2>
             <pre><code data-trim contenteditable>
-// Create a namespace (if it doesn't exist) at top-level scope
+// Use the app namespace if it exists, else create one
 var app = app || {};
 
+app.name = "My Cool Application";
 app.util = {};
 app.doStuff = function(){};
             </code></pre>
+            <p>
+                Top-level namespace is bound to window (global) scope<br>
+                Create a namespace to avoid collisions<br>
+                Prevent flooding global namespace
+            </p>
         </section>
 
         <section>
             <h2>Closures</h2>
             <pre><code data-trim contenteditable>
 var a = (function(){
-    // Function Body
     // Everything here is inherently private
-    // Scoped to the function
 })();
 
-console.log(a);
-// a is undefined
+console.log(a); // undefined
             </code></pre>
+            <p>
+                IIFE - Immediately-Invoked Function Expression<br>
+                'a' is set to the IIFE return value
+            </p>
         </section>
 
         <section>
             <h2>Closures</h2>
             <pre><code data-trim contenteditable>
-(function(){
+var user = (function(){
     var name = "Rich";
 
-    var getName = function(){
-        return name;
-    };
-
     return {
-        getName: getName
+        getName: function(){
+            return name;
+        }
     }
 })();
+
+console.log(user.name);      // undefined
+console.log(user.getName()); // "Rich"
             </code></pre>
+            <p>
+                Expose an API with the return statement<br/>
+                Function scope lives after execution<br/>
+            </p>
+        </section>
+
+        <section>
+            <h2>Closures</h2>
+            <pre><code data-trim contenteditable>
+var app = (function($, author){
+    // function body
+})(window.jQuery, "Rich");
+            </code></pre>
+            <p>
+                Pass parameters into closure scope<br>
+                Protect namespaces and avoid collisions<br>
+            </p>
         </section>
 
         <section>
