@@ -59,7 +59,6 @@
             <h2>Outline</h2>
             <ul>
                 <li>Namespaces</li>
-                <li>Anonymous Functions</li>
                 <li>Closures/IIFE</li>
                 <li>Promises</li>
                 <li>$q vs. $.ajax</li>
@@ -78,11 +77,13 @@ app.doStuff = function(){};
         </section>
 
         <section>
-            <h2>Anonymous Functions</h2>
-        </section>
-
-        <section>
             <h2>Closures/IIFE</h2>
+            <pre><code data-trim contenteditable>
+// Nothing can access the scope of this function
+(function(){
+    // do stuff
+})();
+            </code></pre>
         </section>
 
         <section>
