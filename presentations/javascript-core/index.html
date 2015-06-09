@@ -59,7 +59,7 @@
             <h2>Outline</h2>
             <ul>
                 <li>Namespaces</li>
-                <li>Closures/IIFE</li>
+                <li>Closures</li>
                 <li>Promises</li>
                 <li>$q vs. $.ajax</li>
             </ul>
@@ -77,11 +77,32 @@ app.doStuff = function(){};
         </section>
 
         <section>
-            <h2>Closures/IIFE</h2>
+            <h2>Closures</h2>
             <pre><code data-trim contenteditable>
-// Nothing can access the scope of this function
+var a = (function(){
+    // Function Body
+    // Everything here is inherently private
+    // Scoped to the function
+})();
+
+console.log(a);
+// a is undefined
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Closures</h2>
+            <pre><code data-trim contenteditable>
 (function(){
-    // do stuff
+    var name = "Rich";
+
+    var getName = function(){
+        return name;
+    };
+
+    return {
+        getName: getName
+    }
 })();
             </code></pre>
         </section>
