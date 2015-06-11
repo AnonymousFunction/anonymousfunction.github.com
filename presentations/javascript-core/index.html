@@ -60,8 +60,9 @@
             <ul>
                 <li>Namespaces</li>
                 <li>Closures</li>
+                <li>AJAX</li>
                 <li>Promises</li>
-                <li>$q vs. $.ajax</li>
+                <li>Deferred</li>
             </ul>
         </section>
 
@@ -133,11 +134,36 @@ var app = (function($, author){
         </section>
 
         <section>
-            <h2>Promises</h2>
+            <h2>$http</h2>
+            <pre><code data-trim contenteditable>
+$http.get("/api/users/12345").then(function(res){
+    $scope.user = res.data;
+}, function(res){
+    $scope.errorMessage = "An error occurred";
+});
+            </code></pre>
+            <p>
+                Perform asynchronous HTTP requests<br>
+                Similar to jQuery.ajax()
+            </p>
         </section>
 
         <section>
-            <h2>$q vs. $.ajax</h2>
+            <h2>Deferred API</h2>
+            <p>
+                The purpose of the deferred object is to expose the associated Promise instance as well as APIs that can be used for signaling the successful or unsuccessful completion, as well as the status of the task.
+            </p>
+        </section>
+
+        <section>
+            <h2>Promise API</h2>
+            <p>
+                The purpose of the promise object is to allow for interested parties to get access to the result of the deferred task when it completes.
+            </p>
+        </section>
+
+        <section>
+            <h2>$q</h2>
         </section>
 
     </div>
