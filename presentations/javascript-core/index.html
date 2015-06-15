@@ -222,8 +222,47 @@ userPromise.then(...);
 userPromise.then(...);
             </code></pre>
             <p>
+                What happens here?
+            </p>
+            <p>
                 Promises retain their value once they are resolved/rejected<br>
                 The API doesn't change even if it is resolved
+            </p>
+        </section>
+
+        <section>
+            <h2>Chaining Calls</h2>
+            <pre><code data-trim contenteditable>
+firstPromise.then(function(firstRes){
+    secondPromise.then(function(secondRes){
+        // process responses
+    });
+});
+            </code></pre>
+            <p>
+                Chaining promises is possible, but nesting is not ideal<br>
+                Here, neither call is dependent on the other's response
+            </p>
+            <p>
+                How can we improve this?
+            </p>
+        </section>
+
+        <section>
+            <h2>$q.all</h2>
+            <pre><code data-trim contenteditable>
+$http.get("first").then(function(firstRes){
+    $http.get("second").then(function(secondRes){
+        // process responses
+    });
+});
+            </code></pre>
+            <p>
+                Execute both promi<br>
+                Here, neither call is dependent on the other's response
+            </p>
+            <p>
+                How can we improve this?
             </p>
         </section>
 
