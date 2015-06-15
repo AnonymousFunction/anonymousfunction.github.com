@@ -215,16 +215,15 @@ userPromise.then(function(res){
         </section>
 
         <section>
-            <h2>Deferred API</h2>
+            <h2>Promises</h2>
+            <pre><code data-trim contenteditable>
+userPromise.then(...);
+userPromise.then(...);
+userPromise.then(...);
+            </code></pre>
             <p>
-                The purpose of the deferred object is to expose the associated Promise instance as well as APIs that can be used for signaling the successful or unsuccessful completion, as well as the status of the task.
-            </p>
-        </section>
-
-        <section>
-            <h2>Promise API</h2>
-            <p>
-                The purpose of the promise object is to allow for interested parties to get access to the result of the deferred task when it completes.
+                Promises retain their value once they are resolved/rejected<br>
+                The API doesn't change even if it is resolved
             </p>
         </section>
 
