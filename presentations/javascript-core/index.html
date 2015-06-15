@@ -62,7 +62,6 @@
                 <li>Closures</li>
                 <li>AJAX</li>
                 <li>Promises</li>
-                <li>Deferred</li>
             </ul>
         </section>
 
@@ -139,8 +138,8 @@ var app = (function($, author){
                 What does AJAX do?
             </p>
             <p>
-                OK, JavaScript, when this HTTP request is done<br>
-                come back here and do some stuff
+                <i>"OK, JavaScript, when this HTTP request is done<br>
+                come back here and do some stuff"</i>
             </p>
         </section>
 
@@ -165,8 +164,53 @@ $http.get("/api/users/12345").then(function(res){
                 What do Promises do?
             </p>
             <p>
-                OK, JavaScript, when this <i>thing is resolved</i><br>
-                come back here and do some stuff
+                <i>"OK, JavaScript, when this <b>thing is resolved</b><br>
+                come back here and do some stuff"</i>
+            </p>
+        </section>
+
+        <section>
+            <h2>Promises</h2>
+            <pre><code data-trim contenteditable>
+var getUserPromise = function(id) {
+    var userDeferred = $q.defer();
+
+    if (id) {
+        $http.get("/api/users/" + id).then(function(res) {
+            userDeferred.resolve(res);
+        }, function(res) {
+            userDeferred.reject(res);
+        });
+    } else {
+        userDeferred.reject({ status: 422 });
+    }
+
+    return userDeferred.promise;
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Promises</h2>
+            <pre><code data-trim contenteditable>
+var userPromise = getUserPromise(12345);
+
+userPromise.then(function(res){
+    // success
+}, function(res){
+    // error
+});
+            </code></pre>
+            <p>
+                <ol>
+                    <li>Promise me you'll go get the user</li>
+                    <li>I don't care how</li>
+                    <li>Let me know when you're done</li>
+                </ol>
+                <p>
+                    So what?
+                </p>
+
             </p>
         </section>
 
@@ -182,10 +226,6 @@ $http.get("/api/users/12345").then(function(res){
             <p>
                 The purpose of the promise object is to allow for interested parties to get access to the result of the deferred task when it completes.
             </p>
-        </section>
-
-        <section>
-            <h2>$q</h2>
         </section>
 
     </div>
