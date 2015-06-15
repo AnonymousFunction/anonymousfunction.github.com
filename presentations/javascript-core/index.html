@@ -251,18 +251,33 @@ firstPromise.then(function(firstRes){
         <section>
             <h2>$q.all</h2>
             <pre><code data-trim contenteditable>
-$http.get("first").then(function(firstRes){
-    $http.get("second").then(function(secondRes){
-        // process responses
-    });
+$q.all([firstPromise, secondPromise]).then(function(responses){
+    // process responses[0], responses[1]
 });
             </code></pre>
             <p>
-                Execute both promi<br>
-                Here, neither call is dependent on the other's response
+                Execute both promises<br>
+                Callback fires when ALL are resolved<br>
+                Response array respects order<br>
+                All must succeed for success callback
             </p>
+        </section>
+
+        <section>
+            <h2>$q.all</h2>
+            <pre><code data-trim contenteditable>
+var promises = {
+    user: userPromise,
+    account: accountPromise
+};
+
+$q.all(promises).then(function(responses){
+    // process responses.user, responses.account
+});
+            </code></pre>
             <p>
-                How can we improve this?
+                Can take a named map of promises<br>
+                Responses will me a named map
             </p>
         </section>
 
