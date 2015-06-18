@@ -1,93 +1,114 @@
+html {
+    background-color: #eee;
+}
+
 body {
-  padding: 0;
-  color: #414141;
-  font-family: sans-serif;
+    padding: 0;
+    background-color: transparent;
+    color: #414141;
+    font-family: sans-serif;
 }
+
 header {
-  background-color: rgb(57, 159, 199);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
+    background-color: rgb(57, 159, 199);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
 }
+
 header #title {
-  color: white;
-  font-family: monospace;
-  font-weight: normal;
-  text-shadow: 2px 2px #414141;
-  height: 40px;
-  font-size: 2.0em;
-  padding-top: 5px;
+    color: white;
+    font-family: monospace;
+    font-weight: normal;
+    text-shadow: 2px 2px #414141;
+    height: 40px;
+    font-size: 2.0em;
 }
+
 header nav {
-  background-color: rgb(206, 204, 204);
-  box-shadow: 0 4px 2px -2px gray;
+    background-color: rgb(206, 204, 204);
+    box-shadow: 0 4px 2px -2px gray;
 }
+
 header nav ul {
-  list-style: none;
-  display: inline;
-  padding: 0;
+    list-style: none;
+    display: inline;
+    padding: 0;
 }
+
 header nav ul li {
-  display: inline;
+    display: inline;
 }
-header nav ul li:not(:last-child):after
-{
-  padding: 0 10px;
-  content: ' |';
+
+header nav ul li:not(:last-child):after {
+    padding: 0 10px;
+    content: ' |';
 }
+
 header a {
-  color: #414141;
-  text-decoration: none;
-  font-family: sans-serif;
+    color: #414141;
+    text-decoration: none;
+    font-family: sans-serif;
 }
+
 .exampleTitle {
-  font-weight: bold;
+    font-weight: bold;
 }
+
 #wrapper {
-  margin-top: 70px;
+    margin-top: 70px;
 }
+
 #welcome {
-  text-align: center;
+    text-align: center;
 }
+
 #welcomeText {
-  text-align: justify;
+    text-align: justify;
 }
+
 #about {
-  text-align: center;
-  margin: 0 auto;
-  max-width: 400px;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 400px;
 }
+
 #about img {
-  border-radius: 70px;
-  box-shadow: 2px 2px 2px;
+    border-radius: 70px;
+    box-shadow: 2px 2px 2px;
 }
+
 #rich {
-  padding-top: 5px;
+    padding-top: 5px;
 }
+
 #ted {
-  margin-top: 10px;
+    margin-top: 10px;
 }
+
 #about .aboutText {
-  text-align: justify;
+    text-align: justify;
 }
 
 #games {
-  text-align: center;
-  margin: 0 auto;
-  max-width: 400px;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 400px;
 }
+
 #games img {
-  border-radius: 70px;
-  box-shadow: 2px 2px 2px;
+    border-radius: 70px;
+    box-shadow: 2px 2px 2px;
 }
 
 #breakout img {
-  height: 100px;
-  width: 100px;
+    height: 100px;
+    width: 100px;
 }
+
 #zelda img {
-  height: 100px;
-  width: 100px;
+    height: 100px;
+    width: 100px;
 }
