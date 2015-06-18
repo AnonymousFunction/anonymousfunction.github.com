@@ -8,27 +8,24 @@ body {
     padding: 0;
     background-color: transparent;
     color: #414141;
-    font-family: sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 header {
-    background-color: rgb(57, 159, 199);
     width: 100%;
     text-align: center;
 }
 
 header #title {
+    background-color: rgb(57, 159, 199);
     color: white;
-    font-family: monospace;
     font-weight: normal;
-    text-shadow: 2px 2px #414141;
-    height: 40px;
-    font-size: 2.0em;
+    font-size: 1.5em;
+    padding: 2px 0;
 }
 
 header nav {
     background-color: rgb(206, 204, 204);
-    box-shadow: 0 4px 2px -2px gray;
 }
 
 header nav ul {
@@ -43,13 +40,12 @@ header nav ul li {
 
 header nav ul li:not(:last-child):after {
     padding: 0 10px;
-    content: ' |';
+    content: ' -';
 }
 
 header a {
     color: #414141;
     text-decoration: none;
-    font-family: sans-serif;
 }
 
 .exampleTitle {
