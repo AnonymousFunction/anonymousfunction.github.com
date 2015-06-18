@@ -1,5 +1,6 @@
 html {
     background-color: #eee;
+    height: 100%;
 }
 
 body {
@@ -11,9 +12,6 @@ body {
 
 header {
     background-color: rgb(57, 159, 199);
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     text-align: center;
 }
@@ -58,7 +56,7 @@ header a {
 }
 
 #wrapper {
-    margin-top: 70px;
+    padding: 5px;
 }
 
 #welcome {
