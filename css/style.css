@@ -20,7 +20,7 @@ header #title {
     background-color: rgb(57, 159, 199);
     color: white;
     font-weight: normal;
-    font-size: 1.5em;
+    font-size: 2em;
     padding: 2px 0;
 }
 
@@ -54,20 +54,13 @@ header a {
 
 #wrapper {
     padding: 5px;
-}
-
-#welcome {
     text-align: center;
-}
-
-#welcomeText {
-    text-align: justify;
-}
-
-#about {
-    text-align: center;
+    max-width: 600px;
     margin: 0 auto;
-    max-width: 400px;
+}
+
+#wrapper h3 {
+    margin-top: 5px;
 }
 
 #about img {
@@ -107,9 +100,6 @@ header a {
     width: 100px;
 }
 @media (max-width: 420px) {
-    header #title {
-        font-size: 2em;
-    }
     header nav ul li {
         display: block;
         font-size: 1.3em;
