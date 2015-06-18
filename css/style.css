@@ -25,7 +25,7 @@ header #title {
 }
 
 header nav {
-    background-color: rgb(206, 204, 204);
+    background-color: #cecece;
 }
 
 header nav ul {
@@ -72,7 +72,6 @@ header a {
 
 #about img {
     border-radius: 70px;
-    box-shadow: 2px 2px 2px;
 }
 
 #rich {
