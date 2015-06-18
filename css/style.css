@@ -107,9 +107,12 @@ header a {
     width: 100px;
 }
 @media (max-width: 420px) {
+    header #title {
+        font-size: 2em;
+    }
     header nav ul li {
         display: block;
-        font-size: 1.1em;
+        font-size: 1.3em;
         padding: 2px 0;
     }
     header nav ul li:not(:last-child) {
