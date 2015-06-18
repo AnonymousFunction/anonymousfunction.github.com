@@ -1,6 +1,7 @@
 html {
     background-color: #eee;
     height: 100%;
+    min-width: 320px;
 }
 
 body {
@@ -109,4 +110,16 @@ header a {
 #zelda img {
     height: 100px;
     width: 100px;
+}
+@media (max-width: 420px) {
+    header nav ul li {
+        display: block;
+    }
+    header nav ul li:not(:last-child) {
+        border-bottom: 1px solid #B2B2B2;
+    }
+    header nav ul li:not(:last-child):after {
+        padding: 0;
+        content: none;
+    }
 }
