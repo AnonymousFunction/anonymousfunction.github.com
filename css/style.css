@@ -109,6 +109,8 @@ header a {
 @media (max-width: 420px) {
     header nav ul li {
         display: block;
+        font-size: 1.1em;
+        padding: 2px 0;
     }
     header nav ul li:not(:last-child) {
         border-bottom: 1px solid #B2B2B2;
