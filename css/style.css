@@ -91,6 +91,10 @@ header a {
     border-bottom: 1px solid #C7C7C7;
 }
 
+#games .game:first-of-type {
+    padding-top: 0;
+}
+
 @media (max-width: 420px) {
     header nav ul li {
         display: block;
