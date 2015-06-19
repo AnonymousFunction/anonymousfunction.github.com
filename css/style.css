@@ -53,9 +53,8 @@ header a {
 }
 
 #wrapper {
-    padding: 5px;
+    padding: 5px 20px;
     text-align: center;
-    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -80,25 +79,18 @@ header a {
 }
 
 #games {
-    text-align: center;
-    margin: 0 auto;
-    max-width: 400px;
+    text-align: left;
 }
 
-#games img {
-    border-radius: 70px;
-    box-shadow: 2px 2px 2px;
+#games .game {
+    padding-bottom: 5px;
+    padding-top: 15px;
 }
 
-#breakout img {
-    height: 100px;
-    width: 100px;
+#games .game:not(:last-of-type) {
+    border-bottom: 1px solid #C7C7C7;
 }
 
-#zelda img {
-    height: 100px;
-    width: 100px;
-}
 @media (max-width: 420px) {
     header nav ul li {
         display: block;
