@@ -5,11 +5,12 @@
 
 html {
     width: 100%;
-    font-family: nfl;
 }
 
 body {
     margin: 0;
+    font-family: nfl !important;
+    font-size: 4vmin !important;
 }
 
 .score {
