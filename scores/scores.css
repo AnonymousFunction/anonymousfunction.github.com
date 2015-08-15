@@ -13,22 +13,24 @@ body {
 }
 
 .score {
+    width: 45%;
+    display: inline-block;
     text-align: center;
-    position: absolute;
 }
 
 .game {
 }
 
 .home {
-    width: 35%;
+    width: 20%;
     display: inline-block;
     color: white;
     padding: 10px;
+    text-align: right;
 }
 
 .away {
-    width: 35%;
+    width: 20%;
     display: inline-block;
     float: right;
     color: white;

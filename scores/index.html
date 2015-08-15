@@ -10,13 +10,13 @@
     <body data-ng-controller="MainController">
         <div ng-repeat="game in games" class="game">
             <span class="home" ng-style="{ 'background-color': '#' + game.competitions[0].competitors[0].team.color }">
-                <span class="team-name">{{game.competitions[0].competitors[0].team.displayName}}</span>
+                <span class="team-name">{{game.competitions[0].competitors[0].team.abbreviation}}</span>
                 <span>{{game.competitions[0].competitors[0].score}}</span>
             </span>
             <span class="score">{{game.status.type.shortDetail}}</span>
             <span class="away" ng-style="{ 'background-color': '#' + game.competitions[0].competitors[1].team.color }">
                 <span>{{game.competitions[0].competitors[1].score}}</span>
-                <span class="team-name">{{game.competitions[0].competitors[1].team.displayName}}</span>
+                <span class="team-name">{{game.competitions[0].competitors[1].team.abbreviation}}</span>
             </span>
         </div>
     </body>
