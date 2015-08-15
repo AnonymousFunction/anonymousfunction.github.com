@@ -22,7 +22,7 @@ body {
 }
 
 .home {
-    width: 100px;
+    width: 150px;
     display: inline-block;
     color: white;
     padding: 10px;
@@ -30,7 +30,7 @@ body {
 }
 
 .away {
-    width: 100px;
+    width: 150px;
     display: inline-block;
     color: white;
     padding: 10px;
