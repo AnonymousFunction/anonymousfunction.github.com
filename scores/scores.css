@@ -18,7 +18,8 @@ body {
     text-align: center;
 }
 
-.game {
+.game:not(:last-child) {
+    border-bottom: 1px solid #414141;
 }
 
 .home {
