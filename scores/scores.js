@@ -5,10 +5,8 @@ scores.config(function ( $httpProvider) {
 });
 
 scores.controller("MainController", function($scope, $http){
-//    $http.get("http://sports.espn.go.com/nfl/bottomline/scores").then(function(res){
-//    $http.get("http://www.nfl.com/liveupdate/scorestrip/ss.xml").then(function(res){});
-//    $http.get("http://api.espn.com/v1/sports/football/nfl").then(function(res){});
-    $http.get("http://fcast.k2.espncdn.com/FastcastService/pubsub/profiles/12000/topic/scoreboard-football-nfl/message/9493/checkpoint").then(function(res){
+//    $http.get("http://fcast.n7.espncdn.com/FastcastService/pubsub/profiles/12000/topic/scoreboard-football-nfl/message/10273/checkpoint").then(function(res){
+    $http.get("scores.json").then(function(res){
         $scope.games = res.data.events;
         console.log("$scope.games", $scope.games);
     });

@@ -14,24 +14,27 @@ body {
 
 .score {
     text-align: center;
+    position: absolute;
 }
 
 .game {
-    height: 38px;
 }
 
 .home {
-    /*width: 50%;*/
+    width: 35%;
     display: inline-block;
+    color: white;
+    padding: 10px;
 }
 
 .away {
-    /*width: 49%;*/
+    width: 35%;
     display: inline-block;
     float: right;
+    color: white;
+    padding: 10px;
 }
 
 .team-name {
-    color: white;
     padding: 10px;
 }
