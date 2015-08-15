@@ -2,15 +2,22 @@
 
 <html data-ng-app="scores">
     <head>
+        <link rel="stylesheet" type="text/css" href="scores.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
         <script src="scores.js"></script>
     </head>
     <body data-ng-controller="MainController">
-        <div ng-repeat="game in games">
-            {{game.competitions[0].competitors[0].team.displayName}} {{game.competitions[0].competitors[0].score}} - {{game.competitions[0].competitors[1].team.displayName}} {{game.competitions[0].competitors[1].score}}
-            {{game.status.type.shortDetail}}<br>
+        <div ng-repeat="game in games" class="game">
+            <span class="home">
+                <span class="team-name" ng-style="{ 'background-color': '#' + game.competitions[0].competitors[0].team.color }">{{game.competitions[0].competitors[0].team.displayName}}</span>
+                <span>{{game.competitions[0].competitors[0].score}}</span>
+            </span>
+            <span class="score">{{game.status.type.shortDetail}}</span>
+            <span class="away">
+                <span>{{game.competitions[0].competitors[1].score}}</span>
+                <span class="team-name" ng-style="{ 'background-color': '#' + game.competitions[0].competitors[1].team.color }">{{game.competitions[0].competitors[1].team.displayName}}</span>
+            </span>
         </div>
     </body>
 </html>

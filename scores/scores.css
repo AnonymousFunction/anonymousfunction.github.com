@@ -1,0 +1,37 @@
+@font-face {
+    font-family: nfl;
+    src: url("http://i.nflcdn.com/static/site/7.1/img/fonts/endzone-sans/medium-cond.woff");
+}
+
+html {
+    width: 100%;
+    font-family: nfl;
+}
+
+body {
+    margin: 0;
+}
+
+.score {
+    text-align: center;
+}
+
+.game {
+    height: 38px;
+}
+
+.home {
+    /*width: 50%;*/
+    display: inline-block;
+}
+
+.away {
+    /*width: 49%;*/
+    display: inline-block;
+    float: right;
+}
+
+.team-name {
+    color: white;
+    padding: 10px;
+}
