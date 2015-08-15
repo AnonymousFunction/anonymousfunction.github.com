@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<html data-ng-app="scores">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <script src="scores.js"></script>
+    </head>
+    <body data-ng-controller="MainController">
+        <div ng-repeat="game in games">
+            {{game.competitions[0].competitors[0].team.displayName}} {{game.competitions[0].competitors[0].score}} - {{game.competitions[0].competitors[1].team.displayName}} {{game.competitions[0].competitors[1].score}}
+            {{game.status.type.shortDetail}}<br>
+        </div>
+    </body>
+</html>
