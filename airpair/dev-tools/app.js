@@ -26,5 +26,7 @@ function addNewGame(consoleText, titleText) {
     var el =  document.createElement("tr");
     el.innerHTML = "<td>" + consoleText + "</td><td>" + titleText + "</td>";
     gameTable.appendChild(el);
+
+    console.log("Game Added!", consoleText, titleText);
 }
 
