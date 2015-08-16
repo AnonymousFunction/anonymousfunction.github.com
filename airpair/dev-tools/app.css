@@ -5,3 +5,7 @@ th {
 tr:hover {
     background-color: yellow;
 }
+
+.radical {
+    font-weight: bold;
+}
