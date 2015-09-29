@@ -96,6 +96,23 @@ header a {
     padding-top: 0;
 }
 
+#articles {
+    text-align: left;
+}
+
+#articles .article {
+    padding-bottom: 5px;
+    padding-top: 15px;
+}
+
+#articles .article:not(:last-of-type) {
+    border-bottom: 1px solid #C7C7C7;
+}
+
+#articles .article:first-of-type {
+    padding-top: 0;
+}
+
 @media (max-width: 420px) {
     header nav ul li {
         display: block;

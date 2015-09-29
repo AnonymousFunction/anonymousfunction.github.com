@@ -5,6 +5,7 @@ af.config(function($routeProvider){
      	when('/', {templateUrl:'views/home.html'}).
       	when('/games', {templateUrl:'views/games.html'}).
       	when('/presentations', {templateUrl:'views/presentations.html'}).
+      	when('/writing', {templateUrl:'views/writing.html'}).
       	otherwise({redirectTo:'/'});
 });
 
