@@ -113,6 +113,23 @@ header a {
     padding-top: 0;
 }
 
+#presentations {
+    text-align: left;
+}
+
+#presentations .presentation {
+    padding-bottom: 5px;
+    padding-top: 15px;
+}
+
+#presentations .presentation:not(:last-of-type) {
+    border-bottom: 1px solid #C7C7C7;
+}
+
+#presentations .presentation:first-of-type {
+    padding-top: 0;
+}
+
 @media (max-width: 420px) {
     header nav ul li {
         display: block;
