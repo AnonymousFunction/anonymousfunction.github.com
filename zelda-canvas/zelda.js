@@ -948,6 +948,19 @@
                 return;
             } else {
                 this.isInvincible = false;
+
+                // If Link is done blinking and ended up in a blink state, reset him
+                if (this.id.indexOf("blink") > -1) {
+                    if (this.id.indexOf("up") > -1) {
+                        this.id = "link-up-1";
+                    } else if (this.id.indexOf("down") > -1) {
+                        this.id = "link-down-1";
+                    } else if (this.id.indexOf("left") > -1) {
+                        this.id = "link-left-1";
+                    } else if (this.id.indexOf("right") > -1) {
+                        this.id = "link-right-1";
+                    }
+                }
             }
 
 
