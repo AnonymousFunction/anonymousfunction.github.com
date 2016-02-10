@@ -1,35 +1,37 @@
 {
-    "name": "anonymous-function-grunt-package",
-    "version": "0.0.01",
-    "private": true,
-    "description": "Anonymous Function Grunt Package",
-    "main": "index.html",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "Anonymous Function",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/AnonymousFunction/anonymousfunction.github.com"
-    },
-    "license": "BSD-2-Clause",
-    "devDependencies": {
-        "express": "3.x",
-        "grunt-contrib-uglify": "*",
-        "grunt-karma": "*",
-        "grunt-protractor-coverage": "*",
-        "grunt-protractor-runner": "*",
-        "jshint-html-reporter": "*",
-        "karma": "*",
-        "karma-chrome-launcher": "*",
-        "karma-coverage": "*",
-        "karma-firefox-launcher": "*",
-        "karma-html-reporter": "*",
-        "karma-jasmine": "*",
-        "karma-junit-reporter": "*",
-        "karma-phantomjs-launcher": "*",
-        "matchdep": "*",
-        "protractor": "*",
-        "protractor-html-screenshot-reporter": "*"
-    }
+  "name": "anonymous-function-grunt-package",
+  "version": "0.0.2",
+  "private": true,
+  "description": "Anonymous Function Grunt Package",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anonymous Function",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnonymousFunction/anonymousfunction.github.com"
+  },
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "express": "3.x",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-karma": "*",
+    "grunt-protractor-coverage": "*",
+    "grunt-protractor-runner": "*",
+    "jshint-html-reporter": "*",
+    "karma": "*",
+    "karma-chrome-launcher": "*",
+    "karma-coverage": "*",
+    "karma-firefox-launcher": "*",
+    "karma-html-reporter": "*",
+    "karma-jasmine": "*",
+    "karma-junit-reporter": "*",
+    "karma-phantomjs-launcher": "*",
+    "matchdep": "*",
+    "protractor": "*",
+    "protractor-html-screenshot-reporter": "*"
+  }
 }
