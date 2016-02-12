@@ -13,15 +13,15 @@ module.exports = function (grunt) {
                 tasks: ['jshint:gruntfile']
             },
             src: {
-                files: ['zelda-canvas/scripts/**.js'],
-                tasks: ['concat', 'uglify']
+                files: ['zelda-canvas/scripts/**/**.js'],
+                tasks: ['build']
             }
         },
 
         concat: {
             zelda: {
                 src: [
-                    'zelda-canvas/scripts/**.js'
+                    'zelda-canvas/scripts/**/**.js'
                 ],
                 dest: 'zelda-canvas/output.js'
             }
@@ -48,4 +48,7 @@ module.exports = function (grunt) {
             }
         }
     });
+
+    grunt.registerTask('default', ['build', 'watch']);
+    grunt.registerTask('build', ['concat', 'uglify']);
 };
