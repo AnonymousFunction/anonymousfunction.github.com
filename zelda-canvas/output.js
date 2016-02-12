@@ -147,6 +147,245 @@ RedOctorok.prototype = {
         }
     }
 };
+var BombExplosion = function (game, center) {
+    this.game = game;
+    this.size = { x: 32, y: 32 };
+    this.center = { x: center.x, y: center.y };
+    this.lifeCountdown = 21;
+    this.damage = 1;
+};
+
+BombExplosion.prototype = {
+    draw: function (screen) {
+
+    },
+
+    update: function () {
+        if (this.lifeCountdown === 0) {
+            this.game.removeBody(this);
+        }
+
+        this.lifeCountdown--;
+    }
+};
+var CaveEntrance = function (game, center) {
+    this.id = "cave-entrance";
+    this.hidden = true;
+    this.game = game;
+    this.size = { x: 16, y: 2 };
+    this.center = { x: center.x, y: center.y };
+    this.timer = 0;
+};
+
+CaveEntrance.prototype = {
+    draw: function (screen) {
+        if (this.hidden) {
+            return;
+        }
+
+        var x = this.center.x;
+        var y = this.center.y;
+
+        var img = document.getElementById(this.id);
+        screen.drawImage(img, x - this.size.x / 2, y - 8);
+    },
+
+    isHidden: function(){
+        return this.hidden;
+    },
+
+    show: function(){
+        this.hidden = false;
+    },
+
+    update: function () {
+    }
+};
+var CaveFire = function (game, center) {
+    this.id = "cave-fire";
+    this.game = game;
+    this.size = { x: 16, y: 16 };
+    this.center = { x: center.x, y: center.y };
+    this.spriteChangeCount = 0;
+    this.spriteCooldown = 10;
+};
+
+CaveFire.prototype = {
+    draw: function (screen) {
+        var x = this.center.x;
+        var y = this.center.y;
+
+        var img = document.getElementById(this.id);
+        screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+    },
+
+    update: function () {
+        if (this.spriteChangeCount === 0) {
+            this.id = this.id === "cave-fire" ? "cave-fire-1" : "cave-fire";
+            this.spriteChangeCount = this.spriteCooldown;
+        } else {
+            this.spriteChangeCount--;
+        }
+    }
+};
+var Cloud = function (game, center) {
+    this.id = "cloud-1";
+    this.game = game;
+    this.size = { x: 16, y: 16 };
+    this.center = { x: center.x, y: center.y };
+    this.countdown = 21;
+};
+
+Cloud.prototype = {
+    draw: function (screen) {
+        var x = this.center.x;
+        var y = this.center.y;
+
+        var img = document.getElementById(this.id);
+        screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+    },
+
+    update: function () {
+        if (this.countdown === 0) {
+            this.game.removeBody(this);
+        } else if (this.countdown <= 7) {
+            this.id = "cloud-3";
+        } else if (this.countdown <= 14) {
+            this.id = "cloud-2";
+        } else if (this.countdown <= 21) {
+            this.id = "cloud-1";
+        }
+
+        this.countdown--;
+    }
+};
+var ItemCursor = function (game) {
+    this.game = game;
+    this.position = 1;
+    this.size = { x: 16, y: 16 };
+    this.center = { x: 137, y: 33 };
+    this.waitTime = 0;
+    this.waitCooldown = 15;
+};
+
+ItemCursor.prototype = {
+    draw: function (screen) {
+        var x = this.center.x;
+        var y = this.center.y;
+
+        screen.strokeStyle = "#FF0000";
+        screen.strokeRect(x - this.size.x / 2, y - this.size.y / 2,
+            this.size.x, this.size.y);
+
+        switch (this.position) {
+            case 1:
+                this.center = { x: 137, y: 33 };
+                break;
+            case 2:
+                this.center = { x: 137 + (24 * 1), y: 33 };
+                break;
+            case 3:
+                this.center = { x: 137 + (24 * 2), y: 33 };
+                break;
+            case 4:
+                this.center = { x: 137 + (24 * 3), y: 33 };
+                break;
+            case 5:
+                this.center = { x: 137, y: 51 };
+                break;
+            case 6:
+                this.center = { x: 137 + (24 * 1), y: 51 };
+                break;
+            case 7:
+                this.center = { x: 137 + (24 * 2), y: 51};
+                break;
+            case 8:
+                this.center = { x: 137 + (24 * 3), y: 51};
+                break;
+        }
+    },
+
+    update: function () {
+        if (this.waitTime) {
+            this.waitTime--;
+        }
+    },
+
+    moveLeft: function () {
+        if (!this.waitTime) {
+            this.position--;
+
+            if (this.position < 1) {
+                this.position = 8;
+            }
+            this.waitTime = this.waitCooldown;
+        }
+    },
+
+    moveRight: function () {
+        if (!this.waitTime) {
+            this.position++;
+
+            if (this.position > 8) {
+                this.position = 1;
+            }
+            this.waitTime = this.waitCooldown;
+        }
+    },
+
+    selectActive: function () {
+        this.game.player.equippedItem = null;
+        switch (this.position) {
+            case 1: //Boomerang
+                this.game.player.equipBoomerang();
+                break;
+            case 2: //Bomb
+                this.game.player.equipBomb();
+                break;
+            case 3: //Arrow
+                this.game.player.equippedItem = null;
+                break;
+            case 4: //Candle
+                this.game.player.equipBlueCandle();
+                break;
+            case 5: //Whistle
+                this.game.player.equippedItem = null;
+                break;
+            case 6: //Meat grumble grumble...
+                this.game.player.equippedItem = null;
+                break;
+            case 7: //Potion/Map
+                this.game.player.equippedItem = null;
+                break;
+            case 8: //Magic Rod
+                this.game.player.equippedItem = null;
+                break;
+        }
+    }
+};
+var ItemPrice = function (game, center) {
+    this.id = "item-price";
+    this.game = game;
+    this.size = { x: 8, y: 16 };
+    this.center = { x: center.x, y: center.y };
+};
+
+ItemPrice.prototype = {
+    draw: function (screen) {
+        var x = this.center.x;
+        var y = this.center.y;
+
+        var img = document.getElementById(this.id);
+        screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+
+        screen.font = "8px 'Press Start 2P'";
+        screen.fillStyle = "white";
+        screen.fillText("X", x + 6, y + 5);
+    },
+
+    update: function () {
+    }
+};
 var Arrow = function (game, player) {
     this.game = game;
     this.velocity = 3;
@@ -381,6 +620,76 @@ Boomerang.prototype = {
         }
     }
 };
+var CandleFire = function (game, player) {
+    this.id = "cave-fire";
+    this.game = game;
+    this.size = { x: 16, y: 16 };
+    this.spriteChangeCount = 0;
+    this.spriteCooldown = 10;
+    this.lifeCountdown = 180;
+    this.velocity = 0.6;
+    this.distance = 32;
+
+    this.direction = player.getDirection();
+
+    switch (this.direction) {
+        case "up":
+            this.center = { x: player.center.x, y: player.center.y - this.size.y };
+            break;
+        case "down":
+            this.center = { x: player.center.x, y: player.center.y + this.size.y };
+            break;
+        case "left":
+            this.center = { x: player.center.x - this.size.x, y: player.center.y };
+            break;
+        case "right":
+            this.center = { x: player.center.x + this.size.x, y: player.center.y };
+            break;
+    }
+};
+
+CandleFire.prototype = {
+    draw: function (screen) {
+        var x = this.center.x;
+        var y = this.center.y;
+
+        var img = document.getElementById(this.id);
+        screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+    },
+
+    update: function () {
+        if (this.spriteChangeCount === 0) {
+            this.id = this.id === "cave-fire" ? "cave-fire-1" : "cave-fire";
+            this.spriteChangeCount = this.spriteCooldown;
+        } else {
+            this.spriteChangeCount--;
+        }
+
+        if (this.distance) {
+            switch (this.direction) {
+                case "up":
+                    this.center.y -= this.velocity;
+                    break;
+                case "down":
+                    this.center.y += this.velocity;
+                    break;
+                case "left":
+                    this.center.x -= this.velocity;
+                    break;
+                case "right":
+                    this.center.x += this.velocity;
+                    break;
+            }
+
+            this.distance--;
+        }
+
+        this.lifeCountdown--;
+        if (!this.lifeCountdown) {
+            this.game.removeBody(this);
+        }
+    }
+};
 var EquippedArrow = function (game, center) {
     this.id = "arrow-up";
     this.game = game;
@@ -464,6 +773,25 @@ MagicShield.prototype = {
         screen.font = "8px 'Press Start 2P'";
         screen.fillStyle = "white";
         screen.fillText(this.price, x - 10, y + 20);
+    },
+
+    update: function () {
+    }
+};
+var Sword = function (game, center) {
+    this.id = "sword-item";
+    this.game = game;
+    this.size = { x: 7, y: 16 };
+    this.center = { x: center.x, y: center.y };
+};
+
+Sword.prototype = {
+    draw: function (screen) {
+        var x = this.center.x;
+        var y = this.center.y;
+
+        var img = document.getElementById(this.id);
+        screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
     },
 
     update: function () {
