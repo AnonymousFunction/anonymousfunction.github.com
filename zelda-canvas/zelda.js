@@ -208,13 +208,13 @@ Game.prototype = {
                 var origMapTop = parseInt(this.viewport.css("background-position-y"));
 
                 if (origMapTop < 0) {
-                    var newMapTop = origMapTop + 2;
+                    var newMapTop = origMapTop + 4;
                     this.viewport.css("background-position-y", newMapTop + "px");
 
-                    this.player.center.y += 2;
+                    this.player.center.y += 4;
                 }
 
-                this.screenTransitionTime -= 2;
+                this.screenTransitionTime -= 4;
 
                 if (this.screenTransitionTime === 0) {
                     this.player.center.y -= 9;
@@ -223,13 +223,13 @@ Game.prototype = {
                 var origMapTop = parseInt(this.viewport.css("background-position-y"));
 
                 if (origMapTop > -1232) {
-                    var newMapTop = origMapTop - 2;
+                    var newMapTop = origMapTop - 4;
                     this.viewport.css("background-position-y", newMapTop + "px");
 
-                    this.player.center.y -= 2;
+                    this.player.center.y -= 4;
                 }
 
-                this.screenTransitionTime -= 2;
+                this.screenTransitionTime -= 4;
 
                 if (this.screenTransitionTime === 0) {
                     this.player.center.y += 8;
@@ -238,13 +238,13 @@ Game.prototype = {
                 var origMapLeft = parseInt(this.viewport.css("background-position-x"));
 
                 if (origMapLeft < 0) {
-                    var newMapLeft = origMapLeft + 2;
+                    var newMapLeft = origMapLeft + 4;
                     this.viewport.css("background-position-x", newMapLeft + "px");
 
-                    this.player.center.x += 2;
+                    this.player.center.x += 4;
                 }
 
-                this.screenTransitionTime -= 2;
+                this.screenTransitionTime -= 4;
 
                 if (this.screenTransitionTime === 0) {
                     this.player.center.x -= 8;
@@ -253,13 +253,13 @@ Game.prototype = {
                 var origMapLeft = parseInt(this.viewport.css("background-position-x"));
 
                 if (origMapLeft > -3840) {
-                    var newMapLeft = origMapLeft - 2;
+                    var newMapLeft = origMapLeft - 4;
                     this.viewport.css("background-position-x", newMapLeft + "px");
 
-                    this.player.center.x -= 2;
+                    this.player.center.x -= 4;
                 }
 
-                this.screenTransitionTime -= 2;
+                this.screenTransitionTime -= 4;
                 if (this.screenTransitionTime === 0) {
                     this.player.center.x += 8;
                 }
