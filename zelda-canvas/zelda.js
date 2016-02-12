@@ -1335,46 +1335,6 @@ CaveEntrance.prototype = {
     }
 };
 
-var OldMan = function (game, center) {
-    this.id = "old-man";
-    this.game = game;
-    this.size = { x: 16, y: 16 };
-    this.center = { x: center.x, y: center.y };
-};
-
-OldMan.prototype = {
-    draw: function (screen) {
-        var x = this.center.x;
-        var y = this.center.y;
-
-        var img = document.getElementById(this.id);
-        screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
-    },
-
-    update: function () {
-    }
-};
-
-var Merchant = function (game, center) {
-    this.id = "merchant";
-    this.game = game;
-    this.size = { x: 16, y: 16 };
-    this.center = { x: center.x, y: center.y };
-};
-
-Merchant.prototype = {
-    draw: function (screen) {
-        var x = this.center.x;
-        var y = this.center.y;
-
-        var img = document.getElementById(this.id);
-        screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
-    },
-
-    update: function () {
-    }
-};
-
 var createBombExplosion = function (game, center) {
     //The BombExplosion actually does the damage, not the Cloud, I want to be able to easily
     //reuse the Cloud for enemy spawning without them causing damage to anything.
@@ -1510,56 +1470,6 @@ CandleFire.prototype = {
         if (!this.lifeCountdown) {
             this.game.removeBody(this);
         }
-    }
-};
-
-var KeyItem = function (game, price, center) {
-    this.id = "key-item";
-    this.price = price;
-    this.game = game;
-    this.size = { x: 8, y: 16 };
-    this.center = { x: center.x, y: center.y };
-};
-
-KeyItem.prototype = {
-    draw: function (screen) {
-        var x = this.center.x;
-        var y = this.center.y;
-
-        var img = document.getElementById(this.id);
-        screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
-
-        screen.font = "8px 'Press Start 2P'";
-        screen.fillStyle = "white";
-        screen.fillText(this.price, x - 10, y + 20);
-    },
-
-    update: function () {
-    }
-};
-
-var MagicShield = function (game, price, center) {
-    this.id = "magic-shield";
-    this.price = price;
-    this.game = game;
-    this.size = { x: 8, y: 16 };
-    this.center = { x: center.x, y: center.y };
-};
-
-MagicShield.prototype = {
-    draw: function (screen) {
-        var x = this.center.x;
-        var y = this.center.y;
-
-        var img = document.getElementById(this.id);
-        screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
-
-        screen.font = "8px 'Press Start 2P'";
-        screen.fillStyle = "white";
-        screen.fillText(this.price, x - 10, y + 20);
-    },
-
-    update: function () {
     }
 };
 
