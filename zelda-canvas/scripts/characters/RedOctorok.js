@@ -22,6 +22,11 @@ RedOctorok.prototype = {
         screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
     },
 
+    kill: function(){
+        this.game.removeBody(this);
+        this.game.addBody(new Cloud(this.game, this.center));
+    },
+
     update: function () {
         this.tile.x = parseInt(Number(this.center.x).toFixed(0) / 16);
         this.tile.y = parseInt(Number(this.center.y).toFixed(0) / 16);

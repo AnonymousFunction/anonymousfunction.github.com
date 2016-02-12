@@ -308,7 +308,7 @@ Game.prototype = {
                     //ENEMIES
                     if (body instanceof RedOctorok) {
                         if (link.isSwingingSword()) {
-                            self.removeBody(body);
+                            body.kill();
                         } else {
                             if (!link.isInvincible) {
                                 link.takeDamage(body)
@@ -326,8 +326,8 @@ Game.prototype = {
                 if (!(body instanceof Player) && !(body instanceof SwordPower)) {
                     if (doBodiesCollide(swordPower, body)) {
                         if (body instanceof RedOctorok) {
-                            self.removeBody(body);
                             self.removeBody(swordPower);
+                            body.kill();
                         }
                     }
                 }
@@ -341,7 +341,7 @@ Game.prototype = {
                 if (!(body instanceof Player) && !(body instanceof CandleFire)) {
                     if (doBodiesCollide(candleFire, body)) {
                         if (body instanceof RedOctorok) {
-                            self.removeBody(body);
+                            body.kill();
                         }
                     }
                 }
@@ -361,7 +361,7 @@ Game.prototype = {
                                 link.takeDamage(bombExplosion)
                             }
                         } else if (body instanceof RedOctorok) {
-                            self.removeBody(body);
+                            body.kill();
                         }
                     }
                 }
