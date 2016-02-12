@@ -216,6 +216,9 @@ Game.prototype = {
 
                 this.screenTransitionTime -= 4;
 
+                //shuffle link's feet during screen transition
+                this.player.id = this.screenTransitionTime % 64 < 32 ? "link-up-1" : "link-up-2";
+
                 if (this.screenTransitionTime === 0) {
                     this.player.center.y -= 9;
                 }
@@ -230,6 +233,8 @@ Game.prototype = {
                 }
 
                 this.screenTransitionTime -= 4;
+
+                this.player.id = this.screenTransitionTime % 64 < 32 ? "link-down-1" : "link-down-2";
 
                 if (this.screenTransitionTime === 0) {
                     this.player.center.y += 8;
@@ -246,6 +251,8 @@ Game.prototype = {
 
                 this.screenTransitionTime -= 4;
 
+                this.player.id = this.screenTransitionTime % 64 < 32 ? "link-left-1" : "link-left-2";
+
                 if (this.screenTransitionTime === 0) {
                     this.player.center.x -= 8;
                 }
@@ -260,6 +267,9 @@ Game.prototype = {
                 }
 
                 this.screenTransitionTime -= 4;
+
+                this.player.id = this.screenTransitionTime % 64 < 32 ? "link-right-1" : "link-right-2";
+
                 if (this.screenTransitionTime === 0) {
                     this.player.center.x += 8;
                 }
