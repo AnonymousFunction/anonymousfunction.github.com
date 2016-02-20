@@ -171,6 +171,8 @@ var Game = function () {
     // Run the first game tick.  All future calls will be scheduled by
     // the tick() function itself.
     tick();
+
+    Sound.overworld.play();
 };
 
 Game.prototype = {
@@ -645,6 +647,9 @@ Game.prototype = {
         });
 
         this.isWriteText = true;
+
+        Sound.overworld.stop();
+        Sound.cave.play();
     },
 
     exitCave: function () {
@@ -663,6 +668,8 @@ Game.prototype = {
 
         $("#cave-text").text("");
         this.needToSpawnEnemies = true;
+
+        Sound.overworld.play();
     },
 
     enterDungeon: function () {
@@ -1190,24 +1197,6 @@ var createBombExplosion = function (game, center) {
     game.addBody(new Cloud(game, { x: center.x - 6, y: center.y - 12 }));
     game.addBody(new Cloud(game, { x: center.x + 6, y: center.y - 12}));
 };
-
-var Sound = (function () {
-    var sword = new Audio("sounds/sword.wav");
-    var text = new Audio("sounds/text.mp3");
-
-    return {
-        sword: {
-            play: function () {
-//                   sword.play();
-            }
-        },
-        text: {
-            play: function () {
-//                   text.play();
-            }
-        }
-    }
-})();
 
 // Keyboard input tracking
 // -----------------------
