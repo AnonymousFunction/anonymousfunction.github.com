@@ -299,6 +299,7 @@ Game.prototype = {
                         self.removeBody(body);
                         $("#cave-text").text("");
                         self.removeBodyByType(OldMan)
+                        Sound.fanfare.play();
                     } else if (body instanceof BlueCandle) {
                         if (link.rupees >= body.price) {
                             link.hasBlueCandle = true;

@@ -4,7 +4,7 @@ var CaveFire = function (game, center) {
     this.size = { x: 16, y: 16 };
     this.center = { x: center.x, y: center.y };
     this.spriteChangeCount = 0;
-    this.spriteCooldown = 10;
+    this.spriteCooldown = 6;
 };
 
 CaveFire.prototype = {
