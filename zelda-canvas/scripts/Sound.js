@@ -1,5 +1,5 @@
 var Sound = (function () {
-    var isSoundOn = true;
+    var isSoundOn = false;
     var cave = new Audio("sounds/cave.wav");
     var overworld = new Audio("sounds/overworld.mp3");
     var sword = new Audio("sounds/sword.wav");
