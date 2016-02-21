@@ -3,6 +3,7 @@ var Sound = (function () {
     var cave = new Audio("sounds/cave.wav");
     var fanfare = new Audio("sounds/fanfare.wav");
     var overworld = new Audio("sounds/overworld.mp3");
+    var rupees = new Audio("sounds/text.mp3");
     var sword = new Audio("sounds/sword.wav");
     var text = new Audio("sounds/text.mp3");
 
@@ -30,6 +31,19 @@ var Sound = (function () {
             stop: function(){
                 overworld.pause();
                 overworld.currentTime = 0;
+            }
+        },
+        rupees: {
+            play: function () {
+                if (isSoundOn) {
+                    if (rupees.currentTime === 0) {
+                        rupees.play();
+                    }
+                }
+            },
+            stop: function(){
+                rupees.pause();
+                rupees.currentTime = 0;
             }
         },
         sword: {

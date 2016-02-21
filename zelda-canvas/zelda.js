@@ -206,17 +206,29 @@ Game.prototype = {
         }
 
         if (this.addRupeeCount) {
+            Sound.rupees.play();
+
             if (this.player.rupees < 255) {
                 this.player.rupees++;
             }
             this.addRupeeCount--;
+
+            if (this.addRupeeCount === 0) {
+                Sound.rupees.stop();
+            }
         }
 
         if (this.subtractRupeeCount) {
+            Sound.rupees.play();
+
             if (this.player.rupees > 0) {
                 this.player.rupees--;
             }
             this.subtractRupeeCount--;
+
+            if (this.subtractRupeeCount === 0) {
+                Sound.rupees.stop();
+            }
         }
 
         if (this.screenTransitionTime) {
