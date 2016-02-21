@@ -476,7 +476,7 @@ Game.prototype = {
         menuScreen.fillRect(16, 16, 64, 32);
 
         //Beacon
-        menuScreen.fillStyle = "#71D200;";
+        menuScreen.fillStyle = "#71D200";
         menuScreen.fillRect(16 + (this.map.x * 4), 16 + (this.map.y * 4), 4, 4);
 
         var img = document.getElementById("hud-icons");
