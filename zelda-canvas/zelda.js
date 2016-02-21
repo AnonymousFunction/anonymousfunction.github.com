@@ -306,6 +306,11 @@ Game.prototype = {
                             link.rupees -= body.price;
                             self.removeBody(body);
                         }
+                    } else if (body instanceof CaveRupee) {
+                        if (!body.pickedUp) {
+                            link.rupees += body.value;
+                            body.pickup();
+                        }
                     }
 
                     //ENEMIES
@@ -716,7 +721,8 @@ var getCaveProperties = function (game) {
         bodies: [
             new CaveFire(game, { x: 80, y: 72 }),
             new CaveFire(game, { x: 176, y: 72 }),
-            new CaveMoblin(game, { x: 128, y: 72 })
+            new CaveMoblin(game, { x: 128, y: 72 }),
+            new CaveRupee(game, { x: 128, y: 100 }, 100)
         ]
     };
 
@@ -811,7 +817,7 @@ var Player = function (game, gameSize) {
     this.canMove = true;
     this.maxHearts = 3;
     this.hearts = 3;
-    this.rupees = 255;
+    this.rupees = 20;
     this.bombs = 4;
     this.gameGenieInvincible = false;
     this.gameGenieNoCollision = false;
