@@ -205,6 +205,20 @@ Game.prototype = {
             return;
         }
 
+        if (this.addRupeeCount) {
+            if (this.player.rupees < 255) {
+                this.player.rupees++;
+            }
+            this.addRupeeCount--;
+        }
+
+        if (this.subtractRupeeCount) {
+            if (this.player.rupees > 0) {
+                this.player.rupees--;
+            }
+            this.subtractRupeeCount--;
+        }
+
         if (this.screenTransitionTime) {
             if (this.screenTransitionDir === "up") {
                 var origMapTop = parseInt(this.viewport.css("background-position-y"));
@@ -303,12 +317,12 @@ Game.prototype = {
                     } else if (body instanceof BlueCandle) {
                         if (link.rupees >= body.price) {
                             link.hasBlueCandle = true;
-                            link.rupees -= body.price;
+                            self.subtractRupeeCount = body.price;
                             self.removeBody(body);
                         }
                     } else if (body instanceof CaveRupee) {
                         if (!body.pickedUp) {
-                            link.rupees += body.value;
+                            self.addRupeeCount = body.value;
                             body.pickup();
                         }
                     }
