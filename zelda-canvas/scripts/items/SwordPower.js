@@ -38,6 +38,11 @@ SwordPower.prototype = {
         screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
     },
 
+    remove: function(){
+        this.game.removeBody(this);
+        createSwordEffect(this.game, this.center);
+    },
+
     update: function () {
         if (this.spriteChangeCount === 0) {
             this.spriteChangeCount = this.spriteCooldown;
@@ -60,8 +65,7 @@ SwordPower.prototype = {
         }
 
         if (this.center.x < 0 || this.center.x > 256 || this.center.y < 0 || this.center.y > 176) {
-            this.game.removeBody(this);
+            this.remove();
         }
-
     }
 };

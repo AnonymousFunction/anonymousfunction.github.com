@@ -329,7 +329,7 @@ Game.prototype = {
                 if (!(body instanceof Player) && !(body instanceof SwordPower)) {
                     if (doBodiesCollide(swordPower, body)) {
                         if (body instanceof RedOctorok) {
-                            self.removeBody(swordPower);
+                            swordPower.remove();
                             body.kill();
                         }
                     }
