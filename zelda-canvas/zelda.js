@@ -715,7 +715,8 @@ var getCaveProperties = function (game) {
         text: "IT'S A SECRET\nTO EVERYBODY.",
         bodies: [
             new CaveFire(game, { x: 80, y: 72 }),
-            new CaveFire(game, { x: 176, y: 72 })
+            new CaveFire(game, { x: 176, y: 72 }),
+            new CaveMoblin(game, { x: 128, y: 72 })
         ]
     };
 
