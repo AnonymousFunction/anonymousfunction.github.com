@@ -1,0 +1,47 @@
+* Zelda Outline Notes *
+
+Brief intro about me
+
+Plug the AirPair article and other Canvas demos I've done
+
+Quick look at canvas element and how the coordinates work
+
+Talk about background and how it has no real effect on the game
+ - Hide the background in Dev Tools and go into the shop
+
+Talk about requestAnimationFrame
+
+Talk about the collection of game bodies
+ - Each body has an update function and draw function
+ - For each run of requestAnimationFrame we update each bodies state and draw it
+
+Talk about Link's sprites
+ - The image drawn doesn't actually effect the game
+ - The image drawn is base on the body's state
+ - The image is drawn at the center of the body
+ - Change link's spriteCooldown to 2 (running on ice) and 24 (long glide)
+ - Change link's moveRate to 4.0 to show him moving fast
+
+Talk about environmental collision detection
+ - This is where Link can and cannot move, trigger caves & dungeons
+ - Show movement map
+ - Show map editor (hotkey 'M'), and buildMap() in the console
+ - Turn on link's hit boxes to show collision detection
+
+Talk about item/enemy collision detection
+ - For each loop, check if link is colliding with any items/enemies
+ - Do any enemies need to take damage?
+
+Screen transitions
+ - Enemies and items are despawned when leaving
+ - Enemies are drawn when arriving
+
+Caves
+ - Show cave properties for what's in them and the text that is drawn
+
+Game Genie
+ - Increase link's speed
+ - Turn off collision, go to first dungeon
+ - Turn on invincibility, walk thru enemies
+ - Give link sword, then show first cave is empty
+ - Give link lots of rupees, go buy blue candle
