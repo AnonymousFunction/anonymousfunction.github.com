@@ -22,6 +22,10 @@ Talk about Link's sprites
  - Change link's spriteCooldown to 2 (running on ice) and 24 (long glide)
  - Change link's moveRate to 4.0 to show him moving fast
 
+Talk about controls
+ - Loop is listening to keyboard, controller and touch devices
+ - Moves by velocity if direction is pressed, if link can move there
+
 Talk about environmental collision detection
  - This is where Link can and cannot move, trigger caves & dungeons
  - Show movement map
