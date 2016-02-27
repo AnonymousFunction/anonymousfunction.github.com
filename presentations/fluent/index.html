@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+        <title>The Legend of Canvas</title>
+        <link rel="icon" type="image/png" href="/zelda-canvas/images/triforce.png">
+
+		<meta name="description" content="Recreating the Legend of Zelda in HTML5/JavaScript">
+		<meta name="author" content="Rich McLaughlin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="/lib/reveal.js-3.0.0/css/reveal.css">
+		<link rel="stylesheet" href="/lib/reveal.js-3.0.0/css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="zelda.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="/lib/reveal.js-3.0.0/lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '/lib/reveal.js-3.0.0/css/print/pdf.css' : '/lib/reveal.js-3.0.0/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+        <script src="/lib/underscore/underscore-min.js"></script>
+
+		<!--[if lt IE 9]>
+        <script src="/lib/reveal.js-3.0.0/lib/js/html5shiv.js"></script>
+        <![endif]-->
+	</head>
+
+	<body>
+
+        <img src="contra.jpg" id="contra" style="height: 100%; display: none; margin: 0 auto;"/>
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>The Legend of Canvas</h2>
+					<h4>Recreating the Legend of Zelda<br/>in HTML5 Canvas & JavaScript</h4>
+                    <p>
+                        Fluent 2016 - San Francisco, CA
+                    </p>
+					<p>
+						<small>Created by <a href="https://www.google.com/+RichMcLaughlin" target="_blank">Rich McLaughlin</a> / Available on <a href="https://github.com/RichMcL" target="_blank">GitHub</a></small><br/>
+                    </p>
+				</section>
+
+                <section>
+                    <h2>About Me</h2>
+                    <img src="rich_oot.jpeg" style="border: none;">
+                    <p>
+                        Sr. Software Engineer - <a href="http://www.vertafore.com/" target="_blank">Vertafore</a><br/>
+                        JS Game Developer - <a href="http://anonymous-function.com/#/games" target="_blank">Anonymous Function</a><br/>
+                    </p>
+                </section>
+
+				<section>
+                    <h2>References</h2>
+                    <p>
+                        Read the tutorial on <a href="https://www.airpair.com/javascript/posts/the-legend-of-canvas" target="_blank">AirPair</a>
+                    </p>
+                    <p>
+                        Play <a href="http://anonymous-function.com/zelda-canvas/" target="_blank">Zelda</a> <img src="spin_triforce.gif" id="spinning-triforce">
+                    </p>
+                    <p>
+                        Also: <a href="http://anonymous-function.com/breakout/" target="_blank">Breakout</a> - <a href="http://anonymous-function.com/asteroids/" target="_blank">Asteroids</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Outline</h2>
+                    <ul>
+                        <li>Basic Canvas</li>
+                        <li>Drawing to Canvas</li>
+                        <li>Map Background</li>
+                        <li>Game Loop</li>
+                        <li>Sprites</li>
+                        <li>Collision Detection</li>
+                        <li>Game Genie</li>
+                    </ul>
+				</section>
+
+                <section>
+                    <h2>Basic Canvas</h2>
+                    <pre><code data-trim contenteditable>
+<style>
+    #my-canvas {
+        background: black;
+    }
+</style>
+
+<canvas id="my-canvas" width="100" height="100"></canvas>
+                    </code></pre>
+                    <p>
+                        <a href="http://jsfiddle.net/rsmclaug/uvdwn4q7/" target="_blank">Demo</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>How It Works</h2>
+                    <p>
+                        <img src="canvas_cartesian.png" id="coordinates"/>
+                    </p>
+                    <pre><code data-trim>
+//The y-axis is flipped from cartesian, like HTML rendering
+canvas = { x: cartesian.x, y: -cartesian.y }; //not real :)
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Drawing to Canvas</h2>
+                    <pre><code data-trim contenteditable>
+var canvas = document.getElementById("my-canvas");
+var context = canvas.getContext("2d");
+
+context.fillStyle = "green";
+context.fillRect(10, 10, 100, 100); // x, y, w, h
+                    </code></pre>
+                    <p>
+                        <a href="http://jsfiddle.net/rsmclaug/7s90sznp/" target="_blank">Demo</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Map Background</h2>
+                    <pre><code data-trim contenteditable>
+<style>
+    #zelda {
+        background: url("images/overworld_map.png") no-repeat;
+        background-position-x: -1792px; /* 256px offset */
+        background-position-y: -1232px; /* 176px offset */
+    }
+</style>
+                    </code></pre>
+                    <p>
+                        The background image has no real effect on the game.<br/>
+                        To <a href="http://anonymous-function.com/zelda-canvas/" target="_blank">Chrome Dev Tools</a>!
+                    </p>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Game Loop</h2>
+                        <pre><code data-trim contenteditable>
+//Usually 60fps
+var gameLoop = function () {
+    requestAnimationFrame(gameLoop);
+};
+
+gameLoop();
+                        </code></pre>
+                        <p>
+                            This provides a consistent interval to update the game state.<br/>
+                            For each iteration we update position, check collision, and draw each object.
+                        </p>
+                        <p>
+                            <a href="http://jsfiddle.net/rsmclaug/xhh5ob99/" target="_blank">Demo</a>
+                        </p>
+                    </section>
+                    <section>
+                        <p>
+                            Learn more about requestAnimationFrame!
+                        </p>
+                        <p>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame" target="_blank">MDN Docs</a>
+                        </p>
+                        <p>
+                            <a href="http://www.w3.org/TR/animation-timing/" target="_blank">W3C Docs</a>
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Sprites</h2>
+                    <p>
+                        Just like the background image, sprites have no effect.<br/>
+                        All objects are single points with a height and width.
+                    </p>
+                    <p>
+                        The image is drawn based on the object's position.<br/>
+                        Different images are drawn based on the object's state.
+                    </p>
+                    <p>
+                        Live Code Example - See <a href="http://anonymous-function.com/zelda-canvas/zelda.js" target="_blank">Player.prototype.draw</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Collision Detection</h2>
+                    <p>- Environmental -</p>
+                    <p>
+                        Each screen is broken up into 16 x 16 squares<br/>
+                        Each square has a value to represent its interaction<br/>
+                    </p>
+                    <p>
+                        <a href="http://anonymous-function.com/zelda-canvas/movement.js" target="_blank">Movement Map</a><br/>
+                        <a href="http://anonymous-function.com/zelda" target="_blank">Map Editor Demo</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Collision Detection</h2>
+                    <p>- Items/Enemies -</p>
+                    <p>
+                        Each object has a center point, width, and height.<br/>
+                        For each game loop, we iterate over all objects and determine which collide based on their sizes
+                        <pre><code data-trim contenteditable>
+//example
+player.size = { x: 16, y: 16 };
+player.center = { x: 128, y: 88 };
+
+redOctorok.size = { x: 14, y: 14 };
+redOctorok.center = { x: 118, y: 88 };
+                        </code></pre>
+                        See <a href="http://anonymous-function.com/zelda-canvas/zelda.js" target="_blank">Game.prototype.update</a>
+
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Game Genie</h2>
+                    <p>
+                        Many classic game codes were added for testing.<br/>
+                    </p>
+                    <p>
+                        Pop Quiz:<br/>
+                        &#8593; &#8593; &#8595; &#8595; &#8592; &#8594; &#8592; &#8594; B A
+                    </p>
+                    <p>
+                        Demo Time!
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Now you're playing with power</h2>
+                    <img src="powerGlove.png" style="width: 30%;">
+                    <p>
+                        Questions?
+                    </p>
+                </section>
+			</div>
+
+		</div>
+
+		<script src="/lib/reveal.js-3.0.0/lib/js/head.min.js"></script>
+		<script src="/lib/reveal.js-3.0.0/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '/lib/reveal.js-3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '/lib/reveal.js-3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/lib/reveal.js-3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/lib/reveal.js-3.0.0/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '/lib/reveal.js-3.0.0/plugin/zoom-js/zoom.js', async: true },
+					{ src: '/lib/reveal.js-3.0.0/plugin/notes/notes.js', async: true }
+				]
+			});
+
+            var buttonPressed = function (b) {
+                if (typeof(b) == "object") {
+                    return b.pressed;
+                }
+                return b == 1.0;
+            };
+
+            var controllerCooldown;
+
+            var keyPresses = [];
+
+            var resetControllerCooldown = function(){
+                controllerCooldown = 15;
+                console.log("_.last(keyPresses, 10)", _.last(keyPresses, 10).toString());
+                if (_.last(keyPresses, 10).toString() === "up,up,down,down,left,right,left,right,b,a") {
+                    document.getElementById("contra").style.display = "block";
+                }
+            };
+
+            resetControllerCooldown();
+
+            var gameLoop = function () {
+                var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+
+                var nesController = _.find(gamepads, function (gamepad) {
+                    return gamepad && gamepad.id && gamepad.id.indexOf("USB Gamepad") > -1;
+                });
+
+                if (controllerCooldown > 0) {
+                    controllerCooldown--;
+                }
+
+                if (nesController && controllerCooldown === 0) {
+                    var gp = gamepads[0];
+                    if (gp.axes[1] == -1) {
+                        window.Reveal.navigateUp();
+                        keyPresses.push("up");
+                        resetControllerCooldown();
+                    } else if (gp.axes[1] == 1) {
+                        window.Reveal.navigateDown();
+                        keyPresses.push("down");
+                        resetControllerCooldown();
+                    } else if (gp.axes[0] == -1) {
+                        window.Reveal.navigateLeft();
+                        keyPresses.push("left");
+                        resetControllerCooldown();
+                    } else if (gp.axes[0] == 1) {
+                        window.Reveal.navigateRight();
+                        keyPresses.push("right");
+                        resetControllerCooldown();
+                    }
+
+                    if (buttonPressed(gp.buttons[1])) {
+                        keyPresses.push("a");
+                        resetControllerCooldown();
+                    } else if (buttonPressed(gp.buttons[2])) {
+                        keyPresses.push("b");
+                        resetControllerCooldown();
+                    } else if (buttonPressed(gp.buttons[9])) {
+                        window.Reveal.togglePause();
+                        resetControllerCooldown();
+                    }
+                }
+
+                requestAnimationFrame(gameLoop);
+            };
+
+            gameLoop();
+
+		</script>
+
+	</body>
+</html>
