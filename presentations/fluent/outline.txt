@@ -21,6 +21,7 @@ Talk about Link's sprites
  - The image is drawn at the center of the body
  - Change link's spriteCooldown to 2 (running on ice) and 24 (long glide)
  - Change link's moveRate to 4.0 to show him moving fast
+ - Show link walking backwards
 
 Talk about controls
  - Loop is listening to keyboard, controller and touch devices
@@ -35,6 +36,7 @@ Talk about environmental collision detection
 Talk about item/enemy collision detection
  - For each loop, check if link is colliding with any items/enemies
  - Do any enemies need to take damage?
+ - Spawn lots of octoroks
 
 Screen transitions
  - Enemies and items are despawned when leaving
