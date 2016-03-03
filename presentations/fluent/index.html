@@ -66,20 +66,23 @@
                 </section>
 
 				<section>
-                    <h2>References</h2>
+                    <h2>HEY! Listen!</h2>
                     <p>
-                        Read the tutorial on <a href="https://www.airpair.com/javascript/posts/the-legend-of-canvas" target="_blank">AirPair</a>
+                        Slides: <a href="http://anonymous-function.com/presentations/fluent" target="_blank">tinyurl.com/fluentzelda</a>
                     </p>
                     <p>
-                        Play <a href="http://anonymous-function.com/zelda-canvas/" target="_blank">Zelda</a> <img src="spin_triforce.gif" id="spinning-triforce">
+                        Play: <a href="http://anonymous-function.com/zelda-canvas/" target="_blank">Zelda</a>
                     </p>
                     <p>
-                        Also: <a href="http://anonymous-function.com/breakout/" target="_blank">Breakout</a> - <a href="http://anonymous-function.com/asteroids/" target="_blank">Asteroids</a>
+                        Code: <a href="https://github.com/AnonymousFunction/anonymousfunction.github.com/tree/master/zelda-canvas" target="_blank">GitHub</a>
+                    </p>
+                    <p>
+                        Read: <a href="https://www.airpair.com/javascript/posts/the-legend-of-canvas" target="_blank">AirPair</a>
                     </p>
                 </section>
 
                 <section>
-                    <h2>Outline</h2>
+                    <h2>Inventory</h2>
                     <ul>
                         <li>Basic Canvas</li>
                         <li>Drawing to Canvas</li>
@@ -95,41 +98,24 @@
                     <h2>Basic Canvas</h2>
                     <pre><code data-trim contenteditable>
 <style>
-    #my-canvas {
-        background: black;
+    #zelda {
+        background: url("images/overworld_map.png") no-repeat;
     }
 </style>
 
-<canvas id="my-canvas" width="100" height="100"></canvas>
-                    </code></pre>
-                    <p>
-                        <a href="http://jsfiddle.net/rsmclaug/uvdwn4q7/" target="_blank">Demo</a>
-                    </p>
-                </section>
-
-                <section>
-                    <h2>How It Works</h2>
-                    <p>
-                        <img src="canvas_cartesian.png" id="coordinates"/>
-                    </p>
-                    <pre><code data-trim>
-//The y-axis is flipped from cartesian, like HTML rendering
-canvas = { x: cartesian.x, y: -cartesian.y }; //not real :)
+<canvas id="zelda" width="256" height="176"></canvas>
                     </code></pre>
                 </section>
 
                 <section>
                     <h2>Drawing to Canvas</h2>
                     <pre><code data-trim contenteditable>
-var canvas = document.getElementById("my-canvas");
+var canvas = document.getElementById("zelda");
 var context = canvas.getContext("2d");
 
 context.fillStyle = "green";
 context.fillRect(10, 10, 100, 100); // x, y, w, h
                     </code></pre>
-                    <p>
-                        <a href="http://jsfiddle.net/rsmclaug/7s90sznp/" target="_blank">Demo</a>
-                    </p>
                 </section>
 
                 <section>
@@ -144,8 +130,7 @@ context.fillRect(10, 10, 100, 100); // x, y, w, h
 </style>
                     </code></pre>
                     <p>
-                        The background image has no real effect on the game.<br/>
-                        To <a href="http://anonymous-function.com/zelda-canvas/" target="_blank">Chrome Dev Tools</a>!
+                        The background image has no real effect on the game.
                     </p>
                 </section>
 
