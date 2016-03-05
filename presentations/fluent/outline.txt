@@ -1,19 +1,38 @@
 * Zelda Outline Notes *
 
-Brief intro about me
+THE LEGEND OF CANVAS
 
-Plug the AirPair article and other Canvas demos I've done
+ABOUT ME
+- Brief intro about me and the project
 
-Quick look at canvas element and how the coordinates work
+HEY! LISTEN!
+- Show people where the slides are
+- Link to the game, code, and AirPar article
 
-Talk about background and how it has no real effect on the game
- - Hide the background in Dev Tools and go into the shop
+INVENTORY
+- Quick intro into what we're covering
 
-Talk about requestAnimationFrame
+BASIC CANVAS
+- Quick look at canvas element
+- Show that there are canvases for the menu, game, and controller
 
-Talk about the collection of game bodies
- - Each body has an update function and draw function
- - For each run of requestAnimationFrame we update each bodies state and draw it
+DRAWING TO CANVAS
+- Explain how the coordinates work
+
+MAP BACKGROUND
+- Go to the shop with the background on
+- Hide the background in Dev Tools and go into the shop again
+
+GAME LOOP
+- Talk about requestAnimationFrame
+- Show JSFiddle example, browser tries to maintain 60fps
+
+GAME BODIES (1)
+- Old man example, show how each game body has an update and draw function
+
+GAME BODIES (2)
+- Talk about the collection of game bodies
+- For each run of requestAnimationFrame we update each bodies state and draw it
 
 Talk about Link's sprites
  - The image drawn doesn't actually effect the game

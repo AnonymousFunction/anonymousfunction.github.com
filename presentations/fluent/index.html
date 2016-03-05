@@ -135,35 +135,61 @@ context.fillRect(10, 10, 100, 100); // x, y, w, h
                 </section>
 
                 <section>
-                    <section>
-                        <h2>Game Loop</h2>
-                        <pre><code data-trim contenteditable>
+                    <h2>Game Loop</h2>
+                    <pre><code data-trim contenteditable>
 //Usually 60fps
 var gameLoop = function () {
     requestAnimationFrame(gameLoop);
 };
 
 gameLoop();
-                        </code></pre>
-                        <p>
-                            This provides a consistent interval to update the game state.<br/>
-                            For each iteration we update position, check collision, and draw each object.
-                        </p>
-                        <p>
-                            <a href="http://jsfiddle.net/rsmclaug/xhh5ob99/" target="_blank">Demo</a>
-                        </p>
-                    </section>
-                    <section>
-                        <p>
-                            Learn more about requestAnimationFrame!
-                        </p>
-                        <p>
-                            <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame" target="_blank">MDN Docs</a>
-                        </p>
-                        <p>
-                            <a href="http://www.w3.org/TR/animation-timing/" target="_blank">W3C Docs</a>
-                        </p>
-                    </section>
+                    </code></pre>
+                    <p>
+                        This provides a consistent interval to update the game state.<br/>
+                        For each iteration we update and draw each object.
+                    </p>
+                    <p>
+                        <a href="http://fiddle.jshell.net/rsmclaug/xhh5ob99/show/" target="_blank">Demo</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>GAME BODIES</h2>
+
+                    <pre><code data-trim contenteditable>
+var OldMan = function (game, center) {
+  this.id = "old-man";
+  this.game = game;
+  this.size = { x: 16, y: 16 };
+  this.center = { x: center.x, y: center.y };
+};
+
+OldMan.prototype = {
+  draw: function (screen) {
+    var x = this.center.x, y = this.center.y;
+    var img = document.getElementById(this.id);
+    screen.drawImage(img, x - this.size.x / 2, y - this.size.y / 2);
+  },
+  update: function () { }
+};
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>GAME BODIES</h2>
+
+                    <pre><code data-trim contenteditable>
+// Example from the sword cave
+{
+    text: "IT'S DANGEROUS TO GO\nALONE! TAKE THIS.",
+    bodies: [
+        new CaveFire(game, { x: 80, y: 72 }),
+        new CaveFire(game, { x: 176, y: 72 }),
+        new OldMan(game, { x: 128, y: 72 }),
+        new Sword(game, { x: 128, y: 100 })
+    ]
+}
+                    </code></pre>
                 </section>
 
                 <style>
