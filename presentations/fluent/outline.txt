@@ -27,10 +27,10 @@ GAME LOOP
 - Talk about requestAnimationFrame
 - Show JSFiddle example, browser tries to maintain 60fps
 
-GAME BODIES (1)
-- Old man example, show how each game body has an update and draw function
+GAME BODIES (Old Man example)
+- Show how each game body has an update and draw function
 
-GAME BODIES (2)
+GAME BODIES (Sword cave example)
 - Talk about the collection of game bodies
 - For each run of requestAnimationFrame we update each bodies state and draw it
 
