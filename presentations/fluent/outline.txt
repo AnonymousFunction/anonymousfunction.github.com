@@ -21,7 +21,7 @@ DRAWING TO CANVAS
 
 MAP BACKGROUND
 - Go to the shop with the background on
-- Hide the background in Dev Tools and go into the shop again
+- CODE DEMO: Hide the background in Dev Tools and go into the shop again
 
 GAME LOOP
 - Talk about requestAnimationFrame
@@ -34,28 +34,34 @@ GAME BODIES (Sword cave example)
 - Talk about the collection of game bodies
 - For each run of requestAnimationFrame we update each bodies state and draw it
 
-Talk about Link's sprites
- - The image drawn doesn't actually effect the game
- - The image drawn is base on the body's state
+SPRITES
+ - The image is base on the body's state
  - The image is drawn at the center of the body
- - Change link's spriteCooldown to 2 (running on ice) and 24 (long glide)
- - Change link's moveRate to 4.0 to show him moving fast
- - Show link walking backwards
+ - The image doesn't actually effect the game
+ - CODE DEMO: Change link's spriteCooldown to 2 (running on ice) and 24 (long glide)
+ - CODE DEMO: Change link's moveRate to 4.0 to show him moving fast
+ - CODE DEMO: Show link walking backwards
 
-Talk about controls
- - Loop is listening to keyboard, controller and touch devices
- - Moves by velocity if direction is pressed, if link can move there
-
-Talk about environmental collision detection
+COLLISION DETECTION (Environmental)
  - This is where Link can and cannot move, trigger caves & dungeons
  - Show movement map
  - Show map editor (hotkey 'M'), and buildMap() in the console
  - Turn on link's hit boxes to show collision detection
 
-Talk about item/enemy collision detection
+COLLISION DETECTION (Items/Enemies)
  - For each loop, check if link is colliding with any items/enemies
  - Do any enemies need to take damage?
- - Spawn lots of octoroks
+ - CODE DEMO: Spawn lots of octoroks
+
+GAME GENIE
+ - DEMO: Turn off collision, go to first dungeon
+ - DEMO: Turn on invincibility, walk thru enemies
+ - DEMO: Give link sword, then show first cave is empty
+ - DEMO: Give link lots of rupees, go buy blue candle
+
+Talk about controls
+ - Loop is listening to keyboard, controller and touch devices
+ - Moves by velocity if direction is pressed, if link can move there
 
 Screen transitions
  - Enemies and items are despawned when leaving
@@ -63,10 +69,3 @@ Screen transitions
 
 Caves
  - Show cave properties for what's in them and the text that is drawn
-
-Game Genie
- - Increase link's speed
- - Turn off collision, go to first dungeon
- - Turn on invincibility, walk thru enemies
- - Give link sword, then show first cave is empty
- - Give link lots of rupees, go buy blue candle
