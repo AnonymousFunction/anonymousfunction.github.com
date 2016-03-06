@@ -214,34 +214,37 @@ OldMan.prototype = {
                         width: 50px;
                     }
                 </style>
-
-                <section id="link-sprites">
-                    <h2>Sprites</h2>
-
-                    <img src="/zelda-canvas/images/link/link_up/frame_000.gif">
-                    <img src="/zelda-canvas/images/link/link_up/frame_001.gif">
-                    <img src="/zelda-canvas/images/sword_up.png"><br>
-                    <img src="/zelda-canvas/images/sword_left.png" style="height: 50px; width: auto;">
-                    <img src="/zelda-canvas/images/link/link_left/frame_000.gif">
-                    <img src="/zelda-canvas/images/link/link_left/frame_001.gif"><br>
-                    <img src="/zelda-canvas/images/link/link_right/frame_000.gif">
-                    <img src="/zelda-canvas/images/link/link_right/frame_001.gif">
-                    <img src="/zelda-canvas/images/sword_right.png" style="height: 50px; width: auto;"><br>
-                    <img src="/zelda-canvas/images/link/link_down/frame_000.gif">
-                    <img src="/zelda-canvas/images/link/link_down/frame_001.gif">
-                    <img src="/zelda-canvas/images/sword_down.png" style="margin-bottom: -16px;"><br>
-                </section>
-
                 <section>
                     <h2>Sprites</h2>
-                    <p>
-                        Just like the background image, sprites have no effect.<br/>
-                        All objects are single points with a height and width.
-                    </p>
-                    <p>
-                        The image is drawn based on the object's position.<br/>
-                        Different images are drawn based on the object's state.
-                    </p>
+
+                    <div id="link-sprites" style="display: inline-block;width: 30%;">
+                        <img src="/zelda-canvas/images/link/link_up/frame_000.gif">
+                        <img src="/zelda-canvas/images/link/link_up/frame_001.gif">
+                        <img src="/zelda-canvas/images/sword_up.png"><br>
+                        <img src="/zelda-canvas/images/sword_left.png" style="height: 50px; width: auto;">
+                        <img src="/zelda-canvas/images/link/link_left/frame_000.gif">
+                        <img src="/zelda-canvas/images/link/link_left/frame_001.gif"><br>
+                        <img src="/zelda-canvas/images/link/link_right/frame_000.gif">
+                        <img src="/zelda-canvas/images/link/link_right/frame_001.gif">
+                        <img src="/zelda-canvas/images/sword_right.png" style="height: 50px; width: auto;"><br>
+                        <img src="/zelda-canvas/images/link/link_down/frame_000.gif">
+                        <img src="/zelda-canvas/images/link/link_down/frame_001.gif">
+                        <img src="/zelda-canvas/images/sword_down.png" style="margin-bottom: -16px;"><br>
+                    </div>
+                    <div style="display: inline-block;width: 65%; vertical-align: top;">
+                        <p>
+                            Sprites have no effect
+                        </p>
+                        <p>
+                            Each body has a center and size
+                        </p>
+                        <p>
+                            The sprite is drawn at the body's center
+                        </p>
+                        <p>
+                            The sprite chosen is based on its state
+                        </p>
+                    </div>
                 </section>
 
                 <section>
