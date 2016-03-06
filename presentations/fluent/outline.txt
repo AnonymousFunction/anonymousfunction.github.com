@@ -7,10 +7,10 @@ ABOUT ME
 
 HEY! LISTEN!
 - Show people where the slides are
-- Link to the game, code, and AirPar article
+- Link to the game, code, and AirPair article
 
 INVENTORY
-- Quick intro into what we're covering
+- Basic elements of game design
 
 BASIC CANVAS
 - Quick look at canvas element
@@ -51,11 +51,10 @@ COLLISION DETECTION (Environmental)
 COLLISION DETECTION (Items/Enemies)
  - For each loop, check if link is colliding with any items/enemies
  - Do any enemies need to take damage?
- - CODE DEMO: Spawn lots of octoroks
 
 GAME GENIE
  - DEMO: Turn off collision, go to first dungeon
- - DEMO: Turn on invincibility, walk thru enemies
+ - DEMO: Turn on invincibility, Spawn lots of octoroks
  - DEMO: Give link sword, then show first cave is empty
  - DEMO: Give link lots of rupees, go buy blue candle
 
