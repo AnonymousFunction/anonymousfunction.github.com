@@ -46,7 +46,7 @@ COLLISION DETECTION (Environmental)
  - This is where Link can and cannot move, trigger caves & dungeons
  - Show movement map
  - Show map editor (hotkey 'M'), and buildMap() in the console
- - Turn on link's hit boxes to show collision detection
+ - DEMO: Turn on link's hit boxes to show collision detection (zelda.js find 'center dot')
 
 COLLISION DETECTION (Items/Enemies)
  - For each loop, check if link is colliding with any items/enemies
@@ -58,6 +58,8 @@ GAME GENIE
  - DEMO: Turn on invincibility, walk thru enemies
  - DEMO: Give link sword, then show first cave is empty
  - DEMO: Give link lots of rupees, go buy blue candle
+
+EXTRA TIME
 
 Talk about controls
  - Loop is listening to keyboard, controller and touch devices
