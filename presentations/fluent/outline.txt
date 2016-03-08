@@ -20,8 +20,14 @@ DRAWING TO CANVAS
 - Explain how the coordinates work
 
 MAP BACKGROUND
-- Go to the shop with the background on
+- Go to the shop with the background on, Show the whole map
 - CODE DEMO: Hide the background in Dev Tools and go into the shop again
+
+COLLISION DETECTION (Environmental)
+ - This is where Link can and cannot move, trigger caves & dungeons
+ - Show movement map
+ - Show map editor (hotkey 'M'), and buildMap() in the console
+ - DEMO: (zelda.js line 869) Turn on link's hit boxes to show collision detection
 
 GAME LOOP
 - Talk about requestAnimationFrame
@@ -38,15 +44,9 @@ SPRITES
  - The image is base on the body's state
  - The image is drawn at the center of the body
  - The image doesn't actually effect the game
- - CODE DEMO: Change link's spriteCooldown to 2 (running on ice) and 24 (long glide)
- - CODE DEMO: Change link's moveRate to 4.0 to show him moving fast
- - CODE DEMO: Show link walking backwards
-
-COLLISION DETECTION (Environmental)
- - This is where Link can and cannot move, trigger caves & dungeons
- - Show movement map
- - Show map editor (hotkey 'M'), and buildMap() in the console
- - DEMO: Turn on link's hit boxes to show collision detection (zelda.js find 'center dot')
+ - CODE DEMO: (zelda.js line 825) Change link's spriteCooldown to 2 (running on ice) and 24 (long glide)
+ - CODE DEMO: (zelda.js line 825) Change link's moveRate to 4.0 to show him moving fast
+ - CODE DEMO: (index.html line 192) Show link walking backwards
 
 COLLISION DETECTION (Items/Enemies)
  - For each loop, check if link is colliding with any items/enemies
@@ -54,7 +54,7 @@ COLLISION DETECTION (Items/Enemies)
 
 GAME GENIE
  - DEMO: Turn off collision, go to first dungeon
- - DEMO: Turn on invincibility, Spawn lots of octoroks
+ - DEMO: CODE DEMO (zelda.js line 809) Turn on invincibility, Spawn lots of octoroks
  - DEMO: Give link sword, then show first cave is empty
  - DEMO: Give link lots of rupees, go buy blue candle
 
